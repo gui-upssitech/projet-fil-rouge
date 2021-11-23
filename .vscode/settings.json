@@ -1,0 +1,7 @@
+{
+    "editor.wordWrap": "on",
+    "editor.wordWrapColumn": 80,
+    "editor.wrappingIndent": "same",
+
+    "latex-workshop.latex.outDir": "%DIR%/build/",
+}

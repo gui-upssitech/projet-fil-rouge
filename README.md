@@ -1,3 +1,8 @@
-# projet-fil-rouge
+# [Projet Fil Rouge] Partie 1 - Moteur de recherche
 
-UwU
+Contributeurs:
+- Peter Piriou--Dezy
+- Guillaume Roussin
+- Constant Roux
+- Nelson Sanchez
+- Julian Trani

@@ -1,0 +1,64 @@
+\section{Description détaillée du logiciel}
+\subsection{Interfaces (entrées/sorties)}
+\paragraph{}
+Afin de permettre l'interaction entre l’utilisateur et l’application, nous allons utiliser le clavier et la souris comme entrées du programme. Cette communication sera appelée interface et sera constituée uniquement de menus textuels.
+
+\paragraph{}
+Voici un schéma qui représente les différentes interactions du programme avec son environnement :
+
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[scale=0.6]{assets/projet fil rouge_ entrées_sorties.png}
+        \caption{Diagramme des interfaces de l'application}
+    \end{center}
+\end{figure}
+
+\subsection{Fonctionnalités}
+\subsubsection{Indexation}
+\paragraph{}
+Elle consiste à créer un descripteur de fichier selon le type de document ajouté et les paramètres (modifiables par un administrateur). Il sera ensuite ajouté dans la base de descripteurs qui contient tous les descripteurs disponibles. Cette base sera sauvegardée dans un fichier textuel suivant le prototype suivant :
+\paragraph{}
+\noindent L’indexation change en fonction du type de recherche :
+\begin{itemize}
+    \item \underline{Texte} : Une méthode de base consiste à repérer la présence de mots clés et leur nombre d'occurrences. Nous retrouverons une fonction de nettoyage pour enlever les balises et une fonction de filtrage pour retirer les mots outils.
+    \item \underline{Image} : Le but est de représenter synthétiquement le contenu de l’image. Nous retrouverons une fonction de quantification afin de limiter les calculs et une fonction d’histogramme.
+    \item \underline{Audio} : Une méthode simple consiste à découper le signal en plusieurs fenêtres de taille n échantillons puis de calculer pour chacune de celles-ci un histogramme composé de m intervalles. On aura donc une fonction d’histogramme.
+\end{itemize}
+
+\subsubsection{Comparaison}
+\paragraph{}
+Une fois l’indexation réalisée nous pouvons réaliser la comparaison de documents par l'intermédiaire des descripteurs de fichier. Pour que les documents soient identiques, il faut que les deux descripteurs soient strictement les mêmes. Sinon, nous parlerons de similarité selon un certain pourcentage de similitude (aussi appelé taux de confiance), pour cela, un calcul de distance sera effectué. Dans notre, il sera possible d’utiliser une fonction générique fonctionnant pour tous types de descripteurs.
+
+\subsubsection{Moteur de recherche}
+\paragraph{}
+L’utilisateur, depuis le moteur de recherche, doit d’abord choisir le type de recherche qu’il veut faire :
+\begin{itemize}
+    \item recherche Texte : il pourra donner soit un mot-clef, soit le chemin vers un fichier texte.
+    \item recherche Image : il aura la possibilité d’entrer une couleur (en choisissant une couleur dans une palette prédéfinie ou bien en donnant la couleur exacte par code hexa), une image RGB ou une image en niveaux de gris.
+    \item recherche Audio : il devra donner un fichier audio en entrée.
+\end{itemize}
+
+\paragraph{}
+À la suite de la requête sur l’application, le logiciel renvoie à l’utilisateur la liste des documents trouvés, allant de celui avec la plus forte similitude avec la recherche jusqu’à celui ayant la moins forte. Si le pourcentage de similitude est inférieur à 5\% alors rien ne sera affiché. Les documents trouvés ainsi que leurs descripteurs pourront être consultables par l’utilisateur. Le document ayant le taux de confiance le plus élevé sera ouvert automatiquement (ouvert dans un éditeur de texte pour la recherche Texte, dans un visionneur d’images pour la recherche Image et la zone audio possédant la similarité la plus proche dans un lecteur audio pour la recherche Audio).
+
+\paragraph{}
+De plus, seront présentes différentes vérifications :
+\begin{itemize}
+    \item vérification de la saisie clavier,
+    \item vérification de l’indexation des documents,
+    \item vérification des chemins d’accès aux fichiers,
+    \item vérification des types passés en paramètres.
+\end{itemize}
+
+\paragraph{}
+En cas d’erreur lors de la vérification, un message sera affiché à l’utilisateur et une solution proposée pour continuer l’utilisation du logiciel. (Exemple : si un chemin d’un fichier est inexistant, l’application propose d’entrer à nouveau le chemin).
+
+\paragraph{}
+Voici un diagramme de séquence assez généraliste de l’exécution du moteur de recherche depuis le mode utilisateur : 
+
+\paragraph{}
+Voici un diagramme de séquence assez généraliste de processus d’indexation de fichier : 
+
+\subsection{Scénario}
+\paragraph{}
+Voici une exécution de l’application du point de vue de l’utilisateur, dans ce scénario, nous voulons parmi les images, rechercher par code couleur. Ensuite, il affiche les résultats dans la console puis demande à l'utilisateur de choisir sa visualisation.
