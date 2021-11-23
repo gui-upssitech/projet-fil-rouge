@@ -1,0 +1,53 @@
+Fonctionnalites :
+(1) Indexation
+(2) Comparaison
+(3) Moteur de recherche
+(q) Quitter
+Votre choix ? 1
+
+Indexation :
+(1) individuel
+(2) automatique
+(3) Visualisation descripteur
+(4) Configuration
+(q) Quitter
+Votre choix ? 2
+
+Indexation en cours...
+45 fichiers indexes
+
+Fonctionnalites :
+(1) Indexation
+(2) Comparaison
+(3) Moteur de recherche
+(q) Quitter
+Votre choix ? 2
+
+Comparer par :
+(1) fichiers
+(2) descripteurs
+(q) Quitter
+Votre choix ? 1
+
+Veuillez renseigner le chemin du premier fichier :
+./IMG_et_AUDIO/TEST_RGB/01.jpg
+
+Veuillez renseigner le chemin du deuxieme fichier :
+./IMG_et_AUDIO/TEST_RGB/02.jpg
+
+Similitude : 78.4 %
+
+Fonctionnalites :
+(1) Indexation
+(2) Comparaison
+(3) Moteur de recherche
+(q) Quitter
+Votre choix ? 3
+
+Recherche de type : 
+(1) Texte
+(2) Image
+(3) Audio
+(q) Quitter
+Votre choix ?
+
