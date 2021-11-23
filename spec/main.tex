@@ -24,23 +24,24 @@ right  = 2.50cm]{geometry}
 \setlength{\headheight}{70pt}
 \renewcommand\headrulewidth{1pt}
 
-\input{header_foote.tex}
+\input{header_footer.tex}
 
 \begin{document}
 
-    \subfile{sections/title}
+    \subfile{sections/title.tex}
     \newpage
 
-    \subfile{sections/suivi}
+    \subfile{sections/suivi.tex}
     \newpage
     
     \tableofcontents
     \listoffigures
     \newpage
-    
-    \subfile{sections/header-footer}
 
-    \subfile{sections/contexte}
+    \subfile{sections/contexte.tex}
+    \newpage
+
+    \subfile{sections/desc_gen.tex}
     \newpage
 
     \subfile{sections/description.tex}
