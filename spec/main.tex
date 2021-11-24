@@ -11,6 +11,7 @@
 \usepackage{color, colortbl}
 \usepackage{lastpage}
 \usepackage{subfiles}
+\usepackage{float}
 
 \usepackage[
 top    = 1cm,
@@ -19,6 +20,7 @@ left   = 2.50cm,
 right  = 2.50cm]{geometry}
 
 \definecolor{Gray}{gray}{0.9}
+\def\code#1{\texttt{#1}}
 
 \pagestyle{fancy}
 \setlength{\headheight}{70pt}
@@ -27,6 +29,8 @@ right  = 2.50cm]{geometry}
 \input{header_footer.tex}
 
 \begin{document}
+
+
 
     \subfile{sections/title.tex}
     \newpage
@@ -48,6 +52,9 @@ right  = 2.50cm]{geometry}
     \newpage
 
     \subfile{sections/organisation.tex}
+    \newpage
+
+    \subfile{sections/conventions.tex}
     \newpage
 
     \subfile{sections/glossaire.tex}

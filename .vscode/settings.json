@@ -4,4 +4,13 @@
     "editor.wrappingIndent": "same",
 
     "latex-workshop.latex.outDir": "%DIR%/build/",
+
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.tex$",
+                "cmd": "mkdir -p spec/out/; find spec/ -name \"*.pdf\" -exec cp {} spec/out/ \\;"
+            }
+        ]
+    }
 }

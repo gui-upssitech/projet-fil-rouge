@@ -11,9 +11,9 @@
     \paragraph{}
     Voici un schéma qui représente les différentes interactions du programme avec son environnement:
 
-    \begin{figure}[h]
+    \begin{figure}[H]
         \begin{center}
-            \includegraphics[scale=0.6]{assets/diagrams/pfr_entrees_sorties.png}
+            \includegraphics[scale=0.6]{diagrams/entrees_sorties.png}
             \caption{Diagramme des interfaces de l'application}
         \end{center}
     \end{figure}
@@ -21,18 +21,65 @@
     \subsection{Fonctionnalités}
     \subsubsection{Indexation}
     \paragraph{}
-    Elle consiste à créer un descripteur de fichier selon le type de document ajouté et les paramètres (modifiables par un administrateur). Il sera ensuite ajouté dans la base de descripteurs qui contient tous les descripteurs disponibles. Cette base sera sauvegardée dans un fichier textuel suivant le prototype suivant:
+    Elle consiste à créer un descripteur de fichier selon le type de document ajouté et les paramètres (modifiables par un administrateur). Il sera ensuite ajouté dans la pile de descripteurs qui contient tous les descripteurs disponibles. Cette base sera sauvegardée dans un fichier textuel à l'aide d'une méthode de conversion de pile vers fichier (Voir Fig~\ref{desc:pvf})
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=140mm]{diagrams/pile_vers_fichier.png}
+        \caption{Protoype de la fonction pileVersFichier}\label{desc:pvf}
+    \end{figure}
+
+
     \paragraph{}
-    \noindent L’indexation change en fonction du type de recherche:
-    \begin{itemize}
-        \item \underline{Texte}: Une méthode de base consiste à repérer la présence de mots clés et leur nombre d'occurrences. Nous retrouverons une fonction de nettoyage pour enlever les balises et une fonction de filtrage pour retirer les mots outils.
-        \item \underline{Image}: Le but est de représenter synthétiquement le contenu de l’image. Nous retrouverons une fonction de quantification afin de limiter les calculs et une fonction d’histogramme.
-        \item \underline{Audio}: Une méthode simple consiste à découper le signal en plusieurs fenêtres de taille n échantillons puis de calculer pour chacune de celles-ci un histogramme composé de m intervalles. On aura donc une fonction d’histogramme.
-    \end{itemize}
+    La méthode d'indexation changera en fonction du type de recherche.
+    
+    \paragraph{Texte}
+    Une méthode de base consiste à repérer la présence de mots clés et leur nombre d'occurrences. Nous retrouverons une fonction de nettoyage pour enlever les balises et une fonction de filtrage pour retirer les mots outils.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=140mm]{diagrams/indexer_texte.png}
+        \caption{Protoype de la fonction indexerTexte}
+    \end{figure}
+    
+    \paragraph{Image}
+    Le but est de représenter synthétiquement le contenu de l’image. Nous retrouverons une fonction de quantification afin de limiter les calculs et une fonction d’histogramme.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=140mm]{diagrams/indexer_image.png}
+        \caption{Protoype de la fonction indexerImage}
+    \end{figure}
+    
+    \paragraph{Audio}
+    Une méthode simple consiste à découper le signal en plusieurs fenêtres de taille $n$ échantillons puis de calculer pour chacune de celles-ci un histogramme composé de m intervalles. On aura donc une fonction d’histogramme.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=140mm]{diagrams/indexer_audio.png}
+        \caption{Protoype de la fonction indexerAudio}
+    \end{figure}
 
     \subsubsection{Comparaison}
     \paragraph{}
     Une fois l’indexation réalisée nous pouvons réaliser la comparaison de documents par l'intermédiaire des descripteurs de fichier. Pour que les documents soient identiques, il faut que les deux descripteurs soient strictement les mêmes. Sinon, nous parlerons de similarité selon un certain pourcentage de similitude (aussi appelé taux de confiance), pour cela, un calcul de distance sera effectué. Dans notre, il sera possible d’utiliser une fonction générique fonctionnant pour tous types de descripteurs.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=140mm]{diagrams/fonctions_comparaison.png}
+        \caption{Protoype de la fonction comparerGenerique}
+    \end{figure}
+
+    \paragraph{}
+    Voici le détail des calculs de distance pour chaque type de fichier.
+
+    \paragraph{Texte}
+    Le calcul se fera en comparant les termes de chaque descripteur (token et nombre d'occurrence) ainsi que leur nombre total de termes retenus.
+
+    \paragraph{Image et Audio}
+    Une intersection des histogrammes des descripteurs sera réalisée afin de conclure sur la similitude des deux fichiers.
+
+
 
     \subsubsection{Moteur de recherche}
     \paragraph{}
@@ -68,11 +115,11 @@
     \paragraph{}
     Voici une exécution de l’application du point de vue de l’utilisateur, dans ce scénario, nous voulons parmi les images, rechercher par code couleur. Ensuite, il affiche les résultats dans la console puis demande à l'utilisateur de choisir sa visualisation.
 
-    \begin{figure}[h]
+    \begin{figure}[H]
         % \input{assets/use_cases/user.txt}
         \centering
         \includegraphics[width=160mm]{use_cases/scenario utilisateur.PNG}
-        \caption{scénario enviseageable pour un utilisateur}
+        \caption{Scénario enviseageable pour un utilisateur}
     \end{figure}
 
 \end{document}

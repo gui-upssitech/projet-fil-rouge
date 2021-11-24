@@ -6,3 +6,10 @@ Contributeurs:
 - Constant Roux
 - Nelson Sanchez
 - Julian Trani
+
+## Setup
+
+VS Code setup : install the following extensions :
+```
+ext install emeraldwalk.runonsave james-yu.latex-workshop esbenp.prettier-vscode
+```
