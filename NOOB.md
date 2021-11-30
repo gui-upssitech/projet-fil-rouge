@@ -8,4 +8,12 @@ git config --global --list
 ssh-keygen  
 
 cat ~/.ssh/id_rsa.pub  
+
+git init
+git checkout -b indexation-image
+git status
+git add .
+git commit -m "Commit name"
+git remote add origin lien
+git push --set-upstream origin indexation-image
 ```
