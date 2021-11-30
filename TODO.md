@@ -1,0 +1,1 @@
+- [ ] Avoid press Enter with getchar()

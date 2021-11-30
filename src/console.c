@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../inc/display.h"
+#include "../inc/console.h"
 #include "../inc/toolbox.h"
 
 void print_plate_console()
@@ -30,7 +30,7 @@ void print_blank_console(unsigned int blank_size)
     }
 }
 
-void display_text_console(char* p_text)
+void display_centered_text_console(char* p_text)
 {
     /* statements */
     unsigned int long size, blank_size;
@@ -53,10 +53,38 @@ void display_text_console(char* p_text)
     printf("%s\n\r", WALL);
 }
 
-void main_menu()
+/* the 'q' choice is include in the num_choices variable */
+char get_char_menu(char num_choices)
 {
+    /* initializations */
+    char c;
+
+    /* instructions */
+    do
+    {
+        c = getchar();
+        fflush_stdin();
+    } while ((c <= '0' || c >= num_choices) && c != 'q');
+    return c;
 }
 
-void user_menu(){}
+char display_main_menu()
+{
+    /* instructions */
+    print_plate_console();
+    display_centered_text_console("");
+    display_centered_text_console("Moteur de Recherche");
+    display_centered_text_console("");
+    display_centered_text_console("(1) Utilisateur");
+    display_centered_text_console("(2) Administrateur");
+    display_centered_text_console("(3) A propos");
+    display_centered_text_console("(q) Quitter");
+    display_centered_text_console("");
+    print_plate_console();
 
-void admin_menu(){}
+    return get_char_menu('4');
+}
+
+void display_user_menu(){}
+
+void display_admin_menu(){}

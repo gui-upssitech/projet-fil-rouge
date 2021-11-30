@@ -3,6 +3,15 @@
 
 #include "../inc/toolbox.h"
 
+void fflush_stdin()
+{
+    /* declarations */
+    char c;
+
+    /* instructions */
+    for(c = 0; c != '\n' && c != EOF; c = getchar());
+}
+
 unsigned int get_array_size_from_pointer(char* p_array)
 {
     /* statements */
