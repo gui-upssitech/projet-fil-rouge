@@ -1,16 +1,16 @@
 {
-    "editor.wordWrap": "on",
-    "editor.wordWrapColumn": 80,
-    "editor.wrappingIndent": "same",
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 80,
+  "editor.wrappingIndent": "same",
 
-    "latex-workshop.latex.outDir": "%DIR%/build/",
+  "latex-workshop.latex.outDir": "%DIR%/build/",
 
-    "emeraldwalk.runonsave": {
-        "commands": [
-            {
-                "match": "\\.tex$",
-                "cmd": "mkdir -p spec/out/; find spec/ -name \"*.pdf\" -exec cp {} spec/out/ \\;"
-            }
-        ]
-    }
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.tex$",
+        "cmd": "mkdir -p spec/out/; find spec/ -name \"*.pdf\" -exec cp {} spec/out/ \\;"
+      }
+    ]
+  }
 }

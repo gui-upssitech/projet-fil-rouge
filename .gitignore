@@ -1,2 +1,7 @@
+# LaTeX output files
 build/
 out/
+
+# Compiled c files
+app/
+obj/
