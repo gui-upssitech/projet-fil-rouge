@@ -3,6 +3,8 @@
 
 #include "../inc/indexation_image.h"
 
+/* structure that contains all necessary informations to build the 
+descriptor (id and histogram) */
 typedef struct
 {
     /* unique id of the descriptor based on the hashed file name */
