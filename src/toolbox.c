@@ -3,6 +3,23 @@
 
 #include "../inc/toolbox.h"
 
+unsigned int get_array_size_from_pointer(char* p_array)
+{
+    /* statements */
+    unsigned int size;
+    char c;
+
+    /* initializations */
+    size = 0;
+
+    /* instructions */
+    while((c = *p_array++) != '\0')
+    {
+        size++;
+    }
+    return size;
+}
+
 /* source : https://stackoverflow.com/questions/7666509/hash-function-for-string */
 unsigned long hash(char* p_string)
 {
