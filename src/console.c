@@ -1,3 +1,9 @@
+/*
+Authors:    Constant ROUX
+
+Date:       01/12/2021
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -77,25 +83,118 @@ char get_char_menu(char num_choices)
     return c;
 }
 
-char display_main_menu()
+void display_main_menu()
 {
+    /* declarations */
+    char c;
+
     /* instructions */
-    clear_console();
-    print_plate_console();
-    display_centered_text_console("");
-    display_centered_text_console("Moteur de Recherche");
-    display_centered_text_console("");
-    display_centered_text_console("(1) Utilisateur");
-    display_centered_text_console("(2) Administrateur");
-    display_centered_text_console("(3) A propos");
-    display_centered_text_console("(q) Quitter");
-    display_centered_text_console("");
-    print_plate_console();
-    return get_char_menu('4');
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Moteur de Recherche");
+        display_centered_text_console("");
+        display_centered_text_console("(1) Utilisateur");
+        display_centered_text_console("(2) Administrateur");
+        display_centered_text_console("(3) A propos");
+        display_centered_text_console("(q) Quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        c = get_char_menu('4');
+        switch (c)
+        {
+        case '1':
+            display_user_menu();
+            break;
+
+        case '2':
+            display_admin_menu();
+            break;
+
+        case '3':
+            display_about_menu();
+            break;
+
+        case 'q':
+            return;
+            break;
+        
+        default:
+            return;
+            break;
+        }
+    }
 }
 
 void display_user_menu()
-{}
+{
+    /* declarations */
+    char c;
+
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Menu Utilisateur");
+        display_centered_text_console("");
+        display_centered_text_console("Type de recherche :");
+        display_centered_text_console("(1) Texte");
+        display_centered_text_console("(2) Image");
+        display_centered_text_console("(3) Audio");
+        display_centered_text_console("(q) Quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        c = get_char_menu('4');
+        switch (c)
+        {
+        case '1':
+            display_text_research_menu();
+            break;
+
+        case '2':
+            display_image_research_menu();
+            break;
+
+        case '3':
+            display_audio_research_menu();
+            break;
+
+        case 'q':
+            return;
+            break;
+        
+        default:
+            return;
+            break;
+        }
+    }
+}
 
 void display_admin_menu()
-{}
+{
+
+}
+
+void display_about_menu()
+{
+
+}
+
+void display_text_research_menu()
+{
+
+}
+
+void display_image_research_menu()
+{
+
+}
+
+void display_audio_research_menu()
+{
+
+}

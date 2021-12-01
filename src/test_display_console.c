@@ -12,10 +12,7 @@ int main(void)
 
     /* instructions */
     display_main_menu();
-
-    printf("\n\rend\n\r");
-
-    display_centered_text_console("01234567890123456789012345678901234567890123456789012345678");
+    display_centered_text_console("\n\r01234567890123456789012345678901234567890123456789012345678\n\r");
 
     return EXIT_SUCCESS;
 }

@@ -10,8 +10,14 @@
 
 void display_centered_text_console(char* p_text);
 void print_blank_console(unsigned int blank_size);
-void print_plate_console();
-char display_main_menu();
 char get_char_menu(char num_choices);
+void print_plate_console();
+void display_main_menu();
+void display_user_menu();
+void display_admin_menu();
+void display_about_menu();
+void display_text_research_menu();
+void display_image_research_menu();
+void display_audio_research_menu();
 
 #endif
