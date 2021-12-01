@@ -13,7 +13,9 @@ int main(void)
     /* instructions */
     display_main_menu();
 
-    printf("\n\rend");
+    printf("\n\rend\n\r");
+
+    display_centered_text_console("01234567890123456789012345678901234567890123456789012345678");
 
     return EXIT_SUCCESS;
 }

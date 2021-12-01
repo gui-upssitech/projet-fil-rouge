@@ -4,6 +4,11 @@
 #include "../inc/console.h"
 #include "../inc/toolbox.h"
 
+void clear_console()
+{
+    system("clear");
+}
+
 void print_plate_console()
 {
     /* declarations */
@@ -41,6 +46,11 @@ void display_centered_text_console(char* p_text)
 
     /* instructions */
     size = get_array_size_from_pointer(p_text);
+    if(size > MAX_CHAR_PER_LINE - 2)
+    {
+        printf("Error overflow writing line menu.\n\r");
+        return;
+    }
     if((MAX_CHAR_PER_LINE - size - 2) % 2 == 1)
     {
         even = FALSE;
@@ -62,8 +72,7 @@ char get_char_menu(char num_choices)
     /* instructions */
     do
     {
-        c = getchar();
-        fflush_stdin();
+        c = getch();
     } while ((c <= '0' || c >= num_choices) && c != 'q');
     return c;
 }
@@ -71,6 +80,7 @@ char get_char_menu(char num_choices)
 char display_main_menu()
 {
     /* instructions */
+    clear_console();
     print_plate_console();
     display_centered_text_console("");
     display_centered_text_console("Moteur de Recherche");
@@ -81,10 +91,11 @@ char display_main_menu()
     display_centered_text_console("(q) Quitter");
     display_centered_text_console("");
     print_plate_console();
-
     return get_char_menu('4');
 }
 
-void display_user_menu(){}
+void display_user_menu()
+{}
 
-void display_admin_menu(){}
+void display_admin_menu()
+{}
