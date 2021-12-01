@@ -9,6 +9,8 @@ Date:       01/12/2021
 
 #include "../inc/console.h"
 #include "../inc/toolbox.h"
+#include "../inc/admin.h"
+
 
 void clear_console()
 {
@@ -110,7 +112,7 @@ void display_main_menu()
             break;
 
         case '2':
-            display_admin_menu();
+            display_login_menu();
             break;
 
         case '3':
@@ -127,6 +129,31 @@ void display_main_menu()
         }
     }
 }
+
+void display_login_menu()
+{
+    /* statements */
+    unsigned long password;
+
+    /* initializations */
+    clear_console();
+    print_plate_console();
+    display_centered_text_console("");
+    display_centered_text_console("Mot de passe :");
+    display_centered_text_console("");
+    print_plate_console();
+
+    /* instructions */
+    password = get_hashed_password();
+    if(is_password_valid(password) == TRUE)
+    {
+        display_admin_menu();
+    }
+    else
+    {
+        return;
+    }
+} 
 
 void display_user_menu()
 {
@@ -240,6 +267,7 @@ void display_about_menu()
         display_centered_text_console("Guillaume ROUSSIN");
         display_centered_text_console("Peter PIRIOU--DEZY");
         display_centered_text_console("Constant ROUX");
+        display_centered_text_console("Nelson SANCHEZ");
         display_centered_text_console("");
         display_centered_text_console("Version");
         display_centered_text_console("0.1");

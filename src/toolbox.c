@@ -1,3 +1,9 @@
+/*
+Authors:    Constant ROUX
+
+Date:       01/12/2021
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -5,35 +11,50 @@
 
 #include "../inc/toolbox.h"
 
-/* source: https://stackoverflow.com/questions/421860/capture-characters-from-standard-input-without-waiting-for-enter-to-be-pressed */
-char getch() 
+char getch(void)
 {
-    char buf = 0;
-    struct termios old = {0};
-    if (tcgetattr(0, &old) < 0)
-    { 
-        perror("tcsetattr()");
-    }
-    old.c_lflag &= ~ICANON;
-    old.c_lflag &= ~ECHO;
-    old.c_cc[VMIN] = 1;
-    old.c_cc[VTIME] = 0;
-    if (tcsetattr(0, TCSANOW, &old) < 0)
-    { 
-        perror("tcsetattr ICANON");
-    }
-    if (read(0, &buf, 1) < 0)
-    {
-        perror ("read()");
-    }
-    old.c_lflag |= ICANON;
-    old.c_lflag |= ECHO;
-    if (tcsetattr(0, TCSADRAIN, &old) < 0)
-    { 
-        perror ("tcsetattr ~ICANON");
-    }
-    return (buf);
+    struct termios oldattr, newattr;
+    int ch;
+    tcgetattr( STDIN_FILENO, &oldattr );
+    newattr = oldattr;
+    newattr.c_lflag &= ~( ICANON | ECHO);
+    tcsetattr( STDIN_FILENO, TCSANOW, &newattr );
+    system("stty -echo");
+    ch = getchar();
+    system("stty echo");
+    tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
+    return ch;
 }
+
+/* source: https://stackoverflow.com/questions/421860/capture-characters-from-standard-input-without-waiting-for-enter-to-be-pressed */
+// char getch() 
+// {
+//     char buf = 0;
+//     struct termios old = {0};
+//     if (tcgetattr(0, &old) < 0)
+//     { 
+//         perror("tcsetattr()");
+//     }
+//     old.c_lflag &= ~ICANON;
+//     old.c_lflag &= ~ECHO;
+//     old.c_cc[VMIN] = 1;
+//     old.c_cc[VTIME] = 0;
+//     if (tcsetattr(0, TCSANOW, &old) < 0)
+//     { 
+//         perror("tcsetattr ICANON");
+//     }
+//     if (read(0, &buf, 1) < 0)
+//     {
+//         perror ("read()");
+//     }
+//     old.c_lflag |= ICANON;
+//     old.c_lflag |= ECHO;
+//     if (tcsetattr(0, TCSADRAIN, &old) < 0)
+//     { 
+//         perror ("tcsetattr ~ICANON");
+//     }
+//     return (buf);
+// }
 
 void fflush_stdin()
 {
