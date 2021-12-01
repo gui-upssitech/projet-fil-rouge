@@ -176,12 +176,89 @@ void display_user_menu()
 
 void display_admin_menu()
 {
+    /* declarations */
+    char c;
+
+    /* instructions */
+    while(1)
+    {
+        // TO DO : gestion mot de passe
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Menu Administrateur");
+        display_centered_text_console("");
+        display_centered_text_console("Fonctions :");
+        display_centered_text_console("(1) Indexation");
+        display_centered_text_console("(2) Comparaison");
+        display_centered_text_console("(3) Moteur de recherche");
+        display_centered_text_console("(q) Quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        c = get_char_menu('4');
+        switch (c)
+        {
+        case '1':
+            display_text_research_menu();
+            break;
+
+        case '2':
+            display_image_research_menu();
+            break;
+
+        case '3':
+            display_audio_research_menu();
+            break;
+
+        case 'q':
+            return;
+            break;
+        
+        default:
+            return;
+            break;
+        }
+    }
 
 }
 
 void display_about_menu()
 {
+    /* declarations */
+    char c;
 
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("A propos");
+        display_centered_text_console("");
+        display_centered_text_console("Auteurs");
+        display_centered_text_console("Julian TRANI");
+        display_centered_text_console("Guillaume ROUSSIN");
+        display_centered_text_console("Peter PIRIOU--DEZY");
+        display_centered_text_console("Constant ROUX");
+        display_centered_text_console("");
+        display_centered_text_console("Version");
+        display_centered_text_console("0.1");
+        display_centered_text_console("");
+        display_centered_text_console("(q) Quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        c = get_char_menu('4');
+        switch (c)
+        {
+        case 'q':
+            return;
+            break;
+        
+        default:
+            return;
+            break;
+        }
+    }
 }
 
 void display_text_research_menu()
