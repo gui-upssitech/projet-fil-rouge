@@ -209,7 +209,6 @@ void display_admin_menu()
     /* instructions */
     while(1)
     {
-        // TO DO : gestion mot de passe
         clear_console();
         print_plate_console();
         display_centered_text_console("");

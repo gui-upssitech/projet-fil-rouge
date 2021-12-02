@@ -1,3 +1,4 @@
 - [x] Avoid press Enter with getchar()
 - [ ] Add first connexion menu to setup password admin
 - [ ] Set magic path in a config file 
+- [ ] Set removable char in password entry

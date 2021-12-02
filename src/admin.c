@@ -19,7 +19,7 @@ give again the password to re-enter in the admin menu */
 unsigned long get_hashed_password()
 {
     /* statements */
-    char password[MAX_LENGTH_PASSWORD];
+    char password[MAX_LENGTH_PASSWORD + 1];
     unsigned char size;
     
     /* initializations */
