@@ -1,3 +1,11 @@
+/*
+Authors:    Constant ROUX,
+            Julian TRANI,
+            Peter PIRIOU--DEZY
+            
+Date:       29/11/2021
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -8,8 +8,64 @@ Date:       01/12/2021
 #include <stdlib.h>
 #include <unistd.h>
 #include <termios.h>
+#include <string.h>
 
 #include "../inc/toolbox.h"
+
+char* str_concat(char* str1, char* str2)
+{
+    /* statements */
+    char* ret;
+    unsigned int size1, size2;
+    unsigned int i;
+
+    /* initializations */
+    size1 = get_array_size_from_pointer(str1);
+    size2 = get_array_size_from_pointer(str2);
+    ret = (char *) malloc((size1 + size2 + 1) * sizeof(char));
+
+    /* instructions */
+    for(i = 0; i < size1; i++)
+        *(ret + i) = *(str1 + i);
+
+    for(i = 0; i < size2; i++)
+        *(ret + size1 + i) = *(str2 + i);
+    
+    *(ret + size1 + i) = '\0';
+    
+    return ret;
+}
+
+Bool_e file_contains_substring(FILE* p_file, char* p_str)
+{
+    /* statements */
+    char* p_line;
+    size_t len;
+    ssize_t read;
+
+    /* initializations */
+    p_line = NULL;
+    len = 0;
+
+    /* instructions */
+    while(!feof(p_file))
+    {
+        if((read = getline(&p_line, &len, p_file)) != -1)
+        {
+            if(strstr(p_line, p_str) != NULL)
+            {
+                return TRUE;
+            }
+        }
+    }
+
+    if(p_line != NULL)
+    {
+        free(p_line);
+    }
+
+    return FALSE;
+}
 
 char getch(void)
 {
@@ -25,36 +81,6 @@ char getch(void)
     tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
     return ch;
 }
-
-/* source: https://stackoverflow.com/questions/421860/capture-characters-from-standard-input-without-waiting-for-enter-to-be-pressed */
-// char getch() 
-// {
-//     char buf = 0;
-//     struct termios old = {0};
-//     if (tcgetattr(0, &old) < 0)
-//     { 
-//         perror("tcsetattr()");
-//     }
-//     old.c_lflag &= ~ICANON;
-//     old.c_lflag &= ~ECHO;
-//     old.c_cc[VMIN] = 1;
-//     old.c_cc[VTIME] = 0;
-//     if (tcsetattr(0, TCSANOW, &old) < 0)
-//     { 
-//         perror("tcsetattr ICANON");
-//     }
-//     if (read(0, &buf, 1) < 0)
-//     {
-//         perror ("read()");
-//     }
-//     old.c_lflag |= ICANON;
-//     old.c_lflag |= ECHO;
-//     if (tcsetattr(0, TCSADRAIN, &old) < 0)
-//     { 
-//         perror ("tcsetattr ~ICANON");
-//     }
-//     return (buf);
-// }
 
 void fflush_stdin()
 {

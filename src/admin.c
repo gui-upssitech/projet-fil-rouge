@@ -48,18 +48,24 @@ Bool_e is_password_valid(unsigned long in_password)
     unsigned long saved_password;
 
     /* initializations */
-    password_file = fopen("/home/rxc3445a/Documents/PFR/admin/password.tpscrt", "r");
+    password_file = fopen(PASSWORD_RELATIVE_PATH, "r");
 
     /* instructions */
     if(password_file == NULL)
     {
-        printf("Error %d opening %s.\n\r", errno, "/home/rxc3445a/Documents/PFR/admin/password.tpscrt");
+        printf("Error %d opening %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
         return FALSE;
     }
     
     if(fscanf(password_file, "%lu", &saved_password) == EOF)
     {
         printf("Error reading password file.\n\r");
+    }
+
+    if(fclose(password_file) == EOF)
+    {
+        printf("Error %d closing the file %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
+        return FALSE;
     }
 
     return compare_hashed_password(in_password, saved_password);

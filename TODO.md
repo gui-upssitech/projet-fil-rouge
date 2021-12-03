@@ -1,4 +1,6 @@
 - [x] Avoid press Enter with getchar()
 - [ ] Add first connexion menu to setup password admin
-- [ ] Set magic path in a config file 
+- [x] Set magic path in a header file 
 - [ ] Set removable char in password entry
+- [ ] Change message exception to the stderr
+- [ ] Put all names in header of each file

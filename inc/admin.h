@@ -16,6 +16,9 @@ Date:       01/12/2021
 #define MAX_TRY_PASSWORD 5
 #define PASSWORD_CHAR "*"
 
+/* path constants */
+#define PASSWORD_RELATIVE_PATH "admin/password.tpscrt"
+
 unsigned long get_hashed_password();
 Bool_e is_password_valid(unsigned long in_password);
 Bool_e compare_hashed_password(unsigned long in_password, unsigned long saved_password);
