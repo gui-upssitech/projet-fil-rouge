@@ -2,7 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
             
 Date:       29/11/2021
 */
@@ -10,7 +11,9 @@ Date:       29/11/2021
 #ifndef UNIT_H
 #define UNIT_H
 
-#include "descriptor.h"
+#include "indexation_text.h"
+#include "indexation_image.h"
+#include "indexation_audio.h"
 
 typedef union
 {

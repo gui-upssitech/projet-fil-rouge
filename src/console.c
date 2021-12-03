@@ -2,7 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
             
 Date:       29/11/2021
 */
@@ -59,7 +60,7 @@ void display_centered_text_console(char* p_text)
     size = get_array_size_from_pointer(p_text);
     if(size > MAX_CHAR_PER_LINE - 2)
     {
-        printf("Error overflow writing line menu.\n\r");
+        fprintf(stderr, "Error overflow writing line menu.\n\r");
         return;
     }
     if((MAX_CHAR_PER_LINE - size - 2) % 2 == 1)

@@ -1,6 +1,9 @@
 /*
 Authors:    Constant ROUX,
-            Peter PIRIOU--DEZY
+            Julian TRANI,
+            Peter PIRIOU--DEZY,
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
             
 Date:       29/11/2021
 */

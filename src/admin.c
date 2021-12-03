@@ -1,9 +1,11 @@
 /*
-Authors:    Constant ROUX
-            Julian TRANI
-            Peter PIRIOU--DEZY
-
-Date:       01/12/2021
+Authors:    Constant ROUX,
+            Julian TRANI,
+            Peter PIRIOU--DEZY,
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
+            
+Date:       29/11/2021
 */
 
 #include <stdio.h>
@@ -53,18 +55,18 @@ Bool_e is_password_valid(unsigned long in_password)
     /* instructions */
     if(password_file == NULL)
     {
-        printf("Error %d opening %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
+        fprintf(stderr, "Error %d opening %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
         return FALSE;
     }
     
     if(fscanf(password_file, "%lu", &saved_password) == EOF)
     {
-        printf("Error reading password file.\n\r");
+        fprintf(stderr, "Error reading password file.\n\r");
     }
 
     if(fclose(password_file) == EOF)
     {
-        printf("Error %d closing the file %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
+        fprintf(stderr, "Error %d closing the file %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
         return FALSE;
     }
 

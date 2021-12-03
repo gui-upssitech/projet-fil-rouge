@@ -2,7 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
             
 Date:       29/11/2021
 */
@@ -11,7 +12,6 @@ Date:       29/11/2021
 #include <stdlib.h>
 
 #include "../inc/unit.h"
-#include "../inc/descriptor.h"
 
 void display_unit(Unit_u unit)
 {
@@ -26,8 +26,8 @@ void display_unit(Unit_u unit)
     {
         case sizeof(Text_descriptor_s):
             break;
-
-        case sizeof(Image_descriptor_s):
+        // TO DO check error
+        case sizeof(Image_descriptor_s)+1:
             break;
 
         case sizeof(Audio_descriptor_s):

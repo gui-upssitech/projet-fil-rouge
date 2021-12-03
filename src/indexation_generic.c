@@ -1,3 +1,13 @@
+/*
+Authors:    Constant ROUX,
+            Julian TRANI,
+            Peter PIRIOU--DEZY,
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
+            
+Date:       29/11/2021
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -28,7 +38,7 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
     /* instructions */
     if(p_index_table == NULL)
     {
-        printf("Error %d opening %s.\n\r", errno, p_list_base_path);
+        fprintf(stderr, "Error %d opening %s.\n\r", errno, p_list_base_path);
         return FALSE;
     }
 
@@ -52,7 +62,7 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
                     case IMAGE:
                         if(index_image(str_concat(p_data_path, p_dir->d_name), &(unit.image_descriptor)) == FALSE)
                         {
-                            printf("Error creating file descriptor.\n\r");
+                            fprintf(stderr, "Error creating file descriptor.\n\r");
                             return FALSE;
                         }
                         else
@@ -80,13 +90,13 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
     }
     else
     {
-        printf("Error %d opening %s.\n\r", errno, p_list_base_path);
+        fprintf(stderr, "Error %d opening %s.\n\r", errno, p_list_base_path);
         return FALSE;
     }
 
     if(fclose(p_index_table) == EOF)
     {
-        printf("Error %d closing the file %s.\n\r", errno, p_list_base_path);
+        fprintf(stderr, "Error %d closing the file %s.\n\r", errno, p_list_base_path);
         return FALSE;
     }
     return TRUE;

@@ -1,9 +1,11 @@
 /*
-Authors:    Constant ROUX
-            Julian TRANI
-            Peter PIRIOU--DEZY
-
-Date:       01/12/2021
+Authors:    Constant ROUX,
+            Julian TRANI,
+            Peter PIRIOU--DEZY,
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
+            
+Date:       29/11/2021
 */
 
 #ifndef ADMIN_H

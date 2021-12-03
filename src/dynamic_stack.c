@@ -2,7 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
             
 Date:       29/11/2021
 */
@@ -34,7 +35,7 @@ Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u u
     p_node = malloc(sizeof(Node_s));
     if(p_node == NULL)
     {
-        printf("Error memory allocation.\n\r");
+        fprintf(stderr, "Error memory allocation.\n\r");
     }
     else
     {

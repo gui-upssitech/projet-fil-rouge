@@ -1,7 +1,9 @@
 /*
 Authors:    Constant ROUX,
             Julian TRANI,
-            Peter PIRIOU--DEZY
+            Peter PIRIOU--DEZY,
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
             
 Date:       29/11/2021
 */
@@ -11,9 +13,7 @@ Date:       29/11/2021
 
 #include <stdio.h>
 
-#include "descriptor.h"
 #include "toolbox.h"
-
 
 /* descriptor file path constants */
 #define LIST_BASE_IMAGE_PATH "descriptors/image/list_base_image.txt"
@@ -52,6 +52,18 @@ typedef struct
     /* array that contains respectively width, height and channels */
     int a_sizes[NB_SIZES];
 } Image_s;
+
+/* structure that contains all necessary informations to build the 
+image descriptor (id and histogram) */
+typedef struct
+{
+    /* unique id of the descriptor based on the hashed file name */
+    unsigned long id;
+
+    /* histogram of the file (size of 6 bits) */
+    unsigned char* p_histogram;
+
+} Image_descriptor_s;
 
 Bool_e get_parameters_image(Image_s* p_image);
 Bool_e quantify_image(Image_s* p_image, unsigned char a_quantified_image[]);

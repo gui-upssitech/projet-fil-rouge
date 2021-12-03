@@ -2,7 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
             
 Date:       29/11/2021
 */
@@ -10,7 +11,6 @@ Date:       29/11/2021
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../inc/descriptor.h"
 #include "../../inc/indexation_image.h"
 #include "../../inc/indexation_generic.h"
 #include "../../inc/toolbox.h"

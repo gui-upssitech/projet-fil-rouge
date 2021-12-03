@@ -3,4 +3,5 @@
 - [x] Set magic path in a header file 
 - [ ] Set removable char in password entry
 - [ ] Change message exception to the stderr
-- [ ] Put all names in header of each file
+- [x] Put all names in header of each file
+- [ ] Add config files for admin

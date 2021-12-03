@@ -1,8 +1,10 @@
 /*
-Authors:    Constant ROUX, 
+Authors:    Constant ROUX,
+            Julian TRANI,
             Peter PIRIOU--DEZY,
-            Julian TRANI
-
+            Guillaume ROUSSIN,
+            Nelson SANCHEZ
+            
 Date:       29/11/2021
 */
 
@@ -24,7 +26,7 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
 
     if(fprintf(p_base_descriptor_image, "%lu\n", p_descriptor->id) == EOF)
     {
-        printf("Error %d printing id of image descriptor.\n\r", errno);
+        fprintf(stderr, "Error %d printing id of image descriptor.\n\r", errno);
         return FALSE;
     }
 
@@ -32,7 +34,7 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
     {
         if(fprintf(p_base_descriptor_image, "%d\n", p_descriptor->p_histogram[i]) == EOF)
         {
-            printf("Error %d printing histogram value of image descriptor.\n\r", errno);
+            fprintf(stderr, "Error %d printing histogram value of image descriptor.\n\r", errno);
             return FALSE;
         }
     }
@@ -69,13 +71,13 @@ Bool_e get_parameters_image(Image_s* p_image)
     {
         if(fscanf(p_image->p_image_txt, "%d", &(p_image->a_sizes[i])) == EOF)
         {
-            printf("Error EOF reading %s.\n\r", p_image->p_path);
+            fprintf(stderr, "Error EOF reading %s.\n\r", p_image->p_path);
             return FALSE;
         }
 
         if(p_image->a_sizes[i] <= 0)
         {
-            printf("Error negative dimension image at %s.\n\r", p_image->p_path);
+            fprintf(stderr, "Error negative dimension image at %s.\n\r", p_image->p_path);
             return FALSE;
         }
 
@@ -113,7 +115,7 @@ Bool_e quantify_image(Image_s* p_image, unsigned char a_quantified_image[])
         {
             if(fscanf(p_image->p_image_txt, "%hhu %hhu %hhu", &r, &g, &b) == EOF)
             {
-                printf("Error EOF reading %s.\n\r", p_image->p_path);
+                fprintf(stderr, "Error EOF reading %s.\n\r", p_image->p_path);
                 return FALSE;
             }
 
@@ -125,7 +127,7 @@ Bool_e quantify_image(Image_s* p_image, unsigned char a_quantified_image[])
         {
             if(fscanf(p_image->p_image_txt, "%hhu", &r) == EOF)
             {
-                printf("Error EOF reading %s.\n\r", p_image->p_path);
+                fprintf(stderr, "Error EOF reading %s.\n\r", p_image->p_path);
                 return FALSE;
             }
             a_quantified_image[i] = r / ((PIXEL_MAX_SIZE + 1) / GRAY_LEVEL);
@@ -146,7 +148,7 @@ Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor)
     /* instructions */
     if(p_image_txt == NULL)
     {
-        printf("Error %d opening %s.\n\r", errno, p_path);
+        fprintf(stderr, "Error %d opening %s.\n\r", errno, p_path);
         return FALSE;
     }
     else
@@ -176,7 +178,7 @@ Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor)
 
     if(fclose(image.p_image_txt) == EOF)
     {
-        printf("Error %d closing the file %s.\n\r", errno, image.p_path);
+        fprintf(stderr, "Error %d closing the file %s.\n\r", errno, image.p_path);
         return FALSE;
     }
 
