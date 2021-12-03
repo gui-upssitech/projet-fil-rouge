@@ -10,80 +10,10 @@ Date:       29/11/2021
 #include <errno.h>
 #include <string.h>
 #include <dirent.h>
-#include <string.h>
 
 #include "../inc/toolbox.h"
 #include "../inc/indexation_image.h"
 #include "../inc/dynamic_stack.h"
-
-Bool_e automatic_image_indexation()
-{
-    /* files statements */
-    FILE* p_index_table;
-
-    /* dir explorer statements */
-    struct dirent* p_dir;
-    DIR* p_d;
-
-    /* descriptors statements */
-    Image_descriptor_s image_descriptor;
-    Dynamic_stack_p p_dynamic_stack;
-    Unit_u unit;
-
-    /* initializations */
-    p_dynamic_stack = init_dynamic_stack();
-    p_index_table = fopen(INDEX_TABLE_PATH, "a+");
-
-    /* instructions */
-    if(p_index_table == NULL)
-    {
-        printf("Error %d opening %s.\n\r", errno, INDEX_TABLE_PATH);
-        return FALSE;
-    }
-
-    /* NB images first */
-    p_d = opendir(NB_BASE_PATH);
-    if(p_d)
-    {
-        while((p_dir = readdir(p_d)) != NULL)
-        {
-            /* step 1 : check if the read file contains the string ".txt"*/
-            if(strstr(p_dir->d_name, TEXT_EXTENSION) != NULL)
-            {
-                /* step 2 : check if the index table contains the file being processed */
-                if(file_contains_substring(p_index_table, p_dir->d_name) == FALSE)
-                {
-                    /* step 3 : create the descriptor of the file */
-                    if(index_image(str_concat(NB_BASE_PATH, p_dir->d_name), &image_descriptor) == FALSE)
-                    {
-                        printf("Error creating file descriptor.\n\r");
-                        return FALSE;
-                    }
-                    
-                    /* step 4 : add the new descriptor in the stack */
-                    unit.image_descriptor = image_descriptor;
-                    p_dynamic_stack = add_unit_dynamic_stack(p_dynamic_stack, unit);
-
-                    /* step 5 : add the new file in the index table */
-                    fprintf(p_index_table, "%s\n", p_dir->d_name);
-                }
-            }
-        }
-        closedir(p_d);
-    }
-    else
-    {
-        printf("Error %d opening %s.\n\r", errno, INDEX_TABLE_PATH);
-        return FALSE;
-    }
-
-    if(fclose(p_index_table) == EOF)
-    {
-        printf("Error %d closing the file %s.\n\r", errno, INDEX_TABLE_PATH);
-        return FALSE;
-    }
-    return TRUE;
-}
 
 Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* p_descriptor)
 {

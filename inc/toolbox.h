@@ -10,6 +10,10 @@ Date:       29/11/2021
 
 #include <stdio.h>
 
+/* const values for file */
+#define TEXT_EXTENSION ".txt"
+#define XML_EXTENSION ".xml"
+
 /* classical boolean type*/
 typedef enum {FALSE, TRUE} Bool_e;
 

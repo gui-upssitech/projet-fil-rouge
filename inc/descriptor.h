@@ -11,6 +11,9 @@ Date:       29/11/2021
 text descriptor (...) */
 typedef struct
 {
+    /* unique id of the descriptor based on the hashed file name */
+    unsigned long id;
+
     int provisoire_pour_compiler;
 
 } Text_descriptor_s;
@@ -31,7 +34,16 @@ typedef struct
 audio descriptor (...) */
 typedef struct
 {
+    /* unique id of the descriptor based on the hashed file name */
+    unsigned long id;
 
 } Audio_descriptor_s;
+
+typedef enum
+{
+    TEXT,
+    IMAGE,
+    AUDIO
+} Descriptor_e;
 
 #endif

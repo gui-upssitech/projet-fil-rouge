@@ -16,7 +16,7 @@ Date:       29/11/2021
 
 
 /* descriptor file path constants */
-#define INDEX_TABLE_PATH "descriptors/image/image_index_table.txt"
+#define LIST_BASE_IMAGE_PATH "descriptors/image/list_base_image.txt"
 #define BASE_IMAGE_DESCRIPTOR_PATH "descriptors/image/base_image_descriptor.txt"
 
 /* data file path constants */
@@ -39,9 +39,6 @@ Date:       29/11/2021
 /* image dimension informations */
 #define NB_SIZES 3
 
-/* const values for file */
-#define TEXT_EXTENSION ".txt"
-
 /* structure that contains all informations about the image (file path, 
 pointer on file descriptor, dimensions)*/
 typedef struct
@@ -61,6 +58,5 @@ Bool_e quantify_image(Image_s* p_image, unsigned char a_quantified_image[]);
 Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor);
 void do_histogram_image(Image_s* p_image, unsigned char a_quantified_image[], unsigned char a_histogram[]);
 Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* p_descriptor);
-Bool_e automatic_image_indexation();
 
 #endif
