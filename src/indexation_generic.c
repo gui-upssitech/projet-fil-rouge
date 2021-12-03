@@ -21,7 +21,7 @@ Date:       29/11/2021
 Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, char* p_base_path, Descriptor_e descriptor_type)
 {
     /* files statements */
-    FILE* p_index_table;
+    FILE* p_list_base;
 
     /* dir explorer statements */
     struct dirent* p_dir;
@@ -33,10 +33,10 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
 
     /* initializations */
     p_dynamic_stack = init_dynamic_stack();
-    p_index_table = fopen(p_list_base_path, "a+");
+    p_list_base = fopen(p_list_base_path, "a+");
 
     /* instructions */
-    if(p_index_table == NULL)
+    if(p_list_base == NULL)
     {
         fprintf(stderr, "Error %d opening %s.\n\r", errno, p_list_base_path);
         return FALSE;
@@ -51,7 +51,7 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
             if(strstr(p_dir->d_name, (descriptor_type == TEXT) ? XML_EXTENSION : TEXT_EXTENSION) != NULL)
             {
                 /* step 2 : check if the index table contains the file being processed */
-                if(file_contains_substring(p_index_table, p_dir->d_name) == FALSE)
+                if(file_contains_substring(p_list_base, p_dir->d_name) == FALSE)
                 {
                     /* step 3 : create the descriptor of the file */
                     switch(descriptor_type)
@@ -68,7 +68,7 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
                         else
                         {
                             /* step 4 : add the new file in the index table */
-                            fprintf(p_index_table, "%s %lu\n", p_dir->d_name, unit.image_descriptor.id);
+                            fprintf(p_list_base, "%s %lu\n", p_dir->d_name, unit.image_descriptor.id);
                         }
                         break;
 
@@ -94,7 +94,7 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
         return FALSE;
     }
 
-    if(fclose(p_index_table) == EOF)
+    if(fclose(p_list_base) == EOF)
     {
         fprintf(stderr, "Error %d closing the file %s.\n\r", errno, p_list_base_path);
         return FALSE;

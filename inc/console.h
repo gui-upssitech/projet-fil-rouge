@@ -11,6 +11,8 @@ Date:       29/11/2021
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include "toolbox.h"
+
 /* useful constants for displaying the console */
 #define WALL "|"
 #define SPACE " "
@@ -23,6 +25,7 @@ void print_blank_console(unsigned int blank_size);
 char get_char_menu(char num_choices);
 void print_plate_console();
 void display_login_menu();
+Bool_e display_new_pwd_menu(Bool_e first_password);
 void display_main_menu();
 void display_user_menu();
 void display_admin_menu();

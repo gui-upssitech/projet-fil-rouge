@@ -32,13 +32,27 @@ unsigned long get_hashed_password()
     {
         password[size] = getch();
         
-        if(password[size] != '\n')
+        switch(password[size])
         {
-            printf("%s", PASSWORD_CHAR);
+            case '\n':
+                break;
+            
+            case 0x7F:
+                if(size > 0)
+                {
+                    size--;
+                }
+                printf("\b \b");
+                break;
+            
+            default:
+                printf("%s", PASSWORD_CHAR);
+                size++;
+                break;
         }
-        size++;
-    } while(size < MAX_LENGTH_PASSWORD && password[size - 1] != '\n');
-    password[size] = '\0';
+        
+    } while(size < MAX_LENGTH_PASSWORD && password[size] != '\n');
+    password[size + 1] = '\0';
     
     return hash(password);
 }
@@ -46,25 +60,25 @@ unsigned long get_hashed_password()
 Bool_e is_password_valid(unsigned long in_password)
 {
     /* statements */
-    FILE* password_file;
+    FILE* p_password_file;
     unsigned long saved_password;
 
     /* initializations */
-    password_file = fopen(PASSWORD_RELATIVE_PATH, "r");
+    p_password_file = fopen(PASSWORD_RELATIVE_PATH, "r");
 
     /* instructions */
-    if(password_file == NULL)
+    if(p_password_file == NULL)
     {
         fprintf(stderr, "Error %d opening %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
         return FALSE;
     }
     
-    if(fscanf(password_file, "%lu", &saved_password) == EOF)
+    if(fscanf(p_password_file, "%lu", &saved_password) == EOF)
     {
         fprintf(stderr, "Error reading password file.\n\r");
     }
 
-    if(fclose(password_file) == EOF)
+    if(fclose(p_password_file) == EOF)
     {
         fprintf(stderr, "Error %d closing the file %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
         return FALSE;

@@ -14,7 +14,7 @@ Date:       29/11/2021
 #include "../inc/toolbox.h"
 
 /* password constants */
-#define MAX_LENGTH_PASSWORD 10
+#define MAX_LENGTH_PASSWORD 20
 #define MAX_TRY_PASSWORD 5
 #define PASSWORD_CHAR "*"
 

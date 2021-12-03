@@ -10,9 +10,10 @@ Date:       29/11/2021
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <errno.h>
 
 #include "../inc/console.h"
-#include "../inc/toolbox.h"
 #include "../inc/admin.h"
 
 
@@ -93,10 +94,12 @@ void display_main_menu()
 {
     /* declarations */
     char c;
+    struct stat s_fileStat;
 
     /* instructions */
     while(1)
     {
+        stat(PASSWORD_RELATIVE_PATH, &s_fileStat);
         clear_console();
         print_plate_console();
         display_centered_text_console("");
@@ -116,7 +119,18 @@ void display_main_menu()
             break;
 
         case '2':
-            display_login_menu();
+            if(s_fileStat.st_size != 0)
+            {
+                display_login_menu();
+            }
+            else
+            {
+                if(display_new_pwd_menu(TRUE) == FALSE)
+                {
+                    fprintf(stderr, "Error during password initialization.\n\r");
+                    return;
+                }
+            }
             break;
 
         case '3':
@@ -134,16 +148,60 @@ void display_main_menu()
     }
 }
 
+Bool_e display_new_pwd_menu(Bool_e first_password)
+{
+    /* statements */
+    FILE* p_password_file;
+    unsigned long password;
+
+    /* initializations */
+    p_password_file = fopen(PASSWORD_RELATIVE_PATH, "w");
+
+    /* instructions */
+    if(p_password_file == NULL)
+    {
+        fprintf(stderr, "Error %d opening %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
+        return FALSE;
+    }
+    clear_console();
+    print_plate_console();
+    display_centered_text_console("");
+    if(first_password == TRUE)
+    {
+        display_centered_text_console("Initialisation mot de passe");
+    }
+    else
+    {
+        display_centered_text_console("Nouveau mot de passe");
+    }
+    
+    display_centered_text_console("");
+    print_plate_console();
+    password = get_hashed_password();
+    fprintf(p_password_file, "%lu", password);
+
+    if(fclose(p_password_file) == EOF)
+    {
+        fprintf(stderr, "Error %d closing the file %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
 void display_login_menu()
 {
     /* statements */
     unsigned long password;
+    static unsigned char nb_try = 1;
+    char str[2];
 
-    /* initializations */
+    /* instructions */
+    sprintf(str, "%d", MAX_TRY_PASSWORD - nb_try + 1);
     clear_console();
     print_plate_console();
     display_centered_text_console("");
-    display_centered_text_console("Mot de passe :");
+    display_centered_text_console(str_concat(str_concat("Mot de passe (", str), (str[0] == '1') ? " essai restant)" : " essais restants)"));
     display_centered_text_console("");
     print_plate_console();
 
@@ -151,11 +209,21 @@ void display_login_menu()
     password = get_hashed_password();
     if(is_password_valid(password) == TRUE)
     {
+        nb_try = 1;
         display_admin_menu();
     }
     else
     {
-        return;
+        if(nb_try < MAX_TRY_PASSWORD)
+        {
+            nb_try++;
+            display_login_menu();
+        }
+        else
+        {
+            nb_try = 1;
+            return;
+        }
     }
 } 
 
@@ -222,10 +290,11 @@ void display_admin_menu()
         display_centered_text_console("(1) Indexation");
         display_centered_text_console("(2) Comparaison");
         display_centered_text_console("(3) Moteur de recherche");
+        display_centered_text_console("(4) Modifier mot de passe");
         display_centered_text_console("(q) Quitter");
         display_centered_text_console("");
         print_plate_console();
-        c = get_char_menu('4');
+        c = get_char_menu('5');
         switch (c)
         {
         case '1':
@@ -238,6 +307,10 @@ void display_admin_menu()
 
         case '3':
             display_audio_research_menu();
+            break;
+
+        case '4':
+            display_new_pwd_menu(FALSE);
             break;
 
         case 'q':
