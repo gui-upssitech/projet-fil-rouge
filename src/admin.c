@@ -35,6 +35,7 @@ unsigned long get_hashed_password()
         switch(password[size])
         {
             case '\n':
+                fflush(stdout);
                 break;
             
             case 0x7F:
@@ -46,7 +47,10 @@ unsigned long get_hashed_password()
                 break;
             
             default:
-                printf("%s", PASSWORD_CHAR);
+                if(size < MAX_LENGTH_PASSWORD - 1)
+                {
+                    printf("%s", PASSWORD_CHAR);
+                }
                 size++;
                 break;
         }
