@@ -31,14 +31,14 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
 
     for(i = 0; i < GRAY_LEVEL; i++)
     {
-        if(fprintf(p_base_descriptor_image, "%d\n", p_descriptor->p_histogram[i]) == EOF)
+        if(fprintf(p_base_descriptor_image, "%d ", p_descriptor->p_histogram[i]) == EOF)
         {
             fprintf(stderr, "Error %d printing histogram value of image descriptor.\n\r", errno);
             return FALSE;
         }
     }
 
-    if(fprintf(p_base_descriptor_image, "\n") == EOF)
+    if(fprintf(p_base_descriptor_image, "\n\r") == EOF)
         {
             fprintf(stderr, "Error %d printing new line char in image descriptor.\n\r", errno);
             return FALSE;

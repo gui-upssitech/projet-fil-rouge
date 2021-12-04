@@ -1,0 +1,20 @@
+# indexing
+indexing:
+  text:
+    data_base_relative_path:
+    mode: ""
+    threshold: 10
+    limit: 10
+  image:
+    data_base_relative_path:
+  audio:
+    data_base_relative_path:
+    samples: 1024
+    interval: 100
+
+# comparison
+comparison:
+  image:
+    threshold:
+  audio:
+    threshold:
