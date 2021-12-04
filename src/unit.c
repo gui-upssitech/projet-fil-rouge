@@ -13,33 +13,21 @@ Date:       29/11/2021
 
 #include "../inc/unit.h"
 
-void display_unit(Unit_u unit)
+void affect_unit(Unit_u* unit1, Unit_u unit2, Descriptor_e descriptor_type)
 {
-    /* statements */
-    unsigned int size;
-
-    /* initializations */
-    size = sizeof(Unit_u);
-
     /* instructions */
-    switch(size)
+    switch(descriptor_type)
     {
-        case sizeof(Text_descriptor_s):
-            break;
-        // TO DO check error
-        case sizeof(Image_descriptor_s)+1:
+        case TEXT:
+            (*unit1).text_descriptor = unit2.text_descriptor;
             break;
 
-        case sizeof(Audio_descriptor_s):
+        case IMAGE:
+            (*unit1).image_descriptor = unit2.image_descriptor;
             break;
-            
-        default:
+
+        case AUDIO:
+            (*unit1).audio_descriptor = unit2.audio_descriptor;
             break;
     }
-}
-
-void affect_unit(Unit_u* unit1, Unit_u unit2)
-{
-    /* instructions */
-    *unit1 = unit2;
 }

@@ -23,7 +23,6 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
     unsigned char i;
 
     /* instructions */
-
     if(fprintf(p_base_descriptor_image, "%lu\n", p_descriptor->id) == EOF)
     {
         fprintf(stderr, "Error %d printing id of image descriptor.\n\r", errno);
@@ -38,10 +37,16 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
             return FALSE;
         }
     }
+
+    if(fprintf(p_base_descriptor_image, "\n") == EOF)
+        {
+            fprintf(stderr, "Error %d printing new line char in image descriptor.\n\r", errno);
+            return FALSE;
+        }
     return TRUE;
 }
 
-void create_descriptor_image(char* p_name, unsigned char* p_histogram, Image_descriptor_s* p_descriptor)
+void create_descriptor_image(char* p_name, unsigned int p_histogram[], Image_descriptor_s* p_descriptor)
 {
     /* statements */
     unsigned long hash_code;
@@ -57,7 +62,7 @@ void create_descriptor_image(char* p_name, unsigned char* p_histogram, Image_des
     p_descriptor->id = hash_code;
     for(i = 0; i < GRAY_LEVEL; i++)
     {
-        p_descriptor->p_histogram = p_histogram;
+        p_descriptor->p_histogram[i] = p_histogram[i];
     }
 }
 
@@ -85,13 +90,16 @@ Bool_e get_parameters_image(Image_s* p_image)
     return TRUE;
 }
 
-void do_histogram_image(Image_s* p_image, unsigned char a_quantified_image[], unsigned char a_histogram[])
+void do_histogram_image(Image_s* p_image, unsigned char a_quantified_image[], unsigned int a_histogram[])
 {
     /* statements */
     unsigned int i;
 
-    /* initializations */
-    memset(a_histogram, 0, GRAY_LEVEL * sizeof(unsigned char));
+    /* initializatons */
+    for(i = 0; i < GRAY_LEVEL; i++)
+    {
+        a_histogram[i] = 0;
+    }
 
     /* instructions */
     for(i = 0; i < p_image->a_sizes[WIDTH_IDX] * p_image->a_sizes[HEIGHT_IDX]; i++)
@@ -169,7 +177,7 @@ Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor)
         }
 
         /* step 3 : do histogram */
-        unsigned char a_histogram[GRAY_LEVEL];
+        unsigned int a_histogram[GRAY_LEVEL];
         do_histogram_image(&image, a_quantified_image, a_histogram);
 
         /* step 4 : create descriptor */

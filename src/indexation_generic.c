@@ -14,14 +14,17 @@ Date:       29/11/2021
 #include <string.h>
 #include <dirent.h>
 
-#include "../inc/indexation_image.h"
 #include "../inc/dynamic_stack.h"
 #include "../inc/indexation_generic.h"
+#include "../inc/indexation_text.h"
+#include "../inc/indexation_image.h"
+#include "../inc/indexation_audio.h"
 
 Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, char* p_base_path, Descriptor_e descriptor_type)
 {
     /* files statements */
     FILE* p_list_base;
+    FILE* p_base;
 
     /* dir explorer statements */
     struct dirent* p_dir;
@@ -67,8 +70,12 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
                         }
                         else
                         {
-                            /* step 4 : add the new file in the index table */
-                            fprintf(p_list_base, "%s %lu\n", p_dir->d_name, unit.image_descriptor.id);
+                            /* step 4 : add the new file in the list base */
+                            if(fprintf(p_list_base, "%s %lu\n", p_dir->d_name, unit.image_descriptor.id) == EOF)
+                            {
+                                fprintf(stderr, "Error %d printing path and id in list base descriptor file.\n\r", errno);
+                                return FALSE;
+                            }
                         }
                         break;
 
@@ -80,13 +87,48 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
                     }
 
                     /* step 5 : add the new descriptor in the stack */
-                    p_dynamic_stack = add_unit_dynamic_stack(p_dynamic_stack, unit);  
+                    p_dynamic_stack = add_unit_dynamic_stack(p_dynamic_stack, unit, descriptor_type);  
                 }
             }
         }
         closedir(p_d);
 
-        // TO DO : save descriptor
+        p_base = fopen(p_base_path, "a");
+        if(p_base == NULL)
+        {
+            fprintf(stderr, "Error %d opening %s.\n\r", errno, p_base_path);
+            return FALSE;
+        }
+
+        while(is_empty_dynamic_stack(p_dynamic_stack) == FALSE)
+        {
+            p_dynamic_stack = remove_unit_dynamic_stack(p_dynamic_stack, &unit, descriptor_type);
+            switch(descriptor_type)
+            {
+                case TEXT:
+                    break;
+
+                case IMAGE:
+                    if(save_descriptor_image(p_base, &(unit.image_descriptor)) == FALSE)
+                    {
+                        fprintf(stderr, "Error writing descriptor_id: %lu in %s", unit.image_descriptor.id, p_base_path);
+                        return FALSE;
+                    }
+                    break;
+
+                case AUDIO:
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+
+        if(fclose(p_base) == EOF)
+        {
+            fprintf(stderr, "Error %d closing the file %s.\n\r", errno, p_base_path);
+            return FALSE;
+        }
     }
     else
     {

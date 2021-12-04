@@ -21,6 +21,11 @@ test_indexation_image: $(OBJ) src/test/test_indexation_image.c
 	mv ./*.o ./obj
 	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)
 
+test_indexation_audio: $(OBJ) src/test/test_indexation_audio.c
+	gcc -c src/test/test_indexation_audio.c $(CFLAGS)
+	mv ./*.o ./obj
+	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)
+
 test_display_console: $(OBJ) src/test/test_display_console.c
 	gcc -c src/test/test_display_console.c $(CFLAGS)
 	mv ./*.o ./obj

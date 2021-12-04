@@ -18,7 +18,7 @@ typedef struct
     /* unique id of the descriptor based on the hashed file name */
     unsigned long id;
 
-    float provisoire_pour_compiler;
+    int provisoire_pour_compiler[4];
 
 } Text_descriptor_s;
 

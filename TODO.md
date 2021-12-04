@@ -6,3 +6,4 @@
 - [x] Add multiple tries in the password entry
 - [x] Add first connexion menu to setup password admin
 - [ ] Add config files for admin
+- [ ] check l'histoire du noir et blanc

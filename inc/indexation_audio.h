@@ -10,7 +10,6 @@ Date:       29/11/2021
 
 #ifndef INDEXATION_AUDIO_H
 #define INDEXATION_AUDIO_H
-#endif
 
 /* structure that contains all necessary informations to build the 
 audio descriptor (...) */
@@ -21,3 +20,4 @@ typedef struct
 
 } Audio_descriptor_s;
 
+#endif

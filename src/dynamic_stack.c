@@ -12,7 +12,6 @@ Date:       29/11/2021
 #include <stdlib.h>
 
 #include "../inc/dynamic_stack.h"
-#include "../inc/toolbox.h"
 
 Dynamic_stack_p init_dynamic_stack()
 {
@@ -26,7 +25,7 @@ Bool_e is_empty_dynamic_stack(Dynamic_stack_p p_dynamic_stack)
     return (p_dynamic_stack == NULL) ? TRUE : FALSE;
 }
 
-Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u unit)
+Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u unit, Descriptor_e descripor_type)
 {
     /* statements */
     Node_s* p_node;
@@ -40,14 +39,14 @@ Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u u
     else
     {
         p_node->next_node = p_dynamic_stack;
-        affect_unit(&(p_node->element), unit);
+        affect_unit(&(p_node->element), unit, descripor_type);
 
         p_dynamic_stack = p_node;
     }
     return p_dynamic_stack;
 }
 
-Dynamic_stack_p remove_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u* unit)
+Dynamic_stack_p remove_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u* unit, Descriptor_e descriptor_type)
 {
     /* statements */
     Node_s* p_node;
@@ -60,7 +59,7 @@ Dynamic_stack_p remove_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_
     else
     {   
         p_node = p_dynamic_stack;
-        affect_unit(unit, p_node->element);
+        affect_unit(unit, p_node->element, descriptor_type);
         p_dynamic_stack = p_node->next_node;
         free(p_node);
     }
