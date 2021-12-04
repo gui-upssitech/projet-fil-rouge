@@ -51,7 +51,7 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
         while((p_dir = readdir(p_d)) != NULL)
         {
             /* step 1 : check if the read file contains the string extension file */
-            if(strstr(p_dir->d_name, (descriptor_type == TEXT) ? XML_EXTENSION : TEXT_EXTENSION) != NULL)
+            if(strstr(p_dir->d_name, (descriptor_type == TEXT ? XML_EXTENSION : (descriptor_type == AUDIO ? BIN_EXTENSION : TEXT_EXTENSION))) != NULL)
             {
                 /* step 2 : check if the index table contains the file being processed */
                 if(file_contains_substring(p_list_base, p_dir->d_name) == FALSE)
@@ -80,6 +80,20 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
                         break;
 
                     case AUDIO:
+                        if(index_audio(str_concat(p_data_path, p_dir->d_name), &(unit.audio_descriptor)) == FALSE)
+                        {
+                            fprintf(stderr, "Error creating file descriptor.\n\r");
+                            return FALSE;
+                        }
+                        else
+                        {
+                            /* step 4 : add the new file in the list base */
+                            if(fprintf(p_list_base, "%s %lu\n", p_dir->d_name, unit.audio_descriptor.id) == EOF)
+                            {
+                                fprintf(stderr, "Error %d printing path and id in list base descriptor file.\n\r", errno);
+                                return FALSE;
+                            }
+                        }
                         break;
                     
                     default:
@@ -117,6 +131,11 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
                     break;
 
                 case AUDIO:
+                    if(save_descriptor_audio(p_base, &(unit.audio_descriptor)) == FALSE)
+                    {
+                        fprintf(stderr, "Error writing descriptor_id: %lu in %s", unit.image_descriptor.id, p_base_path);
+                        return FALSE;
+                    }
                     break;
                     
                 default:

@@ -16,6 +16,17 @@ Date:       29/11/2021
 
 #include "../inc/toolbox.h"
 
+unsigned int get_bytes_size_file(FILE* p_file)
+{
+    /* statements */
+    int bytes;
+
+    /* instructions */
+    for(bytes = 0; fgetc(p_file) != EOF; ++bytes);
+    fseek(p_file, 0, SEEK_SET);
+    return bytes;
+}
+
 char* str_concat(char* str1, char* str2)
 {
     /* statements */
@@ -88,7 +99,7 @@ char getch(void)
 
 void fflush_stdin()
 {
-    /* declarations */
+    /* statements */
     char c;
 
     /* instructions */

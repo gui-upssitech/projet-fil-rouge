@@ -16,6 +16,7 @@ Date:       29/11/2021
 /* const values for file */
 #define TEXT_EXTENSION ".txt"
 #define XML_EXTENSION ".xml"
+#define BIN_EXTENSION ".bin"
 
 /* classical boolean type*/
 typedef enum {FALSE, TRUE} Bool_e;
@@ -27,5 +28,6 @@ void fflush_stdin();
 char getch();
 Bool_e file_contains_substring(FILE* p_file, char* p_str);
 char* str_concat(char* str1, char* str2);
+unsigned int get_bytes_size_file(FILE* p_file);
 
 #endif

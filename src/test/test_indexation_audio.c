@@ -12,23 +12,18 @@ Date:       29/11/2021
 #include <stdlib.h>
 #include <string.h>
 
+#include "../../inc/configurations.h"
+#include "../../inc/indexation_generic.h"
+#include "../../inc/indexation_audio.h"
+
 int main(void)
 {
     /* statements */
-    FILE* p_bin_file;
-    char bytes[8];
 
     /* initializations */
-    p_bin_file = fopen("/home/rxc3445a/Documents/projet-fil-rouge/data/audios/TEST_SON/corpus_fi.bin", "rb");
 
     /* instructions */
-    while (!feof(p_bin_file))
-    {
-        fread(bytes, 8, 1, p_bin_file);
-        printf("%.8e\n", *((double*) bytes));
-    }
-
-    fclose(p_bin_file);
+    automatic_generic_indexation(LIST_BASE_AUDIO_PATH, SOUND_BASE_PATH, BASE_AUDIO_DESCRIPTOR_PATH, AUDIO);
 
     return EXIT_SUCCESS;
 }

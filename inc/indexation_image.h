@@ -51,6 +51,7 @@ typedef struct
 
     /* array that contains respectively width, height and channels */
     int a_sizes[NB_SIZES];
+
 } Image_s;
 
 /* structure that contains all necessary informations to build the 
@@ -61,7 +62,7 @@ typedef struct
     unsigned long id;
 
     /* histogram of the file (size of 6 bits) */
-    unsigned int p_histogram[GRAY_LEVEL];
+    unsigned int a_histogram[GRAY_LEVEL];
 
 } Image_descriptor_s;
 

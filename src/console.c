@@ -24,7 +24,7 @@ void clear_console()
 
 void print_plate_console()
 {
-    /* declarations */
+    /* statements */
     unsigned int i;
 
     /* instructions */
@@ -38,7 +38,7 @@ void print_plate_console()
 
 void print_blank_console(unsigned int blank_size)
 {
-    /* declarations */
+    /* statements */
     int i;
 
     /* instructions */
@@ -92,7 +92,7 @@ char get_char_menu(char num_choices)
 
 void display_main_menu()
 {
-    /* declarations */
+    /* statements */
     char c;
     struct stat s_fileStat;
 
@@ -229,7 +229,7 @@ void display_login_menu()
 
 void display_user_menu()
 {
-    /* declarations */
+    /* statements */
     char c;
 
     /* instructions */
@@ -275,7 +275,7 @@ void display_user_menu()
 
 void display_admin_menu()
 {
-    /* declarations */
+    /* statements */
     char c;
 
     /* instructions */
@@ -327,7 +327,7 @@ void display_admin_menu()
 
 void display_about_menu()
 {
-    /* declarations */
+    /* statements */
     char c;
 
     /* instructions */

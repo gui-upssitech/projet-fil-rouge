@@ -31,7 +31,7 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
 
     for(i = 0; i < GRAY_LEVEL; i++)
     {
-        if(fprintf(p_base_descriptor_image, "%d ", p_descriptor->p_histogram[i]) == EOF)
+        if(fprintf(p_base_descriptor_image, "%d ", p_descriptor->a_histogram[i]) == EOF)
         {
             fprintf(stderr, "Error %d printing histogram value of image descriptor.\n\r", errno);
             return FALSE;
@@ -46,7 +46,7 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
     return TRUE;
 }
 
-void create_descriptor_image(char* p_name, unsigned int p_histogram[], Image_descriptor_s* p_descriptor)
+void create_descriptor_image(char* p_name, unsigned int a_histogram[], Image_descriptor_s* p_descriptor)
 {
     /* statements */
     unsigned long hash_code;
@@ -62,7 +62,7 @@ void create_descriptor_image(char* p_name, unsigned int p_histogram[], Image_des
     p_descriptor->id = hash_code;
     for(i = 0; i < GRAY_LEVEL; i++)
     {
-        p_descriptor->p_histogram[i] = p_histogram[i];
+        p_descriptor->a_histogram[i] = a_histogram[i];
     }
 }
 
@@ -166,6 +166,7 @@ Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor)
         image.p_image_txt = p_image_txt;
         if(get_parameters_image(&image) == FALSE)
         {
+            printf("Error reading image %s parameters.\n\r", image.p_path);
             return FALSE;
         }
 
