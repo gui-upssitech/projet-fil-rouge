@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "editor.wordWrap": "on",
   "editor.wordWrapColumn": 80,
   "editor.wrappingIndent": "same",
@@ -14,3 +15,14 @@
     ]
   }
 }
+=======
+    "files.associations": {
+        "unit.h": "c",
+        "indexation_generic.h": "c",
+        "dynamic_stack.h": "c",
+        "toolbox.h": "c",
+        "indexation_text.h": "c",
+        "indexation_image.h": "c"
+    }
+}
+>>>>>>> indexation-image
