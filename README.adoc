@@ -22,7 +22,7 @@ Voici un petit apercu visuel de l'application :
 
 image::images/menu.png[Menu,450,align="center"]
 
-L'application possède de nombreux dossier dans lesquels des fichiers du même type sont regroupés
+L'application possède de nombreux dossiers dans lesquels des fichiers du même type sont regroupés.
 
 Voici un tableau récapitulatif des différents fichiers utilisé dans l'application :
 
@@ -34,7 +34,7 @@ Voici un tableau récapitulatif des différents fichiers utilisé dans l'applica
 | Contient tous les fichiers de configuration accessible du côté admin  
 
 | data
-| Correspond à la base de données du moteur de recherche qui sont triés par type de formats disponibles
+| Correspond à la base de données du moteur de recherche qui est triée par type de formats disponibles
 
 | descriptors
 | Suite à l'indexation, les descripteurs sont stockés selon leur type de format disponible
