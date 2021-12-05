@@ -15,8 +15,6 @@ Date:       29/11/2021
 
 void affect_unit(Unit_u* unit1, Unit_u unit2, Descriptor_e descriptor_type)
 {
-    /* statements */
-    unsigned char i;
     /* instructions */
     switch(descriptor_type)
     {
@@ -26,9 +24,7 @@ void affect_unit(Unit_u* unit1, Unit_u unit2, Descriptor_e descriptor_type)
 
         case IMAGE:
             unit1->image_descriptor.id = unit2.image_descriptor.id;
-            // TO DO optimise image descriptor by changing array by pointer
-            for(i = 0; i < 64; i++)
-                unit1->image_descriptor.a_histogram[i] = unit2.image_descriptor.a_histogram[i];
+            unit1->image_descriptor.p_histogram = unit2.image_descriptor.p_histogram;
             break;
 
         case AUDIO:

@@ -7,5 +7,5 @@
 - [x] Add first connexion menu to setup password admin
 - [ ] Add config files for admin
 - [ ] Talk about black and white problem on image
-- [ ] Optimise (in memory) image indexing
+- [x] Optimise (in memory) image indexing
 - [ ] Check generation id method (take the path or only the file name)

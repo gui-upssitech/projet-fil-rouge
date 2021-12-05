@@ -62,14 +62,13 @@ typedef struct
     unsigned long id;
 
     /* histogram of the file (size of 6 bits) */
-    unsigned int a_histogram[GRAY_LEVEL];
+    unsigned int* p_histogram;
 
 } Image_descriptor_s;
 
 Bool_e get_parameters_image(Image_s* p_image);
-Bool_e quantify_image(Image_s* p_image, unsigned char a_quantified_image[]);
+Bool_e quantify_image(Image_s* p_image, unsigned char* p_quantified_image);
 Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor);
-void do_histogram_image(Image_s* p_image, unsigned char a_quantified_image[], unsigned int a_histogram[]);
-Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* p_descriptor);
+Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, unsigned char* p_quantified_image);
 
 #endif

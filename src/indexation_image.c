@@ -31,7 +31,7 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
 
     for(i = 0; i < GRAY_LEVEL; i++)
     {
-        if(fprintf(p_base_descriptor_image, "%d ", p_descriptor->a_histogram[i]) == EOF)
+        if(fprintf(p_base_descriptor_image, "%d ", p_descriptor->p_histogram[i]) == EOF)
         {
             fprintf(stderr, "Error %d printing histogram value of image descriptor.\n\r", errno);
             return FALSE;
@@ -44,26 +44,6 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
             return FALSE;
         }
     return TRUE;
-}
-
-void create_descriptor_image(char* p_name, unsigned int a_histogram[], Image_descriptor_s* p_descriptor)
-{
-    /* statements */
-    unsigned long hash_code;
-    unsigned int i;
-
-    /* initializations */
-
-    /* instructions */
-    /* step 1 : hash the file name */
-    hash_code = hash(p_name);
-
-    /* step 2 : fill the descriptor struct */
-    p_descriptor->id = hash_code;
-    for(i = 0; i < GRAY_LEVEL; i++)
-    {
-        p_descriptor->a_histogram[i] = a_histogram[i];
-    }
 }
 
 Bool_e get_parameters_image(Image_s* p_image)
@@ -90,25 +70,31 @@ Bool_e get_parameters_image(Image_s* p_image)
     return TRUE;
 }
 
-void do_histogram_image(Image_s* p_image, unsigned char a_quantified_image[], unsigned int a_histogram[])
+Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, unsigned char* p_quantified_image)
 {
     /* statements */
     unsigned int i;
 
     /* initializatons */
-    for(i = 0; i < GRAY_LEVEL; i++)
-    {
-        a_histogram[i] = 0;
-    }
+    p_descriptor->p_histogram = (unsigned int*) malloc(GRAY_LEVEL * sizeof(unsigned int));
 
     /* instructions */
+    if(p_descriptor->p_histogram == NULL)
+    {
+        fprintf(stderr, "Error memory allocation.\n\r");
+        return FALSE;
+    }
+    memset(p_descriptor->p_histogram, 0, GRAY_LEVEL * sizeof(unsigned int));
+
     for(i = 0; i < p_image->a_sizes[WIDTH_IDX] * p_image->a_sizes[HEIGHT_IDX]; i++)
     {
-        a_histogram[a_quantified_image[i]] += 1; 
+        p_descriptor->p_histogram[p_quantified_image[i]] += 1; 
     }
+
+    return TRUE;
 }
 
-Bool_e quantify_image(Image_s* p_image, unsigned char a_quantified_image[])
+Bool_e quantify_image(Image_s* p_image, unsigned char* p_quantified_image)
 {
     /* statements */
     unsigned char r, g, b;
@@ -127,7 +113,7 @@ Bool_e quantify_image(Image_s* p_image, unsigned char a_quantified_image[])
                 return FALSE;
             }
 
-            a_quantified_image[i] = ((r & MASK_QUANT) | 
+            p_quantified_image[i] = ((r & MASK_QUANT) | 
                                     ((g & MASK_QUANT) >> NB_BITS_SHIFTED) | 
                                     ((b & MASK_QUANT) >> (NB_BITS_SHIFTED * 2))) >> NB_BITS_SHIFTED;
         }
@@ -138,7 +124,7 @@ Bool_e quantify_image(Image_s* p_image, unsigned char a_quantified_image[])
                 fprintf(stderr, "Error EOF reading %s.\n\r", p_image->p_path);
                 return FALSE;
             }
-            a_quantified_image[i] = r / ((PIXEL_MAX_SIZE + 1) / GRAY_LEVEL);
+            p_quantified_image[i] = r / ((PIXEL_MAX_SIZE + 1) / GRAY_LEVEL);
         }
     }
     return TRUE;
@@ -149,6 +135,7 @@ Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor)
     /* statements */
     FILE* p_image_txt;
     Image_s image;
+    unsigned char* p_quantified_image;
 
     /* initializations */
     p_image_txt = fopen(p_path, "r");
@@ -171,18 +158,28 @@ Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor)
         }
 
         /* step 2 : quantify image */
-        unsigned char a_quantified_image[image.a_sizes[WIDTH_IDX] * image.a_sizes[HEIGHT_IDX]];
-        if(quantify_image(&image, a_quantified_image) == FALSE)
+        p_quantified_image = (unsigned char*) malloc(image.a_sizes[WIDTH_IDX] * image.a_sizes[HEIGHT_IDX] * sizeof(unsigned char));
+        if(p_quantified_image == NULL)
         {
+            fprintf(stderr, "Error memory allocation.\n\r");
+            return FALSE;
+        }
+
+        if(quantify_image(&image, p_quantified_image) == FALSE)
+        {
+            fprintf(stderr, "Error during quantification of %s.\n\r", image.p_path);
             return FALSE;
         }
 
         /* step 3 : do histogram */
-        unsigned int a_histogram[GRAY_LEVEL];
-        do_histogram_image(&image, a_quantified_image, a_histogram);
+        if(do_histogram_image(&image, p_descriptor, p_quantified_image) == FALSE)
+        {
+            fprintf(stderr, "Error during histogram creation of %s.\n\r", image.p_path);
+            return FALSE;
+        }
 
-        /* step 4 : create descriptor */
-        create_descriptor_image(p_path, a_histogram, p_descriptor);
+        /* step 4 : generate id */
+        p_descriptor->id = hash(image.p_path);
     }
 
     if(fclose(image.p_image_txt) == EOF)
