@@ -39,19 +39,24 @@ Bool_e save_descriptor_audio(FILE* p_base_descriptor_audio, Audio_descriptor_s* 
     {
         for(j = 0; j < p_descriptor->levels; j++)
         {
-            if(fprintf(p_base_descriptor_audio, "%d ", *((p_descriptor->p_histogram) + i * (p_descriptor->samples) + j)) == EOF)
+            if(fprintf(p_base_descriptor_audio, "%d ", *((p_descriptor->p_histogram) + i * (p_descriptor->levels) + j)) == EOF)
             {
                 fprintf(stderr, "Error %d printing histogram value of image descriptor.\n\r", errno);
                 return FALSE;
             }
         }
-    }
-
-    if(fprintf(p_base_descriptor_audio, "\n\r") == EOF)
+       if(fprintf(p_base_descriptor_audio, "\n") == EOF)
         {
             fprintf(stderr, "Error %d printing new line char in image descriptor.\n\r", errno);
             return FALSE;
-        }
+        } 
+    }
+
+    if(fprintf(p_base_descriptor_audio, "\n") == EOF)
+    {
+        fprintf(stderr, "Error %d printing new line char in image descriptor.\n\r", errno);
+        return FALSE;
+    }
     return TRUE;
 }
 

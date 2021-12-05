@@ -1,6 +1,8 @@
 #ifndef CONFIGURATIONS_H
 #define CONFIGURATIONS_H
 
+#include "toolbox.h"
+
 typedef struct
 {
     unsigned int samples;
@@ -14,5 +16,6 @@ typedef struct
 
 extern Parameters_s G_parameters;
 
+Bool_e load_configurations();
 
 #endif

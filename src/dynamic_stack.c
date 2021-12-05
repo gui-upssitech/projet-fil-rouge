@@ -25,7 +25,7 @@ Bool_e is_empty_dynamic_stack(Dynamic_stack_p p_dynamic_stack)
     return (p_dynamic_stack == NULL) ? TRUE : FALSE;
 }
 
-Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u unit, Descriptor_e descripor_type)
+Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u unit, Descriptor_e descriptor_type)
 {
     /* statements */
     Node_s* p_node;
@@ -39,7 +39,7 @@ Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u u
     else
     {
         p_node->next_node = p_dynamic_stack;
-        affect_unit(&(p_node->element), unit, descripor_type);
+        affect_unit(&(p_node->element), unit, descriptor_type);
 
         p_dynamic_stack = p_node;
     }

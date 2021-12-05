@@ -5,3 +5,6 @@
 
 // TO DO
 Parameters_s G_parameters = {{1024, 100}};
+
+Bool_e load_configurations(){}
+

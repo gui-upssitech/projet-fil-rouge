@@ -6,7 +6,6 @@
 - [x] Add multiple tries in the password entry
 - [x] Add first connexion menu to setup password admin
 - [ ] Add config files for admin
-- [ ] Check l'histoire du noir et blanc
+- [ ] Talk about black and white problem on image
 - [ ] Optimise (in memory) image indexing
 - [ ] Check generation id method (take the path or only the file name)
-- [ ] Fix automatic audio indexing bug (seg fault writing the descriptor)
