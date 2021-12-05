@@ -11,6 +11,7 @@ SRC = $(wildcard $(SRCDIR)/*.c)
 OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/%.h 
+	mkdir -p app/ obj/
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 clean:
