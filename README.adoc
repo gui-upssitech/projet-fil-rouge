@@ -31,13 +31,13 @@ Voici un tableau récapitulatif des différents fichiers utilisé dans l'applica
 | *Répertoire* | Description 
 
 | admin
-| Contient tous les fichiers de configuration accessible du coté admin  
+| Contient tous les fichiers de configuration accessible du côté admin  
 
 | data
-| Correspond à la base de données du moteur de recherches qui sont triés par type de format disponible
+| Correspond à la base de données du moteur de recherche qui sont triés par type de formats disponibles
 
 | descriptors
-| Suite à l'indexation, les descripteurs sont stocké selon leur type de format disponible
+| Suite à l'indexation, les descripteurs sont stockés selon leur type de format disponible
 
 | inc
 | Contient tous les fichiers .h de l'application
