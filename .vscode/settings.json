@@ -1,21 +1,4 @@
 {
-<<<<<<< HEAD
-  "editor.wordWrap": "on",
-  "editor.wordWrapColumn": 80,
-  "editor.wrappingIndent": "same",
-
-  "latex-workshop.latex.outDir": "%DIR%/build/",
-
-  "emeraldwalk.runonsave": {
-    "commands": [
-      {
-        "match": "\\.tex$",
-        "cmd": "mkdir -p spec/out/; find spec/ -name \"*.pdf\" -exec cp {} spec/out/ \\;"
-      }
-    ]
-  }
-}
-=======
     "files.associations": {
         "unit.h": "c",
         "indexation_generic.h": "c",
@@ -25,4 +8,3 @@
         "indexation_image.h": "c"
     }
 }
->>>>>>> indexation-image
