@@ -28,7 +28,7 @@ Voici un tableau récapitulatif des différents fichiers utilisé dans l'applica
 
 [cols="1,2a"]
 |===
-| *Répertoire* | *Description* 
+| *Répertoire* | Description 
 
 | admin
 | Contient tous les fichiers de configuration accessible du coté admin  
