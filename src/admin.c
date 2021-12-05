@@ -8,12 +8,7 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-
 #include "../inc/admin.h"
-#include "../inc/toolbox.h"
 
 /* NOTE: if the admin menu is left, the password is forgotten and it's necessary to
 give again the password to re-enter in the admin menu */

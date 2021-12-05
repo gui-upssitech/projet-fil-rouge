@@ -11,8 +11,12 @@ Date:       29/11/2021
 #ifndef DYNAMIC_STACK_H
 #define DYNAMIC_STACK_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "unit.h"
 #include "toolbox.h"
+#include "indexation_generic.h"
 
 /* TYPES */
 typedef struct node {

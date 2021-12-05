@@ -11,7 +11,13 @@ Date:       29/11/2021
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <errno.h>
+
 #include "toolbox.h"
+#include "admin.h"
 
 /* useful constants for displaying the console */
 #define WALL "|"

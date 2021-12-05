@@ -5,7 +5,8 @@
 - [x] Change message exception to the stderr
 - [x] Add multiple tries in the password entry
 - [x] Add first connexion menu to setup password admin
+- [x] Optimise (in memory) image indexing
+- [ ] Check if headers file generate bugs
 - [ ] Add config files for admin
 - [ ] Talk about black and white problem on image
-- [x] Optimise (in memory) image indexing
 - [ ] Check generation id method (take the path or only the file name)

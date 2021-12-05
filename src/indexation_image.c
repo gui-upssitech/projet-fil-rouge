@@ -8,12 +8,6 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
-#include <dirent.h>
-
-#include "../inc/toolbox.h"
 #include "../inc/indexation_image.h"
 #include "../inc/dynamic_stack.h"
 

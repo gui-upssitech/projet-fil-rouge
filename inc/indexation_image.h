@@ -12,6 +12,10 @@ Date:       29/11/2021
 #define INDEXATION_IMAGE_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+#include <dirent.h>
 
 #include "toolbox.h"
 
@@ -70,5 +74,6 @@ Bool_e get_parameters_image(Image_s* p_image);
 Bool_e quantify_image(Image_s* p_image, unsigned char* p_quantified_image);
 Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor);
 Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, unsigned char* p_quantified_image);
+Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* p_descriptor);
 
 #endif

@@ -8,9 +8,6 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "../inc/dynamic_stack.h"
 
 Dynamic_stack_p init_dynamic_stack()

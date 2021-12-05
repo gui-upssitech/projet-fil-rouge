@@ -8,9 +8,6 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "../inc/unit.h"
 
 void affect_unit(Unit_u* unit1, Unit_u unit2, Descriptor_e descriptor_type)

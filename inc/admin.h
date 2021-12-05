@@ -11,7 +11,11 @@ Date:       29/11/2021
 #ifndef ADMIN_H
 #define ADMIN_H
 
-#include "../inc/toolbox.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+
+#include "toolbox.h"
 
 /* password constants */
 #define MAX_LENGTH_PASSWORD 20

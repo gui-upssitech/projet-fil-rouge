@@ -8,14 +8,7 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <errno.h>
-
 #include "../inc/console.h"
-#include "../inc/admin.h"
-
 
 void clear_console()
 {
