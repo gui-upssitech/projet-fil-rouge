@@ -6,7 +6,7 @@ Dernière mise à jour : 05/12/2021
 
 WARNING: Prérequis : posséder un environnement linux
 
-Pour lancer le programme, veuillez exécuter la commande suivante dans le répertoire courant du projet : 
+Pour lancer le programme, veuillez exécuter la commande suivante dans le répertoire courant du projet :
 
 ----
 make main
@@ -16,9 +16,9 @@ make main
 
 À partir d'une base de documents l'application permet de faire des recherches selon 3 types de formats : Texte - Image - Audio. Selon le format, nous avons différentes possibilités de recherche.
 
-_Exemple : Pour les images, on peut rechercher par niveau ou niveau de gris_
+_Exemple : Pour les images, on peut rechercher par niveau ou niveau de gris 
 
-Voici un petit apercu visuel de l'application : 
+Voici un petit aperçu visuel de l'application :
 
 image::images/menu.png[Menu,450,align="center"]
 
@@ -28,13 +28,13 @@ Voici un tableau récapitulatif des différents fichiers utilisé dans l'applica
 
 [cols="1,2a"]
 |===
-| *Répertoire* | Description 
+| *Répertoire* | Description
 
 | admin
 | Contient tous les fichiers de configuration accessible du côté admin  
 
 | data
-| Correspond à la base de données du moteur de recherche qui est triée par type de formats disponibles
+| Corresponds à la base de données du moteur de recherche qui est triée par type de formats disponibles
 
 | descriptors
 | Suite à l'indexation, les descripteurs sont stockés selon leur type de format disponible
@@ -50,7 +50,7 @@ Voici un tableau récapitulatif des différents fichiers utilisé dans l'applica
 
 |===
 
-WARNING: Les fichiers d'éxécution .o et .out sont ignorés grâce au _.gitignore_, donc il ne seront jamais ajouter sur le projet
+WARNING: Les fichiers d'éxécution .o et .out sont ignorés grâce au _.gitignore_, donc il ne seront jamais ajoutés sur le projet
 
 == Fonctionnalités 
 
