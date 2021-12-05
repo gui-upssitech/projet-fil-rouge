@@ -4,25 +4,59 @@ Dernière mise à jour : 05/12/2021
 
 == Installation 
 
-WARNING: Prérequis : Posséder un environnement linux
+WARNING: Prérequis : posséder un environnement linux
 
-Pour lancer le programme, veuillez exécuter la commande suivante dans le répertoire courant du projet.
+Pour lancer le programme, veuillez exécuter la commande suivante dans le répertoire courant du projet : 
 
-NOTE: make main
+----
+make main
+----
 
 == Présentation 
 
 À partir d'une base de documents l'application permet de faire des recherches selon 3 types de formats : Texte - Image - Audio. Selon le format, nous avons différentes possibilités de recherche.
 
-Voici un petit apercu de l'application : 
+_Exemple : Pour les images, on peut rechercher par niveau ou niveau de gris_
 
-image::images/menu.png[Menu,450]
+Voici un petit apercu visuel de l'application : 
+
+image::images/menu.png[Menu,450,align="center"]
+
+L'application possède de nombreux dossier dans lesquels des fichiers du même type sont regroupés
+
+Voici un tableau récapitulatif des différents fichiers utilisé dans l'application :
+
+[cols="1,2a"]
+|===
+| *Répertoire* | *Description* 
+
+| admin
+| Contient tous les fichiers de configuration accessible du coté admin  
+
+| data
+| Correspond à la base de données du moteur de recherches qui sont triés par type de format disponible
+
+| descriptors
+| Suite à l'indexation, les descripteurs sont stocké selon leur type de format disponible
+
+| inc
+| Contient tous les fichiers .h de l'application
+
+| results
+| Contient le résultat des tests effectués
+
+| src
+| Contient tous les fichiers .c (dont les fichiers test) de l'application
+
+|===
+
+WARNING: Les fichiers d'éxécution .o et .out sont ignorés grâce au _.gitignore_, donc il ne seront jamais ajouter sur le projet
 
 == Fonctionnalités 
 
 Dans ce diagramme de use case, vous trouverez toutes les fonctionnalités de l'application.
 
-image::images/user-interactions.png[User,450]
+image::images/user-interactions.png[User,450,align="center"]
 
 WARNING: Toutes les fonctionnalités ne sont pas encore implémentées.
 
