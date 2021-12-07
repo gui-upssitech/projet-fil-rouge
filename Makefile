@@ -17,6 +17,11 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/%.h
 clean:
 	rm ./obj/*.o
 
+test_indexation_text: $(OBJ) src/test/test_indexation_text.c
+	gcc -c src/test/test_indexation_text.c $(CFLAGS)
+	mv ./*.o ./obj
+	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)
+
 test_indexation_image: $(OBJ) src/test/test_indexation_image.c
 	gcc -c src/test/test_indexation_image.c $(CFLAGS)
 	mv ./*.o ./obj
