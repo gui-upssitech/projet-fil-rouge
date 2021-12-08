@@ -79,7 +79,7 @@ Bool_e do_histogram_audio(Audio_s* p_audio, Audio_descriptor_s* p_descriptor, un
         }
         
         value = *((double*) bytes);
-        *(p_descriptor->p_histogram + start_index + (unsigned int) (((p_descriptor->levels - 1) / 2) * (value + 1.))) += 1;
+        *(p_descriptor->p_histogram + start_index + (unsigned int) (((p_descriptor->levels - 1) / 2.) * (value + 1.))) += 1;
     }
     return TRUE;
 }
