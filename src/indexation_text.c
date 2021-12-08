@@ -8,10 +8,6 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-char* read_file() {
-    
-}
-
 void clean_file(char *path)
 {
 
