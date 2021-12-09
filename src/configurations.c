@@ -20,4 +20,3 @@ Bool_e load_configurations()
 {
     return TRUE;
 }
-

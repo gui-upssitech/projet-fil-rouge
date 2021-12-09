@@ -91,49 +91,36 @@ Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, un
 Bool_e quantify_image(Image_s* p_image, unsigned char* p_quantified_image)
 {
     /* statements */
-    unsigned char pixel_unit[RGB_CHANNEL_SIZE];
-    unsigned int cursor[RGB_CHANNEL_SIZE];
-    unsigned int i, j, k;
-
-    /* initializations */
+    int i, j;
+    unsigned char a_color_matrix[RGB_CHANNEL_SIZE][p_image->a_sizes[HEIGHT_IDX] * p_image->a_sizes[WIDTH_IDX]];
 
     /* instructions */
-    // printf("height: %d width: %d channels: %d", p_image->a_sizes[0], p_image->a_sizes[1], p_image->a_sizes[2]);
-    for(i = 0; i < p_image->a_sizes[HEIGHT_IDX]; i++)
+    /* step 1 : get the color matrix (red, green, blue for rgb images and just gray
+    for gray images) */
+    for(i = 0; i < RGB_CHANNEL_SIZE && !feof(p_image->p_image_txt); i++)
     {
-        cursor[0] = i * p_image->a_sizes[WIDTH_IDX];
-        cursor[1] = (i + p_image->a_sizes[HEIGHT_IDX]) * p_image->a_sizes[WIDTH_IDX];
-        cursor[2] = (i + 2 * p_image->a_sizes[HEIGHT_IDX]) * p_image->a_sizes[WIDTH_IDX];
-
-        for(j = 0; j < p_image->a_sizes[WIDTH_IDX]; j++)
-        {       
-            if(p_image->a_sizes[CHANNELS_IDX] == RGB_CHANNEL_SIZE)
+        for(j = 0; j < p_image->a_sizes[HEIGHT_IDX] * p_image->a_sizes[WIDTH_IDX]; j++)
+        {
+            if(fscanf(p_image->p_image_txt, "%hhu ", &a_color_matrix[i][j]) == EOF)
             {
-                for(k = 0; k < RGB_CHANNEL_SIZE; k++)
-                {
-                    // printf("i:%i j:%i k:%i\n", i, j, k);
-                    fseek(p_image->p_image_txt, cursor[k] + j, SEEK_SET);
-                    if(fscanf(p_image->p_image_txt, "%hhu ", &pixel_unit[k]) == EOF)
-                    {
-                        fprintf(stderr, "Error EOF reading %s.\n\r", p_image->p_path);
-                        return FALSE;
-                    }
-                    cursor[k] = ftell(p_image->p_image_txt);
-                }
+                fprintf(stderr, "Error EOF reading %s.\n\r", p_image->p_path);
+                return FALSE;
+            }
+        }
+    }
 
-                p_quantified_image[i * p_image->a_sizes[WIDTH_IDX] + j] =   ((pixel_unit[0] & MASK_QUANT) | 
-                                                                            ((pixel_unit[1] & MASK_QUANT) >> NB_BITS_SHIFTED) | 
-                                                                            ((pixel_unit[2] & MASK_QUANT) >> (NB_BITS_SHIFTED * 2))) >> NB_BITS_SHIFTED;
-            }
-            else if(p_image->a_sizes[CHANNELS_IDX] == NB_CHANNEL_SIZE)
-            {
-                if(fscanf(p_image->p_image_txt, "%hhu", &pixel_unit[0]) == EOF)
-                {
-                    fprintf(stderr, "Error EOF reading %s.\n\r", p_image->p_path);
-                    return FALSE;
-                }
-                p_quantified_image[i * p_image->a_sizes[WIDTH_IDX] + j] = pixel_unit[0] / ((PIXEL_MAX_SIZE + 1) / GRAY_LEVEL);
-            }
+    /* step 2 : quantify the matrix in funciton of the image type */
+    for(i = 0; i < p_image->a_sizes[HEIGHT_IDX] * p_image->a_sizes[WIDTH_IDX]; i++)
+    {
+        if(p_image->a_sizes[CHANNELS_IDX] == RGB_CHANNEL_SIZE)
+        {
+            p_quantified_image[i] =     ((a_color_matrix[0][i] & MASK_QUANT) | 
+                                        ((a_color_matrix[1][i] & MASK_QUANT) >> NB_BITS_SHIFTED) | 
+                                        ((a_color_matrix[2][i] & MASK_QUANT) >> (NB_BITS_SHIFTED * 2))) >> NB_BITS_SHIFTED;
+        }
+        else if(p_image->a_sizes[CHANNELS_IDX] == NB_CHANNEL_SIZE)
+        {
+            p_quantified_image[i] = a_color_matrix[0][i] / ((PIXEL_MAX_SIZE + 1) / GRAY_LEVEL);
         }
     }
     return TRUE;
