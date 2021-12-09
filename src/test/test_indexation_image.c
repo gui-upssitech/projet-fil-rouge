@@ -20,7 +20,7 @@ Date:       29/11/2021
 int main(int argc, char** argv)  
 {
     /* statements */
-
+    Image_descriptor_s image_descriptor;
     /* initializations */
 
     /* instructions */
@@ -28,15 +28,19 @@ int main(int argc, char** argv)
     // printf("size descriptor image : %lu\n\r", sizeof(Image_descriptor_s));
     // printf("size descriptor audio : %lu\n\r", sizeof(Audio_descriptor_s));
 
-    if(automatic_generic_indexation(LIST_BASE_IMAGE_PATH, NB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
-    {
-        printf("Failed automatic image indexation.\n\r");
-    }
+    // if(automatic_generic_indexation(LIST_BASE_IMAGE_PATH, NB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
+    // {
+    //     printf("Failed automatic image indexation.\n\r");
+    // }
 
-    if(automatic_generic_indexation(LIST_BASE_IMAGE_PATH, RGB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
+    // if(automatic_generic_indexation(LIST_BASE_IMAGE_PATH, RGB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
+    // {
+    //     printf("Failed automatic image indexation.\n\r");
+    // }
+    if(index_image("/home/rxc3445a/Documents/projet-fil-rouge/data/images/TEST_RGB/test_image_rgb.txt", &image_descriptor) == FALSE)
     {
-        printf("Failed automatic image indexation.\n\r");
-    }
-    
+        printf("mon cul;");
+    }   
+    printf("yes");
     return EXIT_SUCCESS;
 }

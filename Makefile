@@ -41,3 +41,8 @@ test_login_admin: $(OBJ) src/test/test_login_admin.c
 	gcc -c src/test/test_login_admin.c $(CFLAGS)
 	mv ./*.o ./obj
 	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)
+
+test_config_admin: $(OBJ) src/test/test_config_admin.c
+	gcc -c src/test/test_config_admin.c $(CFLAGS)
+	mv ./*.o ./obj
+	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)
