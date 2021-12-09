@@ -171,7 +171,11 @@ Bool_e display_new_pwd_menu(Bool_e first_password)
     display_centered_text_console("");
     print_plate_console();
     password = get_hashed_password();
-    fprintf(p_password_file, "%lu", password);
+    if(fprintf(p_password_file, "%lu", password))
+    {
+        fprintf(stderr, "Error %d printing password %lu.\n\r", errno, password);
+        return FALSE;
+    }
 
     if(fclose(p_password_file) == EOF)
     {
