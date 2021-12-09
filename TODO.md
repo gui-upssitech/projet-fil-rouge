@@ -8,5 +8,16 @@
 - [x] Optimise (in memory) image indexing
 - [ ] Check if headers file generate bugs
 - [ ] Add config files for admin
-- [ ] Talk about black and white problem on image
+- [X] Talk about black and white problem on image
 - [ ] Check generation id method (take the path or only the file name)
+
+
+# Text
+- [ ] Add detection threshhold / limit
+- [ ] Add error handling
+- [ ] Put output files in correct destination
+- [ ] Manage bash script arguments
+- [ ] Call bash script from C
+- [ ] Generate descriptor database
+- [ ] Add debug mode
+- [ ] **BONUS** Group words with similar root

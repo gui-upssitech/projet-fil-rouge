@@ -3,10 +3,16 @@
 ##### TODO : Make modular
 
 # ARGS: 
-# 1. Filename
-# 2. descriptor ID
+# 1. Filename           Path
+# 2. Output directory   Path
+# 2. descriptor ID      Number
+# 3. Debug mode         Boolean
+# 4. Threshold type     String
+# 5. Threshold value    Number
 
-pwd
+# RETURN VALUES
+# 0 No errors
+# 1 Missing args
 
 dir=/home/uni/Documents/PFR/data/texts
 filename="03-Des_chercheurs_parviennent_α_rΘgΘnΘrer"
@@ -23,18 +29,20 @@ stop_words="stop_words_french.txt"
 
 encoding=$(file -b --mime-encoding $in_path)
 
+# In order of execution this block will :
+# - Remove the XML tags
+# - Remove blank lines
+# - Separate apostrophes from words
+# - Replace punctuation with spaces
+# - Replace uppercase letters with lowercase letters
+# - Remove the first two lines
+
 iconv -f $encoding -t UTF-8 $in_path | sed \
-    # Remove XML tags
     -e 's/<[^>]*>//g'       \
-    # Remove blank lines
     -e '/^$/d'              \
-    # Separate apostrophes from words
     -e "s/'/' /g"           \
-    # Replace punctuation with spaces
     -e 's/[[:punct:]]/ /g'  \
-    # Replace uppercase letters with lowercase letters
     -e 's/[A-Z]/\L&/g'      \
-    # Remove the first two lines
 | tail +3 > $clean_out
 
 ### PHASE 2 : Removal of unnecessary words
@@ -58,12 +66,12 @@ num_uniq_tokens=$(uniq $list_out | wc -l)
 echo "" > $desc_out
 for word in $(uniq $list_out)
 do
-    echo -e "$(grep "$word" $list_out | wc -l) $word" >> $desc_out
+    echo -e "$word $(grep "$word" $list_out | wc -l)" >> $desc_out
 done
 
 # Formatting it all properly
 sort -nr $desc_out -o $desc_out
-sed -i -E -e "s|(\w+) (\w+)|{\"\2\", \1}|g" $desc_out
+#sed -i -E -e "s|(\w+) (\w+)|\2 \1}|g" $desc_out
 
 # Adding descriptor id and number of tokens
 sed -i -e "1s/^/$1\n/" -e '/^$/d' $desc_out
