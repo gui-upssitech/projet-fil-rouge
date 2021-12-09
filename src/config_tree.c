@@ -8,16 +8,9 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "../inc/config_tree.h"
 
-#include "../inc/configurations.h"
-
-// TO DO
-Parameters_s G_parameters = {{1024, 100}};
-
-Bool_e load_configurations()
+void init_config_tree()
 {
-    return TRUE;
+    return;
 }
-

@@ -8,16 +8,13 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef CONFIG_TREE_H
+#define CONFIG_TREE_H
 
-#include "../inc/configurations.h"
-
-// TO DO
-Parameters_s G_parameters = {{1024, 100}};
-
-Bool_e load_configurations()
+typedef struct node
 {
-    return TRUE;
-}
+    void* data;
+    struct node* branch[];
+} Node_s;
 
+#endif

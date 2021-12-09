@@ -43,6 +43,10 @@ Date:       29/11/2021
 /* image dimension informations */
 #define NB_SIZES 3
 
+/* channels size images */
+#define RGB_CHANNEL_SIZE 3
+#define NB_CHANNEL_SIZE 1
+
 /* structure that contains all informations about the image (file path, 
 pointer on file descriptor, dimensions)*/
 typedef struct
