@@ -13,6 +13,9 @@ Date:       29/11/2021
 
 #include <stdio.h>
 
+/* useful macros */
+#define pwrtwo(x) (1 << (x))
+
 /* const values for file */
 #define TEXT_EXTENSION ".txt"
 #define XML_EXTENSION ".xml"
@@ -21,6 +24,7 @@ Date:       29/11/2021
 /* classical boolean type*/
 typedef enum {FALSE, TRUE} Bool_e;
 
+unsigned short shift(unsigned char a, int b);
 Bool_e read_integer(int* p_value);
 unsigned long hash(char* p_string);
 unsigned int get_array_size_from_pointer(char* p_array);

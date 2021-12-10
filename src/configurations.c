@@ -14,7 +14,7 @@ Date:       29/11/2021
 #include "../inc/configurations.h"
 
 // TO DO
-Parameters_s G_parameters = {{1024, 100}};
+Parameters_s G_parameters = {{2}, {1024, 100}};
 
 Bool_e load_configurations()
 {

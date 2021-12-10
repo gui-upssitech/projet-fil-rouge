@@ -16,6 +16,11 @@ Date:       29/11/2021
 
 #include "../inc/toolbox.h"
 
+unsigned short shift(unsigned char a, int b)
+{
+    return ((b < 0) ? (((unsigned short) a) >> -b) : (((unsigned short) a) << b));
+}
+
 unsigned int get_bytes_size_file(FILE* p_file)
 {
     /* statements */
