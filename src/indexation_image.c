@@ -23,7 +23,7 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
         return FALSE;
     }
 
-    for(i = 0; i < GRAY_LEVEL; i++)
+    for(i = 0; i < pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size); i++)
     {
         if(fprintf(p_base_descriptor_image, "%d ", p_descriptor->p_histogram[i]) == EOF)
         {
@@ -59,18 +59,17 @@ Bool_e get_parameters_image(Image_s* p_image)
             fprintf(stderr, "Error negative dimension image at %s.\n\r", p_image->p_path);
             return FALSE;
         }
-
     }
     return TRUE;
 }
 
-Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, unsigned char* p_quantified_image)
+Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, unsigned short* p_quantified_image)
 {
     /* statements */
     unsigned int i;
 
     /* initializatons */
-    p_descriptor->p_histogram = (unsigned int*) malloc(GRAY_LEVEL * sizeof(unsigned int));
+    p_descriptor->p_histogram = (unsigned int*) malloc(pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
 
     /* instructions */
     if(p_descriptor->p_histogram == NULL)
@@ -78,7 +77,7 @@ Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, un
         fprintf(stderr, "Error memory allocation.\n\r");
         return FALSE;
     }
-    memset(p_descriptor->p_histogram, 0, GRAY_LEVEL * sizeof(unsigned int));
+    memset(p_descriptor->p_histogram, 0, pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
 
     for(i = 0; i < p_image->a_sizes[WIDTH_IDX] * p_image->a_sizes[HEIGHT_IDX]; i++)
     {
@@ -88,10 +87,11 @@ Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, un
     return TRUE;
 }
 
-Bool_e quantify_image(Image_s* p_image, unsigned char* p_quantified_image)
+Bool_e quantify_image(Image_s* p_image, unsigned short* p_quantified_image)
 {
     /* statements */
     int i, j;
+    unsigned char quantification_mask;
     unsigned char a_color_matrix[RGB_CHANNEL_SIZE][p_image->a_sizes[HEIGHT_IDX] * p_image->a_sizes[WIDTH_IDX]];
 
     /* instructions */
@@ -110,17 +110,20 @@ Bool_e quantify_image(Image_s* p_image, unsigned char* p_quantified_image)
     }
 
     /* step 2 : quantify the matrix in funciton of the image type */
+    /* build mask for quantification */
+    for(j = 0, quantification_mask = 0xFF; j < (CHAR_SIZE_BIT - G_parameters.image_indexing_parameters.quantification_size); j++, quantification_mask <<= 1);
     for(i = 0; i < p_image->a_sizes[HEIGHT_IDX] * p_image->a_sizes[WIDTH_IDX]; i++)
     {
         if(p_image->a_sizes[CHANNELS_IDX] == RGB_CHANNEL_SIZE)
         {
-            p_quantified_image[i] =     ((a_color_matrix[0][i] & MASK_QUANT) | 
-                                        ((a_color_matrix[1][i] & MASK_QUANT) >> NB_BITS_SHIFTED) | 
-                                        ((a_color_matrix[2][i] & MASK_QUANT) >> (NB_BITS_SHIFTED * 2))) >> NB_BITS_SHIFTED;
+            /*  construct the quantified pixel */
+            p_quantified_image[i] =     ((((a_color_matrix[0][i] & quantification_mask) >> (CHAR_SIZE_BIT - G_parameters.image_indexing_parameters.quantification_size)) << (2 * G_parameters.image_indexing_parameters.quantification_size)) | 
+                                         (((a_color_matrix[1][i] & quantification_mask) >> (CHAR_SIZE_BIT - G_parameters.image_indexing_parameters.quantification_size)) << (1 * G_parameters.image_indexing_parameters.quantification_size)) | 
+                                         (((a_color_matrix[2][i] & quantification_mask) >> (CHAR_SIZE_BIT - G_parameters.image_indexing_parameters.quantification_size)))); 
         }
         else if(p_image->a_sizes[CHANNELS_IDX] == NB_CHANNEL_SIZE)
         {
-            p_quantified_image[i] = a_color_matrix[0][i] / ((PIXEL_MAX_SIZE + 1) / GRAY_LEVEL);
+            p_quantified_image[i] = a_color_matrix[0][i] / ((PIXEL_MAX_SIZE + 1) / pwrtwo(CHAR_SIZE_BIT - G_parameters.image_indexing_parameters.quantification_size));
         }
     }
     return TRUE;
@@ -131,7 +134,7 @@ Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor)
     /* statements */
     FILE* p_image_txt;
     Image_s image;
-    unsigned char* p_quantified_image;
+    unsigned short* p_quantified_image;
 
     /* initializations */
     p_image_txt = fopen(p_path, "r");
@@ -154,10 +157,10 @@ Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor)
         }
 
         /* step 2 : quantify image */
-        p_quantified_image = (unsigned char*) malloc(image.a_sizes[WIDTH_IDX] * image.a_sizes[HEIGHT_IDX] * sizeof(unsigned char));
+        p_quantified_image = (unsigned short*) malloc(image.a_sizes[WIDTH_IDX] * image.a_sizes[HEIGHT_IDX] * sizeof(unsigned short));
         if(p_quantified_image == NULL)
         {
-            fprintf(stderr, "Error memory allocation.\n\r");
+            fprintf(stderr, "Error memory allocation p_quantified_image array.\n\r");
             return FALSE;
         }
 
