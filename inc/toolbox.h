@@ -13,6 +13,9 @@ Date:       29/11/2021
 
 #include <stdio.h>
 
+/* useful macros */
+#define pwrtwo(x) (1 << (x))
+
 /* const values for file */
 #define TEXT_EXTENSION ".txt"
 #define XML_EXTENSION ".xml"

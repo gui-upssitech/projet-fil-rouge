@@ -15,12 +15,18 @@ Date:       29/11/2021
 
 typedef struct
 {
+    unsigned int quantification_size;
+} Image_indexing_parameters_s;
+
+typedef struct
+{
     unsigned int samples;
     unsigned int levels;
 } Audio_indexing_parameters_s;
 
 typedef struct
 {
+    Image_indexing_parameters_s image_indexing_parameters;
     Audio_indexing_parameters_s audio_indexing_parameters;
 } Parameters_s;
 
