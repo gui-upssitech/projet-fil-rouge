@@ -39,8 +39,7 @@ Date:       29/11/2021
 #define RGB_CHANNEL_SIZE 3
 #define NB_CHANNEL_SIZE 1
 
-/* const values for quantification */
-#define NB_BITS_SHIFTED 2
+/* const value for quantification */
 #define CHAR_SIZE_BIT 8
 
 /* structure that contains all informations about the image (file path, 
@@ -54,7 +53,7 @@ typedef struct
     FILE* p_image_txt;
 
     /* array that contains respectively width, height and channels */
-    int a_sizes[NB_SIZES];
+    unsigned int a_sizes[NB_SIZES];
 
 } Image_s;
 

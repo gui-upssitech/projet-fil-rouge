@@ -14,7 +14,7 @@ Date:       29/11/2021
 Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* p_descriptor)
 {
     /* statements */
-    unsigned char i;
+    unsigned int i;
 
     /* instructions */
     if(fprintf(p_base_descriptor_image, "%lu\n", p_descriptor->id) == EOF)
@@ -109,6 +109,18 @@ Bool_e quantify_image(Image_s* p_image, unsigned short* p_quantified_image)
         }
     }
 
+    /* make sure that the bit quantification is valid for two bytes */
+    if(G_parameters.image_indexing_parameters.quantification_size < 1)
+    {
+        fprintf(stderr, "Error during quantification by n = %d bits (need to be > 0).\n", G_parameters.image_indexing_parameters.quantification_size);
+        return FALSE;
+    }
+    if(G_parameters.image_indexing_parameters.quantification_size > 5)
+    {
+        fprintf(stderr, "Error during quantification by n = %d bits (need to be < 6).\n", G_parameters.image_indexing_parameters.quantification_size);
+        return FALSE;
+    }
+
     /* step 2 : quantify the matrix in funciton of the image type */
     /* build mask for quantification */
     for(j = 0, quantification_mask = 0xFF; j < (CHAR_SIZE_BIT - G_parameters.image_indexing_parameters.quantification_size); j++, quantification_mask <<= 1);
@@ -122,6 +134,7 @@ Bool_e quantify_image(Image_s* p_image, unsigned short* p_quantified_image)
         }
         else if(p_image->a_sizes[CHANNELS_IDX] == NB_CHANNEL_SIZE)
         {
+            // TO DO problem here
             p_quantified_image[i] = a_color_matrix[0][i] / ((PIXEL_MAX_SIZE + 1) / pwrtwo(CHAR_SIZE_BIT - G_parameters.image_indexing_parameters.quantification_size));
         }
     }

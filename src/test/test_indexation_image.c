@@ -20,7 +20,7 @@ Date:       29/11/2021
 int main(int argc, char** argv)  
 {
     /* statements */
-    Image_descriptor_s image_descriptor;
+    // Image_descriptor_s image_descriptor;
 
     /* initializations */
 
