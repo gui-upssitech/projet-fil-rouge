@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../../inc/config_tree.h"
+#include "config_tree.h"
 
 int main(void)
 {

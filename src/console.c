@@ -8,7 +8,7 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include "../inc/console.h"
+#include "console.h"
 
 void clear_console()
 {

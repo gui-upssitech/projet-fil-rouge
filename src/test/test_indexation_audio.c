@@ -12,9 +12,9 @@ Date:       29/11/2021
 #include <stdlib.h>
 #include <string.h>
 
-#include "../../inc/configurations.h"
-#include "../../inc/indexation_generic.h"
-#include "../../inc/indexation_audio.h"
+#include "configurations.h"
+#include "indexation_generic.h"
+#include "indexation_audio.h"
 
 int main(void)
 {

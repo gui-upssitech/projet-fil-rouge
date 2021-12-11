@@ -8,7 +8,7 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include "../inc/indexation_audio.h"
+#include "indexation_audio.h"
 
 void get_parameters_audio(Audio_s* p_audio, Audio_descriptor_s* p_descriptor)
 {
@@ -29,22 +29,17 @@ Bool_e save_descriptor_audio(FILE* p_base_descriptor_audio, Audio_descriptor_s* 
         return FALSE;
     }
 
-    if(fprintf(p_base_descriptor_audio, "%d %d %d\n", p_descriptor->samples, p_descriptor->levels, p_descriptor->i_windows) == EOF)
-    {
-        fprintf(stderr, "Error %d printing id of image descriptor.\n\r", errno);
-        return FALSE;
-    }
-    
     for(i = 0; i < p_descriptor->i_windows; i++)
     {
         for(j = 0; j < p_descriptor->levels; j++)
         {
             if(fprintf(p_base_descriptor_audio, "%d ", *((p_descriptor->p_histogram) + i * (p_descriptor->levels) + j)) == EOF)
             {
-                fprintf(stderr, "Error %d printing histogram value of image descriptor.\n\r", errno);
+                fprintf(stderr, "Error %d printing histogram value of image descriptor at %d:%d.\n\r", errno, i, j);
                 return FALSE;
             }
         }
+
        if(fprintf(p_base_descriptor_audio, "\n") == EOF)
         {
             fprintf(stderr, "Error %d printing new line char in image descriptor.\n\r", errno);

@@ -8,8 +8,8 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include "../inc/indexation_generic.h"
-#include "../inc/dynamic_stack.h"
+#include "indexation_generic.h"
+#include "dynamic_stack.h"
 
 Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, char* p_base_path, Descriptor_e descriptor_type)
 {

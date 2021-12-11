@@ -11,8 +11,8 @@ Date:       29/11/2021
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../inc/admin.h"
-#include "../inc/toolbox.h"
+#include "admin.h"
+#include "toolbox.h"
 
 int main(void)
 {

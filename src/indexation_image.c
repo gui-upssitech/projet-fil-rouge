@@ -8,8 +8,8 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include "../inc/indexation_image.h"
-#include "../inc/dynamic_stack.h"
+#include "indexation_image.h"
+#include "dynamic_stack.h"
 
 Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* p_descriptor)
 {

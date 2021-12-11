@@ -11,11 +11,11 @@ Date:       29/11/2021
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../inc/indexation_audio.h"
-#include "../../inc/indexation_text.h"
-#include "../../inc/indexation_image.h"
-#include "../../inc/indexation_generic.h"
-#include "../../inc/toolbox.h"
+#include "indexation_audio.h"
+#include "indexation_text.h"
+#include "indexation_image.h"
+#include "indexation_generic.h"
+#include "toolbox.h"
 
 int main(int argc, char** argv)  
 {

@@ -14,7 +14,7 @@ Date:       29/11/2021
 #include <termios.h>
 #include <string.h>
 
-#include "../inc/toolbox.h"
+#include "toolbox.h"
 
 unsigned short shift(unsigned char a, int b)
 {
