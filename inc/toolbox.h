@@ -15,6 +15,7 @@ Date:       29/11/2021
 
 /* useful macros */
 #define pwrtwo(x) (1 << (x))
+#define abs_int(x) ((x < 0) ? (-(x)) : (x))
 
 /* const values for file */
 #define TEXT_EXTENSION ".txt"
@@ -30,7 +31,7 @@ unsigned long hash(char* p_string);
 unsigned int get_array_size_from_pointer(char* p_array);
 void fflush_stdin();
 char getch();
-Bool_e file_contains_substring(FILE* p_file, char* p_str);
+Bool_e file_contains_substring(FILE* p_file, char* p_str, char** p_line);
 char* str_concat(char* str1, char* str2);
 unsigned int get_bytes_size_file(FILE* p_file);
 

@@ -8,14 +8,15 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include <stdio.h>
+#ifndef COMPARAISON_AUDIO_H
+#define COMPARAISON_AUDIO_H
+
 #include <stdlib.h>
+#include <stdio.h>
 
-#include "configurations.h"
+#include "toolbox.h"
+#include "indexation_audio.h"
 
-Parameters_s G_parameters = {{2}, {1024, 100}, {1, 90.0}};
+Bool_e compare_audio_files(char* file1, char* file2);
 
-Bool_e load_configurations()
-{
-    return TRUE;
-}
+#endif

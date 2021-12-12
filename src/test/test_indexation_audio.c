@@ -23,7 +23,7 @@ int main(void)
     /* initializations */
 
     /* instructions */
-    automatic_generic_indexation(LIST_BASE_AUDIO_PATH, SOUND_BASE_PATH, BASE_AUDIO_DESCRIPTOR_PATH, AUDIO);
+    automatic_indexing_by_data(LIST_BASE_AUDIO_PATH, SOUND_BASE_PATH, BASE_AUDIO_DESCRIPTOR_PATH, AUDIO);
 
     return EXIT_SUCCESS;
 }

@@ -1,4 +1,8 @@
-# indexing
+# general settings
+general:
+  data_base_relative_path: "data/"
+
+# indexing settings
 indexing:
   text:
     data_base_relative_path:
@@ -6,13 +10,12 @@ indexing:
     threshold: 10
     limit: 10
   image:
-    data_base_relative_path: {"data/images/TEST_NB/", "data/images/TEST_RGB/"}
+    quantification: 2
   audio:
-    data_base_relative_path: {data/audios/TEST_SON/}
     samples: 1024
     interval: 100
 
-# comparison
+# comparison settings
 comparison:
   image:
     threshold:

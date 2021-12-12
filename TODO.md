@@ -1,3 +1,4 @@
+# Image
 - [x] Avoid press Enter with getchar()
 - [x] Put all names in header of each file
 - [x] Set magic path in a header file 
@@ -6,9 +7,9 @@
 - [x] Add multiple tries in the password entry
 - [x] Add first connexion menu to setup password admin
 - [x] Optimise (in memory) image indexing
-- [ ] Check if headers file generate bugs
-- [ ] Add config files for admin
+- [x] Check if headers file generate bugs
 - [X] Talk about black and white problem on image
+- [ ] Add config files for admin
 - [ ] Check generation id method (take the path or only the file name)
 
 

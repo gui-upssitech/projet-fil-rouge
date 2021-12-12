@@ -26,8 +26,15 @@ typedef struct
 
 typedef struct
 {
+    unsigned int step;
+    double threshold;
+} Audio_comparison_parameters_s;
+
+typedef struct
+{
     Image_indexing_parameters_s image_indexing_parameters;
     Audio_indexing_parameters_s audio_indexing_parameters;
+    Audio_comparison_parameters_s audio_comparison_parameters;
 } Parameters_s;
 
 extern Parameters_s G_parameters;

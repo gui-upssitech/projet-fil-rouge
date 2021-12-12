@@ -29,6 +29,7 @@ typedef enum
     AUDIO
 } Descriptor_e;
 
-Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, char* p_base_path, Descriptor_e descriptor_type);
+Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, char* p_base_path, Descriptor_e descriptor_type);
+Bool_e automatic_indexing();
 
 #endif

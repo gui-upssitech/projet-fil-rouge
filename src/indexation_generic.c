@@ -11,7 +11,39 @@ Date:       29/11/2021
 #include "indexation_generic.h"
 #include "dynamic_stack.h"
 
-Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, char* p_base_path, Descriptor_e descriptor_type)
+Bool_e automatic_indexing()
+{
+    // if(automatic_indexing_by_data(LIST_BASE_AUDIO_PATH, SOUND_BASE_PATH, BASE_AUDIO_DESCRIPTOR_PATH, AUDIO) == FALSE)
+    // {
+    //     fprintf(stderr, "Error automatic indexing audio files.\n\r");
+    //     return FALSE;
+    // }
+    
+    /* indexing all nb image file */
+    if(automatic_indexing_by_data(LIST_BASE_IMAGE_PATH, NB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
+    {
+        fprintf(stderr, "Error automatic indexing audio files.\n\r");
+        return FALSE;
+    }
+
+    /* indexing all rgb image file */
+    if(automatic_indexing_by_data(LIST_BASE_IMAGE_PATH, RGB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
+    {
+        fprintf(stderr, "Error automatic indexing audio files.\n\r");
+        return FALSE;
+    }
+
+    /* indexing all audio files */
+    if(automatic_indexing_by_data(LIST_BASE_AUDIO_PATH, SOUND_BASE_PATH, BASE_AUDIO_DESCRIPTOR_PATH, AUDIO) == FALSE)
+    {
+        fprintf(stderr, "Error automatic indexing audio files.\n\r");
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, char* p_base_path, Descriptor_e descriptor_type)
 {
     /* files statements */
     FILE* p_list_base;
@@ -45,7 +77,7 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
             if(strstr(p_dir->d_name, (descriptor_type == TEXT ? XML_EXTENSION : (descriptor_type == AUDIO ? BIN_EXTENSION : TEXT_EXTENSION))) != NULL)
             {
                 /* step 2 : check if the index table contains the file being processed */
-                if(file_contains_substring(p_list_base, p_dir->d_name) == FALSE)
+                if(file_contains_substring(p_list_base, p_dir->d_name, NULL) == FALSE)
                 {
                     /* step 3 : create the descriptor of the file */
                     switch(descriptor_type)

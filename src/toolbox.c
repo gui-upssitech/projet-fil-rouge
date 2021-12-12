@@ -58,12 +58,12 @@ char* str_concat(char* str1, char* str2)
     return ret;
 }
 
-Bool_e file_contains_substring(FILE* p_file, char* p_str)
+Bool_e file_contains_substring(FILE* p_file, char* p_str, char** ret_line)
 {
     /* statements */
-    char* p_line;
     size_t len;
     ssize_t read;
+    char* p_line;
 
     /* initializations */
     p_line = NULL;
@@ -76,14 +76,10 @@ Bool_e file_contains_substring(FILE* p_file, char* p_str)
         {
             if(strstr(p_line, p_str) != NULL)
             {
+                *ret_line = p_line;
                 return TRUE;
             }
         }
-    }
-
-    if(p_line != NULL)
-    {
-        free(p_line);
     }
 
     return FALSE;

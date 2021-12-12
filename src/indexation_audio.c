@@ -29,6 +29,12 @@ Bool_e save_descriptor_audio(FILE* p_base_descriptor_audio, Audio_descriptor_s* 
         return FALSE;
     }
 
+    if(fprintf(p_base_descriptor_audio, "%d\n", p_descriptor->i_windows) == EOF)
+    {
+        fprintf(stderr, "Error %d printing id of image descriptor.\n\r", errno);
+        return FALSE;
+    }
+
     for(i = 0; i < p_descriptor->i_windows; i++)
     {
         for(j = 0; j < p_descriptor->levels; j++)
@@ -128,7 +134,7 @@ Bool_e index_audio(char* p_path, Audio_descriptor_s* p_descriptor)
         /* step 1 : get audio/descriptor parameters */
         audio.p_path = p_path;
         get_parameters_audio(&audio, p_descriptor);
-        p_descriptor->i_windows = ((audio.size_doubles) / (p_descriptor->samples)) + 1;
+        p_descriptor->i_windows = ((audio.size_doubles) / (p_descriptor->samples));
 
         /* step 2 : generate id */
         p_descriptor->id = hash(p_path);

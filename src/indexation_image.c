@@ -134,8 +134,9 @@ Bool_e quantify_image(Image_s* p_image, unsigned short* p_quantified_image)
         }
         else if(p_image->a_sizes[CHANNELS_IDX] == NB_CHANNEL_SIZE)
         {
-            // TO DO problem here
-            p_quantified_image[i] = a_color_matrix[0][i] / ((PIXEL_MAX_SIZE + 1) / pwrtwo(CHAR_SIZE_BIT - G_parameters.image_indexing_parameters.quantification_size));
+            p_quantified_image[i] = shift((a_color_matrix[0][i] & quantification_mask), (-8 + 3 *  G_parameters.image_indexing_parameters.quantification_size)) |
+                                    shift((a_color_matrix[0][i] & quantification_mask), (-8 + 2 *  G_parameters.image_indexing_parameters.quantification_size)) |
+                                    shift((a_color_matrix[0][i] & quantification_mask), (-8 + 1 *  G_parameters.image_indexing_parameters.quantification_size));
         }
     }
     return TRUE;
