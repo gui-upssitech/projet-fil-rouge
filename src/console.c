@@ -319,7 +319,6 @@ void display_admin_menu()
             break;
         }
     }
-
 }
 
 void display_about_menu()
@@ -374,5 +373,46 @@ void display_image_research_menu()
 
 void display_audio_research_menu()
 {
+    /* statements */
+    char c;
 
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Menu Audio");
+        display_centered_text_console("");
+        display_centered_text_console("(q) Quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        c = get_char_menu('5');
+        switch (c)
+        {
+        case '1':
+            display_text_research_menu();
+            break;
+
+        case '2':
+            display_image_research_menu();
+            break;
+
+        case '3':
+            display_audio_research_menu();
+            break;
+
+        case '4':
+            display_new_pwd_menu(FALSE);
+            break;
+
+        case 'q':
+            return;
+            break;
+        
+        default:
+            return;
+            break;
+        }
+    }
 }

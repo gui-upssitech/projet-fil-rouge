@@ -12,7 +12,51 @@ Date:       29/11/2021
 
 Bool_e compare_audio_descriptors(Audio_descriptor_s p_descriptor1, Audio_descriptor_s p_descriptor2)
 {
-    return FALSE;
+    /* statements */
+    int shift_value, i, j, k;
+    Audio_descriptor_s buffer;
+    double* histograms_confidence;
+    double double_buffer, max_confidence;
+
+    /* initializations */
+    max_confidence = 0;
+    k = 0;
+
+    /* declarations */
+    if(p_descriptor2.i_windows > p_descriptor1.i_windows)
+    {
+        buffer = p_descriptor1;
+        p_descriptor1 = p_descriptor2;
+        p_descriptor2 = buffer;
+    }
+
+    shift_value = p_descriptor1.i_windows - p_descriptor2.i_windows + 1;
+    histograms_confidence = (double*) malloc(shift_value * sizeof(double));
+
+    for(i = 0; i < shift_value; i++)
+    {
+        double confidence_sum = 0;
+
+        for(j = 0; j < p_descriptor2.i_windows; j++)
+        {
+            compare_histogram(  p_descriptor1.levels, 
+                                &p_descriptor1.p_histogram[i * p_descriptor2.levels + j * p_descriptor2.levels], 
+                                &p_descriptor2.p_histogram[j * p_descriptor2.levels], 
+                                &double_buffer  );
+
+            confidence_sum += double_buffer;
+        }
+
+        histograms_confidence[i] = confidence_sum / p_descriptor2.i_windows;
+        if(histograms_confidence[i] > max_confidence)
+        {
+            max_confidence = histograms_confidence[i];
+            k = i;
+        }
+    }
+        printf("%3.2f %% de fiabilite a %d s.\n\r", max_confidence, k / 15);
+
+    return TRUE;
 }
 
 Bool_e read_histogram(FILE* p_file, Audio_descriptor_s* p_descriptor)
@@ -147,10 +191,11 @@ Bool_e compare_audio_files(char* file1, char* file2)
     }
 
     /* step 4 : launch comparison */
-
-    /* step 5 : find time code */
-
-    /* step 6 : display result */
+    if(compare_audio_descriptors(descriptor_file1, descriptor_file2) == FALSE)
+    {
+        fprintf(stderr, "Error comparing audio descriptors.\n\r");
+        return FALSE;
+    }
     
     return TRUE;
 }

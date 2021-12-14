@@ -15,7 +15,7 @@ Date:       29/11/2021
 
 /* useful macros */
 #define pwrtwo(x) (1 << (x))
-#define abs_int(x) ((x < 0) ? (-(x)) : (x))
+#define abs_int(x) (((x) < 0) ? (-(x)) : (x))
 
 /* const values for file */
 #define TEXT_EXTENSION ".txt"
