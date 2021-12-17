@@ -16,7 +16,7 @@
 - [ ] Add detection threshhold / limit
 - [ ] Add error handling
 - [X] Put output files in correct destination
-- [ ] Manage bash script arguments
+- [X] Manage bash script arguments
 - [X] Call bash script from C
 - [ ] Generate descriptor database
 - [X] Add debug mode
