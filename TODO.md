@@ -5,7 +5,7 @@
 - [x] Change message exception to the stderr
 - [x] Add multiple tries in the password entry
 - [x] Add first connexion menu to setup password admin
-- [x] Optimise (in memory) image indexing
+- [x] **TURBO BONUS** Optimise (in memory) image indexing
 - [ ] Check if headers file generate bugs
 - [ ] Add config files for admin
 - [X] Talk about black and white problem on image
@@ -15,9 +15,9 @@
 # Text
 - [ ] Add detection threshhold / limit
 - [ ] Add error handling
-- [ ] Put output files in correct destination
+- [X] Put output files in correct destination
 - [ ] Manage bash script arguments
-- [ ] Call bash script from C
+- [X] Call bash script from C
 - [ ] Generate descriptor database
-- [ ] Add debug mode
+- [X] Add debug mode
 - [ ] **BONUS** Group words with similar root

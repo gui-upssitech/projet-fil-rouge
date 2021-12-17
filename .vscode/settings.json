@@ -1,10 +1,10 @@
 {
-    "files.associations": {
-        "unit.h": "c",
-        "indexation_generic.h": "c",
-        "dynamic_stack.h": "c",
-        "toolbox.h": "c",
-        "indexation_text.h": "c",
-        "indexation_image.h": "c"
-    }
+  "files.associations": {
+    "unit.h": "c",
+    "indexation_generic.h": "c",
+    "dynamic_stack.h": "c",
+    "toolbox.h": "c",
+    "indexation_text.h": "c",
+    "indexation_image.h": "c"
+  }
 }
