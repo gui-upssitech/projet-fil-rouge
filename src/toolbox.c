@@ -13,6 +13,7 @@ Date:       29/11/2021
 #include <unistd.h>
 #include <termios.h>
 #include <string.h>
+#include <errno.h>
 
 #include "../inc/toolbox.h"
 
@@ -159,4 +160,44 @@ Bool_e read_integer(int* p_value)
         return_value = FALSE;
     }
     return return_value;
+}
+
+// Source : https://stackoverflow.com/questions/646241/c-run-a-system-command-and-get-output
+char* run_command(char* command)
+{
+    FILE *fp;
+    char *command_out = "";
+    char buffer[1035];
+
+    /* Open the command for reading. */
+    fp = popen(command, "r");
+    if (fp == NULL)
+    {
+        fprintf(stderr, "Error: Failed to read stdout");
+    }
+
+    /* Read the output a line at a time - output it. */
+    while (fgets(buffer, sizeof(buffer), fp) != NULL) {
+        command_out = str_concat(command_out, buffer);
+    }
+
+    if(strlen(command_out) > 0)
+    {
+        command_out[strlen(command_out)-1] = '\0';
+    }
+
+    /* close */
+    pclose(fp);
+    return command_out;
+}
+
+char* get_path(char* path)
+{
+    static char* base_dir = "";
+    if(strcmp(base_dir,"") == 0)
+    {
+        base_dir = run_command("pwd");
+    }
+
+    return str_concat(base_dir, path);
 }

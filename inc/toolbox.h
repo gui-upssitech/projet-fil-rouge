@@ -33,4 +33,7 @@ Bool_e file_contains_substring(FILE* p_file, char* p_str);
 char* str_concat(char* str1, char* str2);
 unsigned int get_bytes_size_file(FILE* p_file);
 
+char* run_command(char* command);
+char* get_path(char* path);
+
 #endif
