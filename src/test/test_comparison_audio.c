@@ -11,7 +11,7 @@ int main(void)
     /* initializations */
     /* instructions */
     
-    compare_audio_files(file1, file2);
+    compare_audio_files(file2, file1);
 
     return EXIT_SUCCESS;
 }

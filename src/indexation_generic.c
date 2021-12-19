@@ -8,8 +8,8 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include "indexation_generic.h"
 #include "dynamic_stack.h"
+#include "indexation_generic.h"
 
 Bool_e automatic_indexing()
 {
@@ -52,6 +52,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
     /* dir explorer statements */
     struct dirent* p_dir;
     DIR* p_d;
+    char* ret_line;
 
     /* descriptors statements */
     Dynamic_stack_p p_dynamic_stack;
@@ -77,7 +78,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
             if(strstr(p_dir->d_name, (descriptor_type == TEXT ? XML_EXTENSION : (descriptor_type == AUDIO ? BIN_EXTENSION : TEXT_EXTENSION))) != NULL)
             {
                 /* step 2 : check if the index table contains the file being processed */
-                if(file_contains_substring(p_list_base, p_dir->d_name, NULL) == FALSE)
+                if(file_contains_substring(p_list_base, p_dir->d_name, &ret_line) == FALSE)
                 {
                     /* step 3 : create the descriptor of the file */
                     switch(descriptor_type)

@@ -368,7 +368,36 @@ void display_text_research_menu()
 
 void display_image_research_menu()
 {
+    /* statements */
+    char c;
 
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Menu Image");
+        display_centered_text_console("");
+        display_centered_text_console("Recherche par :");
+        display_centered_text_console("(1) Code couleur");
+        display_centered_text_console("(2) Image couleur");
+        display_centered_text_console("(3) Image niveaux de gris");
+        display_centered_text_console("(q) Quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        c = get_char_menu('4');
+        switch (c)
+        {
+        case 'q':
+            return;
+            break;
+        
+        default:
+            return;
+            break;
+        }
+    }
 }
 
 void display_audio_research_menu()

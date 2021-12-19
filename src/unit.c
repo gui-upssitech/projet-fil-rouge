@@ -31,5 +31,8 @@ void affect_unit(Unit_u* unit1, Unit_u unit2, Descriptor_e descriptor_type)
             unit1->audio_descriptor.samples = unit2.audio_descriptor.samples;
             unit1->audio_descriptor.p_histogram = unit2.audio_descriptor.p_histogram;
             break;
+    
+        default:
+            break;
     }
 }

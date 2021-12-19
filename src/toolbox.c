@@ -76,7 +76,10 @@ Bool_e file_contains_substring(FILE* p_file, char* p_str, char** ret_line)
         {
             if(strstr(p_line, p_str) != NULL)
             {
-                *ret_line = p_line;
+                if(ret_line != NULL)
+                {
+                    *ret_line = p_line;
+                }
                 return TRUE;
             }
         }

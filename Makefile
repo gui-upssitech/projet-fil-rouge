@@ -47,6 +47,11 @@ test_config_admin: $(OBJ) src/test/test_config_admin.c
 	mv ./*.o ./obj
 	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)
 
+test_comparison_image: $(OBJ) src/test/test_comparison_image.c
+	gcc -c src/test/test_comparison_image.c $(CFLAGS)
+	mv ./*.o ./obj
+	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)	
+
 test_comparaison_audio: $(OBJ) src/test/test_comparison_audio.c
 	gcc -c src/test/test_comparison_audio.c $(CFLAGS)
 	mv ./*.o ./obj

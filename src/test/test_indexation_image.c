@@ -46,7 +46,7 @@ int main(int argc, char** argv)
 
     time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
 
-    printf("The elapsed time is %f seconds", time_spent);
+    printf("The elapsed time is %f seconds\n", time_spent);
 
     // if(index_image("/home/rxc3445a/Documents/projet-fil-rouge/data/images/TEST_RGB/test_image_rgb.txt", &image_descriptor) == FALSE)
     // {
