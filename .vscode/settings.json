@@ -9,6 +9,7 @@
         "configurations.h": "c",
         "indexation_audio.h": "c",
         "comparaison_image.h": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "comparaison_audio.h": "c"
     }
 }

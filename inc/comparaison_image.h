@@ -13,6 +13,7 @@ Date:       29/11/2021
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "binary_search_tree.h"
 #include "indexation_image.h"

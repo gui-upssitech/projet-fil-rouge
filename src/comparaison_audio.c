@@ -8,27 +8,17 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include "../inc/comparaison_audio.h"
+#include "comparaison_audio.h"
 
-Bool_e compare_audio_descriptors(Audio_descriptor_s p_descriptor1, Audio_descriptor_s p_descriptor2, int** time_codes)
+Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descriptor1, Audio_descriptor_s p_descriptor2, Binary_search_tree_p** p_tree)
 {
     /* statements */
-    int shift_value, i, j;
+    int shift_value, i, j, k;
     double double_buffer;
     Audio_descriptor_s buffer;
-    int size_time_codes;
-
-    /* initializations */
-    size_time_codes = -1;
-    *time_codes = (int*) malloc(sizeof(int));
+    Result_s result;
 
     /* instructions */
-    if(time_codes == NULL)
-    {
-        fprintf(stderr, "Error memory allocation.\n\r");
-        return FALSE;
-    }
-
     if(p_descriptor2.i_windows > p_descriptor1.i_windows)
     {
         buffer = p_descriptor1;
@@ -58,33 +48,16 @@ Bool_e compare_audio_descriptors(Audio_descriptor_s p_descriptor1, Audio_descrip
 
         if(confidence_sum / p_descriptor2.i_windows > G_parameters.audio_comparison_parameters.threshold)
         {
-            if(size_time_codes == -1)
+            result.confidence = confidence_sum / p_descriptor2.i_windows;
+            for(k = 0; file_name[k] != '\0' && k < 256; k++)
             {
-                size_time_codes++;
-                (*time_codes)[size_time_codes] = i / 15; // TO DO fix magic constant
+                result.name[k] = file_name[k];
             }
-            else if(i / 15 > ((*time_codes)[size_time_codes] + p_descriptor2.i_windows / 15))
-            {
-                size_time_codes++;
-                *time_codes = (int*) realloc(*time_codes, sizeof(int) * (size_time_codes + 1));
-                if(time_codes == NULL)
-                {
-                    fprintf(stderr, "Error memory reallocation.\n\r");
-                    return FALSE;
-                }
-                (*time_codes)[size_time_codes] = i / 15;
-            }
+            result.time_code = i / 15; // TO DO fix magic constant
+            add_node_binary_search_tree(*p_tree, result);
         }
     }
-    /* end of array */
-    size_time_codes++;
-    *time_codes = (int*) realloc(*time_codes, sizeof(int) * (size_time_codes + 1));
-    if(time_codes == NULL)
-    {
-        fprintf(stderr, "Error memory reallocation.\n\r");
-        return FALSE;
-    }
-    (*time_codes)[size_time_codes] = -1;
+
     return TRUE;
 }
 
@@ -129,15 +102,10 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p* result
     char buf[256];
 
     /* image descriptor statements */
-    unsigned int windows_order;
     unsigned long hash_file, hash_file_read;
     Audio_descriptor_s request_descriptor_file, descriptor_file;
     char* p_line;
     FILE* p_file;
-
-    /* result statement */
-    Result_s result;
-    double confidence;
     
     /* other statements */
     unsigned int i;
@@ -154,7 +122,7 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p* result
     }
 
     /* step 2 : find database image files */
-    p_cmd = popen(str_concat(str_concat("find ", SOUND_BASE_PATH), "*.txt -printf \"%f\n\""), "r");
+    p_cmd = popen(str_concat(str_concat("find ", SOUND_BASE_PATH), "*.bin -printf \"%f\n\""), "r");
 
     if(p_cmd == NULL)
     {
@@ -165,6 +133,12 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p* result
     /* step 3 : browse all the database files */
     while(fgets(buf, sizeof(buf), p_cmd) != 0)
     {
+        for(i = 0; buf[i] != '\0' && i < 256; i++){} buf[i - 1] = '\0'; 
+        if(strstr(request_file_path, buf) != NULL)
+        {
+            continue;
+        }
+
         /* step 3.1 : open the base image list */
         p_file = fopen(LIST_BASE_AUDIO_PATH, "r");
         if(p_file == NULL)
@@ -174,7 +148,6 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p* result
         }
 
         /* step 3.2 : find the line containing the file name and the hash code */
-        for(i = 0; buf[i] != '\0' && i < 256; i++){} buf[i - 1] = '\0'; 
         if(file_contains_substring(p_file, buf, &p_line) == FALSE)
         {
             fprintf(stderr, "Error impossible to find the file.\n\r");
@@ -200,10 +173,10 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p* result
         descriptor_file.samples = G_parameters.audio_indexing_parameters.samples;
 
         /* step 3.6 : open base image image descriptor */
-        p_file = fopen(BASE_IMAGE_DESCRIPTOR_PATH, "r");
+        p_file = fopen(BASE_AUDIO_DESCRIPTOR_PATH, "r");
         if(p_file == NULL)
         {
-            fprintf(stderr, "Error %d opening %s.\n\r", errno, BASE_IMAGE_DESCRIPTOR_PATH);
+            fprintf(stderr, "Error %d opening %s.\n\r", errno, BASE_AUDIO_DESCRIPTOR_PATH);
             return FALSE;
         }
 
@@ -225,28 +198,16 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p* result
 
         if(fclose(p_file) == EOF)
         {
-            fprintf(stderr, "Error %d closing the file %s.\n\r", errno, BASE_IMAGE_DESCRIPTOR_PATH);
+            fprintf(stderr, "Error %d closing the file %s.\n\r", errno, BASE_AUDIO_DESCRIPTOR_PATH);
             return FALSE;
         }
 
         /* step 3.8 : launch comparison */
-        if(compare_audio_descriptors(request_descriptor_file, descriptor_file, &confidence) == FALSE)
+        if(compare_audio_descriptors(buf, request_descriptor_file, descriptor_file, &results) == FALSE)
         {
             fprintf(stderr, "Error comparing descriptor files.\n\r");
             return FALSE;
         } // TO DO
-
-        if(confidence >= G_parameters.image_comparison_parameters.threshold)
-        {
-            for(i = 0; buf[i] != '\0' && i < 256; i++)
-            {
-                result.name[i] = buf[i];
-            }
-            
-            result.confidence = confidence;
-            result.time_code = -1;
-            add_node_binary_search_tree(results, result);
-        }
     }
 
     if(pclose(p_cmd) == EOF)

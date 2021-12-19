@@ -30,7 +30,6 @@ unsigned int get_bytes_size_file(FILE* p_file)
     fseek(p_file, 0, SEEK_END);
     bytes = ftell(p_file);
     fseek(p_file, 0, SEEK_SET);
-    printf("size: %d\n", bytes);
     return bytes;
 }
 

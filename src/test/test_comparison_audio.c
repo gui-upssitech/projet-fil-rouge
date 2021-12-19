@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../inc/comparaison_audio.h"
+#include "comparaison_audio.h"
 
 int main(void)
 {
     /* statements */
-    char *file1 = "corpus_fi.bin", *file2 = "jingle_fi.bin";
+    Binary_search_tree_p tree;
     
     /* initializations */
     /* instructions */
     
-    compare_audio_files(file2, file1);
-
+    compare_audio_files("/home/rxc3445a/Documents/projet-fil-rouge/data/audios/TEST_SON/jingle_fi.bin", &tree);
+    display_binary_search_tree(tree, AUDIO);
     return EXIT_SUCCESS;
 }

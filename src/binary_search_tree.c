@@ -22,6 +22,10 @@ Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descr
             printf("%s : %3.2f %%\n\r", binary_search_tree->result.name, binary_search_tree->result.confidence);
             break;
         
+        case AUDIO:
+            printf("%s : %3.2f %% at %d\n\r", binary_search_tree->result.name, binary_search_tree->result.confidence, binary_search_tree->result.time_code);
+            break;
+        
         default:
             break;
     }

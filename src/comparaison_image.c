@@ -101,6 +101,12 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
     /* step 3 : browse all the database files */
     while(fgets(buf, sizeof(buf), p_cmd) != 0)
     {
+        for(i = 0; buf[i] != '\0' && i < 256; i++){} buf[i - 1] = '\0'; 
+        if(strstr(request_file_path, buf) != NULL)
+        {
+            continue;
+        }
+
         /* step 3.1 : open the base image list */
         p_file = fopen(LIST_BASE_IMAGE_PATH, "r");
         if(p_file == NULL)
@@ -110,7 +116,6 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
         }
 
         /* step 3.2 : find the line containing the file name and the hash code */
-        for(i = 0; buf[i] != '\0' && i < 256; i++){} buf[i - 1] = '\0'; 
         if(file_contains_substring(p_file, buf, &p_line) == FALSE)
         {
             fprintf(stderr, "Error impossible to find the file.\n\r");
