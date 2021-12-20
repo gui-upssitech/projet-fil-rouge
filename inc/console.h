@@ -18,7 +18,6 @@ Date:       29/11/2021
 #include <string.h>
 
 #include "comparaison_image.h"
-#include "binary_search_tree.h"
 #include "toolbox.h"
 #include "admin.h"
 
@@ -43,5 +42,6 @@ void display_text_research_menu();
 void display_image_research_menu();
 void display_audio_research_menu();
 Bool_e display_image_color_research_menu();
+void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path);
 
 #endif

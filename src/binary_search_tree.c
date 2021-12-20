@@ -2,9 +2,14 @@
 #include <stdlib.h>
 
 #include "binary_search_tree.h"
+#include "console.h"
 
 Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descriptor_e data_type)
 {
+    /* statements */
+    void (*p_display_centered_text_console)(char*) = &display_centered_text_console;
+    char buf[MAX_CHAR_PER_LINE - 4 + 256];
+
     /* instructions */
     if(is_empty_binary_search_tree(binary_search_tree) == TRUE)
     {
@@ -20,7 +25,8 @@ Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descr
     switch(data_type)
     {
         case IMAGE:
-            printf("%s [%3.2f %%]\n\r", binary_search_tree->result.name, binary_search_tree->result.confidence);
+            sprintf(buf, "%s [%3.2f %%]", binary_search_tree->result.name, binary_search_tree->result.confidence);
+            (*p_display_centered_text_console)(buf);
             break;
         
         case AUDIO:

@@ -10,6 +10,7 @@ Date:       29/11/2021
 
 #include "comparaison_image.h"
 
+
 Bool_e compare_image_descriptors(Image_descriptor_s p_descriptor1, Image_descriptor_s p_descriptor2, double* confidence)
 {
     /* instructions */
@@ -56,7 +57,7 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
 {
     /* command descriptor statements */
     FILE* p_cmd;
-    char buf[256];
+    char buf[256]; // TO DO
 
     /* image descriptor statements */
     unsigned long hash_file, hash_file_read;

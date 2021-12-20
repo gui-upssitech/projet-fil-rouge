@@ -410,6 +410,10 @@ Bool_e display_image_color_research_menu()
     Binary_search_tree_p confidence_tree;
     char* path;
     int code;
+    int ret;
+
+    /* initalizations */
+    ret = 0;
 
     /* instructions */
     while(1)
@@ -419,6 +423,20 @@ Bool_e display_image_color_research_menu()
         display_centered_text_console("");
         display_centered_text_console("Recherche par image couleur");
         display_centered_text_console("");
+        if(ret != 0)
+        {
+            if(ret == 1)
+            {
+                display_centered_text_console("Fichier inexistant ou invalide");
+            }
+            else
+            {
+                display_centered_text_console("Fichier non au format JPEG");
+            }
+            
+            display_centered_text_console("");
+            ret = 0;
+        }
         display_centered_text_console("Inserer le chemin du fichier");
         display_centered_text_console("Taper Echap pour quitter");
         display_centered_text_console("");
@@ -438,27 +456,59 @@ Bool_e display_image_color_research_menu()
                     strcpy(strrchr(path, '.'), ".txt");
                     if(compare_image_files(path, &confidence_tree, TRUE) == TRUE)
                     {
-                        display_binary_search_tree(confidence_tree, IMAGE);
+                        display_image_result_menu(confidence_tree, path);
                     }
                     else
                     {
-                        // TO DO gerer exception
+                        fprintf(stderr, "Error comparing image file \"%s\".\n\r", path);
+                        return FALSE;
                     }
                 }
                 else
                 {
-                    // TO DO gerer exception
+                    ret = 2;
                 }
             }
             else
             {
-                // TO DO gerer exception
+                ret = 1;
             }
-
         }
-        getchar();
+        else
+        {
+            break;
+        }
     }
     return TRUE;
+}
+
+void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path)
+{
+    /*declarations */
+    char* file_name; 
+
+    /* instructions */
+    clear_console();
+    print_plate_console();
+    file_name = strrchr(path, '/') + 1;
+    strcpy(strrchr(file_name, '.'), ".jpg");
+    display_centered_text_console("");
+    display_centered_text_console(str_concat("Requete : ", file_name));
+    display_centered_text_console("");
+    if(is_empty_binary_search_tree(confidence_tree) == FALSE)
+    {
+        display_centered_text_console("Resultats");
+        display_binary_search_tree(confidence_tree, IMAGE);
+    }
+    else
+    {
+        display_centered_text_console("Aucun resultat");
+    }
+    display_centered_text_console("");
+    display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
+    display_centered_text_console("");
+    print_plate_console();
+    getch();
 }
 
 void display_audio_research_menu()
