@@ -1,3 +1,6 @@
+# General
+- [ ] Add auto remove descriptor when file is deleted
+
 # Image
 - [x] Avoid press Enter with getchar()
 - [x] Put all names in header of each file

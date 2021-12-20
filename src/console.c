@@ -389,6 +389,10 @@ void display_image_research_menu()
         c = get_char_menu('4');
         switch (c)
         {
+        case '2':
+            display_image_color_research_menu();
+            break;
+
         case 'q':
             return;
             break;
@@ -398,6 +402,63 @@ void display_image_research_menu()
             break;
         }
     }
+}
+
+Bool_e display_image_color_research_menu()
+{
+    /* declarations */
+    Binary_search_tree_p confidence_tree;
+    char* path;
+    int code;
+
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Recherche par image couleur");
+        display_centered_text_console("");
+        display_centered_text_console("Inserer le chemin du fichier");
+        display_centered_text_console("Taper Echap pour quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        if(read_path(&path, &code) == FALSE)
+        {
+            fprintf(stderr, "Error reading path file.\n\r");
+            return FALSE;
+        }
+
+        if(code == 0)
+        {
+            if(is_regular_file(path) == TRUE)
+            {
+                if(is_jpeg_file(path) == TRUE)
+                {
+                    strcpy(strrchr(path, '.'), ".txt");
+                    if(compare_image_files(path, &confidence_tree, TRUE) == TRUE)
+                    {
+                        display_binary_search_tree(confidence_tree, IMAGE);
+                    }
+                    else
+                    {
+                        // TO DO gerer exception
+                    }
+                }
+                else
+                {
+                    // TO DO gerer exception
+                }
+            }
+            else
+            {
+                // TO DO gerer exception
+            }
+
+        }
+        getchar();
+    }
+    return TRUE;
 }
 
 void display_audio_research_menu()

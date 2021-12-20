@@ -15,7 +15,10 @@ Date:       29/11/2021
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <string.h>
 
+#include "comparaison_image.h"
+#include "binary_search_tree.h"
 #include "toolbox.h"
 #include "admin.h"
 
@@ -39,5 +42,6 @@ void display_about_menu();
 void display_text_research_menu();
 void display_image_research_menu();
 void display_audio_research_menu();
+Bool_e display_image_color_research_menu();
 
 #endif

@@ -22,8 +22,31 @@ Date:       29/11/2021
 #define XML_EXTENSION ".xml"
 #define BIN_EXTENSION ".bin"
 
+/* useful char constants */
+#define ESCAPE_KEY 27
+#define ENTER_KEY 10
+
 /* classical boolean type */
 typedef enum {FALSE, TRUE} Bool_e;
+
+/**
+ * @brief Know if the path file is corresponding to a regular file.
+ * 
+ * @param path The path file.
+ * @return Bool_e TRUE if the file is regular, FALSE else.
+ */
+Bool_e is_regular_file(const char *path);
+
+Bool_e is_jpeg_file(const char* path);
+
+/**
+ * @brief Read a path with Enter key validation or Escape key abandonment.
+ * 
+ * @param path A pointer to the first case adress of the path string.
+ * @param code A code status (0 if Enter key validation, -1 if Escape key abandonment)
+ * @return Bool_e TRUE if succeed, FALSE else.
+ */
+Bool_e read_path(char** path, int* code);
 
 /**
  * @brief Shift bits of a b-times to the left if b is positive, to the right else.

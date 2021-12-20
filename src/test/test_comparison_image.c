@@ -12,7 +12,7 @@ int main(void)
     /* initializations */
 
     /* instructions */
-    if(compare_image_files("/home/rxc3445a/Documents/projet-fil-rouge/data/images/TEST_RGB/01.txt", &tree, TRUE) == FALSE)
+    if(compare_image_files("/home/rxc3445a/Documents/projet-fil-rouge/data/images/TEST_RGB/02.txt", &tree, TRUE) == FALSE)
     {
         fprintf(stderr, "Error comparing image file.\n\r");
     }

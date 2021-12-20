@@ -5,6 +5,7 @@
 
 Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descriptor_e data_type)
 {
+    /* instructions */
     if(is_empty_binary_search_tree(binary_search_tree) == TRUE)
     {
         fprintf(stderr, "Error binary search tree is empty.\n\r");
@@ -19,11 +20,11 @@ Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descr
     switch(data_type)
     {
         case IMAGE:
-            printf("%s : %3.2f %%\n\r", binary_search_tree->result.name, binary_search_tree->result.confidence);
+            printf("%s [%3.2f %%]\n\r", binary_search_tree->result.name, binary_search_tree->result.confidence);
             break;
         
         case AUDIO:
-            printf("%s : %3.2f %% at %d\n\r", binary_search_tree->result.name, binary_search_tree->result.confidence, binary_search_tree->result.time_code);
+            printf("%s : %3.2f %% at %ds\n\r", binary_search_tree->result.name, binary_search_tree->result.confidence, binary_search_tree->result.time_code);
             break;
         
         default:

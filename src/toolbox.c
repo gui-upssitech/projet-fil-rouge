@@ -13,8 +13,106 @@ Date:       29/11/2021
 #include <unistd.h>
 #include <termios.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include "toolbox.h"
+
+/* https://stackoverflow.com/questions/4553012/checking-if-a-file-is-a-directory-or-just-a-file */
+Bool_e is_regular_file(const char *path)
+{
+    /* statements */
+    struct stat path_stat;
+
+    /* initializations */
+    stat(path, &path_stat);
+
+    /* instructions */
+    return S_ISREG(path_stat.st_mode) > 0 ? TRUE : FALSE;
+}
+
+Bool_e is_jpeg_file(const char* path)
+{
+    /* statements */
+    char* dot;
+    char* extension;
+
+    /* instructions */
+    dot = strrchr(path, '.');
+    if(!dot || dot == path)
+    {
+        return FALSE;
+    }
+
+    extension = dot + 1;
+
+    if( strcmp(extension, "jpg") != 0 &&
+        strcmp(extension, "jepg") != 0 &&
+        strcmp(extension, "jpe") != 0 &&
+        strcmp(extension, "jfif") != 0 &&
+        strcmp(extension, "jif") != 0)
+    {
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+Bool_e read_path(char** path, int* code)
+{
+    /* statements */
+    int i;
+    char c;
+
+    /* initializations */
+    i = 0;
+    *path = (char*) malloc(sizeof(char));
+
+    /* instructions */
+    if(*path == NULL)
+    {
+        fprintf(stderr, "Error memory allocation.\n\r");
+        return FALSE;
+    }
+
+    do
+    {
+        c = getch(); 
+        printf("%c", c);
+        (*path)[i] = c;
+        if((*path)[i] == 0x7F)
+        {
+            if(i > 0)
+            {
+                i--;
+            }
+            printf("\b \b");
+            continue;
+        }
+
+        i++;
+        *path = (char*) realloc(*path, (i + 1) * sizeof(char));
+        if(*path == NULL)
+        {
+            fprintf(stderr, "Error memory reallocation.\n\r");
+            return FALSE;
+        }
+        
+    } while(c != ESCAPE_KEY && c != ENTER_KEY);
+
+    (*path)[i - 1] = '\0';
+
+    if(c == ESCAPE_KEY)
+    {
+        *code = -1;
+    }
+    else
+    {
+        *code = 0;
+    }
+
+    return TRUE;
+}
 
 unsigned short shift(unsigned char a, int b)
 {
