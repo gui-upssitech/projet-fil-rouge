@@ -34,14 +34,10 @@ Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descripto
 
         for(j = 0; j < p_descriptor2.i_windows; j++)
         {
-            if(compare_histogram(  p_descriptor1.levels, 
+            compare_histogram(  p_descriptor1.levels, 
                                 &p_descriptor1.p_histogram[i * p_descriptor2.levels + j * p_descriptor2.levels], 
                                 &p_descriptor2.p_histogram[j * p_descriptor2.levels], 
-                                &double_buffer  ) == FALSE)
-            {
-                fprintf(stderr, "Error comparing descriptors.\n\r");
-                return FALSE;
-            }
+                                &double_buffer  );
 
             confidence_sum += double_buffer;
         }

@@ -41,7 +41,7 @@ void display_about_menu();
 void display_text_research_menu();
 void display_image_research_menu();
 void display_audio_research_menu();
-Bool_e display_image_color_research_menu();
-void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path);
+Bool_e display_image_by_path_research_menu(Bool_e colored);
+void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path, Bool_e colored);
 
 #endif

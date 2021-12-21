@@ -10,7 +10,7 @@ Date:       29/11/2021
 
 #include "comparaison_generic.h"
 
-Bool_e compare_histogram(unsigned int size, unsigned int* histogram1, unsigned int* histogram2, double* confidence)
+void compare_histogram(unsigned int size, unsigned int* histogram1, unsigned int* histogram2, double* confidence)
 {
     /* statements */
     int sum, max1, max2;
@@ -29,12 +29,5 @@ Bool_e compare_histogram(unsigned int size, unsigned int* histogram1, unsigned i
         max2 += histogram2[i];
     }
     
-    if(max1 != max2)
-    {
-        fprintf(stderr, "Error comparing histograms (not same size).\n\r");
-        return FALSE;
-    }
     *confidence = (double) (sum * -100) / (double) (max1 + max2) + 100.0f;
-    
-    return TRUE;
 }

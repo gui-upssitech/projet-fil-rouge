@@ -14,14 +14,10 @@ Date:       29/11/2021
 Bool_e compare_image_descriptors(Image_descriptor_s p_descriptor1, Image_descriptor_s p_descriptor2, double* confidence)
 {
     /* instructions */
-    if(compare_histogram(   pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size), 
-                            p_descriptor1.p_histogram, 
-                            p_descriptor2.p_histogram, 
-                            confidence   ) == FALSE)
-    {
-        fprintf(stderr, "Error comparing histograms.\n\r");
-        return FALSE;
-    }
+    compare_histogram(  pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size), 
+                        p_descriptor1.p_histogram, 
+                        p_descriptor2.p_histogram, 
+                        confidence   );
     
     return TRUE;
 }

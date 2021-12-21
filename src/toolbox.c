@@ -18,7 +18,7 @@ Date:       29/11/2021
 
 #include "toolbox.h"
 
-/* https://stackoverflow.com/questions/4553012/checking-if-a-file-is-a-directory-or-just-a-file */
+/* source : https://stackoverflow.com/questions/4553012/checking-if-a-file-is-a-directory-or-just-a-file */
 Bool_e is_regular_file(const char *path)
 {
     /* statements */
@@ -31,11 +31,11 @@ Bool_e is_regular_file(const char *path)
     return S_ISREG(path_stat.st_mode) > 0 ? TRUE : FALSE;
 }
 
-Bool_e is_jpeg_file(const char* path)
+Bool_e is_extension_file(const char* path, char* extension)
 {
     /* statements */
     char* dot;
-    char* extension;
+    char* read_extension;
 
     /* instructions */
     dot = strrchr(path, '.');
@@ -44,19 +44,16 @@ Bool_e is_jpeg_file(const char* path)
         return FALSE;
     }
 
-    extension = dot + 1;
+    read_extension = dot + 1;
 
-    if( strcmp(extension, "jpg") != 0 &&
-        strcmp(extension, "jepg") != 0 &&
-        strcmp(extension, "jpe") != 0 &&
-        strcmp(extension, "jfif") != 0 &&
-        strcmp(extension, "jif") != 0)
+    if( strcmp(read_extension, extension) != 0)
     {
         return FALSE;
     }
 
     return TRUE;
 }
+
 
 Bool_e read_path(char** path, int* code)
 {

@@ -7,7 +7,6 @@
 Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descriptor_e data_type)
 {
     /* statements */
-    void (*p_display_centered_text_console)(char*) = &display_centered_text_console;
     char buf[MAX_CHAR_PER_LINE - 4 + 256];
 
     /* instructions */
@@ -26,7 +25,7 @@ Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descr
     {
         case IMAGE:
             sprintf(buf, "%s [%3.2f %%]", binary_search_tree->result.name, binary_search_tree->result.confidence);
-            (*p_display_centered_text_console)(buf);
+            display_centered_text_console(buf);
             break;
         
         case AUDIO:

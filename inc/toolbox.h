@@ -37,7 +37,14 @@ typedef enum {FALSE, TRUE} Bool_e;
  */
 Bool_e is_regular_file(const char *path);
 
-Bool_e is_jpeg_file(const char* path);
+/**
+ * @brief Know if the file is corresponding to a specific extension file.
+ * 
+ * @param path The path file.
+ * @return Bool_e TRUE if the file is the specific extension, FALSE else.
+ */
+Bool_e is_extension_file(const char* path, char* extension);
+
 
 /**
  * @brief Read a path with Enter key validation or Escape key abandonment.

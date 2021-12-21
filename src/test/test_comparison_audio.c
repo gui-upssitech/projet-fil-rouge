@@ -11,7 +11,7 @@ int main(void)
     /* initializations */
     /* instructions */
     
-    compare_audio_files("/home/rxc3445a/Documents/projet-fil-rouge/data/audios/TEST_SON/jingle_fi.bin", &tree);
+    compare_audio_files("/home/rxc3445a/Documents/projet-fil-rouge/data/audios/TEST_SON/jingle_miaou.bin", &tree);
     display_binary_search_tree(tree, AUDIO);
     return EXIT_SUCCESS;
 }

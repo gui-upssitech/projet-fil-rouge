@@ -390,7 +390,11 @@ void display_image_research_menu()
         switch (c)
         {
         case '2':
-            display_image_color_research_menu();
+            display_image_by_path_research_menu(TRUE);
+            break;
+        
+        case '3':
+            display_image_by_path_research_menu(FALSE);
             break;
 
         case 'q':
@@ -404,7 +408,7 @@ void display_image_research_menu()
     }
 }
 
-Bool_e display_image_color_research_menu()
+Bool_e display_image_by_path_research_menu(Bool_e colored)
 {
     /* declarations */
     Binary_search_tree_p confidence_tree;
@@ -421,7 +425,14 @@ Bool_e display_image_color_research_menu()
         clear_console();
         print_plate_console();
         display_centered_text_console("");
-        display_centered_text_console("Recherche par image couleur");
+        if(colored == TRUE)
+        {        
+            display_centered_text_console("Recherche par image couleur");
+        }
+        else
+        {
+            display_centered_text_console("Recherche par image niveaux de gris");
+        }
         display_centered_text_console("");
         if(ret != 0)
         {
@@ -431,7 +442,7 @@ Bool_e display_image_color_research_menu()
             }
             else
             {
-                display_centered_text_console("Fichier non au format JPEG");
+                display_centered_text_console("Fichier au mauvais format");
             }
             
             display_centered_text_console("");
@@ -451,22 +462,46 @@ Bool_e display_image_color_research_menu()
         {
             if(is_regular_file(path) == TRUE)
             {
-                if(is_jpeg_file(path) == TRUE)
+                if(colored == TRUE)
                 {
-                    strcpy(strrchr(path, '.'), ".txt");
-                    if(compare_image_files(path, &confidence_tree, TRUE) == TRUE)
+                    if(is_extension_file(path, "jpg") == TRUE)
                     {
-                        display_image_result_menu(confidence_tree, path);
+                        strcpy(strrchr(path, '.'), ".txt");
+                        if(compare_image_files(path, &confidence_tree, TRUE) == TRUE)
+                        {
+                            display_image_result_menu(confidence_tree, path, TRUE);
+                        }
+                        else
+                        {
+                            fprintf(stderr, "Error comparing image file \"%s\".\n\r", path);
+                            return FALSE;
+                        }
                     }
                     else
                     {
-                        fprintf(stderr, "Error comparing image file \"%s\".\n\r", path);
-                        return FALSE;
+                        ret = 2;
                     }
                 }
                 else
                 {
-                    ret = 2;
+                    if(is_extension_file(path, "bmp") == TRUE)
+                    {
+                        strcpy(strrchr(path, '.'), ".txt");
+                        if(compare_image_files(path, &confidence_tree, FALSE) == TRUE)
+                        {
+                            display_image_result_menu(confidence_tree, path, FALSE);
+                        }
+                        else
+                        {
+                            fprintf(stderr, "Error comparing image file \"%s\".\n\r", path);
+                            return FALSE;
+                        }
+                    }
+                    else
+                    {
+                        ret = 2;
+                    }
+
                 }
             }
             else
@@ -482,7 +517,7 @@ Bool_e display_image_color_research_menu()
     return TRUE;
 }
 
-void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path)
+void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path, Bool_e colored)
 {
     /*declarations */
     char* file_name; 
@@ -491,7 +526,15 @@ void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path)
     clear_console();
     print_plate_console();
     file_name = strrchr(path, '/') + 1;
-    strcpy(strrchr(file_name, '.'), ".jpg");
+    if(colored == TRUE)
+    {
+        strcpy(strrchr(file_name, '.'), ".jpg");
+    }
+    else
+    {
+        strcpy(strrchr(file_name, '.'), ".bmp");
+    }
+    
     display_centered_text_console("");
     display_centered_text_console(str_concat("Requete : ", file_name));
     display_centered_text_console("");
