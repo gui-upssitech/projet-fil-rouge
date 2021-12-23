@@ -11,7 +11,12 @@ Date:       29/11/2021
 #ifndef CONFIGURATIONS_H
 #define CONFIGURATIONS_H
 
+#include <errno.h>
+#include <string.h>
+
 #include "toolbox.h"
+
+#define CONFIG_FILE_PATH "admin/parameters.conf" 
 
 typedef struct
 {
@@ -31,8 +36,8 @@ typedef struct
 
 typedef struct
 {
-    unsigned int step; // TO DO
     double threshold;
+    unsigned int step; // TO DO
 } Audio_comparison_parameters_s;
 
 typedef struct

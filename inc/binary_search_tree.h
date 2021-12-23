@@ -51,6 +51,8 @@ Bool_e is_empty_binary_search_tree(Binary_search_tree_p p_binary_search_tree);
  * @param p_binary_search_tree A pointer of the binary search tree for wich we want to add a result.
  * @param result The result to add (can be IMAGE or AUDIO result).
  */
-void add_node_binary_search_tree(Binary_search_tree_p* p_binary_search_tree, Result_s result);
+void add_node_binary_search_tree_image(Binary_search_tree_p* p_binary_search_tree, Result_s result);
+
+void add_node_binary_search_tree_audio(Binary_search_tree_p* p_binary_search_tree, Result_s result, int duration);
 
 #endif

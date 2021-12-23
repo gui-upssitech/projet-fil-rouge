@@ -181,7 +181,7 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
             
             result.confidence = confidence;
             result.time_code = -1;
-            add_node_binary_search_tree(results, result);
+            add_node_binary_search_tree_image(results, result);
         }
     }
 

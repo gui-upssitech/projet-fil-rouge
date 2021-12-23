@@ -256,7 +256,7 @@ void display_user_menu()
             break;
 
         case '3':
-            display_audio_research_menu();
+            display_audio_by_path_research_menu();
             break;
 
         case 'q':
@@ -295,15 +295,12 @@ void display_admin_menu()
         switch (c)
         {
         case '1':
-            display_text_research_menu();
             break;
 
         case '2':
-            display_image_research_menu();
             break;
 
         case '3':
-            display_audio_research_menu();
             break;
 
         case '4':
@@ -554,48 +551,126 @@ void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path,
     getch();
 }
 
-void display_audio_research_menu()
+void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned int size, char* path)
 {
-    /* statements */
-    char c;
+    /* declarations */
+    char* file_name; 
+    unsigned int i;
+    Bool_e one_result_existing;
+
+    /* initializations */
+    one_result_existing = FALSE;
+
+    /* instructions */
+    clear_console();
+    print_plate_console();
+    file_name = strrchr(path, '/') + 1;
+    strcpy(strrchr(file_name, '.'), ".wav");
+    
+    display_centered_text_console("");
+    display_centered_text_console(str_concat("Requete : ", file_name));
+    display_centered_text_console("");
+    for(i = 0; i < size; i++)
+    {
+        if(is_empty_binary_search_tree(time_code_forest[i]) == FALSE)
+        {
+            if(one_result_existing == FALSE)
+            {
+                display_centered_text_console("Resultats");
+            }
+            one_result_existing = TRUE;
+            display_centered_text_console(time_code_forest[i]->result.name);
+            display_binary_search_tree(time_code_forest[i], AUDIO);
+            display_centered_text_console("");
+        }
+    }
+    if(one_result_existing == FALSE)
+    {
+        display_centered_text_console("Aucun resultat");
+        display_centered_text_console("");
+    }
+    
+    display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
+    display_centered_text_console("");
+    print_plate_console();
+    getch();
+}
+
+Bool_e display_audio_by_path_research_menu()
+{
+    /* declarations */
+    Binary_search_tree_p* time_code_forest;
+    unsigned int size;
+    char* path;
+    int code;
+    int ret;
+
+    /* initalizations */
+    ret = 0;
 
     /* instructions */
     while(1)
     {
         clear_console();
         print_plate_console();
+        display_centered_text_console("");      
+        display_centered_text_console("Recherche Audio");
         display_centered_text_console("");
-        display_centered_text_console("Menu Audio");
-        display_centered_text_console("");
-        display_centered_text_console("(q) Quitter");
+        if(ret != 0)
+        {
+            if(ret == 1)
+            {
+                display_centered_text_console("Fichier inexistant ou invalide");
+            }
+            else
+            {
+                display_centered_text_console("Fichier au mauvais format");
+            }
+            
+            display_centered_text_console("");
+            ret = 0;
+        }
+        display_centered_text_console("Inserer le chemin du fichier");
+        display_centered_text_console("Taper Echap pour quitter");
         display_centered_text_console("");
         print_plate_console();
-        c = get_char_menu('5');
-        switch (c)
+        if(read_path(&path, &code) == FALSE)
         {
-        case '1':
-            display_text_research_menu();
-            break;
+            fprintf(stderr, "Error reading path file.\n\r");
+            return FALSE;
+        }
 
-        case '2':
-            display_image_research_menu();
-            break;
-
-        case '3':
-            display_audio_research_menu();
-            break;
-
-        case '4':
-            display_new_pwd_menu(FALSE);
-            break;
-
-        case 'q':
-            return;
-            break;
-        
-        default:
-            return;
+        if(code == 0)
+        {
+            if(is_regular_file(path) == TRUE)
+            {
+                if(is_extension_file(path, "wav") == TRUE)
+                {
+                    strcpy(strrchr(path, '.'), ".bin");
+                    if(compare_audio_files(path, &time_code_forest, &size) == TRUE)
+                    {
+                        display_audio_result_menu(time_code_forest, size, path);
+                    }
+                    else
+                    {
+                        fprintf(stderr, "Error comparing audio file \"%s\".\n\r", path);
+                        return FALSE;
+                    }
+                }
+                else
+                {
+                    ret = 2;
+                }
+            }
+            else
+            {
+                ret = 1;
+            }
+        }
+        else
+        {
             break;
         }
     }
+    return TRUE;
 }

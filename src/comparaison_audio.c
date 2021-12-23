@@ -10,7 +10,7 @@ Date:       29/11/2021
 
 #include "comparaison_audio.h"
 
-Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descriptor1, Audio_descriptor_s p_descriptor2, Binary_search_tree_p** p_tree)
+Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descriptor1, Audio_descriptor_s p_descriptor2, Binary_search_tree_p* p_tree)
 {
     /* statements */
     int shift_value, i, j, k;
@@ -19,6 +19,7 @@ Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descripto
     Result_s result;
 
     /* instructions */
+    /* NOTE descriptor 2 is the smaller */
     if(p_descriptor2.i_windows > p_descriptor1.i_windows)
     {
         buffer = p_descriptor1;
@@ -28,7 +29,7 @@ Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descripto
 
     shift_value = p_descriptor1.i_windows - p_descriptor2.i_windows + 1;
 
-    for(i = 0; i < shift_value; i++)
+    for(i = 0; i < shift_value; i += G_parameters.audio_comparison_parameters.step)
     {
         double confidence_sum = 0;
 
@@ -49,11 +50,12 @@ Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descripto
             {
                 result.name[k] = file_name[k];
             }
-            result.time_code = i / 15; // TO DO fix magic constant
-            add_node_binary_search_tree(*p_tree, result);
+            result.name[k] = '\0';
+            result.time_code = i / 15.7; // TO DO fix magic constant WTF
+            
+            add_node_binary_search_tree_audio(p_tree, result, p_descriptor2.i_windows / 15.7);
         }
     }
-
     return TRUE;
 }
 
@@ -91,7 +93,7 @@ Bool_e read_histogram_audio(FILE* p_file, Audio_descriptor_s* p_descriptor)
 }
 
 /* NOTE : first parameter is the user request */
-Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p* results)
+Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_forest, unsigned int* size)
 {
     /* command descriptor statements */
     FILE* p_cmd;
@@ -102,19 +104,51 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p* result
     Audio_descriptor_s request_descriptor_file, descriptor_file;
     char* p_line;
     FILE* p_file;
+
+    /* forest statements */
+    unsigned int idx;
     
     /* other statements */
     unsigned int i;
 
     /* initializations */
-    *results = init_binary_search_tree();
+    idx = 0;
 
     /* declarations */
-    /* step 1 : create descriptor of request file */
+    /* step 0 : create descriptor of request file */
     if(index_audio(request_file_path, &request_descriptor_file) == FALSE)
     {
         fprintf(stderr, "Error indexing request file %s.\n\r", request_file_path);
         return FALSE;
+    }
+
+    /* step 1 : get the number of audio files and init the forest */
+    p_cmd = popen(str_concat("wc -l ", LIST_BASE_AUDIO_PATH), "r");
+
+    if(p_cmd == NULL)
+    {
+        fprintf(stderr, "Error %d opening wc -l command.\n\r", errno);
+    }
+
+    fscanf(p_cmd, "%u", size);
+
+    if(pclose(p_cmd) == EOF)
+    {
+        fprintf(stderr, "Error %d closing the wc -l command.\n\r", errno);
+        return FALSE;
+    }
+
+    *p_forest = (Binary_search_tree_p*) malloc(sizeof(Binary_search_tree_p) * (*size));
+
+    if(p_forest == NULL)
+    {
+        printf("Error memory allocation.\n\r");
+        return FALSE;
+    }
+
+    for(i = 0; i < *size; i++)
+    {
+        *(*p_forest + i) = init_binary_search_tree();
     }
 
     /* step 2 : find database image files */
@@ -199,11 +233,13 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p* result
         }
 
         /* step 3.8 : launch comparison */
-        if(compare_audio_descriptors(buf, request_descriptor_file, descriptor_file, &results) == FALSE)
+        *(*p_forest + idx) = init_binary_search_tree();
+        if(compare_audio_descriptors(buf, request_descriptor_file, descriptor_file, (*p_forest + idx)) == FALSE)
         {
             fprintf(stderr, "Error comparing descriptor files.\n\r");
             return FALSE;
-        } // TO DO
+        }
+        idx++;
     }
 
     if(pclose(p_cmd) == EOF)
