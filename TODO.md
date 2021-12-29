@@ -1,6 +1,12 @@
 # General
 - [ ] Add auto remove descriptor when file is deleted
 
+# Menu
+- [ ] Add language selection
+- [ ] Add arrow movement in type box
+- [ ] Add escape possibility in password entry
+- [ ] Add tab auto completion
+
 # Image
 - [x] Avoid press Enter with getchar()
 - [x] Put all names in header of each file
@@ -12,9 +18,9 @@
 - [x] Optimise (in memory) image indexing
 - [x] Check if headers file generate bugs
 - [X] Talk about black and white problem on image
-- [ ] Add config files for admin
+- [x] Add config files for admin
+- [ ] Fix bug images display (.jpg instead of .txt)
 - [ ] Check generation id method (take the path or only the file name)
-
 
 # Text
 - [ ] Add detection threshhold / limit

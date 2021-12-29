@@ -53,7 +53,7 @@ Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descripto
             result.name[k] = '\0';
             result.time_code = i / 15.7; // TO DO fix magic constant WTF
             
-            add_node_binary_search_tree_audio(p_tree, result, p_descriptor2.i_windows / 15.7);
+            add_node_binary_search_tree_audio(p_tree, result, p_descriptor2.i_windows / (16000.0 / (double) G_parameters.audio_indexing_parameters.samples));
         }
     }
     return TRUE;
@@ -114,7 +114,7 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
     /* initializations */
     idx = 0;
 
-    /* declarations */
+    /* statements */
     /* step 0 : create descriptor of request file */
     if(index_audio(request_file_path, &request_descriptor_file) == FALSE)
     {

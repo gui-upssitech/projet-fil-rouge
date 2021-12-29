@@ -94,3 +94,32 @@ Bool_e load_configurations()
     }
     return TRUE;
 }
+
+Bool_e save_configuration(char* config, char* value)
+{
+    /* statements */
+    FILE* p_sed;
+
+    /* instructions */
+    p_sed = popen(str_concat(str_concat(str_concat(str_concat(str_concat(str_concat(str_concat(
+        "sed -i 's/", config), ".*/"), config), "="), value), "/' "), CONFIG_FILE_PATH), "r");
+
+    if(p_sed == NULL)
+    {
+        fprintf(stderr, "Error %d opening sed command.\n\r", errno);
+        return FALSE;
+    }
+
+    if(pclose(p_sed) == EOF)
+    {
+        fprintf(stderr, "Error %d closing the sed command.\n\r", errno);
+        return FALSE;
+    }
+
+    if(load_configurations() == FALSE) 
+    {
+        fprintf(stderr, "Error loading configurations.\n\r");
+    }
+
+    return TRUE;
+}

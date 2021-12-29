@@ -13,23 +13,18 @@ Date:       29/11/2021
 
 Bool_e automatic_indexing()
 {
-    // if(automatic_indexing_by_data(LIST_BASE_AUDIO_PATH, SOUND_BASE_PATH, BASE_AUDIO_DESCRIPTOR_PATH, AUDIO) == FALSE)
-    // {
-    //     fprintf(stderr, "Error automatic indexing audio files.\n\r");
-    //     return FALSE;
-    // }
-    
+    /* instructions */
     /* indexing all nb image file */
     if(automatic_indexing_by_data(LIST_BASE_IMAGE_PATH, NB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
     {
-        fprintf(stderr, "Error automatic indexing audio files.\n\r");
+        fprintf(stderr, "Error automatic indexing gray images.\n\r");
         return FALSE;
     }
 
     /* indexing all rgb image file */
     if(automatic_indexing_by_data(LIST_BASE_IMAGE_PATH, RGB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
     {
-        fprintf(stderr, "Error automatic indexing audio files.\n\r");
+        fprintf(stderr, "Error automatic indexing rgb images.\n\r");
         return FALSE;
     }
 

@@ -32,6 +32,8 @@ Bool_e read_histogram_image(FILE* p_file, Image_descriptor_s* p_descriptor);
  */
 Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* results, Bool_e colored);
 
+Bool_e compare_image_hexacode(char* color, Binary_search_tree_p* results);
+
 void display_image_research_result(char* file, int* confidence);
 
 #endif

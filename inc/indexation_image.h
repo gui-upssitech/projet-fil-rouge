@@ -21,6 +21,7 @@ Date:       29/11/2021
 #include "toolbox.h"
 
 /* descriptor file path constants */
+#define COLORS_BASE_PATH "admin/colors.conf"
 #define LIST_BASE_IMAGE_PATH "descriptors/image/list_base_image.txt"
 #define BASE_IMAGE_DESCRIPTOR_PATH "descriptors/image/base_image_descriptor.txt"
 
@@ -74,5 +75,6 @@ Bool_e quantify_image(Image_s* p_image, unsigned short* p_quantified_image);
 Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor);
 Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, unsigned short* p_quantified_image);
 Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* p_descriptor);
+Bool_e create_descriptor_hexacode(char* p_color, Image_s image, Image_descriptor_s* p_image_descriptor) ;
 
 #endif

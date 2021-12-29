@@ -45,5 +45,8 @@ Bool_e display_image_by_path_research_menu(Bool_e colored);
 void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path, Bool_e colored);
 Bool_e display_audio_by_path_research_menu();
 void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned int size, char* path);
+void display_indexation_admin_menu();
+Bool_e display_image_by_hexacode_research_menu();
+void display_image_by_hexacode_result_menu(Binary_search_tree_p confidence_tree, char* color);
 
 #endif

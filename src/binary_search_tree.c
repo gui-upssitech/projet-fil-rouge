@@ -65,7 +65,7 @@ Bool_e is_empty_binary_search_tree(Binary_search_tree_p p_binary_search_tree)
 
 void add_node_binary_search_tree_image(Binary_search_tree_p* p_binary_search_tree, Result_s result)
 {
-    /* declarations */
+    /* statements */
     Leaf_s* p_leaf;
 
     /* instructions */
@@ -142,7 +142,7 @@ void add_node_binary_search_tree_image(Binary_search_tree_p* p_binary_search_tre
 
 void add_node_binary_search_tree_audio(Binary_search_tree_p* p_binary_search_tree, Result_s result, int duration)
 {
-    /* declarations */
+    /* statements */
     Leaf_s* p_leaf;
 
     /* instructions */

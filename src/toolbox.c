@@ -54,7 +54,6 @@ Bool_e is_extension_file(const char* path, char* extension)
     return TRUE;
 }
 
-
 Bool_e read_path(char** path, int* code)
 {
     /* statements */
@@ -77,7 +76,7 @@ Bool_e read_path(char** path, int* code)
         c = getch(); 
         printf("%c", c);
         (*path)[i] = c;
-        if((*path)[i] == 0x7F)
+        if((*path)[i] == 0x7F) // TO DO
         {
             if(i > 0)
             {

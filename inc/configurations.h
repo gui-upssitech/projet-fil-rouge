@@ -51,5 +51,6 @@ typedef struct
 extern Parameters_s G_parameters;
 
 Bool_e load_configurations();
+Bool_e save_configuration(char* config, char* value);
 
 #endif
