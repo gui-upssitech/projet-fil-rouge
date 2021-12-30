@@ -191,7 +191,8 @@ char* run_command(char* command)
     return command_out;
 }
 
-char* get_path(char* path)
+// Source : https://stackoverflow.com/questions/933850/how-do-i-find-the-location-of-the-executable-in-c
+char* get_absolute_path(char* path)
 {
     static char* base_dir = "";
     if(strcmp(base_dir,"") == 0)

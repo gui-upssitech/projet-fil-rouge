@@ -13,8 +13,8 @@
 
 
 # Text
-- [ ] Add detection threshhold / limit
-- [ ] Add error handling
+- [X] Add detection threshhold / limit
+- [X] Add error handling
 - [X] Put output files in correct destination
 - [X] Manage bash script arguments
 - [X] Call bash script from C
