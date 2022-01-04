@@ -47,15 +47,28 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
                 /* step 2 : check if the index table contains the file being processed */
                 if(file_contains_substring(p_list_base, p_dir->d_name) == FALSE)
                 {
-                    /* step 3 : create the descriptor of the file */
                     switch(descriptor_type)
                     {
                     case TEXT:
+                        /* step 3 : create the descriptor of the file */
+                        if(index_text(str_concat(p_data_path, p_dir->d_name), &(unit.text_descriptor)) == FALSE)
+                        {
+                            /* If this fails, show error and bail */
+                            fprintf(stderr, "Error creating file descriptor.\n\r");
+                            return FALSE;
+                        }
+                        else
+                        {
+                            /* step 4 : add the new file in the list base */
+                            printf("%s\n\n", unit.text_descriptor.descriptor_contents);
+                        }
                         break;
                     
                     case IMAGE:
+                        /* step 3 : create the descriptor of the file */
                         if(index_image(str_concat(p_data_path, p_dir->d_name), &(unit.image_descriptor)) == FALSE)
                         {
+                            /* If this fails, show error and bail */
                             fprintf(stderr, "Error creating file descriptor.\n\r");
                             return FALSE;
                         }
@@ -71,8 +84,10 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
                         break;
 
                     case AUDIO:
+                        /* step 3 : create the descriptor of the file */
                         if(index_audio(str_concat(p_data_path, p_dir->d_name), &(unit.audio_descriptor)) == FALSE)
                         {
+                            /* If this fails, show error and bail */
                             fprintf(stderr, "Error creating file descriptor.\n\r");
                             return FALSE;
                         }
@@ -111,6 +126,7 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
             switch(descriptor_type)
             {
                 case TEXT:
+                    // TODO
                     break;
 
                 case IMAGE:

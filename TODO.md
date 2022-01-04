@@ -18,6 +18,11 @@
 - [X] Put output files in correct destination
 - [X] Manage bash script arguments
 - [X] Call bash script from C
-- [ ] Generate descriptor database
+- [X] Generate descriptor
+- [ ] Save descriptor
 - [X] Add debug mode
-- [ ] **BONUS** Group words with similar root
+
+- [ ] Arbre binaire
+- [ ] "base_descriptor"
+- [ ] "list_descriptor"
+- [ ] "table_descriptor"

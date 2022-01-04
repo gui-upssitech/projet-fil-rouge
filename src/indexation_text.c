@@ -16,44 +16,19 @@ Date:       29/11/2021
 #include "../inc/indexation_generic.h"
 #include "../inc/indexation_text.h"
 
-// TODO ADD CONFIG FILE WITH MERGE
-#define FILTER_VALUE "10"
-#define DEBUG_MODE "1"
-#define NB_ARGS 6 // number of arguments needed to the indexation_text.sh script
-
 /*char *to_string(int num)
 {
-    char **buffer = (char *)malloc(20 * sizeof(char));
+    char *buffer;
+    *buffer = (char *)malloc(20 * sizeof(char));
     sprintf(*buffer, "%d", num);
     return *buffer;
 }*/
 
-Bool_e generate_descriptor(char *filename)
+Bool_e generate_command(char *input_path, char **output, unsigned long desc_id)
 {
-    char* command = "";
-    Bool_e result = generate_command(filename, &command);
-
-    // Check if generate_command works
-    if (!result){
-        fprintf(stderr, "ERREUR Commande mal générée !");
-        return FALSE;
-    }
-
-    printf("Command to run : %s\n", command);
-
-    printf("command output :\n%s\n", run_command(command));
-
-    return TRUE;
-}
-
-Bool_e generate_command(char* filename, char** output) {
     // creation of desciprtor ID by hash function (tools)
-    unsigned long desc_id = hash(filename);
     char desc_id_str[40];
-    sprintf(desc_id_str, "%ld", desc_id);
-
-    // Get input path
-    char* input_path = str_concat(TEXT_DESCRIPTOR_INPUT_DIR, filename);
+    sprintf(desc_id_str, "%lu", desc_id);
 
     // ADD ARGUMENTS
     *output = TEXT_DESCRIPTOR_BASE_COMMAND;
@@ -62,13 +37,12 @@ Bool_e generate_command(char* filename, char** output) {
 
     // ARGS : IN_PATH OUT_DIR DESC_ID F_TYPE F_VAL DEBUG
     char *args[NB_ARGS] = {
-        input_path, 
-        TEXT_DESCRIPTOR_OUTPUT_DIR, 
-        desc_id_str, 
-        TEXT_DESCRIPTOR_FILTER_THRESHOLD, 
+        input_path,
+        TEXT_DESCRIPTOR_DEBUG_OUT,
+        desc_id_str,
+        TEXT_DESCRIPTOR_FILTER_THRESHOLD,
         FILTER_VALUE,
-        DEBUG_MODE
-    };
+        DEBUG_MODE};
 
     for (int i = 0; i < NB_ARGS; i++)
     {
@@ -77,3 +51,50 @@ Bool_e generate_command(char* filename, char** output) {
 
     return TRUE;
 }
+
+Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
+{
+    char *command, *descriptor = "";
+    unsigned long desc_id = hash(p_path);
+
+    /* Step 1: generate command */
+    if (!generate_command(p_path, &command, desc_id))
+    {
+        fprintf(stderr, "Command generation failed for file '%s'", p_path);
+        return FALSE;
+    }
+
+    /* Step 2: run command */
+    descriptor = run_command(command);
+    // TODO check the retunr of run_command !
+
+    p_descriptor->id = desc_id;
+    p_descriptor->descriptor_contents = descriptor;
+
+    // Call the save descriptor function
+
+
+
+
+    return TRUE;
+}
+
+Bool_e save_descriptor_text(FILE *p_base_descriptor_text, Text_descriptor_s *p_descriptor)
+{
+    /* variables */
+    char * value ;
+
+    // Try to add the id to the descriptor file
+    if(fprintf(p_base_descriptor_text, "%lu\n", p_descriptor->id) == EOF)
+    {
+        fprintf(stderr, "Error %d printing id of text descriptor.\n\r", errno);
+        return FALSE;
+    }
+
+    // Check 
+
+
+    return TRUE;
+}
+
+// TODO save_descriptor into file
