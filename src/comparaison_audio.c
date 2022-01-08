@@ -51,6 +51,7 @@ Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descripto
                 result.name[k] = file_name[k];
             }
             result.name[k] = '\0';
+            strcpy(strrchr(result.name, '.'), ".wav");
             result.time_code = i / 15.7; // TO DO fix magic constant WTF
             
             add_node_binary_search_tree_audio(p_tree, result, p_descriptor2.i_windows / (16000.0 / (double) G_parameters.audio_indexing_parameters.samples));

@@ -328,6 +328,15 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
             {
                 result.name[i] = buf[i];
             }
+
+            if(colored == TRUE)
+            {
+                strcpy(strrchr(result.name, '.'), ".jpg");
+            }
+            else
+            {
+                strcpy(strrchr(result.name, '.'), ".bmp");
+            }
             
             result.confidence = confidence;
             result.time_code = -1;
