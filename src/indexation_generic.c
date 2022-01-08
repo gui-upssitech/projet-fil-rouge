@@ -47,63 +47,46 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
                 /* step 2 : check if the index table contains the file being processed */
                 if(file_contains_substring(p_list_base, p_dir->d_name) == FALSE)
                 {
+                    Bool_e index_result;
+                    unsigned long descriptor_id;
+
+                    /* step 3 : create the descriptor of the file */
                     switch(descriptor_type)
                     {
-                    case TEXT:
-                        /* step 3 : create the descriptor of the file */
-                        if(index_text(str_concat(p_data_path, p_dir->d_name), &(unit.text_descriptor)) == FALSE)
-                        {
-                            /* If this fails, show error and bail */
-                            fprintf(stderr, "Error creating file descriptor.\n\r");
-                            return FALSE;
-                        }
-                        else
-                        {
-                            /* step 4 : add the new file in the list base */
-                            printf("%s\n\n", unit.text_descriptor.descriptor_contents);
-                        }
-                        break;
-                    
-                    case IMAGE:
-                        /* step 3 : create the descriptor of the file */
-                        if(index_image(str_concat(p_data_path, p_dir->d_name), &(unit.image_descriptor)) == FALSE)
-                        {
-                            /* If this fails, show error and bail */
-                            fprintf(stderr, "Error creating file descriptor.\n\r");
-                            return FALSE;
-                        }
-                        else
-                        {
-                            /* step 4 : add the new file in the list base */
-                            if(fprintf(p_list_base, "%s %lu\n", p_dir->d_name, unit.image_descriptor.id) == EOF)
-                            {
-                                fprintf(stderr, "Error %d printing path and id in list base descriptor file.\n\r", errno);
-                                return FALSE;
-                            }
-                        }
-                        break;
+                        case TEXT:
+                            index_result = index_text(str_concat(p_data_path, p_dir->d_name), &(unit.text_descriptor));
+                            descriptor_id = unit.text_descriptor.id;
+                            break;
+                        
+                        case IMAGE:
+                            index_result = index_image(str_concat(p_data_path, p_dir->d_name), &(unit.image_descriptor));
+                            descriptor_id = unit.image_descriptor.id;
+                            break;
 
-                    case AUDIO:
-                        /* step 3 : create the descriptor of the file */
-                        if(index_audio(str_concat(p_data_path, p_dir->d_name), &(unit.audio_descriptor)) == FALSE)
+                        case AUDIO:
+                            index_result = index_audio(str_concat(p_data_path, p_dir->d_name), &(unit.audio_descriptor));
+                            descriptor_id = unit.audio_descriptor.id;
+                            break;
+                        
+                        default:
+                            index_result = FALSE;
+                            break;
+                    }
+
+                    if(index_result == FALSE)
+                    {
+                        /* If this fails, show error and bail */
+                        fprintf(stderr, "Error creating file descriptor.\n\r");
+                        return FALSE;
+                    }
+                    else
+                    {
+                        /* step 4 : add the new file in the list base */
+                        if(fprintf(p_list_base, "%s %lu\n", p_dir->d_name, descriptor_id) == EOF)
                         {
-                            /* If this fails, show error and bail */
-                            fprintf(stderr, "Error creating file descriptor.\n\r");
+                            fprintf(stderr, "Error %d printing path and id in list base descriptor file.\n\r", errno);
                             return FALSE;
                         }
-                        else
-                        {
-                            /* step 4 : add the new file in the list base */
-                            if(fprintf(p_list_base, "%s %lu\n", p_dir->d_name, unit.audio_descriptor.id) == EOF)
-                            {
-                                fprintf(stderr, "Error %d printing path and id in list base descriptor file.\n\r", errno);
-                                return FALSE;
-                            }
-                        }
-                        break;
-                    
-                    default:
-                        break;
                     }
 
                     /* step 5 : add the new descriptor in the stack */
@@ -123,30 +106,36 @@ Bool_e automatic_generic_indexation(char* p_list_base_path, char* p_data_path, c
         while(is_empty_dynamic_stack(p_dynamic_stack) == FALSE)
         {
             p_dynamic_stack = remove_unit_dynamic_stack(p_dynamic_stack, &unit, descriptor_type);
+            printf("%lu\n", unit.text_descriptor.id);
+
+            Bool_e save_result;
+            unsigned long descriptor_id;
+
             switch(descriptor_type)
             {
                 case TEXT:
-                    // TODO
+                    save_result = save_descriptor_text(p_base, &(unit.text_descriptor));
+                    descriptor_id = unit.image_descriptor.id;
                     break;
 
                 case IMAGE:
-                    if(save_descriptor_image(p_base, &(unit.image_descriptor)) == FALSE)
-                    {
-                        fprintf(stderr, "Error writing descriptor_id: %lu in %s", unit.image_descriptor.id, p_base_path);
-                        return FALSE;
-                    }
+                    save_result = save_descriptor_image(p_base, &(unit.image_descriptor));
+                    descriptor_id = unit.image_descriptor.id;
                     break;
 
                 case AUDIO:
-                    if(save_descriptor_audio(p_base, &(unit.audio_descriptor)) == FALSE)
-                    {
-                        fprintf(stderr, "Error writing descriptor_id: %lu in %s", unit.image_descriptor.id, p_base_path);
-                        return FALSE;
-                    }
+                    save_result = save_descriptor_audio(p_base, &(unit.audio_descriptor));
+                    descriptor_id = unit.image_descriptor.id;
                     break;
                     
                 default:
                     break;
+            }
+
+            if(save_result == FALSE)
+            {
+                fprintf(stderr, "Error writing descriptor_id: %lu in %s", descriptor_id, p_base_path);
+                return FALSE;
             }
         }
 

@@ -71,30 +71,17 @@ Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
     p_descriptor->id = desc_id;
     p_descriptor->descriptor_contents = descriptor;
 
-    // Call the save descriptor function
-
-
-
-
     return TRUE;
 }
 
 Bool_e save_descriptor_text(FILE *p_base_descriptor_text, Text_descriptor_s *p_descriptor)
 {
-    /* variables */
-    char * value ;
-
     // Try to add the id to the descriptor file
-    if(fprintf(p_base_descriptor_text, "%lu\n", p_descriptor->id) == EOF)
+    if(fprintf(p_base_descriptor_text, "%s\n\n", p_descriptor->descriptor_contents) == EOF)
     {
         fprintf(stderr, "Error %d printing id of text descriptor.\n\r", errno);
         return FALSE;
     }
 
-    // Check 
-
-
     return TRUE;
 }
-
-// TODO save_descriptor into file
