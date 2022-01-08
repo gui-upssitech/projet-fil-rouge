@@ -318,7 +318,10 @@ void display_admin_menu()
 void display_indexation_admin_menu()
 {
     /* statements */
+    Bool_e ret;
     char c;
+    long value;
+    char conversion[2];
 
     /* instructions */
     while(1)
@@ -352,6 +355,33 @@ void display_indexation_admin_menu()
             break;
 
         case '3':
+            do
+            {
+                printf("Veuillez insérer une valeur entre 1 et 5 : "); // TO DO
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while(value < MIN_QUANTIFICATION_SIZE || value > MAX_QUANTIFICATION_SIZE || ret == FALSE);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting quantification value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("indexing_image_quantification", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new quantification value.\n\r");
+                return;
+            }
+
+            fopen(LIST_BASE_IMAGE_PATH, "w");
+            fopen(BASE_IMAGE_DESCRIPTOR_PATH, "w");
+            if(automatic_indexing() == FALSE)
+            {
+                fprintf(stderr, "Error re-indexing images with new quantification.\n\r");
+                return;
+            }
+            // TO DO : re-indexing all images
             break;
 
         case '4':

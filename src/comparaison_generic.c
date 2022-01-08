@@ -24,7 +24,7 @@ void compare_histogram(unsigned int size, unsigned int* histogram1, unsigned int
     /* instructions */
     for(i = 0; i < size; i++)
     {
-        sum = sum + abs_int((int) histogram1[i] - (int) histogram2[i]);
+        sum = sum + ABS_INT((int) histogram1[i] - (int) histogram2[i]);
         max1 += histogram1[i];
         max2 += histogram2[i];
     }

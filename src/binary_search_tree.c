@@ -7,7 +7,7 @@
 Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descriptor_e data_type)
 {
     /* statements */
-    char buf[MAX_CHAR_PER_LINE - 4 + 256];
+    char buf[MAX_CHAR_PER_LINE - 4 + MAX_MEMORY_STRING];
 
     /* instructions */
     if(is_empty_binary_search_tree(binary_search_tree) == TRUE)

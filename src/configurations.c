@@ -13,7 +13,7 @@ Date:       29/11/2021
 
 #include "configurations.h"
 
-Parameters_s G_parameters = {{2}, {1024, 100}, {60.0}, {1, 80.0}};
+Parameters_s G_parameters = {{2}, {MAX_MEMORY_STRING, 100}, {60.0}, {1, 80.0}};
 
 void load_configuration(char* config, char* value)
 {
@@ -65,7 +65,7 @@ Bool_e load_configurations()
 {
     /* statements */
     FILE* p_config_file;
-    char buf[256], name[256], value[256];
+    char buf[MAX_MEMORY_STRING], name[MAX_MEMORY_STRING], value[MAX_MEMORY_STRING];
 
     /* initializations */
 
@@ -79,7 +79,7 @@ Bool_e load_configurations()
 
     while(!feof(p_config_file))
     {
-        fgets(buf, 256, p_config_file);
+        fgets(buf, MAX_MEMORY_STRING, p_config_file);
         if(buf[0] != '#' && buf[0] != '\n')
         {
             sscanf(buf, "%[^=]%[^\n]", name, value);

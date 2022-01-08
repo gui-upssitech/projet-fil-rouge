@@ -14,13 +14,16 @@ Date:       29/11/2021
 #include <stdio.h>
 
 /* useful macros */
-#define pwrtwo(x) (1 << (x))
-#define abs_int(x) (((x) < 0) ? (-(x)) : (x))
+#define PWRTWO(x) (1 << (x))
+#define ABS_INT(x) (((x) < 0) ? (-(x)) : (x))
 
 /* const values for file */
 #define TEXT_EXTENSION ".txt"
 #define XML_EXTENSION ".xml"
 #define BIN_EXTENSION ".bin"
+
+/* useful memory constants */
+#define MAX_MEMORY_STRING 1024
 
 /* useful char constants */
 #define ESCAPE_KEY 27
@@ -70,7 +73,7 @@ unsigned short shift(unsigned char a, int b);
  * @param p_value A integer pointer which will contains the read value.
  * @return Bool_e TRUE if the user puts an integer in stdin, FALSE else.
  */
-Bool_e read_integer(int* p_value);
+Bool_e read_integer(long* p_value);
 
 /**
  * @brief Transform a string to an unique unsigned long.

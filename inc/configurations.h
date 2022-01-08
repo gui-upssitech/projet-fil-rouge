@@ -18,11 +18,8 @@ Date:       29/11/2021
 
 #define CONFIG_FILE_PATH "admin/parameters.conf" 
 
-typedef struct
-{
-    unsigned int quantification_size;
-} Image_indexing_parameters_s;
-
+#define MIN_QUANTIFICATION_SIZE 1
+#define MAX_QUANTIFICATION_SIZE 5
 typedef struct
 {
     unsigned int quantification_size;
@@ -42,7 +39,7 @@ typedef struct
 typedef struct
 {
     double threshold;
-    unsigned int step; // TO DO
+    unsigned int step;
 } Audio_comparison_parameters_s;
 
 typedef struct
@@ -55,7 +52,20 @@ typedef struct
 
 extern Parameters_s G_parameters;
 
+/**
+ * @brief Load the configuration file in Parameters_s struct.
+ * 
+ * @return Bool_e TRUE if loading success, FALSE else.
+ */
 Bool_e load_configurations();
+
+/**
+ * @brief Save a new configuration in the ocnfiguration file.
+ * 
+ * @param config The config section to change the value.
+ * @param value The new value for the config.
+ * @return Bool_e TRUE if saving success, FALSE else.
+ */
 Bool_e save_configuration(char* config, char* value);
 
 #endif

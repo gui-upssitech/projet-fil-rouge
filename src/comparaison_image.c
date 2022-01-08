@@ -14,7 +14,7 @@ Date:       29/11/2021
 Bool_e compare_image_descriptors(Image_descriptor_s p_descriptor1, Image_descriptor_s p_descriptor2, double* confidence)
 {
     /* instructions */
-    compare_histogram(  pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size), 
+    compare_histogram(  PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size), 
                         p_descriptor1.p_histogram, 
                         p_descriptor2.p_histogram, 
                         confidence   );
@@ -29,14 +29,14 @@ Bool_e read_histogram_image(FILE* p_file, Image_descriptor_s* p_descriptor)
     unsigned int read_value;
 
     /* instructions */
-    p_descriptor->p_histogram = (unsigned int*) malloc(pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
+    p_descriptor->p_histogram = (unsigned int*) malloc(PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
     if(p_descriptor->p_histogram == NULL)
     {
         fprintf(stderr, "Error memory allocation.\n\r");
         return FALSE;
     }
 
-    for(i = 0; i < pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size); i++)
+    for(i = 0; i < PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size); i++)
     {
         if(fscanf(p_file, "%u", &read_value) != 1)
         {
@@ -52,7 +52,7 @@ Bool_e compare_image_hexacode(char* color, Binary_search_tree_p* results)
 {
     /* command descriptor statements */
     FILE* p_cmd;
-    char buf[256]; // TO DO
+    char buf[MAX_MEMORY_STRING]; // TO DO
 
     /* image descriptor statements */
     unsigned long hash_file, hash_file_read;
@@ -83,7 +83,7 @@ Bool_e compare_image_hexacode(char* color, Binary_search_tree_p* results)
     /* step 3 : browse all the database files */
     while(fgets(buf, sizeof(buf), p_cmd) != 0)
     {
-        for(i = 0; buf[i] != '\0' && i < 256; i++){} buf[i - 1] = '\0'; 
+        for(i = 0; buf[i] != '\0' && i < MAX_MEMORY_STRING; i++){} buf[i - 1] = '\0'; 
 
         p_file = fopen(str_concat(RGB_BASE_PATH, buf), "r");
         if(p_file == NULL)
@@ -176,7 +176,7 @@ Bool_e compare_image_hexacode(char* color, Binary_search_tree_p* results)
 
         if(confidence >= G_parameters.image_comparison_parameters.threshold)
         {
-            for(i = 0; buf[i] != '\0' && i < 256; i++)
+            for(i = 0; buf[i] != '\0' && i < MAX_MEMORY_STRING; i++)
             {
                 result.name[i] = buf[i];
             }
@@ -202,7 +202,7 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
 {
     /* command descriptor statements */
     FILE* p_cmd;
-    char buf[256]; // TO DO
+    char buf[MAX_MEMORY_STRING]; // TO DO
 
     /* image descriptor statements */
     unsigned long hash_file, hash_file_read;
@@ -247,7 +247,7 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
     /* step 3 : browse all the database files */
     while(fgets(buf, sizeof(buf), p_cmd) != 0)
     {
-        for(i = 0; buf[i] != '\0' && i < 256; i++){} buf[i - 1] = '\0'; 
+        for(i = 0; buf[i] != '\0' && i < MAX_MEMORY_STRING; i++){} buf[i - 1] = '\0'; 
         if(strstr(request_file_path, buf) != NULL)
         {
             continue;
@@ -324,7 +324,7 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
 
         if(confidence >= G_parameters.image_comparison_parameters.threshold)
         {
-            for(i = 0; buf[i] != '\0' && i < 256; i++)
+            for(i = 0; buf[i] != '\0' && i < MAX_MEMORY_STRING; i++)
             {
                 result.name[i] = buf[i];
             }

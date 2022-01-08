@@ -16,7 +16,7 @@ Date:       29/11/2021
 
 typedef struct
 {
-    char name[256]; // TO DO fix magic constant
+    char name[MAX_MEMORY_STRING];
     double confidence;
     int time_code;
 } Result_s;

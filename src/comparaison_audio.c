@@ -46,13 +46,13 @@ Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descripto
         if(confidence_sum / p_descriptor2.i_windows > G_parameters.audio_comparison_parameters.threshold)
         {
             result.confidence = confidence_sum / p_descriptor2.i_windows;
-            for(k = 0; file_name[k] != '\0' && k < 256; k++)
+            for(k = 0; file_name[k] != '\0' && k < MAX_MEMORY_STRING; k++)
             {
                 result.name[k] = file_name[k];
             }
             result.name[k] = '\0';
             strcpy(strrchr(result.name, '.'), ".wav");
-            result.time_code = i / 15.7; // TO DO fix magic constant WTF
+            result.time_code = i / (16000.0 / (double) G_parameters.audio_indexing_parameters.samples);
             
             add_node_binary_search_tree_audio(p_tree, result, p_descriptor2.i_windows / (16000.0 / (double) G_parameters.audio_indexing_parameters.samples));
         }
@@ -98,7 +98,7 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
 {
     /* command descriptor statements */
     FILE* p_cmd;
-    char buf[256];
+    char buf[MAX_MEMORY_STRING];
 
     /* image descriptor statements */
     unsigned long hash_file, hash_file_read;
@@ -164,7 +164,7 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
     /* step 3 : browse all the database files */
     while(fgets(buf, sizeof(buf), p_cmd) != 0)
     {
-        for(i = 0; buf[i] != '\0' && i < 256; i++){} buf[i - 1] = '\0'; 
+        for(i = 0; buf[i] != '\0' && i < MAX_MEMORY_STRING; i++){} buf[i - 1] = '\0'; 
         if(strstr(request_file_path, buf) != NULL)
         {
             continue;

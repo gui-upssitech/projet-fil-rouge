@@ -23,7 +23,7 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
         return FALSE;
     }
 
-    for(i = 0; i < pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size); i++)
+    for(i = 0; i < PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size); i++)
     {
         if(fprintf(p_base_descriptor_image, "%d ", p_descriptor->p_histogram[i]) == EOF)
         {
@@ -69,7 +69,7 @@ Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, un
     unsigned int i;
 
     /* initializatons */
-    p_descriptor->p_histogram = (unsigned int*) malloc(pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
+    p_descriptor->p_histogram = (unsigned int*) malloc(PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
 
     /* instructions */
     if(p_descriptor->p_histogram == NULL)
@@ -77,7 +77,7 @@ Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, un
         fprintf(stderr, "Error memory allocation.\n\r");
         return FALSE;
     }
-    memset(p_descriptor->p_histogram, 0, pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
+    memset(p_descriptor->p_histogram, 0, PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
 
     for(i = 0; i < p_image->a_sizes[WIDTH_IDX] * p_image->a_sizes[HEIGHT_IDX]; i++)
     {
@@ -123,7 +123,7 @@ Bool_e create_descriptor_hexacode(char* p_color, Image_s image, Image_descriptor
         return FALSE;
     }
 
-    p_image_descriptor->p_histogram = (unsigned int*) malloc(pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
+    p_image_descriptor->p_histogram = (unsigned int*) malloc(PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
     
     if(p_image_descriptor->p_histogram == NULL)
     {
@@ -131,7 +131,7 @@ Bool_e create_descriptor_hexacode(char* p_color, Image_s image, Image_descriptor
         return FALSE;
     }
 
-    memset(p_image_descriptor->p_histogram, 0, pwrtwo(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
+    memset(p_image_descriptor->p_histogram, 0, PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
     
     for(j = 0, quantification_mask = 0xFF; j < (CHAR_SIZE_BIT - G_parameters.image_indexing_parameters.quantification_size); j++, quantification_mask <<= 1);
     for(i = 0; i < image.a_sizes[WIDTH_IDX] * image.a_sizes[HEIGHT_IDX]; i++)

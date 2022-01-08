@@ -223,7 +223,6 @@ unsigned int get_array_size_from_pointer(char* p_array)
     return size;
 }
 
-/* source: https://stackoverflow.com/questions/7666509/hash-function-for-string */
 unsigned long hash(char* p_string)
 {
     /* statements */
@@ -240,23 +239,29 @@ unsigned long hash(char* p_string)
     return hash;
 }
 
-Bool_e read_integer(int* p_value)
+Bool_e read_integer(long* p_value)
 {
     /* statements */
-    Bool_e return_value;
+    char a_string[MAX_MEMORY_STRING];
+    char* p_end;
 
     /* initializations */
 
     /* instructions */
-    if(scanf("%d", p_value))
+    if(scanf("%s", a_string) != 1)
     {
-        return_value = TRUE;
+        return FALSE;
+    }
+
+    *p_value = strtol(a_string, &p_end, 10);
+    if((*p_value == 0L && p_end == a_string) || errno == ERANGE)
+    {
+        return FALSE;
     }
     else
     {
-        return_value = FALSE;
+        return TRUE;
     }
-    return return_value;
 }
 
 // Source : https://stackoverflow.com/questions/646241/c-run-a-system-command-and-get-output
