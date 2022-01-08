@@ -5,6 +5,11 @@
         "dynamic_stack.h": "c",
         "toolbox.h": "c",
         "indexation_text.h": "c",
-        "indexation_image.h": "c"
+        "indexation_image.h": "c",
+        "configurations.h": "c",
+        "indexation_audio.h": "c",
+        "comparaison_image.h": "c",
+        "type_traits": "c",
+        "comparaison_audio.h": "c"
     }
 }

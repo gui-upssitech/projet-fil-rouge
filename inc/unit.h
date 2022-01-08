@@ -17,7 +17,13 @@ Date:       29/11/2021
 #include "indexation_text.h"
 #include "indexation_image.h"
 #include "indexation_audio.h"
-#include "indexation_generic.h"
+
+typedef enum
+{
+    TEXT,
+    IMAGE,
+    AUDIO
+} Descriptor_e;
 
 typedef union
 {

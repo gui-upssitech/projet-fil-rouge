@@ -8,7 +8,7 @@ Authors:    Constant ROUX,
 Date:       29/11/2021
 */
 
-#include "../inc/console.h"
+#include "console.h"
 
 void clear_console()
 {
@@ -171,7 +171,11 @@ Bool_e display_new_pwd_menu(Bool_e first_password)
     display_centered_text_console("");
     print_plate_console();
     password = get_hashed_password();
-    fprintf(p_password_file, "%lu", password);
+    if(fprintf(p_password_file, "%lu", password))
+    {
+        fprintf(stderr, "Error %d printing password %lu.\n\r", errno, password);
+        return FALSE;
+    }
 
     if(fclose(p_password_file) == EOF)
     {
@@ -252,7 +256,7 @@ void display_user_menu()
             break;
 
         case '3':
-            display_audio_research_menu();
+            display_audio_by_path_research_menu();
             break;
 
         case 'q':
@@ -282,8 +286,7 @@ void display_admin_menu()
         display_centered_text_console("Fonctions :");
         display_centered_text_console("(1) Indexation");
         display_centered_text_console("(2) Comparaison");
-        display_centered_text_console("(3) Moteur de recherche");
-        display_centered_text_console("(4) Modifier mot de passe");
+        display_centered_text_console("(3) Modifier mot de passe");
         display_centered_text_console("(q) Quitter");
         display_centered_text_console("");
         print_plate_console();
@@ -291,18 +294,13 @@ void display_admin_menu()
         switch (c)
         {
         case '1':
-            display_text_research_menu();
+            display_indexation_admin_menu();
             break;
 
         case '2':
-            display_image_research_menu();
             break;
 
         case '3':
-            display_audio_research_menu();
-            break;
-
-        case '4':
             display_new_pwd_menu(FALSE);
             break;
 
@@ -315,7 +313,62 @@ void display_admin_menu()
             break;
         }
     }
+}
 
+void display_indexation_admin_menu()
+{
+    /* statements */
+    char c;
+
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Parametres indexation");
+        display_centered_text_console("");
+        display_centered_text_console("Indexation Texte");
+        display_centered_text_console("(1) Mode");
+        display_centered_text_console("(2) Seuil");
+        display_centered_text_console("");
+        display_centered_text_console("Indexation Image");
+        display_centered_text_console("(3) Quantification");
+        display_centered_text_console("");
+        display_centered_text_console("Indexation Audio");
+        display_centered_text_console("(4) Echantillons");
+        display_centered_text_console("(5) Niveaux");
+        display_centered_text_console("");
+        display_centered_text_console("(q) Quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        c = get_char_menu('6');
+        switch (c)
+        {
+        case '1':
+            break;
+
+        case '2':
+            break;
+
+        case '3':
+            break;
+
+        case '4':
+            break;
+        
+        case '5':
+            break;
+
+        case 'q':
+            return;
+            break;
+        
+        default:
+            return;
+            break;
+        }
+    }
 }
 
 void display_about_menu()
@@ -365,10 +418,357 @@ void display_text_research_menu()
 
 void display_image_research_menu()
 {
+    /* statements */
+    char c;
 
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Menu Image");
+        display_centered_text_console("");
+        display_centered_text_console("Recherche par :");
+        display_centered_text_console("(1) Code couleur");
+        display_centered_text_console("(2) Image couleur");
+        display_centered_text_console("(3) Image niveaux de gris");
+        display_centered_text_console("(q) Quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        c = get_char_menu('4');
+        switch (c)
+        {
+        case '1':
+            display_image_by_hexacode_research_menu();
+            break;
+
+        case '2':
+            display_image_by_path_research_menu(TRUE);
+            break;
+        
+        case '3':
+            display_image_by_path_research_menu(FALSE);
+            break;
+
+        case 'q':
+            return;
+            break;
+        
+        default:
+            return;
+            break;
+        }
+    }
 }
 
-void display_audio_research_menu()
+Bool_e display_image_by_hexacode_research_menu()
 {
+    /* statements */
+    Binary_search_tree_p confidence_tree;
 
+    /* instructions */
+    if(compare_image_hexacode("rouge", &confidence_tree) == FALSE)
+    {
+        fprintf(stderr, "Error comparing image by color.\n\r");
+        return FALSE;
+    }
+
+    display_image_by_hexacode_result_menu(confidence_tree, "rouge");
+
+    return TRUE;
+}
+
+Bool_e display_image_by_path_research_menu(Bool_e colored)
+{
+    /* statements */
+    Binary_search_tree_p confidence_tree;
+    char* path;
+    int code;
+    int ret;
+
+    /* initalizations */
+    ret = 0;
+
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        if(colored == TRUE)
+        {        
+            display_centered_text_console("Recherche par image couleur");
+        }
+        else
+        {
+            display_centered_text_console("Recherche par image niveaux de gris");
+        }
+        display_centered_text_console("");
+        if(ret != 0)
+        {
+            if(ret == 1)
+            {
+                display_centered_text_console("Fichier inexistant ou invalide");
+            }
+            else
+            {
+                display_centered_text_console("Fichier au mauvais format");
+            }
+            
+            display_centered_text_console("");
+            ret = 0;
+        }
+        display_centered_text_console("Inserer le chemin du fichier");
+        display_centered_text_console("Taper Echap pour quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        if(read_path(&path, &code) == FALSE)
+        {
+            fprintf(stderr, "Error reading path file.\n\r");
+            return FALSE;
+        }
+
+        if(code == 0)
+        {
+            if(is_regular_file(path) == TRUE)
+            {
+                if(colored == TRUE)
+                {
+                    if(is_extension_file(path, "jpg") == TRUE)
+                    {
+                        strcpy(strrchr(path, '.'), ".txt");
+                        if(compare_image_files(path, &confidence_tree, TRUE) == TRUE)
+                        {
+                            display_image_result_menu(confidence_tree, path, TRUE);
+                        }
+                        else
+                        {
+                            fprintf(stderr, "Error comparing image file \"%s\".\n\r", path);
+                            return FALSE;
+                        }
+                    }
+                    else
+                    {
+                        ret = 2;
+                    }
+                }
+                else
+                {
+                    if(is_extension_file(path, "bmp") == TRUE)
+                    {
+                        strcpy(strrchr(path, '.'), ".txt");
+                        if(compare_image_files(path, &confidence_tree, FALSE) == TRUE)
+                        {
+                            display_image_result_menu(confidence_tree, path, FALSE);
+                        }
+                        else
+                        {
+                            fprintf(stderr, "Error comparing image file \"%s\".\n\r", path);
+                            return FALSE;
+                        }
+                    }
+                    else
+                    {
+                        ret = 2;
+                    }
+
+                }
+            }
+            else
+            {
+                ret = 1;
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+    return TRUE;
+}
+
+void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path, Bool_e colored)
+{
+    /*statements */
+    char* file_name; 
+
+    /* instructions */
+    clear_console();
+    print_plate_console();
+    file_name = strrchr(path, '/') + 1;
+    if(colored == TRUE)
+    {
+        strcpy(strrchr(file_name, '.'), ".jpg");
+    }
+    else
+    {
+        strcpy(strrchr(file_name, '.'), ".bmp");
+    }
+    
+    display_centered_text_console("");
+    display_centered_text_console(str_concat("Requete : ", file_name));
+    display_centered_text_console("");
+    if(is_empty_binary_search_tree(confidence_tree) == FALSE)
+    {
+        display_centered_text_console("Resultats");
+        display_binary_search_tree(confidence_tree, IMAGE);
+    }
+    else
+    {
+        display_centered_text_console("Aucun resultat");
+    }
+    display_centered_text_console("");
+    display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
+    display_centered_text_console("");
+    print_plate_console();
+    getch();
+}
+
+void display_image_by_hexacode_result_menu(Binary_search_tree_p confidence_tree, char* color)
+{
+    /* instructions */
+    clear_console();
+    print_plate_console();
+    display_centered_text_console("");
+    display_centered_text_console(str_concat("Requete : ", color));
+    display_centered_text_console("");
+    if(is_empty_binary_search_tree(confidence_tree) == FALSE)
+    {
+        display_centered_text_console("Resultats");
+        display_binary_search_tree(confidence_tree, IMAGE);
+    }
+    else
+    {
+        display_centered_text_console("Aucun resultat");
+    }
+    display_centered_text_console("");
+    display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
+    display_centered_text_console("");
+    print_plate_console();
+    getch();
+}
+
+void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned int size, char* path)
+{
+    /* statements */
+    char* file_name; 
+    unsigned int i;
+    Bool_e one_result_existing;
+
+    /* initializations */
+    one_result_existing = FALSE;
+
+    /* instructions */
+    clear_console();
+    print_plate_console();
+    file_name = strrchr(path, '/') + 1;
+    strcpy(strrchr(file_name, '.'), ".wav");
+    
+    display_centered_text_console("");
+    display_centered_text_console(str_concat("Requete : ", file_name));
+    display_centered_text_console("");
+    for(i = 0; i < size; i++)
+    {
+        if(is_empty_binary_search_tree(time_code_forest[i]) == FALSE)
+        {
+            if(one_result_existing == FALSE)
+            {
+                display_centered_text_console("Resultats");
+            }
+            one_result_existing = TRUE;
+            display_centered_text_console(time_code_forest[i]->result.name);
+            display_binary_search_tree(time_code_forest[i], AUDIO);
+            display_centered_text_console("");
+        }
+    }
+    if(one_result_existing == FALSE)
+    {
+        display_centered_text_console("Aucun resultat");
+        display_centered_text_console("");
+    }
+    
+    display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
+    display_centered_text_console("");
+    print_plate_console();
+    getch();
+}
+
+Bool_e display_audio_by_path_research_menu()
+{
+    /* statements */
+    Binary_search_tree_p* time_code_forest;
+    unsigned int size;
+    char* path;
+    int code;
+    int ret;
+
+    /* initalizations */
+    ret = 0;
+
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");      
+        display_centered_text_console("Recherche Audio");
+        display_centered_text_console("");
+        if(ret != 0)
+        {
+            if(ret == 1)
+            {
+                display_centered_text_console("Fichier inexistant ou invalide");
+            }
+            else
+            {
+                display_centered_text_console("Fichier au mauvais format");
+            }
+            
+            display_centered_text_console("");
+            ret = 0;
+        }
+        display_centered_text_console("Inserer le chemin du fichier");
+        display_centered_text_console("Taper Echap pour quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        if(read_path(&path, &code) == FALSE)
+        {
+            fprintf(stderr, "Error reading path file.\n\r");
+            return FALSE;
+        }
+
+        if(code == 0)
+        {
+            if(is_regular_file(path) == TRUE)
+            {
+                if(is_extension_file(path, "wav") == TRUE)
+                {
+                    strcpy(strrchr(path, '.'), ".bin");
+                    if(compare_audio_files(path, &time_code_forest, &size) == TRUE)
+                    {
+                        display_audio_result_menu(time_code_forest, size, path);
+                    }
+                    else
+                    {
+                        fprintf(stderr, "Error comparing audio file \"%s\".\n\r", path);
+                        return FALSE;
+                    }
+                }
+                else
+                {
+                    ret = 2;
+                }
+            }
+            else
+            {
+                ret = 1;
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+    return TRUE;
 }

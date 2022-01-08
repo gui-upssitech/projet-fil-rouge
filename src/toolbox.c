@@ -13,8 +13,107 @@ Date:       29/11/2021
 #include <unistd.h>
 #include <termios.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
-#include "../inc/toolbox.h"
+#include "toolbox.h"
+
+/* source : https://stackoverflow.com/questions/4553012/checking-if-a-file-is-a-directory-or-just-a-file */
+Bool_e is_regular_file(const char *path)
+{
+    /* statements */
+    struct stat path_stat;
+
+    /* initializations */
+    stat(path, &path_stat);
+
+    /* instructions */
+    return S_ISREG(path_stat.st_mode) > 0 ? TRUE : FALSE;
+}
+
+Bool_e is_extension_file(const char* path, char* extension)
+{
+    /* statements */
+    char* dot;
+    char* read_extension;
+
+    /* instructions */
+    dot = strrchr(path, '.');
+    if(!dot || dot == path)
+    {
+        return FALSE;
+    }
+
+    read_extension = dot + 1;
+
+    if( strcmp(read_extension, extension) != 0)
+    {
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+Bool_e read_path(char** path, int* code)
+{
+    /* statements */
+    int i;
+    char c;
+
+    /* initializations */
+    i = 0;
+    *path = (char*) malloc(sizeof(char));
+
+    /* instructions */
+    if(*path == NULL)
+    {
+        fprintf(stderr, "Error memory allocation.\n\r");
+        return FALSE;
+    }
+
+    do
+    {
+        c = getch(); 
+        printf("%c", c);
+        (*path)[i] = c;
+        if((*path)[i] == 0x7F) // TO DO
+        {
+            if(i > 0)
+            {
+                i--;
+            }
+            printf("\b \b");
+            continue;
+        }
+
+        i++;
+        *path = (char*) realloc(*path, (i + 1) * sizeof(char));
+        if(*path == NULL)
+        {
+            fprintf(stderr, "Error memory reallocation.\n\r");
+            return FALSE;
+        }
+        
+    } while(c != ESCAPE_KEY && c != ENTER_KEY);
+
+    (*path)[i - 1] = '\0';
+
+    if(c == ESCAPE_KEY)
+    {
+        *code = -1;
+    }
+    else
+    {
+        *code = 0;
+    }
+
+    return TRUE;
+}
+
+unsigned short shift(unsigned char a, int b)
+{
+    return ((b < 0) ? (((unsigned short) a) >> -b) : (((unsigned short) a) << b));
+}
 
 unsigned int get_bytes_size_file(FILE* p_file)
 {
@@ -22,7 +121,8 @@ unsigned int get_bytes_size_file(FILE* p_file)
     int bytes;
 
     /* instructions */
-    for(bytes = 0; fgetc(p_file) != EOF; ++bytes);
+    fseek(p_file, 0, SEEK_END);
+    bytes = ftell(p_file);
     fseek(p_file, 0, SEEK_SET);
     return bytes;
 }
@@ -51,12 +151,12 @@ char* str_concat(char* str1, char* str2)
     return ret;
 }
 
-Bool_e file_contains_substring(FILE* p_file, char* p_str)
+Bool_e file_contains_substring(FILE* p_file, char* p_str, char** ret_line)
 {
     /* statements */
-    char* p_line;
     size_t len;
     ssize_t read;
+    char* p_line;
 
     /* initializations */
     p_line = NULL;
@@ -69,14 +169,13 @@ Bool_e file_contains_substring(FILE* p_file, char* p_str)
         {
             if(strstr(p_line, p_str) != NULL)
             {
+                if(ret_line != NULL)
+                {
+                    *ret_line = p_line;
+                }
                 return TRUE;
             }
         }
-    }
-
-    if(p_line != NULL)
-    {
-        free(p_line);
     }
 
     return FALSE;

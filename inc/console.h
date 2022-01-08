@@ -15,7 +15,10 @@ Date:       29/11/2021
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <string.h>
 
+#include "comparaison_audio.h"
+#include "comparaison_image.h"
 #include "toolbox.h"
 #include "admin.h"
 
@@ -38,6 +41,12 @@ void display_admin_menu();
 void display_about_menu();
 void display_text_research_menu();
 void display_image_research_menu();
-void display_audio_research_menu();
+Bool_e display_image_by_path_research_menu(Bool_e colored);
+void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path, Bool_e colored);
+Bool_e display_audio_by_path_research_menu();
+void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned int size, char* path);
+void display_indexation_admin_menu();
+Bool_e display_image_by_hexacode_research_menu();
+void display_image_by_hexacode_result_menu(Binary_search_tree_p confidence_tree, char* color);
 
 #endif

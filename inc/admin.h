@@ -25,8 +25,29 @@ Date:       29/11/2021
 /* path constants */
 #define PASSWORD_RELATIVE_PATH "admin/password.tpscrt"
 
+/**
+ * @brief Read a password where echo of each char is replaced by PASSWORD_CHAR. 
+ * The user can delete char in case of input error. 
+ * 
+ * @return unsigned long the hashed input password
+ */
 unsigned long get_hashed_password();
+
+/**
+ * @brief Check if the input hashed password is equals to the admin password in the password.tpscrt file.
+ * 
+ * @param in_password the hashed input password.
+ * @return Bool_e TRUE if password is valid, FALSE else.
+ */
 Bool_e is_password_valid(unsigned long in_password);
+
+/**
+ * @brief Compare two hashed passwords
+ * 
+ * @param in_password the input hashed password.
+ * @param saved_password the saved hashed password.
+ * @return Bool_e TRUE if password are equals, FALSE else.
+ */
 Bool_e compare_hashed_password(unsigned long in_password, unsigned long saved_password);
 
 #endif

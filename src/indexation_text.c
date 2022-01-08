@@ -7,3 +7,8 @@ Authors:    Constant ROUX,
             
 Date:       29/11/2021
 */
+
+void clean_file(char *path)
+{
+
+}
