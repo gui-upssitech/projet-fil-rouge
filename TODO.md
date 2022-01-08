@@ -14,19 +14,25 @@
 - [x] Change message exception to the stderr
 - [x] Add multiple tries in the password entry
 - [x] Add first connexion menu to setup password admin
-- [x] Optimise (in memory) image indexing
-- [x] Check if headers file generate bugs
+- [x] **TURBO BONUS** Optimise (in memory) image indexing
+- [ ] Check if headers file generate bugs
+- [ ] Add config files for admin
 - [X] Talk about black and white problem on image
 - [x] Add config files for admin
 - [x] Fix bug images display (.jpg instead of .txt)
 - [ ] Check generation id method (take the path or only the file name)
 
 # Text
-- [ ] Add detection threshhold / limit
-- [ ] Add error handling
-- [ ] Put output files in correct destination
-- [ ] Manage bash script arguments
-- [ ] Call bash script from C
-- [ ] Generate descriptor database
-- [ ] Add debug mode
-- [ ] **BONUS** Group words with similar root
+- [X] Add detection threshhold / limit
+- [X] Add error handling
+- [X] Put output files in correct destination
+- [X] Manage bash script arguments
+- [X] Call bash script from C
+- [X] Generate descriptor
+- [ ] Save descriptor
+- [X] Add debug mode
+
+- [ ] Arbre binaire
+- [ ] "base_descriptor"
+- [ ] "list_descriptor"
+- [ ] "table_descriptor"

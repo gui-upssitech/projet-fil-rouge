@@ -25,6 +25,11 @@ typedef struct
 
 typedef struct
 {
+    unsigned int quantification_size;
+} Image_indexing_parameters_s;
+
+typedef struct
+{
     unsigned int samples;
     unsigned int levels;
 } Audio_indexing_parameters_s;
