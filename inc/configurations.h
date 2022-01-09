@@ -25,6 +25,9 @@ typedef struct
     unsigned int quantification_size;
 } Image_indexing_parameters_s;
 
+
+#define MIN_LEVELS_SIZE 3
+#define MAX_LEVELS_SIZE 1000
 typedef struct
 {
     unsigned int samples;

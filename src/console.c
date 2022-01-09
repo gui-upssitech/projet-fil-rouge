@@ -352,12 +352,11 @@ void display_indexation_admin_menu()
             break;
 
         case '2':
-            break;
-
+            break; 
         case '3':
             do
             {
-                printf("Veuillez insérer une valeur entre 1 et 5 : "); // TO DO
+                printf("Veuillez insérer une valeur entre %d et %d : ", MIN_QUANTIFICATION_SIZE, MAX_QUANTIFICATION_SIZE);
                 ret = read_integer(&value);
                 printf("\33[1A\33[2K\r");
             } while(value < MIN_QUANTIFICATION_SIZE || value > MAX_QUANTIFICATION_SIZE || ret == FALSE);
@@ -370,7 +369,7 @@ void display_indexation_admin_menu()
 
             if(save_configuration("indexing_image_quantification", conversion) == FALSE)
             {
-                fprintf(stderr, "Error saving new quantification value.\n\r");
+                fprintf(stderr, "Error saving new image quantification value.\n\r");
                 return;
             }
 
@@ -381,13 +380,64 @@ void display_indexation_admin_menu()
                 fprintf(stderr, "Error re-indexing images with new quantification.\n\r");
                 return;
             }
-            // TO DO : re-indexing all images
             break;
 
         case '4':
+            do
+            {
+                printf("Veuillez insérer une puissance de 2 (minimum 256) : ");
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while((value & (value - 1)) != 0 || ret == FALSE || value < 256);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting samples audio value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("indexing_audio_samples", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new samples audio value.\n\r");
+                return;
+            }
+
+            fopen(LIST_BASE_AUDIO_PATH, "w");
+            fopen(BASE_AUDIO_DESCRIPTOR_PATH, "w");
+            if(automatic_indexing() == FALSE)
+            {
+                fprintf(stderr, "Error re-indexing audio with new samples.\n\r");
+                return;
+            }
             break;
         
         case '5':
+            do
+            {
+                printf("Veuillez insérer une valeur entre %d et %d : ", MIN_LEVELS_SIZE, MAX_LEVELS_SIZE);
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while(value < MIN_LEVELS_SIZE || value > MAX_LEVELS_SIZE || ret == FALSE);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting audio levels value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("indexing_audio_interval", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new audio levels value.\n\r");
+                return;
+            }
+
+            fopen(LIST_BASE_AUDIO_PATH, "w");
+            fopen(BASE_AUDIO_DESCRIPTOR_PATH, "w");
+            if(automatic_indexing() == FALSE)
+            {
+                fprintf(stderr, "Error re-indexing audio with new levels.\n\r");
+                return;
+            }
             break;
 
         case 'q':
