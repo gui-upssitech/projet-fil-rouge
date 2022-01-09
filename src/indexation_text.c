@@ -26,30 +26,16 @@ Date:       29/11/2021
 
 Bool_e generate_command(char *input_path, char **output, unsigned long desc_id)
 {
-    // creation of desciprtor ID by hash function (tools)
-    char desc_id_str[40];
-    sprintf(desc_id_str, "%lu", desc_id);
+    int result = sprintf(*output, "/bin/bash src/indexation_text/indexation_text.sh %s %s %lu %d %d %d",
+                         input_path,
+                         TEXT_DESCRIPTOR_DEBUG_OUT,
+                         desc_id,
+                         TEXT_DESCRIPTOR_FILTER_THRESHOLD,
+                         FILTER_VALUE,
+                         DEBUG_MODE);
 
-    // ADD ARGUMENTS
-    *output = TEXT_DESCRIPTOR_BASE_COMMAND;
 
-    // TODO CHECK ARGS ERROR
-
-    // ARGS : IN_PATH OUT_DIR DESC_ID F_TYPE F_VAL DEBUG
-    char *args[NB_ARGS] = {
-        input_path,
-        TEXT_DESCRIPTOR_DEBUG_OUT,
-        desc_id_str,
-        TEXT_DESCRIPTOR_FILTER_THRESHOLD,
-        FILTER_VALUE,
-        DEBUG_MODE};
-
-    for (int i = 0; i < NB_ARGS; i++)
-    {
-        *output = str_concat(*output, str_concat(" ", args[i]));
-    }
-
-    return TRUE;
+    return (result != EOF);
 }
 
 Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
@@ -77,7 +63,7 @@ Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
 Bool_e save_descriptor_text(FILE *p_base_descriptor_text, Text_descriptor_s *p_descriptor)
 {
     // Try to add the id to the descriptor file
-    if(fprintf(p_base_descriptor_text, "%s\n\n", p_descriptor->descriptor_contents) == EOF)
+    if (fprintf(p_base_descriptor_text, "%s\n\n", p_descriptor->descriptor_contents) == EOF)
     {
         fprintf(stderr, "Error %d printing id of text descriptor.\n\r", errno);
         return FALSE;

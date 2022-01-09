@@ -349,6 +349,32 @@ void display_indexation_admin_menu()
         switch (c)
         {
         case '1':
+            do
+            {
+                printf("Veuillez choisir le mode (0 pour %s ou 1 pour %s) : ", LIMIT_MODE, THRESHOLD_MODE);
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while(ret != 0 && ret != 1);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting text mode value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("indexing_text_filter_mode", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new text mode value.\n\r");
+                return;
+            }
+
+            // fopen(LIST_BASE_IMAGE_PATH, "w");
+            // fopen(BASE_IMAGE_DESCRIPTOR_PATH, "w");
+            if(automatic_indexing() == FALSE)
+            {
+                fprintf(stderr, "Error re-indexing text with new mode.\n\r");
+                return;
+            }
             break;
 
         case '2':
@@ -373,8 +399,8 @@ void display_indexation_admin_menu()
                 return;
             }
 
-            fopen(LIST_BASE_IMAGE_PATH, "w");
-            fopen(BASE_IMAGE_DESCRIPTOR_PATH, "w");
+            fclose(fopen(LIST_BASE_IMAGE_PATH, "w"));
+            fclose(fopen(BASE_IMAGE_DESCRIPTOR_PATH, "w"));
             if(automatic_indexing() == FALSE)
             {
                 fprintf(stderr, "Error re-indexing images with new quantification.\n\r");
@@ -402,8 +428,8 @@ void display_indexation_admin_menu()
                 return;
             }
 
-            fopen(LIST_BASE_AUDIO_PATH, "w");
-            fopen(BASE_AUDIO_DESCRIPTOR_PATH, "w");
+            fclose(fopen(LIST_BASE_AUDIO_PATH, "w"));
+            fclose(fopen(BASE_AUDIO_DESCRIPTOR_PATH, "w"));
             if(automatic_indexing() == FALSE)
             {
                 fprintf(stderr, "Error re-indexing audio with new samples.\n\r");
@@ -431,8 +457,8 @@ void display_indexation_admin_menu()
                 return;
             }
 
-            fopen(LIST_BASE_AUDIO_PATH, "w");
-            fopen(BASE_AUDIO_DESCRIPTOR_PATH, "w");
+            fclose(fopen(LIST_BASE_AUDIO_PATH, "w"));
+            fclose(fopen(BASE_AUDIO_DESCRIPTOR_PATH, "w"));
             if(automatic_indexing() == FALSE)
             {
                 fprintf(stderr, "Error re-indexing audio with new levels.\n\r");

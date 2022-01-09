@@ -21,7 +21,6 @@ Date:       29/11/2021
 #define TEXT_BASE_PATH "data/texts/"
 
 /* constants for bash script execution */
-#define TEXT_DESCRIPTOR_BASE_COMMAND    "/bin/bash src/indexation_text/indexation_text.sh"
 #define NB_ARGS 6
 
 // TODO PASS TO CONFIG

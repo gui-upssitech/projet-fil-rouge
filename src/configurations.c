@@ -13,49 +13,48 @@ Date:       29/11/2021
 
 #include "configurations.h"
 
-Parameters_s G_parameters = {{2}, {MAX_MEMORY_STRING, 100}, {60.0}, {1, 80.0}};
+Parameters_s G_parameters = {{0, 10, 0}, {2}, {1024, 100}, {60.0}, {1, 80.0}};
 
-void load_configuration(char* config, char* value)
+void load_configuration(char *config, char *value)
 {
     value[0] = '0';
-    if(strcmp(config, "indexing_text_mode") == 0)
+    if (strcmp(config, "indexing_text_filter_mode") == 0)
     {
+        G_parameters.text_indexing_parameters.indexing_text_filter_mode = atoi(value);
     }
-    if(strcmp(config, "indexing_text_threshold") == 0)
+    if (strcmp(config, "indexing_text_filter_value") == 0)
     {
+        G_parameters.text_indexing_parameters.indexing_text_filter_value = atoi(value);
     }
-    if(strcmp(config, "indexing_text_limit") == 0)
+    if (strcmp(config, "indexing_text_debug") == 0)
     {
+        G_parameters.text_indexing_parameters.indexing_text_debug = atoi(value);
     }
 
-
-    if(strcmp(config, "indexing_image_quantification") == 0)
+    if (strcmp(config, "indexing_image_quantification") == 0)
     {
         G_parameters.image_indexing_parameters.quantification_size = atoi(value);
     }
-
-
-    if(strcmp(config, "indexing_audio_samples") == 0)
+    
+    if (strcmp(config, "indexing_audio_samples") == 0)
     {
         G_parameters.audio_indexing_parameters.samples = atoi(value);
     }
-    if(strcmp(config, "indexing_audio_interval") == 0)
+    if (strcmp(config, "indexing_audio_interval") == 0)
     {
         G_parameters.audio_indexing_parameters.levels = atoi(value);
     }
 
-
-    if(strcmp(config, "comparison_image_threshold") == 0)
+    if (strcmp(config, "comparison_image_threshold") == 0)
     {
         G_parameters.image_comparison_parameters.threshold = atof(value);
     }
 
-
-    if(strcmp(config, "comparison_audio_step") == 0)
+    if (strcmp(config, "comparison_audio_step") == 0)
     {
         G_parameters.audio_comparison_parameters.step = atoi(value);
     }
-    if(strcmp(config, "comparison_audio_threshold") == 0)
+    if (strcmp(config, "comparison_audio_threshold") == 0)
     {
         G_parameters.audio_comparison_parameters.threshold = atof(value);
     }
@@ -64,30 +63,30 @@ void load_configuration(char* config, char* value)
 Bool_e load_configurations()
 {
     /* statements */
-    FILE* p_config_file;
+    FILE *p_config_file;
     char buf[MAX_MEMORY_STRING], name[MAX_MEMORY_STRING], value[MAX_MEMORY_STRING];
 
     /* initializations */
 
     /* instructions */
     p_config_file = fopen(CONFIG_FILE_PATH, "r");
-    if(p_config_file == NULL)
+    if (p_config_file == NULL)
     {
         fprintf(stderr, "Error %d opening %s.\n\r", errno, CONFIG_FILE_PATH);
         return FALSE;
     }
 
-    while(!feof(p_config_file))
+    while (!feof(p_config_file))
     {
         fgets(buf, MAX_MEMORY_STRING, p_config_file);
-        if(buf[0] != '#' && buf[0] != '\n')
+        if (buf[0] != '#' && buf[0] != '\n')
         {
             sscanf(buf, "%[^=]%[^\n]", name, value);
             load_configuration(name, value);
         }
     }
 
-    if(fclose(p_config_file) == EOF)
+    if (fclose(p_config_file) == EOF)
     {
         fprintf(stderr, "Error %d closing the file %s.\n\r", errno, CONFIG_FILE_PATH);
         return FALSE;
@@ -95,28 +94,29 @@ Bool_e load_configurations()
     return TRUE;
 }
 
-Bool_e save_configuration(char* config, char* value)
+Bool_e save_configuration(char *config, char *value)
 {
     /* statements */
-    FILE* p_sed;
+    FILE *p_sed;
+    char cmd[MAX_MEMORY_STRING];
 
     /* instructions */
-    p_sed = popen(str_concat(str_concat(str_concat(str_concat(str_concat(str_concat(str_concat(
-        "sed -i 's/", config), ".*/"), config), "="), value), "/' "), CONFIG_FILE_PATH), "r");
+    sprintf(cmd, "sed -i 's/%s.*/%s=%s/' %s", config, config, value, CONFIG_FILE_PATH);
+    p_sed = popen(cmd, "r");
 
-    if(p_sed == NULL)
+    if (p_sed == NULL)
     {
         fprintf(stderr, "Error %d opening sed command.\n\r", errno);
         return FALSE;
     }
 
-    if(pclose(p_sed) == EOF)
+    if (pclose(p_sed) == EOF)
     {
         fprintf(stderr, "Error %d closing the sed command.\n\r", errno);
         return FALSE;
     }
 
-    if(load_configurations() == FALSE) 
+    if (load_configurations() == FALSE)
     {
         fprintf(stderr, "Error loading configurations.\n\r");
     }
