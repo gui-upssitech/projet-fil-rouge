@@ -63,7 +63,6 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
         fprintf(stderr, "Error %d opening %s.\n\r", errno, p_list_base_path);
         return FALSE;
     }
-
     p_d = opendir(p_data_path);
     if(p_d)
     {

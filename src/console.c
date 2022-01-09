@@ -321,7 +321,7 @@ void display_indexation_admin_menu()
     Bool_e ret;
     char c;
     long value;
-    char conversion[2];
+    char conversion[MAX_MEMORY_STRING];
 
     /* instructions */
     while(1)
