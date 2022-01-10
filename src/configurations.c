@@ -35,7 +35,7 @@ void load_configuration(char *config, char *value)
     {
         G_parameters.image_indexing_parameters.quantification_size = atoi(value);
     }
-    
+
     if (strcmp(config, "indexing_audio_samples") == 0)
     {
         G_parameters.audio_indexing_parameters.samples = atoi(value);
