@@ -26,7 +26,7 @@ Date:       29/11/2021
 
 Bool_e generate_command(char *input_path, char **output, unsigned long desc_id)
 {
-    int result = sprintf(*output, "/bin/bash src/indexation_text/indexation_text.sh %s %s %lu %d %d %d",
+    int result = sprintf(*output, "/bin/bash src/indexation_text/indexation_text.sh %s %s %lu %s %s %s",
                          input_path,
                          TEXT_DESCRIPTOR_DEBUG_OUT,
                          desc_id,
