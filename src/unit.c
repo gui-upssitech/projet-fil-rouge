@@ -17,6 +17,7 @@ void affect_unit(Unit_u* unit1, Unit_u unit2, Descriptor_e descriptor_type)
     {
         case TEXT:
             unit1->text_descriptor.id = unit2.text_descriptor.id;
+            unit1->text_descriptor.descriptor_contents = unit2.text_descriptor.descriptor_contents;
             break;
 
         case IMAGE:

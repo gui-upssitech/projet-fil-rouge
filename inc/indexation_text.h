@@ -25,10 +25,7 @@ Date:       29/11/2021
 
 // TODO PASS TO CONFIG
 #define TEXT_DESCRIPTOR_DEBUG_OUT           "results/debug/"
-#define TEXT_DESCRIPTOR_FILTER_LIMIT        "0"
-#define TEXT_DESCRIPTOR_FILTER_THRESHOLD    "1"
-#define FILTER_VALUE                        "4"
-#define DEBUG_MODE                          "0"
+#define MAX_COMMAND_LENGTH 200
 
 
 /* structure that contains all necessary informations to build the 
@@ -37,14 +34,11 @@ typedef struct
 {
     /* unique id of the descriptor based on the hashed file name */
     unsigned long id;
-
-    int provisoire_pour_compiler[4];
     char* descriptor_contents;
 
 } Text_descriptor_s;
 
-Bool_e index_text(char* p_path, Text_descriptor_s* p_descriptor);
-Bool_e generate_command(char* filename, char** output, unsigned long desc_id);
+Bool_e generate_command(char* filename, char* output, unsigned long desc_id);
 Bool_e index_text(char* p_path, Text_descriptor_s* p_descriptor);
 Bool_e save_descriptor_text(FILE* p_base_descriptor_text, Text_descriptor_s* p_descriptor);
 

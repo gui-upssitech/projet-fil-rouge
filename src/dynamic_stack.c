@@ -28,7 +28,9 @@ Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u u
     Node_s* p_node;
 
     /* instructions */
-    p_node = malloc(sizeof(Node_s));
+    int value = sizeof(Unit_u);
+    int size = sizeof(Node_s);
+    p_node = (Node_s*) malloc(size * 2);
     if(p_node == NULL)
     {
         fprintf(stderr, "Error memory allocation.\n\r");

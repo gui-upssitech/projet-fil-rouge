@@ -133,7 +133,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
         while(is_empty_dynamic_stack(p_dynamic_stack) == FALSE)
         {
             p_dynamic_stack = remove_unit_dynamic_stack(p_dynamic_stack, &unit, descriptor_type);
-
+    
             Bool_e save_result;
             unsigned long descriptor_id;
 
