@@ -32,7 +32,7 @@ void print_plate_console()
 void print_blank_console(unsigned int blank_size)
 {
     /* statements */
-    int i;
+    unsigned int i;
 
     /* instructions */
     for(i = 0; i < blank_size; i++)
@@ -495,7 +495,6 @@ void display_about_menu()
         display_centered_text_console("Guillaume ROUSSIN");
         display_centered_text_console("Peter PIRIOU--DEZY");
         display_centered_text_console("Constant ROUX");
-        display_centered_text_console("Nelson SANCHEZ");
         display_centered_text_console("");
         display_centered_text_console("Version");
         display_centered_text_console("0.1");
@@ -536,24 +535,19 @@ void display_image_research_menu()
         display_centered_text_console("Menu Image");
         display_centered_text_console("");
         display_centered_text_console("Recherche par :");
-        display_centered_text_console("(1) Code couleur");
-        display_centered_text_console("(2) Image couleur");
-        display_centered_text_console("(3) Image niveaux de gris");
+        display_centered_text_console("(1) Image couleur");
+        display_centered_text_console("(2) Image niveaux de gris");
         display_centered_text_console("(q) Quitter");
         display_centered_text_console("");
         print_plate_console();
-        c = get_char_menu('4');
+        c = get_char_menu('3');
         switch (c)
         {
         case '1':
-            display_image_by_hexacode_research_menu();
-            break;
-
-        case '2':
             display_image_by_path_research_menu(TRUE);
             break;
         
-        case '3':
+        case '2':
             display_image_by_path_research_menu(FALSE);
             break;
 
@@ -566,23 +560,6 @@ void display_image_research_menu()
             break;
         }
     }
-}
-
-Bool_e display_image_by_hexacode_research_menu()
-{
-    /* statements */
-    Binary_search_tree_p confidence_tree;
-
-    /* instructions */
-    if(compare_image_hexacode("rouge", &confidence_tree) == FALSE)
-    {
-        fprintf(stderr, "Error comparing image by color.\n\r");
-        return FALSE;
-    }
-
-    display_image_by_hexacode_result_menu(confidence_tree, "rouge");
-
-    return TRUE;
 }
 
 Bool_e display_image_by_path_research_menu(Bool_e colored)
@@ -714,30 +691,6 @@ void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path,
     
     display_centered_text_console("");
     display_centered_text_console(str_concat("Requete : ", file_name));
-    display_centered_text_console("");
-    if(is_empty_binary_search_tree(confidence_tree) == FALSE)
-    {
-        display_centered_text_console("Resultats");
-        display_binary_search_tree(confidence_tree, IMAGE);
-    }
-    else
-    {
-        display_centered_text_console("Aucun resultat");
-    }
-    display_centered_text_console("");
-    display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
-    display_centered_text_console("");
-    print_plate_console();
-    getch();
-}
-
-void display_image_by_hexacode_result_menu(Binary_search_tree_p confidence_tree, char* color)
-{
-    /* instructions */
-    clear_console();
-    print_plate_console();
-    display_centered_text_console("");
-    display_centered_text_console(str_concat("Requete : ", color));
     display_centered_text_console("");
     if(is_empty_binary_search_tree(confidence_tree) == FALSE)
     {

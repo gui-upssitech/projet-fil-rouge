@@ -213,7 +213,7 @@ void fflush_stdin(void)
         ;
 }
 
-unsigned int get_array_size_from_pointer(char *p_array)
+unsigned int get_array_size_from_pointer(const char *p_array)
 {
     /* statements */
     unsigned int size;

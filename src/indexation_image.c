@@ -23,7 +23,7 @@ Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* 
         return FALSE;
     }
 
-    for(i = 0; i < PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size); i++)
+    for(i = 0; i < (unsigned int) PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size); i++)
     {
         if(fprintf(p_base_descriptor_image, "%d ", p_descriptor->p_histogram[i]) == EOF)
         {
@@ -78,7 +78,6 @@ Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, un
         return FALSE;
     }
     memset(p_descriptor->p_histogram, 0, PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
-
     for(i = 0; i < p_image->a_sizes[WIDTH_IDX] * p_image->a_sizes[HEIGHT_IDX]; i++)
     {
         p_descriptor->p_histogram[p_quantified_image[i]] += 1; 
@@ -87,68 +86,10 @@ Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, un
     return TRUE;
 }
 
-Bool_e create_descriptor_hexacode(char* p_color, Image_s image, Image_descriptor_s* p_image_descriptor) 
-{
-    /* statements */
-    int i, j;
-    FILE* file;
-    char* ret_line;
-    unsigned int hexacode;
-    unsigned char quantification_mask;
-    unsigned short quantified;
-
-    /* instructions */
-    file = fopen(COLORS_BASE_PATH, "r");
-    if(file == NULL)
-    {
-        fprintf(stderr, "Error %d opening file %s.\n\r", errno, COLORS_BASE_PATH);
-        return FALSE;
-    } 
-
-    if(file_contains_substring(file, p_color, &ret_line) == FALSE)
-    {
-        fprintf(stderr, "Error finding color hexacode.\n\r");
-        return FALSE;
-    }
-
-    if(fclose(file) == EOF)
-    {
-        fprintf(stderr, "Error %d closing the file %s.\n\r", errno, COLORS_BASE_PATH);
-        return FALSE;
-    }
-
-    if(sscanf(ret_line, "%*[^ ]%x\n", &hexacode) != 1)
-    {
-        fprintf(stderr, "Error reading hexa code for file.\n\r");
-        return FALSE;
-    }
-
-    p_image_descriptor->p_histogram = (unsigned int*) malloc(PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
-    
-    if(p_image_descriptor->p_histogram == NULL)
-    {
-        fprintf(stderr, "Error memory allocation.\n\r");
-        return FALSE;
-    }
-
-    memset(p_image_descriptor->p_histogram, 0, PWRTWO(RGB_CHANNEL_SIZE * G_parameters.image_indexing_parameters.quantification_size) * sizeof(unsigned int));
-    
-    for(j = 0, quantification_mask = 0xFF; j < (CHAR_SIZE_BIT - G_parameters.image_indexing_parameters.quantification_size); j++, quantification_mask <<= 1);
-    for(i = 0; i < image.a_sizes[WIDTH_IDX] * image.a_sizes[HEIGHT_IDX]; i++)
-    {
-        quantified =    shift((hexacode & quantification_mask), (-8 + 3 *  G_parameters.image_indexing_parameters.quantification_size)) |
-                        shift((hexacode & quantification_mask), (-8 + 2 *  G_parameters.image_indexing_parameters.quantification_size)) |
-                        shift((hexacode & quantification_mask), (-8 + 1 *  G_parameters.image_indexing_parameters.quantification_size));
-        p_image_descriptor->p_histogram[quantified] += 1; 
-    }
-
-    return TRUE;
-}
-
 Bool_e quantify_image(Image_s* p_image, unsigned short* p_quantified_image)
 {
     /* statements */
-    int i, j;
+    unsigned int i, j;
     unsigned char quantification_mask;
     unsigned char a_color_matrix[RGB_CHANNEL_SIZE][p_image->a_sizes[HEIGHT_IDX] * p_image->a_sizes[WIDTH_IDX]];
 
