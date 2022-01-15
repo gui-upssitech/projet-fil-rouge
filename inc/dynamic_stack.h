@@ -27,7 +27,7 @@ typedef struct node {
 typedef Node_s* Dynamic_stack_p;
 
 /* FUNCTIONS */
-Dynamic_stack_p init_dynamic_stack();
+Dynamic_stack_p init_dynamic_stack(void);
 Bool_e is_empty_dynamic_stack(Dynamic_stack_p p_dynamic_stack);
 Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u unit, Descriptor_e descriptor_type);
 Dynamic_stack_p remove_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u* unit, Descriptor_e descriptor_type);

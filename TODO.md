@@ -1,10 +1,11 @@
 # General
-- [ ] Add auto remove descriptor when file is deleted
+- [ ] **BONUS** Add auto remove descriptor when file is deleted
+- [ ] Replace `str_concat` with `strcat`
+- [ ] 
 
 # Menu
 - [ ] Add arrow movement in type box
 - [ ] Add escape possibility in password entry
-- [ ] Add tab auto completion
 
 # Image
 - [x] Avoid press Enter with getchar()
@@ -15,8 +16,8 @@
 - [x] Add multiple tries in the password entry
 - [x] Add first connexion menu to setup password admin
 - [x] **TURBO BONUS** Optimise (in memory) image indexing
-- [ ] Check if headers file generate bugs
-- [ ] Add config files for admin
+- [x] Check if headers file generate bugs
+- [x] Add config files for admin
 - [X] Talk about black and white problem on image
 - [x] Add config files for admin
 - [x] Fix bug images display (.jpg instead of .txt)
@@ -29,10 +30,11 @@
 - [X] Manage bash script arguments
 - [X] Call bash script from C
 - [X] Generate descriptor
-- [ ] Save descriptor
+- [X] Save descriptor
 - [X] Add debug mode
 
 - [ ] Arbre binaire
 - [ ] "base_descriptor"
-- [ ] "list_descriptor"
+- [X] "list_descriptor"
 - [ ] "table_descriptor"
+- [ ] Optimise bash script (only create files in debug mode)

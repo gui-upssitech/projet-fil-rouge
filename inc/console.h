@@ -30,7 +30,7 @@ Date:       29/11/2021
 #define CORNER "+"
 #define MAX_CHAR_PER_LINE 60
 
-void display_centered_text_console(char* p_text);
+void display_centered_text_console(const char* p_text);
 void print_blank_console(unsigned int blank_size);
 char get_char_menu(char num_choices);
 void print_plate_console();

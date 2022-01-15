@@ -4,6 +4,7 @@
 
 #include "../../inc/indexation_text.h"
 #include "../../inc/indexation_generic.h"
+#include "../../inc/configurations.h"
 
 int main() 
 {
@@ -12,6 +13,8 @@ int main()
     time_spent = 0.0;
 
     clock_t begin = clock();
+
+    load_configurations();
 
     if(automatic_indexing_by_data(LIST_BASE_TEXT_PATH, TEXT_BASE_PATH, BASE_TEXT_DESCRIPTOR_PATH, TEXT) == FALSE)
     {

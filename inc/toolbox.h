@@ -95,14 +95,14 @@ unsigned int get_array_size_from_pointer(char* p_array);
  * @brief Flush the stdin buffer.
  * 
  */
-void fflush_stdin();
+void fflush_stdin(void);
 
 /**
  * @brief Get a char in stdin without echo and enter-key validation.
  * 
  * @return char The read char from stdin.
  */
-char getch();
+char getch(void);
 
 /**
  * @brief Know if a file contains a specific string.
@@ -130,8 +130,5 @@ char* str_concat(char* str1, char* str2);
  * @return unsigned int The number of bytes in p_file.
  */
 unsigned int get_bytes_size_file(FILE* p_file);
-
-char* run_command(char* command);
-char* get_absolute_path(char* path);
 
 #endif

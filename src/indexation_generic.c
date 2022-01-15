@@ -11,7 +11,7 @@ Date:       29/11/2021
 #include "dynamic_stack.h"
 #include "indexation_generic.h"
 
-Bool_e automatic_indexing()
+Bool_e automatic_indexing(void)
 {
     /* instructions */
     /* indexing all nb image file */
@@ -83,6 +83,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
                         case TEXT:
                             index_result = index_text(str_concat(p_data_path, p_dir->d_name), &(unit.text_descriptor));
                             descriptor_id = unit.text_descriptor.id;
+                            printf("%lu - %s\n", descriptor_id, p_dir->d_name);
                             break;
                         
                         case IMAGE:

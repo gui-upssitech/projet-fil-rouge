@@ -39,38 +39,57 @@ Bool_e generate_command(char *input_path, char *output, unsigned long desc_id)
 
 Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
 {
+    FILE* p_cmd;
+    unsigned int size;
+    char buffer[MAX_MEMORY_STRING];
     char command[MAX_COMMAND_LENGTH];
-    unsigned long desc_id = hash(p_path);
 
     /* Step 1: generate command */
-    if (!generate_command(p_path, command, desc_id))
+    p_descriptor->id = hash(p_path);
+    if (!generate_command(p_path, command, p_descriptor->id))
     {
         fprintf(stderr, "Command generation failed for file '%s'", p_path);
         return FALSE;
     }
 
-    /* Step 2: run command */
-    
-    // TODO check the retunr of run_command !
-    char* descriptor = run_command(command);
-
-    /* Step 3: Store descriptor contents in the descriptor object */
-    p_descriptor->id = desc_id;
-
-    p_descriptor->descriptor_contents = (char*) malloc(get_array_size_from_pointer(descriptor) * sizeof(char));
-    if(p_descriptor->descriptor_contents == NULL) {
-        fprintf(stderr, "Error allocating memory for descriptor content");
+    /* Step 2: run command */  
+    /* Open the command for reading. */
+    p_cmd = popen(command, "r");
+    if (p_cmd == NULL)
+    {
+        fprintf(stderr, "Error: Failed to read stdout");
         return FALSE;
     }
-    strcpy(p_descriptor->descriptor_contents, descriptor);
 
+    /* get number of bytes in command descriptor */
+    size = get_bytes_size_file(p_cmd);
+
+    /* memory allocation */
+    p_descriptor->descriptor_contents = (char*) malloc(sizeof(char) * size + 1);
+    if(p_descriptor->descriptor_contents == NULL)
+    {
+        fprintf(stderr, "Error memory allocation.\n\r");
+        return FALSE;
+    }
+
+    /* Read the output a line at a time - output it. */
+    while (fgets(buffer, sizeof(buffer), p_cmd) != NULL)
+    {
+        p_descriptor->descriptor_contents = strcat(p_descriptor->descriptor_contents, buffer);
+    }
+
+    if(pclose(p_cmd) == EOF)
+    {
+        fprintf(stderr, "Error closing descriptor\n\r");
+        return FALSE;
+    }
+
+    /* Step 3: Store descriptor contents in the descriptor object */
     return TRUE;
 }
 
 Bool_e save_descriptor_text(FILE *p_base_descriptor_text, Text_descriptor_s *p_descriptor)
 {
-    printf("descriptor id: %lu\ndescriptor content : %s\n\n\n", p_descriptor->id, p_descriptor->descriptor_contents);
-
     // Try to add the id to the descriptor file
     if (fprintf(p_base_descriptor_text, "%s\n\n", p_descriptor->descriptor_contents) == EOF)
     {

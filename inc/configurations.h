@@ -69,7 +69,7 @@ extern Parameters_s G_parameters;
  * 
  * @return Bool_e TRUE if loading success, FALSE else.
  */
-Bool_e load_configurations();
+Bool_e load_configurations(void);
 
 /**
  * @brief Load a configuration section.

@@ -16,7 +16,7 @@ Date:       29/11/2021
 #include "../../inc/indexation_generic.h"
 #include "../../inc/toolbox.h"
 
-int main(int argc, char** argv)  
+int main()  
 {
     /* statements */
     // Image_descriptor_s image_descriptor;

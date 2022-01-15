@@ -10,7 +10,7 @@ Date:       29/11/2021
 
 #include "dynamic_stack.h"
 
-Dynamic_stack_p init_dynamic_stack()
+Dynamic_stack_p init_dynamic_stack(void)
 {
     /* instructions */
     return NULL;

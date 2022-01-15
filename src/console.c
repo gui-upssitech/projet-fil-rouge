@@ -41,7 +41,7 @@ void print_blank_console(unsigned int blank_size)
     }
 }
 
-void display_centered_text_console(char* p_text)
+void display_centered_text_console(const char* p_text)
 {
     /* statements */
     unsigned int long size, blank_size;

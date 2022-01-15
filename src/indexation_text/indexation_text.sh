@@ -50,10 +50,11 @@ DEBUG_MODE=$6
 
 ### == STEP 0.5 : variable declaration ================================================================================
 
-clean_out="$OUTPUT_DIR/$DESCRIPTOR_ID.clean"
-tok_out="$OUTPUT_DIR/$DESCRIPTOR_ID.tok"
-list_out="$OUTPUT_DIR/$DESCRIPTOR_ID.list"
-desc_out="$OUTPUT_DIR/$DESCRIPTOR_ID.desc"
+mkdir -p "$OUTPUT_DIR/$DESCRIPTOR_ID"
+clean_out="$OUTPUT_DIR/$DESCRIPTOR_ID/$DESCRIPTOR_ID.clean"
+tok_out="$OUTPUT_DIR/$DESCRIPTOR_ID/$DESCRIPTOR_ID.tok"
+list_out="$OUTPUT_DIR/$DESCRIPTOR_ID/$DESCRIPTOR_ID.list"
+desc_out="$OUTPUT_DIR/$DESCRIPTOR_ID/$DESCRIPTOR_ID.desc"
 
 mkdir -p $OUTPUT_DIR
 
@@ -72,8 +73,8 @@ encoding=$(file -b --mime-encoding $INPUT_PATH)
 # - Remove all blank lines
 # - Remove the first two lines
 
-iconv -f $encoding -t UTF-8 $INPUT_PATH | sed \
-    -e 's/<[^>]*>//g'       \
+iconv -f $encoding -t ASCII//TRANSLIT $INPUT_PATH | sed \
+    -e 's/<[^>]*>/ /g'       \
     -e 's/[[:punct:]]/ /g'  \
     -e 's/[A-Z]/\L&/g'      \
 | RBL | tail +3 > $clean_out
