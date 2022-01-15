@@ -40,7 +40,8 @@ Bool_e generate_command(char *input_path, char *output, unsigned long desc_id)
 Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
 {
     FILE* p_cmd;
-    unsigned int size;
+    unsigned int line_size;
+    unsigned int current_size;
     char buffer[MAX_MEMORY_STRING];
     char command[MAX_COMMAND_LENGTH];
 
@@ -48,7 +49,7 @@ Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
     p_descriptor->id = hash(p_path);
     if (!generate_command(p_path, command, p_descriptor->id))
     {
-        fprintf(stderr, "Command generation failed for file '%s'", p_path);
+        fprintf(stderr, "Command generation failed for file %s", p_path);
         return FALSE;
     }
 
@@ -61,21 +62,19 @@ Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
         return FALSE;
     }
 
-    /* get number of bytes in command descriptor */
-    size = get_bytes_size_file(p_cmd);
-
-    /* memory allocation */
-    p_descriptor->descriptor_contents = (char*) malloc(sizeof(char) * size + 1);
-    if(p_descriptor->descriptor_contents == NULL)
-    {
-        fprintf(stderr, "Error memory allocation.\n\r");
-        return FALSE;
-    }
-
     /* Read the output a line at a time - output it. */
+    current_size = 1;
     while (fgets(buffer, sizeof(buffer), p_cmd) != NULL)
     {
-        p_descriptor->descriptor_contents = strcat(p_descriptor->descriptor_contents, buffer);
+        line_size = strlen(buffer);
+        p_descriptor->descriptor_contents = realloc(p_descriptor->descriptor_contents, current_size + line_size);
+        if(p_descriptor->descriptor_contents == NULL)
+        {
+            fprintf(stderr, "Error reallocating descriptor content.\n\r");
+            return FALSE;
+        }
+        strcpy(p_descriptor->descriptor_contents + current_size - 1, buffer);
+        current_size += line_size;
     }
 
     if(pclose(p_cmd) == EOF)
@@ -91,7 +90,7 @@ Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
 Bool_e save_descriptor_text(FILE *p_base_descriptor_text, Text_descriptor_s *p_descriptor)
 {
     // Try to add the id to the descriptor file
-    if (fprintf(p_base_descriptor_text, "%s\n\n", p_descriptor->descriptor_contents) == EOF)
+    if (fprintf(p_base_descriptor_text, "%s", p_descriptor->descriptor_contents) == EOF)
     {
         fprintf(stderr, "Error %d printing id of text descriptor.\n\r", errno);
         return FALSE;

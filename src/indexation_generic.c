@@ -83,7 +83,6 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
                         case TEXT:
                             index_result = index_text(str_concat(p_data_path, p_dir->d_name), &(unit.text_descriptor));
                             descriptor_id = unit.text_descriptor.id;
-                            printf("%lu - %s\n", descriptor_id, p_dir->d_name);
                             break;
                         
                         case IMAGE:
@@ -118,7 +117,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
                     }
 
                     /* step 5 : add the new descriptor in the stack */
-                    p_dynamic_stack = add_unit_dynamic_stack(p_dynamic_stack, unit, descriptor_type);  
+                    p_dynamic_stack = add_unit_dynamic_stack(p_dynamic_stack, unit, descriptor_type); 
                 }
             }
         }
@@ -134,7 +133,6 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
         while(is_empty_dynamic_stack(p_dynamic_stack) == FALSE)
         {
             p_dynamic_stack = remove_unit_dynamic_stack(p_dynamic_stack, &unit, descriptor_type);
-    
             Bool_e save_result;
             unsigned long descriptor_id;
 
