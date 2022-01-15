@@ -56,3 +56,8 @@ test_comparison_audio: $(OBJ) src/test/test_comparison_audio.c
 	gcc -c src/test/test_comparison_audio.c $(CFLAGS)
 	mv ./*.o ./obj
 	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)	
+
+main: $(OBJ) src/release/main.c
+	gcc -c src/release/main.c $(CFLAGS)
+	mv ./*.o ./obj
+	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)	
