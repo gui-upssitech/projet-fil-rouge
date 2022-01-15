@@ -79,7 +79,7 @@ WARNING: Toutes les fonctionnalités ne sont pas encore implémentées.
 - Peter Piriou--Dezy
 - Guillaume Roussin
 - Constant Roux
-- Nelson Sanchez
+- 
 - Julian Trani
 
 

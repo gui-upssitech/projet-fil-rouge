@@ -2,7 +2,7 @@
 - [ ] **BONUS** Add auto remove descriptor when file is deleted
 
 # Menu
-- [ ] Add escape possibility in password entry
+- [x] Add escape possibility in password entry
 
 # Image
 - [x] Avoid press Enter with getchar()
