@@ -25,7 +25,6 @@ int main(void)
 
     /* instructions */
     printf("test login :\n\r");
-    password = get_hashed_password();
     ret_value = is_password_valid(password);
     printf("\n\ris valid : %s\n\r", ret_value == 0 ? "FAUX" : "VRAI");
     printf("\n\r%lu %lu", hash("root"), hash("root\n"));

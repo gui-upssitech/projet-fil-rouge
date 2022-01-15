@@ -144,6 +144,7 @@ void display_main_menu()
 Bool_e display_new_pwd_menu(Bool_e first_password)
 {
     /* statements */
+    int code;
     FILE* p_password_file;
     unsigned long password;
 
@@ -170,25 +171,29 @@ Bool_e display_new_pwd_menu(Bool_e first_password)
     
     display_centered_text_console("");
     print_plate_console();
-    password = get_hashed_password();
-    if(fprintf(p_password_file, "%lu", password))
+    password = get_hashed_password(&code);
+    if(code == 1)
     {
-        fprintf(stderr, "Error %d printing password %lu.\n\r", errno, password);
-        return FALSE;
-    }
+        if(fprintf(p_password_file, "%lu", password))
+        {
+            fprintf(stderr, "Error %d printing password %lu.\n\r", errno, password);
+            return FALSE;
+        }
 
-    if(fclose(p_password_file) == EOF)
-    {
-        fprintf(stderr, "Error %d closing the file %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
-        return FALSE;
+        if(fclose(p_password_file) == EOF)
+        {
+            fprintf(stderr, "Error %d closing the file %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
+            return FALSE;
+        }
     }
-
+    
     return TRUE;
 }
 
 void display_login_menu()
 {
     /* statements */
+    int code;
     unsigned long password;
     static unsigned char nb_try = 1;
     char str[2];
@@ -199,28 +204,37 @@ void display_login_menu()
     print_plate_console();
     display_centered_text_console("");
     display_centered_text_console(str_concat(str_concat("Mot de passe (", str), (str[0] == '1') ? " essai restant)" : " essais restants)"));
+    display_centered_text_console("Taper Echap pour quitter");
     display_centered_text_console("");
     print_plate_console();
 
     /* instructions */
-    password = get_hashed_password();
-    if(is_password_valid(password) == TRUE)
+    password = get_hashed_password(&code);
+    if(code == 1)
     {
-        nb_try = 1;
-        display_admin_menu();
-    }
-    else
-    {
-        if(nb_try < MAX_TRY_PASSWORD)
+        if(is_password_valid(password) == TRUE)
         {
-            nb_try++;
-            display_login_menu();
+            nb_try = 1;
+            display_admin_menu();
         }
         else
         {
-            nb_try = 1;
-            return;
+            if(nb_try < MAX_TRY_PASSWORD)
+            {
+                nb_try++;
+                display_login_menu();
+            }
+            else
+            {
+                nb_try = 1;
+                return;
+            }
         }
+    }
+    else
+    {
+        nb_try = 1;
+        return;
     }
 } 
 

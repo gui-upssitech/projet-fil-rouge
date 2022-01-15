@@ -13,7 +13,7 @@ Date:       29/11/2021
 /* NOTE: if the admin menu is left, the password is forgotten and it's necessary to
 give again the password to re-enter in the admin menu */
 
-unsigned long get_hashed_password()
+unsigned long get_hashed_password(int* p_code)
 {
     /* statements */
     char password[MAX_LENGTH_PASSWORD + 1];
@@ -33,6 +33,9 @@ unsigned long get_hashed_password()
                 fflush(stdout);
                 break;
             
+            case ESCAPE_KEY:
+                break;
+            
             case 0x7F:
                 if(size > 0)
                 {
@@ -50,7 +53,16 @@ unsigned long get_hashed_password()
                 break;
         }
         
-    } while(size < MAX_LENGTH_PASSWORD && password[size] != '\n');
+    } while(size < MAX_LENGTH_PASSWORD && password[size] != '\n' && password[size] != ESCAPE_KEY);
+
+    if(password[size] == ESCAPE_KEY)
+    {
+        *p_code = -1;
+    }
+    else
+    {
+        *p_code = 1;
+    }
     password[size + 1] = '\0';
     
     return hash(password);
