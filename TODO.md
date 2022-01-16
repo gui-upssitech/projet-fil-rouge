@@ -33,8 +33,18 @@
 - [X] Save descriptor
 - [X] Add debug mode
 
-- [ ] Arbre binaire
-- [ ] "base_descriptor"
+- [X] Arbre binaire
+- [X] "base_descriptor"
 - [X] "list_descriptor"
 - [ ] "table_descriptor"
 - [ ] Optimise bash script (only create files in debug mode)
+
+Partie table descriptor
+
+1. [X] Création des struct arbres
+2. [X] Lecture des descriptor contents ligne par ligne
+3. Traitement 
+    1. [X] Ajout des mots dans l'arbres 
+    2. [ ] Ajout des occurences dans les mots existants dans l'abre
+    3. [ ] Gestion du tri dans les occurences de mots
+4. [ ] Enregistrement de l'arbre dans un .txt

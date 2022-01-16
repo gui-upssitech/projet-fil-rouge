@@ -16,15 +16,7 @@ Date:       29/11/2021
 #include "../inc/indexation_generic.h"
 #include "../inc/indexation_text.h"
 
-/*char *to_string(int num)
-{
-    char *buffer;
-    *buffer = (char *)malloc(20 * sizeof(char));
-    sprintf(*buffer, "%d", num);
-    return *buffer;
-}*/
-
-Bool_e generate_command(char *input_path, char *output, unsigned long desc_id)
+Bool_e generate_command(char *input_path, unsigned long desc_id, char *output)
 {
     int result = sprintf(output, "/bin/bash src/indexation_text/indexation_text.sh %s %s %lu %u %u %u",
                          input_path,
@@ -39,7 +31,8 @@ Bool_e generate_command(char *input_path, char *output, unsigned long desc_id)
 
 Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
 {
-    FILE* p_cmd;
+    /* statements */
+    FILE *p_cmd;
     unsigned int line_size;
     unsigned int current_size;
     char buffer[MAX_MEMORY_STRING];
@@ -47,13 +40,13 @@ Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
 
     /* Step 1: generate command */
     p_descriptor->id = hash(p_path);
-    if (!generate_command(p_path, command, p_descriptor->id))
+    if (!generate_command(p_path, p_descriptor->id, command))
     {
         fprintf(stderr, "Command generation failed for file %s", p_path);
         return FALSE;
     }
 
-    /* Step 2: run command */  
+    /* Step 2: run command */
     /* Open the command for reading. */
     p_cmd = popen(command, "r");
     if (p_cmd == NULL)
@@ -62,22 +55,28 @@ Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
         return FALSE;
     }
 
+    p_descriptor->descriptor_contents = NULL;
     /* Read the output a line at a time - output it. */
     current_size = 1;
     while (fgets(buffer, sizeof(buffer), p_cmd) != NULL)
     {
+        /* Resize the string to accomodate new line */
         line_size = strlen(buffer);
-        p_descriptor->descriptor_contents = realloc(p_descriptor->descriptor_contents, current_size + line_size);
-        if(p_descriptor->descriptor_contents == NULL)
+        p_descriptor->descriptor_contents = (char *)realloc(p_descriptor->descriptor_contents, current_size + line_size * sizeof(char));
+
+        /* Vérify malloc allocation */
+        if (p_descriptor->descriptor_contents == NULL)
         {
             fprintf(stderr, "Error reallocating descriptor content.\n\r");
             return FALSE;
         }
+
         strcpy(p_descriptor->descriptor_contents + current_size - 1, buffer);
         current_size += line_size;
     }
 
-    if(pclose(p_cmd) == EOF)
+    /* Closing the command after all indexing  */
+    if (pclose(p_cmd) == EOF)
     {
         fprintf(stderr, "Error closing descriptor\n\r");
         return FALSE;
@@ -90,10 +89,56 @@ Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
 Bool_e save_descriptor_text(FILE *p_base_descriptor_text, Text_descriptor_s *p_descriptor)
 {
     // Try to add the id to the descriptor file
-    if (fprintf(p_base_descriptor_text, "%s", p_descriptor->descriptor_contents) == EOF)
+    if (fprintf(p_base_descriptor_text, "%s\n\n", p_descriptor->descriptor_contents) == EOF)
     {
         fprintf(stderr, "Error %d printing id of text descriptor.\n\r", errno);
         return FALSE;
+    }
+
+    return TRUE;
+}
+
+Bool_e update_dictionary(Word_Tree_s* p_dictionary, Text_descriptor_s descriptor)
+{
+    char word[MAX_MEMORY_STRING];
+    char* line;
+
+    Word_occurence_s occurence;
+    Bool_e found_word;
+
+    occurence.origin_id = descriptor.id;
+
+    /*Source : https://stackoverflow.com/questions/17983005/c-how-to-read-a-string-line-by-line */
+    /* Read line one by one and add the word/occurence to the tree */
+    char* buffer = descriptor.descriptor_contents;
+    while (buffer)
+    {
+        char* new_buffer = strchr(buffer, '\n');
+        int line_len = new_buffer ? (new_buffer - buffer) : strlen(buffer);
+        line = (char*) malloc(line_len + 1);
+
+        if (line == NULL)
+        {
+            fprintf(stderr, "Error %d failed to allocate memory.\n\r", errno);
+            return FALSE;
+        }
+
+        memcpy(line, buffer, line_len);
+        line[line_len] = '\0'; /* nul terminate the string to avoid errors */
+        
+        /* Line treatment - Start by skipping the first line and last two lines */
+        if(strchr(line, ' '))
+        {
+            sscanf(line, "%s %u\n", word, &(occurence.num_occurences));
+            if (add_occurence_to_tree(p_dictionary, word, occurence) == FALSE)
+            {
+                fprintf(stderr, "Error %d failed to add occurence to tree.\n\r", errno);
+                return FALSE;
+            }
+        }
+        
+        free(line);
+        buffer = new_buffer ? (new_buffer + 1) : NULL; /* Remove the line (the +1 skips the \n) */
     }
 
     return TRUE;

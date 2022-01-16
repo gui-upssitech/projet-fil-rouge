@@ -23,7 +23,7 @@ Date:       29/11/2021
 #include "indexation_audio.h"
 #include "dynamic_stack.h"
 
-Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, char* p_base_path, Descriptor_e descriptor_type);
+Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, char* p_base_path, char* p_dictionary_path, Descriptor_e descriptor_type);
 Bool_e automatic_indexing(void);
 
 #endif

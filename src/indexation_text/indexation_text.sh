@@ -74,9 +74,10 @@ encoding=$(file -b --mime-encoding $INPUT_PATH)
 # - Remove the first two lines
 
 iconv -f $encoding -t ASCII//TRANSLIT $INPUT_PATH | sed \
-    -e 's/<[^>]*>/ /g'       \
+    -e 's/<[^>]*>/ /g'      \
     -e 's/[[:punct:]]/ /g'  \
     -e 's/[A-Z]/\L&/g'      \
+    -e 's/[0-9]*//g'         \
 | RBL | tail +3 > $clean_out
 
 
