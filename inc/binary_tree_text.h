@@ -18,7 +18,7 @@ Word_Tree_s init_word_tree();
 Bool_e is_empty_word_tree(Word_Tree_s word_tree);
 Bool_e add_occurence_to_tree(Word_Tree_s* p_word_tree, char* word, Word_occurence_s occurence);
 
-void find_word_in_tree(Word_Tree_s p_word_tree, char* word, Word_s** found_item);
+void find_word_in_tree(Word_Tree_s* p_word_tree, char* word, Word_s** found_item);
 Bool_e save_dictionary_to_file(Word_Tree_s p_word_tree, FILE *p_stream);
 
 #endif

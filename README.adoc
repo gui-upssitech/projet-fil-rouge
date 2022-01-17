@@ -1,26 +1,59 @@
 = [Projet Fil Rouge] Partie 1 - Moteur de recherche
 
-Dernière mise à jour : 05/12/2021
+Auteurs :
+Constant ROUX,
+Peter PIRIOU--DEZY,
+Guillaume ROUSSIN,
+Julian TRANI,
+
+Dernière mise à jour : 16/01/2022
 
 == Installation 
 
 WARNING: Prérequis : posséder un environnement linux
 
-Pour lancer le programme, veuillez exécuter la commande suivante dans le répertoire courant du projet :
+Avant d'utiliser l'application vous devez :
 
-----
-make main
-----
+- Clonez le projet avec le lien suivant : https://github.com/Guillaume-prog/projet-fil-rouge
+- Ajoutez le répertoire _data_ téléchargeable ici , dans le projet
+
+Une fois l'application correctement installée, pour lancer l'application veuillez exécuter la commande suivante dans le répertoire courant du projet : _make main_
 
 == Présentation 
 
-À partir d'une base de documents l'application permet de faire des recherches selon 3 types de formats : Texte - Image - Audio. Selon le format, nous avons différentes possibilités de recherche.
+À partir d'une base de documents et après les avoir indexés, l'application permet de faire des recherches selon 3 types de formats : Texte - Image - Audio. 
+Pour chacun de ces formats, nous avons différentes possibilités de recherche.
 
-_Exemple : Pour les images, on peut rechercher par niveau ou niveau de gris 
+_Exemple : Pour les images, on peut rechercher par RGB ou niveau de gris_ 
 
 Voici un petit aperçu visuel de l'application :
 
 image::images/menu.png[Menu,450,align="center"]
+
+== Fonctionnalités 
+
+Dans ce diagramme des cas d'utilisation, vous trouverez toutes les fonctionnalités de l'application.
+
+image::images/user-interactions.png[User,450,align="center"]
+
+WARNING: Toutes les fonctionnalités ne sont pas encore implémentées.
+
+(Les cases cochées sont les fonctionnalités déjà codées et implémentées dans l'application)
+
+- [ ] Indexation Texte
+- [x] Indexation Image (+ sauvegarde dans la base)
+- [x] Indexation Audio (+ sauvegarde dans la base)
+- [x] Comparaison Texte
+- [x] Comparaison Image
+- [x] Comparaison Audio
+- [ ] Moteur de recherche - Texte
+- [x] Moteur de recherche - Image
+- [x] Moteur de recherche - Audio
+- [x] Connexion pour le passage en mode admin
+- [x] Différents menus
+
+
+== Architecture de l'application
 
 L'application possède de nombreux dossiers dans lesquels des fichiers du même type sont regroupés.
 
@@ -50,36 +83,8 @@ Voici un tableau récapitulatif des différents fichiers utilisé dans l'applica
 
 |===
 
-WARNING: Les fichiers d'éxécution .o et .out sont ignorés grâce au _.gitignore_, donc il ne seront jamais ajoutés sur le projet
+WARNING: Les fichiers d'éxécution .o et .out sont ignorés grâce au _.gitignore_, tout comme le repertoire data, donc ils ne seront jamais ajoutés sur le projet
 
-== Fonctionnalités 
 
-Dans ce diagramme de use case, vous trouverez toutes les fonctionnalités de l'application.
-
-image::images/user-interactions.png[User,450,align="center"]
-
-WARNING: Toutes les fonctionnalités ne sont pas encore implémentées.
-
-(Les cases cochées sont les fonctionnalités déjà codées)
-
-- [ ] Indexation Texte
-- [x] Indexation Image (+ sauvegarde dans la base)
-- [x] Indexation Audio (+ sauvegarde dans la base)
-- [ ] Comparaison Texte
-- [ ] Comparaison Image
-- [ ] Comparaison Audio
-- [ ] Moteur de recherche - Texte
-- [ ] Moteur de recherche - Image
-- [ ] Moteur de recherche - Audio
-- [x] Connexion pour le passage en mode admin
-- [x] Différents menus
-
-## Auteurs
-
-- Peter Piriou--Dezy
-- Guillaume Roussin
-- Constant Roux
-- Nelson Sanchez
-- Julian Trani
 
 

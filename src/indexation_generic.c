@@ -195,14 +195,14 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
     /* Save dictionary (only in TEXT mode) */
     if(descriptor_type == TEXT)
     {
-        p_index_table = fopen(p_dictionary_path, "a");
+        p_index_table = fopen(p_dictionary_path, "w");
         if(p_index_table == NULL)
         {
             fprintf(stderr, "Failed to open dictionary\n\r");
             return FALSE;
         }
 
-        if(save_dictionary_to_file(p_dictionary, p_dictionary_path) == FALSE)
+        if(save_dictionary_to_file(p_dictionary, p_index_table) == FALSE)
         {
             fprintf(stderr, "Error saving the dictionary.\n\r");
             return FALSE;
