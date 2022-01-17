@@ -2,8 +2,7 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN
-            
+            Guillaume ROUSSIN            
             
 Date:       29/11/2021
 */
@@ -47,7 +46,6 @@ Bool_e is_regular_file(const char *path);
  * @return Bool_e TRUE if the file is the specific extension, FALSE else.
  */
 Bool_e is_extension_file(const char* path, char* extension);
-
 
 /**
  * @brief Read a path with Enter key validation or Escape key abandonment.

@@ -2,8 +2,7 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN
-            
+            Guillaume ROUSSIN        
             
 Date:       29/11/2021
 */
@@ -25,6 +24,12 @@ Date:       29/11/2021
 /* path constants */
 #define PASSWORD_RELATIVE_PATH "admin/password.tpscrt"
 
+/**
+ * @brief Get the hashed password object
+ * 
+ * @param p_code -1 if password entry is cancelled, 1 else 
+ * @return unsigned long The hashed password
+ */
 unsigned long get_hashed_password(int* p_code);
 
 /**

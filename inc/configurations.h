@@ -3,8 +3,7 @@ Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
             Guillaume ROUSSIN
-            
-            
+                       
 Date:       29/11/2021
 */
 
@@ -20,39 +19,66 @@ Date:       29/11/2021
 
 #define LIMIT_MODE "limite"
 #define THRESHOLD_MODE "seuil"
+
+/**
+ * @brief A struct which represents text indexing parameters.
+ * 
+ */
 typedef struct
 {
-    unsigned int indexing_text_filter_mode;
-    unsigned int indexing_text_filter_value;
-    unsigned int indexing_text_debug;
+    unsigned int indexing_text_filter_mode; /**< The text indexing filter mode. */
+    unsigned int indexing_text_filter_value; /**< The text indexing filter value in function of the filter mode. */
+    unsigned int indexing_text_debug; /**< The text indexing debug mode */
 } Text_indexing_parameters_s;
 
 #define MIN_QUANTIFICATION_SIZE 1
 #define MAX_QUANTIFICATION_SIZE 5
+
+/**
+ * @brief A struct to which represents image indexing parameters.
+ * 
+ */
 typedef struct
 {
-    unsigned int quantification_size;
+    unsigned int quantification_size; /**< the image indexing quantification size. */
 } Image_indexing_parameters_s;
 
 #define MIN_LEVELS_SIZE 3
 #define MAX_LEVELS_SIZE 1000
+
+/**
+ * @brief A struct which represents audio indexing parameters.
+ * 
+ */
 typedef struct
 {
-    unsigned int samples;
-    unsigned int levels;
+    unsigned int samples; /**< the audio indexing samples. */
+    unsigned int levels; /**< the audio indexing levels. */
 } Audio_indexing_parameters_s;
 
+/**
+ * @brief A struct which represents image comparison parameters.
+ * 
+ */
 typedef struct
 {
-    double threshold;
+    double threshold; /**< the image comparison threshold. */
 } Image_comparison_parameters_s;
 
+/**
+ * @brief A struct which represents audio comparison parameters.
+ * 
+ */
 typedef struct
 {
-    double threshold;
-    unsigned int step;
+    double threshold; /**< the audio comparison threshold. */
+    unsigned int step; /**< the audio comparison step. */
 } Audio_comparison_parameters_s;
 
+/**
+ * @brief A struct which contains all structs defined in the configurations.h (except itself).
+ * 
+ */
 typedef struct
 {
     Text_indexing_parameters_s text_indexing_parameters;
