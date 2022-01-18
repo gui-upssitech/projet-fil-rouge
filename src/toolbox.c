@@ -55,7 +55,7 @@ Bool_e is_extension_file(const char *path, char *extension)
     return TRUE;
 }
 
-Bool_e read_path(char **path, int *code)
+Bool_e read_string(char **path, int *code)
 {
     /* statements */
     int i;
