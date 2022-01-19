@@ -73,4 +73,7 @@ void add_node_binary_search_tree_image(Binary_search_tree_p* p_binary_search_tre
  */
 void add_node_binary_search_tree_audio(Binary_search_tree_p* p_binary_search_tree, Result_s result, int duration);
 
+Result_s get_max_tree(Binary_search_tree_p binary_search_tree, Descriptor_e data_type);
+
+
 #endif

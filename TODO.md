@@ -33,7 +33,7 @@
 - [X] "base_descriptor"
 - [X] "list_descriptor"
 - [X] "table_descriptor"
-- [ ] Optimise bash script (only create files in debug mode)
+- [X] Optimise bash script (only create files in debug mode)
 
 # Partie table descriptor
 

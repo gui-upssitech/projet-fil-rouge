@@ -12,6 +12,7 @@
     "type_traits": "c",
     "comparaison_audio.h": "c",
     "limits": "c",
-    "comparaison_text.h": "c"
+    "comparaison_text.h": "c",
+    "binary_search_tree.h": "c"
   }
 }

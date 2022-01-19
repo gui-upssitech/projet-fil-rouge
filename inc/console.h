@@ -153,6 +153,12 @@ void display_audio_result_menu(Binary_search_tree_p *time_code_forest, unsigned 
 void display_indexation_admin_menu();
 
 /**
+ * @brief Display comparison admin menu.
+ * 
+ */
+void display_comparison_admin_menu();
+
+/**
  * @brief Display the menu of research by keyword
  * 
  * @return Bool_e 

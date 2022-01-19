@@ -19,6 +19,8 @@ Date:       29/11/2021
 
 #define LIMIT_MODE "limite"
 #define THRESHOLD_MODE "seuil"
+#define MIN_FILTER_SIZE 3
+#define MAX_FILTER_SIZE 30
 
 /**
  * @brief A struct which represents text indexing parameters.

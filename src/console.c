@@ -13,7 +13,8 @@ Date:       29/11/2021
 
 void clear_console()
 {
-    printf("\033[H\033[2J");
+    // printf("\033[H\033[2J");
+    system("clear");
 }
 
 void print_plate_console()
@@ -169,17 +170,15 @@ Bool_e display_new_pwd_menu(Bool_e first_password)
     {
         display_centered_text_console("Nouveau mot de passe");
     }
+
+    display_centered_text_console("Taper Echap pour quitter");
     
     display_centered_text_console("");
     print_plate_console();
     password = get_hashed_password(&code);
     if(code == 1)
     {
-        if(fprintf(p_password_file, "%lu", password))
-        {
-            fprintf(stderr, "Error %d printing password %lu.\n\r", errno, password);
-            return FALSE;
-        }
+        fprintf(p_password_file, "%lu", password);
 
         if(fclose(p_password_file) == EOF)
         {
@@ -313,6 +312,7 @@ void display_admin_menu()
             break;
 
         case '2':
+            display_comparison_admin_menu();
             break;
 
         case '3':
@@ -349,18 +349,20 @@ void display_indexation_admin_menu()
         display_centered_text_console("Indexation Texte");
         display_centered_text_console("(1) Mode");
         display_centered_text_console("(2) Seuil");
+        display_centered_text_console("(3) Debug");
+        display_centered_text_console("(4) Limite index");
         display_centered_text_console("");
         display_centered_text_console("Indexation Image");
-        display_centered_text_console("(3) Quantification");
+        display_centered_text_console("(5) Quantification");
         display_centered_text_console("");
         display_centered_text_console("Indexation Audio");
-        display_centered_text_console("(4) Echantillons");
-        display_centered_text_console("(5) Niveaux");
+        display_centered_text_console("(6) Echantillons");
+        display_centered_text_console("(7) Niveaux");
         display_centered_text_console("");
         display_centered_text_console("(q) Quitter");
         display_centered_text_console("");
         print_plate_console();
-        c = get_char_menu('6');
+        c = get_char_menu('8');
         switch (c)
         {
         case '1':
@@ -383,8 +385,9 @@ void display_indexation_admin_menu()
                 return;
             }
 
-            // fopen(LIST_BASE_IMAGE_PATH, "w");
-            // fopen(BASE_IMAGE_DESCRIPTOR_PATH, "w");
+            fclose(fopen(LIST_BASE_TEXT_PATH, "w"));
+            fclose(fopen(BASE_TEXT_DESCRIPTOR_PATH, "w"));
+            fclose(fopen(INDEX_TABLE_TEXT_DESCRIPTOR_PATH, "w"));
             if(automatic_indexing() == FALSE)
             {
                 fprintf(stderr, "Error re-indexing text with new mode.\n\r");
@@ -393,8 +396,96 @@ void display_indexation_admin_menu()
             break;
 
         case '2':
-            break; 
+            do
+            {
+                printf("Veuillez insérer une valeur entre %d et %d : ", MIN_FILTER_SIZE, MAX_FILTER_SIZE);
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while(value < MIN_FILTER_SIZE || value > MAX_FILTER_SIZE || ret == FALSE);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting filter text value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("indexing_text_filter_value", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new text filter value.\n\r");
+                return;
+            }
+
+            fclose(fopen(LIST_BASE_TEXT_PATH, "w"));
+            fclose(fopen(BASE_TEXT_DESCRIPTOR_PATH, "w"));
+            fclose(fopen(INDEX_TABLE_TEXT_DESCRIPTOR_PATH, "w"));
+            if(automatic_indexing() == FALSE)
+            {
+                fprintf(stderr, "Error re-indexing text with new mode.\n\r");
+                return;
+            }
+            break;
+
         case '3':
+            do
+            {
+                printf("Activer le debug (0 pour desactiver ou 1 pour activer) : ");
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while(ret != 0 && ret != 1);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting text debug value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("indexing_text_debug", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new debug mode value.\n\r");
+                return;
+            }
+
+            fclose(fopen(LIST_BASE_TEXT_PATH, "w"));
+            fclose(fopen(BASE_TEXT_DESCRIPTOR_PATH, "w"));
+            fclose(fopen(INDEX_TABLE_TEXT_DESCRIPTOR_PATH, "w"));
+            if(automatic_indexing() == FALSE)
+            {
+                fprintf(stderr, "Error re-indexing text with new debug mode.\n\r");
+                return;
+            }
+            break;
+
+        case '4':
+            do
+            {
+                printf("Veuillez insérer une valeur entre %d et %d : ", MIN_FILTER_SIZE, MAX_FILTER_SIZE);
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while(value < MIN_FILTER_SIZE || value > MAX_FILTER_SIZE || ret == FALSE);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting index text value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("indexing_text_number_table_index", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new text index value.\n\r");
+                return;
+            }
+
+            fclose(fopen(LIST_BASE_TEXT_PATH, "w"));
+            fclose(fopen(BASE_TEXT_DESCRIPTOR_PATH, "w"));
+            fclose(fopen(INDEX_TABLE_TEXT_DESCRIPTOR_PATH, "w"));
+            if(automatic_indexing() == FALSE)
+            {
+                fprintf(stderr, "Error re-indexing text with new index text value.\n\r");
+                return;
+            }
+            break;
+
+        case '5':
             do
             {
                 printf("Veuillez insérer une valeur entre %d et %d : ", MIN_QUANTIFICATION_SIZE, MAX_QUANTIFICATION_SIZE);
@@ -423,7 +514,7 @@ void display_indexation_admin_menu()
             }
             break;
 
-        case '4':
+        case '6':
             do
             {
                 printf("Veuillez insérer une puissance de 2 (minimum 256) : ");
@@ -452,7 +543,7 @@ void display_indexation_admin_menu()
             }
             break;
         
-        case '5':
+        case '7':
             do
             {
                 printf("Veuillez insérer une valeur entre %d et %d : ", MIN_LEVELS_SIZE, MAX_LEVELS_SIZE);
@@ -480,6 +571,111 @@ void display_indexation_admin_menu()
                 return;
             }
             break;
+
+        case 'q':
+            return;
+            break;
+        
+        default:
+            return;
+            break;
+        }
+    }
+}
+
+void display_comparison_admin_menu()
+{
+    /* statements */
+    Bool_e ret;
+    char c;
+    long value;
+    char conversion[MAX_MEMORY_STRING];
+
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Parametres comparaison");
+        display_centered_text_console("");
+        display_centered_text_console("Comparaison Image");
+        display_centered_text_console("(1) Seuil");
+        display_centered_text_console("");
+        display_centered_text_console("Comparaison Audio");
+        display_centered_text_console("(2) Pas");
+        display_centered_text_console("(3) Seuil");
+        display_centered_text_console("");
+        display_centered_text_console("(q) Quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        c = get_char_menu('4');
+        switch (c)
+        {
+        case '1':
+            do
+            {
+                printf("Veuillez insérer une valeur entre %d et %d : ", 0, 100);
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while(value < 0 || value > 100 || ret == FALSE);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting image threshold value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("comparison_image_threshold", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new image threshold value.\n\r");
+                return;
+            }
+            break;
+        
+        case '2':
+            do
+            {
+                printf("Veuillez insérer une valeur entre %d et %d : ", 1, 10);
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while(value < 1 || value > 10 || ret == FALSE);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting audio step value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("comparison_audio_step", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new audio step value.\n\r");
+                return;
+            }
+            break;
+
+        case '3':
+            do
+            {
+                printf("Veuillez insérer une valeur entre %d et %d : ", 0, 100);
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while(value < 0 || value > 100 || ret == FALSE);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting audio threshold value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("comparison_audio_threshold", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new audio threshold value.\n\r");
+                return;
+            }
+            break;
+
+       
 
         case 'q':
             return;

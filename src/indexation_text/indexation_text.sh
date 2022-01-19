@@ -10,6 +10,8 @@
 shopt -s expand_aliases
 alias RBL="sed -e '/^$/d'"
 
+
+
 workspace_root=$(pwd) #"/home/uni/Documents/PFR"
 stop_words="$workspace_root/src/indexation_text/stop_words_french.txt"
 
@@ -48,19 +50,6 @@ DEBUG_MODE=$6
 
 
 
-### == STEP 0.5 : variable declaration ================================================================================
-
-mkdir -p "$OUTPUT_DIR/$DESCRIPTOR_ID"
-clean_out="$OUTPUT_DIR/$DESCRIPTOR_ID/$DESCRIPTOR_ID.clean"
-tok_out="$OUTPUT_DIR/$DESCRIPTOR_ID/$DESCRIPTOR_ID.tok"
-list_out="$OUTPUT_DIR/$DESCRIPTOR_ID/$DESCRIPTOR_ID.list"
-desc_out="$OUTPUT_DIR/$DESCRIPTOR_ID/$DESCRIPTOR_ID.desc"
-
-mkdir -p $OUTPUT_DIR
-
-
-
-
 ### == STEP 1 : Cleaning of the input file ============================================================================
 
 # Figure out the file encoding
@@ -73,12 +62,12 @@ encoding=$(file -b --mime-encoding $INPUT_PATH)
 # - Remove all blank lines
 # - Remove the first two lines
 
-iconv -f $encoding -t ASCII//TRANSLIT $INPUT_PATH | sed \
+clean_out=$(iconv -f $encoding -t ASCII//TRANSLIT $INPUT_PATH | sed \
     -e 's/<[^>]*>/ /g'      \
     -e 's/[[:punct:]]/ /g'  \
     -e 's/[A-Z]/\L&/g'      \
-    -e 's/[0-9]*//g'         \
-| RBL | tail +3 > $clean_out
+    -e 's/[0-9]*//g'        \
+| RBL | tail +3)
 
 
 
@@ -89,7 +78,7 @@ iconv -f $encoding -t ASCII//TRANSLIT $INPUT_PATH | sed \
 sed -i "s/\r$//" $stop_words
 
 # Remove stop words
-sed -e "$(sed 's|.*|s/\\b&\\b//ig|' $stop_words)" $clean_out > $tok_out
+tok_out=$(echo -e "$clean_out" | sed -e "$(sed 's|.*|s/\\b&\\b//ig|' $stop_words)")
 
 
 
@@ -98,35 +87,43 @@ sed -e "$(sed 's|.*|s/\\b&\\b//ig|' $stop_words)" $clean_out > $tok_out
 ### == STEP 3 : Counting ==============================================================================================
 
 # Organise text to have one word per line
-sed -E "s/\s+/\n/g" $tok_out | RBL | sort > $list_out
+list_out=$(echo -e "$tok_out" | sed -E "s/\s+/\n/g" | RBL | sort)
 
 # Get number of occurences of each word, sort by number of occurences, then output in format "word num_occurence"
-uniq --count $list_out | sort -nr | awk '{ print $2 " " $1 }' > $desc_out
+desc_out=$(echo -e "$list_out" | uniq --count | sort -nr | awk '{ print $2 " " $1 }')
 
 # Add filter
 if [ $FILTER_TYPE -eq 0 ]
-then    
+then
     # Limit mode
-    echo "$(head -n $FILTER_VALUE $desc_out)" > $desc_out
-else 
+    desc_out=$(echo -e "$desc_out" | head -n $FILTER_VALUE)
+else
     # Threshold mode
-    echo "$(awk -v threshold=$FILTER_VALUE '$2 >= threshold' < $desc_out)" > $desc_out
+    desc_out=$(echo -e "$desc_out" | awk -v threshold=$FILTER_VALUE '$2 >= threshold')
 fi
 
-# Add the number of tokens and unique tokens in the descriptor
-echo -e "$(cat $desc_out | wc -l)\n$(cat $list_out | wc -l)" >> $desc_out
+# Add descriptor id to the top of the file & add the number of tokens and unique tokens in the descriptor
+desc_out="$DESCRIPTOR_ID\n$desc_out\n$(echo -e "$desc_out" | wc -l)\n$(echo -e "$list_out" | wc -l)"
 
-# Add descriptor id to the top of the file
-sed -i -e "1s/^/$DESCRIPTOR_ID\n/" $desc_out
-
-cat $desc_out
+# Print descriptor to console
+echo -e "$desc_out"
 
 
 
-# == STEP 4 : Clean up ================================================================================================
 
-if [ $DEBUG_MODE -eq 0 ]; then
-    rm -rf $OUTPUT_DIR
+
+# == STEP 4 : Debug output ============================================================================================
+
+save_var() {
+    echo -e "$1" > "$OUTPUT_DIR/$DESCRIPTOR_ID/$DESCRIPTOR_ID.$2"
+}
+
+if [ $DEBUG_MODE -eq 1 ]; then
+    mkdir -p "$OUTPUT_DIR/$DESCRIPTOR_ID"
+    save_var "$clean_out" "clean"
+    save_var "$tok_out"   "tok"
+    save_var "$list_out"  "list"
+    save_var "$desc_out"  "desc"
 fi
 
 exit 0

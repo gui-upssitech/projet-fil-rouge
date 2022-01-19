@@ -13,7 +13,6 @@ typedef struct tree
 
 typedef Word_Leaf_s* Word_Tree_s;
 
-
 Word_Tree_s init_word_tree();
 Bool_e is_empty_word_tree(Word_Tree_s word_tree);
 Bool_e add_occurence_to_tree(Word_Tree_s* p_word_tree, char* word, Word_occurence_s occurence);
