@@ -19,7 +19,7 @@ Date:       29/11/2021
 #define INDEX_TABLE_TEXT_DESCRIPTOR_PATH "descriptors/text/index_table.txt"
 
 /* data file path constants */
-#define TEXT_BASE_PATH "data/texts/"
+#define TEXT_BASE_PATH "data/text/"
 
 /* constants for bash script execution */
 #define NB_ARGS 6

@@ -104,7 +104,6 @@ Bool_e update_dictionary(Word_Tree_s* p_dictionary, Text_descriptor_s descriptor
     char* line;
 
     Word_occurence_s occurence;
-    Bool_e found_word;
 
     occurence.origin_id = descriptor.id;
 

@@ -10,22 +10,21 @@ Date:       29/11/2021
 
 #include "comparaison_text.h"
 
-Bool_e display_research_by_keyword(char* word)
+Bool_e display_research_by_keyword(char *word)
 {
     /* statements */
-    FILE* p_indexing_table;
-    char* p_line;
+    FILE *p_indexing_table;
+    char *p_line;
     char buf[MAX_MEMORY_STRING];
-    char* name;
+    char *name;
     unsigned long hash_code;
     unsigned int occurences;
 
     /* initalizations */
 
-
     /* instructions */
     p_indexing_table = fopen(INDEX_TABLE_TEXT_DESCRIPTOR_PATH, "r");
-    if(p_indexing_table == NULL)
+    if (p_indexing_table == NULL)
     {
         fprintf(stderr, "Error opening %s.\n\r", INDEX_TABLE_TEXT_DESCRIPTOR_PATH);
         return FALSE;
@@ -37,18 +36,18 @@ Bool_e display_research_by_keyword(char* word)
     display_centered_text_console(str_concat("Requete : ", word));
     display_centered_text_console("");
 
-    if(file_contains_substring(p_indexing_table, word, &p_line) == TRUE)
+    if (file_contains_substring(p_indexing_table, word, &p_line) == TRUE)
     {
-        while(fgets(buf, sizeof(buf), p_indexing_table) != 0)
+        while (fgets(buf, sizeof(buf), p_indexing_table) != 0)
         {
-            if(buf[0] == '\n')
+            if (buf[0] == '\n')
             {
                 break;
             }
 
             sscanf(buf, "%lu %u", &hash_code, &occurences);
 
-            if(find_filename_from_id(hash_code, &name) == FALSE)
+            if (find_filename_from_id(hash_code, &name) == FALSE)
             {
                 fprintf(stderr, "Error file not found in the base.\n\r");
                 return FALSE;
@@ -67,7 +66,7 @@ Bool_e display_research_by_keyword(char* word)
     print_plate_console();
     getch();
 
-    if(fclose(p_indexing_table) == EOF)
+    if (fclose(p_indexing_table) == EOF)
     {
         fprintf(stderr, "Error closing file %s.\n\r", INDEX_TABLE_TEXT_DESCRIPTOR_PATH);
         return FALSE;
@@ -76,35 +75,64 @@ Bool_e display_research_by_keyword(char* word)
     return TRUE;
 }
 
-Bool_e find_filename_from_id(unsigned long id, char** filename)
+Bool_e find_filename_from_id(unsigned long id, char **filename)
 {
-    FILE* p_list_base;
+    FILE *p_list_base;
     char buf[MAX_MEMORY_STRING];
     unsigned long hash_code;
 
     p_list_base = fopen(LIST_BASE_TEXT_PATH, "r");
-    if(p_list_base == NULL)
+    if (p_list_base == NULL)
     {
         fprintf(stderr, "Error opening %s.\n\r", LIST_BASE_TEXT_PATH);
         return FALSE;
     }
 
-    while(!feof(p_list_base))
+    while (!feof(p_list_base))
     {
         fscanf(p_list_base, "%s %lu\n", buf, &hash_code);
-        if(hash_code == id)
+        if (hash_code == id)
         {
-            *filename = (char*) malloc(strlen(buf) * sizeof(char));
+            *filename = (char *)malloc(strlen(buf) * sizeof(char));
             strcpy(*filename, buf);
             return TRUE;
         }
     }
 
-    if(fclose(p_list_base) == EOF)
+    if (fclose(p_list_base) == EOF)
     {
         fprintf(stderr, "Error closing %s.\n\r", LIST_BASE_TEXT_PATH);
         return FALSE;
     }
 
     return FALSE;
+}
+
+Bool_e display_research_by_text(char *path)
+{
+    /* statements */
+    Text_descriptor_s desc;
+
+    /* initalizations */
+
+    /* STEP 1 : Indexing the text in param */
+
+    if (index_text(path, &desc) == FALSE ){
+         fprintf(stderr, "ERROR INDEX TEXT RESEARCH BY TEXT %s", path);
+        return FALSE;
+    }
+    
+    clear_console();
+    printf("%s\n\n", desc.descriptor_contents);
+    
+    while(1);
+
+    /* STEP 2 :  */
+
+    /* STEP 3 :  */
+    
+
+
+    /* instructions */
+    return TRUE;
 }

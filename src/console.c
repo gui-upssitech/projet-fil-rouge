@@ -566,7 +566,43 @@ void display_text_research_by_keyword_menu()
         }
     }
     return TRUE;
+}
 
+void display_text_research_by_text_menu(){
+/* statements */
+    char* path;
+    int code;
+
+    /* initalizations */
+
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Recherche par texte");
+        display_centered_text_console("");
+        display_centered_text_console("Inserer le nom du fichier texte");
+        display_centered_text_console("Taper Echap pour quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        if(read_string(&path, &code) == FALSE)
+        {
+            fprintf(stderr, "Error reading word research file.\n\r");
+            return FALSE;
+        }
+
+        if(code == 0)
+        {
+            display_research_by_text(path);
+        }
+        else
+        {
+            break;
+        }
+    }
+    return TRUE;
 }
 
 void display_text_research_menu()
@@ -595,7 +631,8 @@ void display_text_research_menu()
             display_text_research_by_keyword_menu();
             break;
 
-        case '2':     
+        case '2':         
+            display_text_research_by_text_menu();    
             break;
 
         case 'q':

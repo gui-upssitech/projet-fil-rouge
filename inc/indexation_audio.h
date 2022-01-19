@@ -23,7 +23,7 @@ Date:       29/11/2021
 #define BASE_AUDIO_DESCRIPTOR_PATH "descriptors/audio/base_audio_descriptor.txt"
 
 /* data file path constants */
-#define SOUND_BASE_PATH "data/audios/TEST_SON/"
+#define SOUND_BASE_PATH "data/audio/"
 
 /**
  * @brief structure that contains all informations about the image (file path, 

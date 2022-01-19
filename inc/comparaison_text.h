@@ -25,8 +25,8 @@ typedef struct comparaison_text
 
 /* METHODS */
 
-Bool_e display_research_by_keyword(char* word);
-Bool_e find_filename_from_id(unsigned long id, char** filename);
+Bool_e display_research_by_keyword(char *word);
+Bool_e find_filename_from_id(unsigned long id, char **filename);
+Bool_e display_research_by_text(char *path);
 
-
-#endif 
+#endif

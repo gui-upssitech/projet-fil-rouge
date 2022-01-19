@@ -25,8 +25,8 @@ Date:       29/11/2021
 #define BASE_IMAGE_DESCRIPTOR_PATH "descriptors/image/base_image_descriptor.txt"
 
 /* data file path constants */
-#define NB_BASE_PATH "data/images/TEST_NB/"
-#define RGB_BASE_PATH "data/images/TEST_RGB/"
+#define NB_BASE_PATH "data/image/NB/"
+#define RGB_BASE_PATH "data/image/RGB/"
 
 /* pixel const values */
 #define PIXEL_MAX_SIZE 255 

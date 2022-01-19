@@ -32,7 +32,7 @@ Date:       29/11/2021
  * @param descriptor_type The type of data.
  * @return Bool_e TRUE if automatic indexing succeed, FALSE else.
  */
-Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, char* p_base_path, Descriptor_e descriptor_type);
+Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, char* p_base_path, char* p_dictionary_path, Descriptor_e descriptor_type);
 
 /**
  * @brief Index automatically all datas.

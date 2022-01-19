@@ -40,7 +40,7 @@ void init_word(char *word_name, Word_s **output)
 Bool_e add_occurence(Word_s **word, Word_occurence_s occurence)
 {
     /* Variables */
-    unsigned int i, j, cursor, max_size;
+    unsigned int i, cursor, max_size;
 
     /* Init variable */
     cursor = (*word)->tab_cursor;
@@ -107,7 +107,7 @@ Bool_e add_occurence(Word_s **word, Word_occurence_s occurence)
 
 Bool_e word_to_string(Word_s word, char **output)
 {
-    int i;
+    unsigned int i;
 
     *output = (char *) malloc(MAX_MEMORY_STRING * sizeof(char));
     sprintf(*output, "%s", word.word_name);
