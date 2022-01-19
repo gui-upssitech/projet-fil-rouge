@@ -50,8 +50,31 @@ typedef struct
  */
 Bool_e generate_command(char *input_path, unsigned long desc_id, char *output);
 
+/**
+ * @brief 
+ * 
+ * @param p_path 
+ * @param p_descriptor 
+ * @return Bool_e 
+ */
 Bool_e index_text(char* p_path, Text_descriptor_s* p_descriptor);
+
+/**
+ * @brief 
+ * 
+ * @param p_base_descriptor_text 
+ * @param p_descriptor 
+ * @return Bool_e 
+ */
 Bool_e save_descriptor_text(FILE* p_base_descriptor_text, Text_descriptor_s* p_descriptor);
+
+/**
+ * @brief 
+ * 
+ * @param p_dictionary 
+ * @param descriptor 
+ * @return Bool_e 
+ */
 Bool_e update_dictionary(Word_Tree_s* p_dictionary, Text_descriptor_s descriptor);
 
 

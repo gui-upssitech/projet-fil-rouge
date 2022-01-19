@@ -73,6 +73,12 @@ void add_node_binary_search_tree_image(Binary_search_tree_p* p_binary_search_tre
  */
 void add_node_binary_search_tree_audio(Binary_search_tree_p* p_binary_search_tree, Result_s result, int duration);
 
+/**
+ * @brief Get the max confidence in the tree
+ * 
+ * @param p_result The result of the search
+ * @param binary_search_tree The three in which to search the max value
+ */
 void get_max_tree(Result_s* p_result, Binary_search_tree_p binary_search_tree);
 
 

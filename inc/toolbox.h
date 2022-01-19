@@ -112,6 +112,14 @@ char getch(void);
  */
 Bool_e file_contains_substring(FILE* p_file, char* p_str, char** p_line);
 
+/**
+ * @brief Know if a file contains a specific string EXACTLY.
+ * 
+ * @param p_file The file descriptor opened.
+ * @param p_str The string that we are looking for.
+ * @param p_line The file line which contains p_str.
+ * @return Bool_e TRUE if the file contains the substring, FALSE else.
+ */
 Bool_e file_contains_string(FILE *p_file, char *p_str, char **ret_line);
 
 /**
@@ -131,6 +139,13 @@ char* str_concat(char* str1, char* str2);
  */
 unsigned int get_bytes_size_file(FILE* p_file);
 
+/**
+ * @brief 
+ * 
+ * @param path 
+ * @param filename 
+ * @return Bool_e 
+ */
 Bool_e open_file(char* path, char* filename);
 
 #endif
