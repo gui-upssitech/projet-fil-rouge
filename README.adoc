@@ -38,13 +38,13 @@ image::images/user-interactions.png[User,450,align="center"]
 
 (Les cases cochées sont les fonctionnalités déjà codées et implémentées dans l'application)
 
-- [X] Indexation Texte (+ sauvegarde dans la base)
+- [x] Indexation Texte (+ sauvegarde dans la base)
 - [x] Indexation Image (+ sauvegarde dans la base)
 - [x] Indexation Audio (+ sauvegarde dans la base)
 - [x] Comparaison Texte
 - [x] Comparaison Image
 - [x] Comparaison Audio
-- [X] Moteur de recherche - Texte (mot-clef / texte )
+- [x] Moteur de recherche - Texte (mot-clef / texte )
 - [x] Moteur de recherche - Image (couleur / niveaux de gris )
 - [x] Moteur de recherche - Audio  (jingle)
 - [x] Connexion pour le passage en mode admin

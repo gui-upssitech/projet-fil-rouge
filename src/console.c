@@ -13,7 +13,7 @@ Date:       29/11/2021
 
 void clear_console()
 {
-    system("clear");
+    printf("\033[H\033[2J");
 }
 
 void print_plate_console()
