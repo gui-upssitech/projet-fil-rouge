@@ -2,8 +2,7 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN            
             
 Date:       29/11/2021
 */
@@ -43,38 +42,74 @@ Date:       29/11/2021
 /* const value for quantification */
 #define CHAR_SIZE_BIT 8
 
-/* structure that contains all informations about the image (file path, 
-pointer on file descriptor, dimensions)*/
+/**
+ * @brief structure that contains all informations about the image (file path, 
+ * pointer on file descriptor, dimensions)
+ * 
+ */
 typedef struct
 {
-    /* the adress of the first char of the file path*/
-    char* p_path;
-
-    /* the adress of the file descriptor */
-    FILE* p_image_txt;
-
-    /* array that contains respectively width, height and channels */
-    unsigned int a_sizes[NB_SIZES];
+    char* p_path; /**< the adress of the first char of the file path */
+    FILE* p_image_txt; /**< the adress of the file descriptor */
+    unsigned int a_sizes[NB_SIZES]; /**< array that contains respectively width, height and channels */
 
 } Image_s;
 
-/* structure that contains all necessary informations to build the 
-image descriptor (id and histogram) */
+/**
+ * @brief structure that contains all necessary informations to build the 
+ * image descriptor (id and histogram)
+ * 
+ */
 typedef struct
 {
-    /* unique id of the descriptor based on the hashed file name */
-    unsigned long id;
-
-    /* histogram of the file */
-    unsigned int* p_histogram;
+    unsigned long id; /**< unique id of the descriptor based on the hashed file name */
+    unsigned int* p_histogram; /**< histogram of the file */
 
 } Image_descriptor_s;
 
+/**
+ * @brief Get the parameters of an image.
+ * 
+ * @param p_image A pointer of image informations struct.
+ * @return Bool_e TRUE if parameters have been saved, FALSE else.
+ */
 Bool_e get_parameters_image(Image_s* p_image);
+
+/**
+ * @brief Quantify an image.
+ * 
+ * @param p_image A pointer to the image informations struct.
+ * @param p_quantified_image A pointer representing an array of the quantified image.
+ * @return Bool_e TRUE if quantification succeed, FALSE else.
+ */
 Bool_e quantify_image(Image_s* p_image, unsigned short* p_quantified_image);
+
+/**
+ * @brief Index an image.
+ * 
+ * @param p_path The path to the image to index.
+ * @param p_descriptor The image descriptor as result.
+ * @return Bool_e TRUE if indexing succeed, FALSE else.
+ */
 Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor);
+
+/**
+ * @brief Do the histogram of an image.
+ * 
+ * @param p_image A pointer to the image informations struct.
+ * @param p_descriptor A pointer to the image descriptor as result.
+ * @param p_quantified_image The image quantification array.
+ * @return Bool_e TRUE if histogram creation succeed, FALSE else. 
+ */
 Bool_e do_histogram_image(Image_s* p_image, Image_descriptor_s* p_descriptor, unsigned short* p_quantified_image);
+
+/**
+ * @brief Save the image descriptor.
+ * 
+ * @param p_base_descriptor_image The file descriptor in which to save the descriptor.
+ * @param p_descriptor The image descriptor to save.
+ * @return Bool_e TRUE if saving image descriptor succeed, FALSE else.
+ */
 Bool_e save_descriptor_image(FILE* p_base_descriptor_image, Image_descriptor_s* p_descriptor);
-Bool_e create_descriptor_hexacode(char* p_color, Image_s image, Image_descriptor_s* p_image_descriptor) ;
 
 #endif

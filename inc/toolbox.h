@@ -2,8 +2,7 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN            
             
 Date:       29/11/2021
 */
@@ -48,7 +47,6 @@ Bool_e is_regular_file(const char *path);
  */
 Bool_e is_extension_file(const char* path, char* extension);
 
-
 /**
  * @brief Read a path with Enter key validation or Escape key abandonment.
  * 
@@ -89,7 +87,7 @@ unsigned long hash(char* p_string);
  * @param p_array The char array for which we want the size.
  * @return unsigned int The size of the array.
  */
-unsigned int get_array_size_from_pointer(char* p_array);
+unsigned int get_array_size_from_pointer(const char* p_array);
 
 /**
  * @brief Flush the stdin buffer.

@@ -2,8 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN
+            
             
 Date:       29/11/2021
 */
@@ -77,7 +77,7 @@ Bool_e read_string(char **path, int *code)
         c = getch();
         printf("%c", c);
         (*path)[i] = c;
-        if ((*path)[i] == 0x7F) // TO DO
+        if ((*path)[i] == 0x7F)
         {
             if (i > 0)
             {
@@ -213,7 +213,7 @@ void fflush_stdin(void)
         ;
 }
 
-unsigned int get_array_size_from_pointer(char *p_array)
+unsigned int get_array_size_from_pointer(const char *p_array)
 {
     /* statements */
     unsigned int size;

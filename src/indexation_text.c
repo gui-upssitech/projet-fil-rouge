@@ -2,8 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN
+            
 
 Date:       29/11/2021
 */

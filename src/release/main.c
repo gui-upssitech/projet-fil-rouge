@@ -12,6 +12,11 @@ int main(void)
         return EXIT_FAILURE;
     }
 
+    if(automatic_indexing() == FALSE)
+    {
+        return EXIT_FAILURE;
+    }
+
     display_main_menu();
     
     return EXIT_SUCCESS;

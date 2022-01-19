@@ -33,7 +33,7 @@
             "name": "TEST INDEXATION IMAGE",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/app/test_display_console",
+            "program": "${workspaceFolder}/app/test_indexation_image",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

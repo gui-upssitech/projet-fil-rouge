@@ -2,8 +2,7 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN           
             
 Date:       29/11/2021
 */
@@ -26,44 +25,77 @@ Date:       29/11/2021
 /* data file path constants */
 #define SOUND_BASE_PATH "data/audios/TEST_SON/"
 
-/* structure that contains all informations about the image (file path, 
-pointer on file descriptor, dimensions)*/
+/**
+ * @brief structure that contains all informations about the image (file path, 
+ * pointer on file descriptor, dimensions)
+ * 
+ */
 typedef struct
 {
-    /* the adress of the first char of the file path*/
-    char* p_path;
-
-    /* the adress of the file descriptor */
-    FILE* p_audio_bin;
-
-    /* the number of 8 bytes packets (sizeof double) */
-    unsigned int size_doubles;
+    char* p_path; /**< the adress of the first char of the file path*/
+    FILE* p_audio_bin; /**< the adress of the file descriptor */
+    unsigned int size_doubles; /**< the number of 8 bytes packets (sizeof double) */
 
 } Audio_s;
 
-/* structure that contains all necessary informations to build the 
-audio descriptor (...) */
+/**
+ * @brief structure that contains all necessary informations to build the 
+ * audio descriptor (...)
+ * 
+ */
 typedef struct
 {
-    /* unique id of the descriptor based on the hashed file name */
-    unsigned long id;
-
-    /* histograms of the file */
-    unsigned int* p_histogram;
-
-    /* the audio parameters used to create the descriptor */
-    unsigned int samples;
-    unsigned int levels;
-
-    /* the nummber of windows */
-    unsigned int i_windows;
+    unsigned long id; /**< unique id of the descriptor based on the hashed file name */
+    unsigned int* p_histogram; /**< histograms of the file */
+    unsigned int samples; /**< the audio parameter samples */
+    unsigned int levels; /**< the audio parameter levels */
+    unsigned int i_windows; /**< the nummber of windows */
 
 } Audio_descriptor_s;
 
+/**
+ * @brief Get the parameters of audio file.
+ * 
+ * @param p_audio The pointer of audio struct containing informations about the audio file.
+ * @param p_descriptor A pointer of audio descriptor as result with new informations.
+ */
 void get_parameters_audio(Audio_s* p_audio, Audio_descriptor_s* p_descriptor);
+
+/**
+ * @brief Index audio file.
+ * 
+ * @param p_path The audio file path.
+ * @param p_descriptor The audio descriptor as result.
+ * @return Bool_e TRUE if index succeed, FALSE else.
+ */
 Bool_e index_audio(char* p_path, Audio_descriptor_s* p_descriptor);
+
+/**
+ * @brief Create the multiple necessary descriptors of audio file.
+ * 
+ * @param p_audio A pointer to the audio file informations.
+ * @param p_descriptor A pointer to the audio descriptor.
+ * @return Bool_e TRUE if creation of histograms succeed, FALSE else.
+ */
 Bool_e do_histograms_audio(Audio_s* p_audio, Audio_descriptor_s* p_descriptor);
+
+/**
+ * @brief Create an audio histogram.
+ * 
+ * @param p_audio A pointer to the audio file informations.
+ * @param p_descriptor A pointer to the audio descriptor.
+ * @param start_index The number of levels parameter.
+ * @return Bool_e TRUE if creation of historam succed, FALSE else.
+ */
 Bool_e do_histogram_audio(Audio_s* p_audio, Audio_descriptor_s* p_descriptor, unsigned int start_index);
+
+/**
+ * @brief Save the audio descriptor.
+ * 
+ * @param p_base_descriptor_audio The file descriptor in which to save the descriptor.
+ * @param p_descriptor The audio descriptor to save.
+ * @return Bool_e TRUE if saving audio descriptor succeed, FALSE else.
+ */
 Bool_e save_descriptor_audio(FILE* p_base_descriptor_audio, Audio_descriptor_s* p_descriptor);
 
 #endif

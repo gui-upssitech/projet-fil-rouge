@@ -1,11 +1,8 @@
 # General
 - [ ] **BONUS** Add auto remove descriptor when file is deleted
-- [ ] Replace `str_concat` with `strcat`
-- [ ] 
 
 # Menu
-- [ ] Add arrow movement in type box
-- [ ] Add escape possibility in password entry
+- [x] Add escape possibility in password entry
 
 # Image
 - [x] Avoid press Enter with getchar()
@@ -21,7 +18,6 @@
 - [X] Talk about black and white problem on image
 - [x] Add config files for admin
 - [x] Fix bug images display (.jpg instead of .txt)
-- [ ] Check generation id method (take the path or only the file name)
 
 # Text
 - [X] Add detection threshhold / limit

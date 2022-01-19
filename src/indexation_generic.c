@@ -2,8 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN
+            
             
 Date:       29/11/2021
 */
@@ -15,6 +15,12 @@ Date:       29/11/2021
 Bool_e automatic_indexing(void)
 {
     /* instructions */
+    /* indexing all texts */
+    if(automatic_indexing_by_data(LIST_BASE_TEXT_PATH, TEXT_BASE_PATH, BASE_TEXT_DESCRIPTOR_PATH, TEXT) == FALSE)
+    {
+        printf("Failed automatic text indexation.\n\r");
+    }
+    
     /* indexing all nb image file */
     if(automatic_indexing_by_data(LIST_BASE_IMAGE_PATH, NB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, "", IMAGE) == FALSE)
     {

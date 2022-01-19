@@ -84,7 +84,3 @@ Voici un tableau récapitulatif des différents fichiers utilisé dans l'applica
 |===
 
 WARNING: Les fichiers d'éxécution .o et .out sont ignorés grâce au _.gitignore_, tout comme le repertoire data, donc ils ne seront jamais ajoutés sur le projet
-
-
-
-
