@@ -195,15 +195,15 @@ void add_node_binary_search_tree_audio(Binary_search_tree_p *p_binary_search_tre
     }
 }
 
-Result_s get_max_tree(Binary_search_tree_p binary_search_tree, Descriptor_e data_type)
+void get_max_tree(Result_s* p_result, Binary_search_tree_p binary_search_tree)
 {
     /* instructions */
-    if (is_empty_binary_search_tree(binary_search_tree->p_right) == TRUE)
+    if (is_empty_binary_search_tree(binary_search_tree->p_right) == FALSE)
     {
-        return binary_search_tree->result ;
+        get_max_tree(p_result, binary_search_tree->p_right); 
     }
     else
     {
-        get_max_tree(binary_search_tree->p_right, data_type);
+        *p_result = binary_search_tree->result;
     }
 }

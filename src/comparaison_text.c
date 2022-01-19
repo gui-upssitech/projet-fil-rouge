@@ -27,8 +27,10 @@ Bool_e display_research_by_keyword(char* word)
     char* name;
     unsigned long hash_code;
     unsigned int occurences;
+    Bool_e first;
 
     /* initalizations */
+    first = TRUE;
 
     /* instructions */
     p_indexing_table = fopen(INDEX_TABLE_TEXT_DESCRIPTOR_PATH, "r");
@@ -59,6 +61,11 @@ Bool_e display_research_by_keyword(char* word)
             {
                 fprintf(stderr, "Error file not found in the base.\n\r");
                 return FALSE;
+            }
+            if(first == TRUE)
+            {
+                open_file(TEXT_BASE_PATH, name);
+                first = FALSE;
             }
             sprintf(buf, "%s %u", name, occurences);
             display_centered_text_console(buf);
@@ -134,7 +141,10 @@ Bool_e display_research_by_text(char* path)
     char* p_line;
     char buf[MAX_MEMORY_STRING];
 
+    Bool_e first;
+
     /* initalizations */
+    first = TRUE;
     init_keywords(&keywords);
 
     /* instructions */
@@ -297,6 +307,12 @@ Bool_e display_research_by_text(char* path)
             if(find_filename_from_id(keywords.score_texts[j].id, &p_name) == FALSE)
             {
                 return FALSE;
+            }
+
+            if(first == TRUE)
+            {
+                first = FALSE;
+                open_file(TEXT_BASE_PATH, p_name);
             }
 
             sprintf(word, "%s %.1f", p_name, keywords.score_texts[j].score);

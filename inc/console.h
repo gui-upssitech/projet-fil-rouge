@@ -27,7 +27,7 @@ Date:       29/11/2021
 #define SPACE " "
 #define PLATE "-"
 #define CORNER "+"
-#define MAX_CHAR_PER_LINE 60
+#define MAX_CHAR_PER_LINE 100
 
 /**
  * @brief Clear the console.

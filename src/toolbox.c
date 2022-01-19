@@ -304,3 +304,19 @@ Bool_e read_integer(long *p_value)
         return TRUE;
     }
 }
+
+Bool_e open_file(char* path, char* filename)
+{
+    int ret;
+    char command[MAX_MEMORY_STRING];
+    
+    sprintf(command, "xdg-open %s%s", path, filename);
+    ret = system(command);
+    
+    if(ret == -1)
+    {
+        fprintf(stderr, "Error running command : %s.\n\r", command);
+        return FALSE;
+    }
+    return TRUE;
+}

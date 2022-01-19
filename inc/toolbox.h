@@ -131,4 +131,6 @@ char* str_concat(char* str1, char* str2);
  */
 unsigned int get_bytes_size_file(FILE* p_file);
 
+Bool_e open_file(char* path, char* filename);
+
 #endif

@@ -920,6 +920,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
     char* path;
     int code;
     int ret;
+    Result_s result;
 
     /* initalizations */
     ret = 0;
@@ -974,6 +975,8 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
                         strcpy(strrchr(path, '.'), ".txt");
                         if(compare_image_files(path, &confidence_tree, TRUE) == TRUE)
                         {
+                            get_max_tree(&result, confidence_tree);
+                            open_file(RGB_BASE_PATH, result.name);
                             display_image_result_menu(confidence_tree, path, TRUE);
                         }
                         else
@@ -994,6 +997,8 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
                         strcpy(strrchr(path, '.'), ".txt");
                         if(compare_image_files(path, &confidence_tree, FALSE) == TRUE)
                         {
+                            get_max_tree(&result, confidence_tree);
+                            open_file(NB_BASE_PATH, result.name);
                             display_image_result_menu(confidence_tree, path, FALSE);
                         }
                         else
