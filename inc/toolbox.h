@@ -54,7 +54,7 @@ Bool_e is_extension_file(const char* path, char* extension);
  * @param code A code status (0 if Enter key validation, -1 if Escape key abandonment)
  * @return Bool_e TRUE if succeed, FALSE else.
  */
-Bool_e read_path(char** path, int* code);
+Bool_e read_string(char** path, int* code);
 
 /**
  * @brief Shift bits of a b-times to the left if b is positive, to the right else.

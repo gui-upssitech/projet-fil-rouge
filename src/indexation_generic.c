@@ -10,6 +10,7 @@ Date:       29/11/2021
 
 #include "dynamic_stack.h"
 #include "indexation_generic.h"
+#include "binary_tree_text.h"
 
 Bool_e automatic_indexing(void)
 {
@@ -21,21 +22,21 @@ Bool_e automatic_indexing(void)
     }
     
     /* indexing all nb image file */
-    if(automatic_indexing_by_data(LIST_BASE_IMAGE_PATH, NB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
+    if(automatic_indexing_by_data(LIST_BASE_IMAGE_PATH, NB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, "", IMAGE) == FALSE)
     {
         fprintf(stderr, "Error automatic indexing gray images.\n\r");
         return FALSE;
     }
 
     /* indexing all rgb image file */
-    if(automatic_indexing_by_data(LIST_BASE_IMAGE_PATH, RGB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
+    if(automatic_indexing_by_data(LIST_BASE_IMAGE_PATH, RGB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, "", IMAGE) == FALSE)
     {
         fprintf(stderr, "Error automatic indexing rgb images.\n\r");
         return FALSE;
     }
 
     /* indexing all audio files */
-    if(automatic_indexing_by_data(LIST_BASE_AUDIO_PATH, SOUND_BASE_PATH, BASE_AUDIO_DESCRIPTOR_PATH, AUDIO) == FALSE)
+    if(automatic_indexing_by_data(LIST_BASE_AUDIO_PATH, SOUND_BASE_PATH, BASE_AUDIO_DESCRIPTOR_PATH, "", AUDIO) == FALSE)
     {
         fprintf(stderr, "Error automatic indexing audio files.\n\r");
         return FALSE;
@@ -44,11 +45,12 @@ Bool_e automatic_indexing(void)
     return TRUE;
 }
 
-Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, char* p_base_path, Descriptor_e descriptor_type)
+Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, char* p_base_path, char* p_dictionary_path, Descriptor_e descriptor_type)
 {
     /* files statements */
     FILE* p_list_base;
     FILE* p_base;
+    FILE* p_index_table; /* Only used in text mode */
 
     /* dir explorer statements */
     struct dirent* p_dir;
@@ -57,10 +59,12 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
 
     /* descriptors statements */
     Dynamic_stack_p p_dynamic_stack;
+    Word_Tree_s p_dictionary;
     Unit_u unit;
 
     /* initializations */
     p_dynamic_stack = init_dynamic_stack();
+    p_dictionary = init_word_tree();
     p_list_base = fopen(p_list_base_path, "a+");
 
     /* instructions */
@@ -147,6 +151,12 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
                 case TEXT:
                     save_result = save_descriptor_text(p_base, &(unit.text_descriptor));
                     descriptor_id = unit.image_descriptor.id;
+
+                    if(update_dictionary(&p_dictionary, unit.text_descriptor) == FALSE)
+                    {
+                        fprintf(stderr, "Failed to update dictionnary");
+                        return FALSE;
+                    }
                     break;
 
                 case IMAGE:
@@ -187,5 +197,29 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
         fprintf(stderr, "Error %d closing the file %s.\n\r", errno, p_list_base_path);
         return FALSE;
     }
+
+    /* Save dictionary (only in TEXT mode) */
+    if(descriptor_type == TEXT)
+    {
+        p_index_table = fopen(p_dictionary_path, "w");
+        if(p_index_table == NULL)
+        {
+            fprintf(stderr, "Failed to open dictionary\n\r");
+            return FALSE;
+        }
+
+        if(save_dictionary_to_file(p_dictionary, p_index_table) == FALSE)
+        {
+            fprintf(stderr, "Error saving the dictionary.\n\r");
+            return FALSE;
+        }
+
+        if(fclose(p_index_table) == EOF)
+        {
+            fprintf(stderr, "Error %d closing the dictionary.\n\r", errno);
+            return FALSE;
+        }
+    }
+
     return TRUE;
 }

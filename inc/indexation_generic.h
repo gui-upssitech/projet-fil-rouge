@@ -22,6 +22,7 @@ Date:       29/11/2021
 #include "indexation_audio.h"
 #include "dynamic_stack.h"
 
+
 /**
  * @brief Index all files of the same data type.
  * 

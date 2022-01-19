@@ -30,6 +30,10 @@ void load_configuration(char *config, char *value)
     {
         G_parameters.text_indexing_parameters.indexing_text_debug = atoi(value);
     }
+    if (strcmp(config, "indexing_text_number_table_index") == 0)
+    {
+        G_parameters.text_indexing_parameters.indexing_text_number_table_index = atoi(value);
+    }
 
     if (strcmp(config, "indexing_image_quantification") == 0)
     {

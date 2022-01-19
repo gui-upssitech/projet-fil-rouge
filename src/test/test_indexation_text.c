@@ -16,7 +16,7 @@ int main()
 
     load_configurations();
 
-    if(automatic_indexing_by_data(LIST_BASE_TEXT_PATH, TEXT_BASE_PATH, BASE_TEXT_DESCRIPTOR_PATH, TEXT) == FALSE)
+    if(automatic_indexing_by_data(LIST_BASE_TEXT_PATH, TEXT_BASE_PATH, BASE_TEXT_DESCRIPTOR_PATH, INDEX_TABLE_TEXT_DESCRIPTOR_PATH, TEXT) == FALSE)
     {
         printf("Failed automatic text indexation.\n\r");
     }
@@ -24,7 +24,6 @@ int main()
     clock_t end = clock();
 
     time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
-
     printf("Text indexing finished in %lf seconds\n", time_spent);
 
     return 0;

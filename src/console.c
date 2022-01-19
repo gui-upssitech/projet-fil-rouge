@@ -522,7 +522,7 @@ void display_about_menu()
         case 'q':
             return;
             break;
-        
+    
         default:
             return;
             break;
@@ -530,8 +530,80 @@ void display_about_menu()
     }
 }
 
+void display_text_research_by_keyword_menu()
+{
+    /* statements */
+    char* word;
+    int code;
+
+    /* initalizations */
+
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Recherche par mot-clef");
+        display_centered_text_console("");
+        display_centered_text_console("Inserer le mot a rechercher");
+        display_centered_text_console("Taper Echap pour quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        if(read_string(&word, &code) == FALSE)
+        {
+            fprintf(stderr, "Error reading word research file.\n\r");
+            return FALSE;
+        }
+
+        if(code == 0)
+        {
+            display_research_by_keyword(word);
+        }
+        else
+        {
+            break;
+        }
+    }
+    return TRUE;
+
+}
+
 void display_text_research_menu()
 {
+    /* statements */
+    char c;
+
+    /* instructions */
+    while(1)
+    {
+        clear_console();
+        print_plate_console();
+        display_centered_text_console("");
+        display_centered_text_console("Menu Texte");
+        display_centered_text_console("");
+        display_centered_text_console(" Recherche par :");
+        display_centered_text_console("(1) Mot-clef");
+        display_centered_text_console("(2) Texte");
+        display_centered_text_console("(q) Quitter");
+        display_centered_text_console("");
+        print_plate_console();
+        c = get_char_menu('3');
+        switch (c)
+        {
+        case '1':
+            display_text_research_by_keyword_menu();
+            break;
+
+        case '2':     
+            break;
+
+        case 'q':
+        default:
+            return;
+            break;
+        }
+    }
 
 }
 
@@ -620,7 +692,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
         display_centered_text_console("Taper Echap pour quitter");
         display_centered_text_console("");
         print_plate_console();
-        if(read_path(&path, &code) == FALSE)
+        if(read_string(&path, &code) == FALSE)
         {
             fprintf(stderr, "Error reading path file.\n\r");
             return FALSE;
@@ -805,7 +877,7 @@ Bool_e display_audio_by_path_research_menu()
         display_centered_text_console("Taper Echap pour quitter");
         display_centered_text_console("");
         print_plate_console();
-        if(read_path(&path, &code) == FALSE)
+        if(read_string(&path, &code) == FALSE)
         {
             fprintf(stderr, "Error reading path file.\n\r");
             return FALSE;

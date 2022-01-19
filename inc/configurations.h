@@ -28,7 +28,8 @@ typedef struct
 {
     unsigned int indexing_text_filter_mode; /**< The text indexing filter mode. */
     unsigned int indexing_text_filter_value; /**< The text indexing filter value in function of the filter mode. */
-    unsigned int indexing_text_debug; /**< The text indexing debug mode */
+    unsigned int indexing_text_debug; /**< The text indexing debug mode */  
+    unsigned int indexing_text_number_table_index;
 } Text_indexing_parameters_s;
 
 #define MIN_QUANTIFICATION_SIZE 1
