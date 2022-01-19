@@ -105,16 +105,23 @@ Bool_e add_occurence(Word_s **word, Word_occurence_s occurence)
     return TRUE;
 }
 
-Bool_e word_to_string(Word_s word, char **output)
+Bool_e word_to_string(Word_s word, char** output)
 {
     unsigned int i;
+    char buf[MAX_MEMORY_STRING];
 
     *output = (char *) malloc(MAX_MEMORY_STRING * sizeof(char));
+    if(*output == NULL)
+    {
+        fprintf(stderr, "Error allocating memory to convert word to string.\n\r");
+        return FALSE;
+    }
     sprintf(*output, "%s", word.word_name);
 
     for (i = 0; i < word.tab_cursor; i++)
     {
-        sprintf(*output, "%s\n%lu %u", *output, word.t_occurences[i].origin_id, word.t_occurences[i].num_occurences);
+        sprintf(buf, "\n%lu %u", word.t_occurences[i].origin_id, word.t_occurences[i].num_occurences);
+        strcat(*output, buf);
     }
 
     return TRUE;

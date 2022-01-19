@@ -11,6 +11,7 @@
     "comparaison_image.h": "c",
     "type_traits": "c",
     "comparaison_audio.h": "c",
-    "limits": "c"
+    "limits": "c",
+    "comparaison_text.h": "c"
   }
 }

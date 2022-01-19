@@ -199,7 +199,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
     }
 
     /* Save dictionary (only in TEXT mode) */
-    if(descriptor_type == TEXT)
+    if(descriptor_type == TEXT && is_empty_word_tree(p_dictionary) == FALSE)
     {
         p_index_table = fopen(p_dictionary_path, "w");
         if(p_index_table == NULL)

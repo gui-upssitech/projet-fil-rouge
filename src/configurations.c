@@ -13,7 +13,7 @@ Date:       29/11/2021
 
 #include "configurations.h"
 
-Parameters_s G_parameters = {{0, 10, 0}, {2}, {1024, 100}, {60.0}, {1, 80.0}};
+Parameters_s G_parameters = {{0, 10, 0, 5}, {2}, {1024, 100}, {60.0}, {1, 80.0}};
 
 void load_configuration(char *config, char *value)
 {

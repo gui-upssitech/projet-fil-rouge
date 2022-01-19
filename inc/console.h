@@ -30,11 +30,17 @@ Date:       29/11/2021
 #define MAX_CHAR_PER_LINE 60
 
 /**
+ * @brief Clear the console.
+ * 
+ */
+void clear_console();
+
+/**
  * @brief Display a centered text depending of macro-parameters (MAX_CHAR_PER_LINE, WALL).
  * 
  * @param p_text The text to display.
  */
-void display_centered_text_console(const char* p_text);
+void display_centered_text_console(const char *p_text);
 
 /**
  * @brief Print blank_size time a SPACE in console. 
@@ -122,7 +128,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored);
  * @param path The path of the search image by user.
  * @param colored Boolean variable to indicate if the menu is for a colored or gray image.
  */
-void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path, Bool_e colored);
+void display_image_result_menu(Binary_search_tree_p confidence_tree, char *path, Bool_e colored);
 
 /**
  * @brief Display audio by path research menu.
@@ -138,12 +144,26 @@ Bool_e display_audio_by_path_research_menu();
  * @param size The size of time_code_forest.
  * @param path The path of the search file by user.
  */
-void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned int size, char* path);
+void display_audio_result_menu(Binary_search_tree_p *time_code_forest, unsigned int size, char *path);
 
 /**
  * @brief Display indexing admin menu.
  * 
  */
 void display_indexation_admin_menu();
+
+/**
+ * @brief Display the menu of research by keyword
+ * 
+ * @return Bool_e 
+ */
+Bool_e display_text_research_by_keyword_menu();
+
+/**
+ * @brief Display the menu of research by text
+ * 
+ * @return Bool_e 
+ */
+Bool_e display_text_research_by_text_menu();
 
 #endif

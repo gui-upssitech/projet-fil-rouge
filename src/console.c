@@ -9,6 +9,7 @@ Date:       29/11/2021
 */
 
 #include "console.h"
+#include "comparaison_text.h"
 
 void clear_console()
 {
@@ -530,7 +531,7 @@ void display_about_menu()
     }
 }
 
-void display_text_research_by_keyword_menu()
+Bool_e display_text_research_by_keyword_menu()
 {
     /* statements */
     char* word;
@@ -568,12 +569,14 @@ void display_text_research_by_keyword_menu()
     return TRUE;
 }
 
-void display_text_research_by_text_menu(){
+Bool_e display_text_research_by_text_menu(){
 /* statements */
     char* path;
     int code;
+    int ret ; 
 
     /* initalizations */
+    ret = 0 ;
 
     /* instructions */
     while(1)
@@ -594,7 +597,7 @@ void display_text_research_by_text_menu(){
         }
 
         if(code == 0)
-        {
+        {            
             display_research_by_text(path);
         }
         else

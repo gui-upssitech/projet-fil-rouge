@@ -113,7 +113,7 @@ Bool_e update_dictionary(Word_Tree_s* p_dictionary, Text_descriptor_s descriptor
     while (buffer)
     {
         char* new_buffer = strchr(buffer, '\n');
-        int line_len = new_buffer ? (new_buffer - buffer) : strlen(buffer);
+        size_t line_len = new_buffer ? (size_t) (new_buffer - buffer) : strlen(buffer);
         line = (char*) malloc(line_len + 1);
 
         if (line == NULL)

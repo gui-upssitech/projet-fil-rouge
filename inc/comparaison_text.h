@@ -15,18 +15,29 @@ Date:       29/11/2021
 #include <stdlib.h>
 #include <string.h>
 
+#include "console.h"
 #include "indexation_text.h"
 #include "toolbox.h"
 
-typedef struct comparaison_text
+typedef struct
 {
-    /* data */
-};
+    char* word;
+    unsigned int occurences;
+    float word_weight;
+} Keyword_s;
+
+typedef struct
+{    
+    unsigned int size;
+    Keyword_s* keywords;
+} Keywords_s;
 
 /* METHODS */
 
+void init_keywords(Keywords_s* keywords);
 Bool_e display_research_by_keyword(char *word);
 Bool_e find_filename_from_id(unsigned long id, char **filename);
 Bool_e display_research_by_text(char *path);
+
 
 #endif
