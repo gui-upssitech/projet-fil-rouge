@@ -5,7 +5,7 @@ INCDIR = inc
 OBJDIR = obj
 APPDIR = app
 
-CFLAGS = -I$(INCDIR) -g -Wall
+CFLAGS = -I$(INCDIR) -g -W -Wall
 
 SRC = $(wildcard $(SRCDIR)/*.c)
 OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
@@ -54,5 +54,10 @@ test_comparison_image: $(OBJ) src/test/test_comparison_image.c
 
 test_comparison_audio: $(OBJ) src/test/test_comparison_audio.c
 	gcc -c src/test/test_comparison_audio.c $(CFLAGS)
+	mv ./*.o ./obj
+	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)	
+
+main: $(OBJ) src/release/main.c
+	gcc -c src/release/main.c $(CFLAGS)
 	mv ./*.o ./obj
 	$(CC) -o $(APPDIR)/$@ $^ $(CFLAGS)	

@@ -2,8 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN
+            
             
 Date:       29/11/2021
 */
@@ -32,22 +32,22 @@ Bool_e is_regular_file(const char *path)
     return S_ISREG(path_stat.st_mode) > 0 ? TRUE : FALSE;
 }
 
-Bool_e is_extension_file(const char* path, char* extension)
+Bool_e is_extension_file(const char *path, char *extension)
 {
     /* statements */
-    char* dot;
-    char* read_extension;
+    char *dot;
+    char *read_extension;
 
     /* instructions */
     dot = strrchr(path, '.');
-    if(!dot || dot == path)
+    if (!dot || dot == path)
     {
         return FALSE;
     }
 
     read_extension = dot + 1;
 
-    if( strcmp(read_extension, extension) != 0)
+    if (strcmp(read_extension, extension) != 0)
     {
         return FALSE;
     }
@@ -55,7 +55,7 @@ Bool_e is_extension_file(const char* path, char* extension)
     return TRUE;
 }
 
-Bool_e read_path(char** path, int* code)
+Bool_e read_path(char **path, int *code)
 {
     /* statements */
     int i;
@@ -63,10 +63,10 @@ Bool_e read_path(char** path, int* code)
 
     /* initializations */
     i = 0;
-    *path = (char*) malloc(sizeof(char));
+    *path = (char *)malloc(sizeof(char));
 
     /* instructions */
-    if(*path == NULL)
+    if (*path == NULL)
     {
         fprintf(stderr, "Error memory allocation.\n\r");
         return FALSE;
@@ -74,12 +74,12 @@ Bool_e read_path(char** path, int* code)
 
     do
     {
-        c = getch(); 
+        c = getch();
         printf("%c", c);
         (*path)[i] = c;
-        if((*path)[i] == 0x7F) // TO DO
+        if ((*path)[i] == 0x7F)
         {
-            if(i > 0)
+            if (i > 0)
             {
                 i--;
             }
@@ -88,18 +88,18 @@ Bool_e read_path(char** path, int* code)
         }
 
         i++;
-        *path = (char*) realloc(*path, (i + 1) * sizeof(char));
-        if(*path == NULL)
+        *path = (char *)realloc(*path, (i + 1) * sizeof(char));
+        if (*path == NULL)
         {
             fprintf(stderr, "Error memory reallocation.\n\r");
             return FALSE;
         }
-        
-    } while(c != ESCAPE_KEY && c != ENTER_KEY);
+
+    } while (c != ESCAPE_KEY && c != ENTER_KEY);
 
     (*path)[i - 1] = '\0';
 
-    if(c == ESCAPE_KEY)
+    if (c == ESCAPE_KEY)
     {
         *code = -1;
     }
@@ -113,10 +113,10 @@ Bool_e read_path(char** path, int* code)
 
 unsigned short shift(unsigned char a, int b)
 {
-    return ((b < 0) ? (((unsigned short) a) >> -b) : (((unsigned short) a) << b));
+    return ((b < 0) ? (((unsigned short)a) >> -b) : (((unsigned short)a) << b));
 }
 
-unsigned int get_bytes_size_file(FILE* p_file)
+unsigned int get_bytes_size_file(FILE *p_file)
 {
     /* statements */
     int bytes;
@@ -128,53 +128,59 @@ unsigned int get_bytes_size_file(FILE* p_file)
     return bytes;
 }
 
-char* str_concat(char* str1, char* str2)
+char* str_concat(char *str1, char *str2)
 {
     /* statements */
-    char* ret;
+    char *ret;
     unsigned int size1, size2;
     unsigned int i;
 
     /* initializations */
     size1 = get_array_size_from_pointer(str1);
     size2 = get_array_size_from_pointer(str2);
-    ret = (char *) malloc((size1 + size2 + 1) * sizeof(char));
+    ret = (char*) malloc((size1 + size2 + 1) * sizeof(char));
 
-    /* instructions */
-    for(i = 0; i < size1; i++)
-        *(ret + i) = *(str1 + i);
+    if (ret != NULL)
+    {
+        /* instructions */
+        for (i = 0; i < size1; i++)
+            *(ret + i) = *(str1 + i);
 
-    for(i = 0; i < size2; i++)
-        *(ret + size1 + i) = *(str2 + i);
-    
-    *(ret + size1 + i) = '\0';
-    
+        for (i = 0; i < size2; i++)
+            *(ret + size1 + i) = *(str2 + i);
+
+        *(ret + size1 + i) = '\0';
+    }
+
     return ret;
 }
 
-Bool_e file_contains_substring(FILE* p_file, char* p_str, char** ret_line)
+Bool_e file_contains_substring(FILE *p_file, char *p_str, char **ret_line)
 {
     /* statements */
     size_t len;
     ssize_t read;
-    char* p_line;
+    char *p_line;
 
     /* initializations */
     p_line = NULL;
     len = 0;
 
     /* instructions */
-    while(!feof(p_file))
+    if(p_file != NULL)
     {
-        if((read = getline(&p_line, &len, p_file)) != -1)
+        while (!feof(p_file))
         {
-            if(strstr(p_line, p_str) != NULL)
+            if ((read = getline(&p_line, &len, p_file)) != -1)
             {
-                if(ret_line != NULL)
+                if (strstr(p_line, p_str) != NULL)
                 {
-                    *ret_line = p_line;
+                    if (ret_line != NULL)
+                    {
+                        *ret_line = p_line;
+                    }
+                    return TRUE;
                 }
-                return TRUE;
             }
         }
     }
@@ -186,27 +192,28 @@ char getch(void)
 {
     struct termios oldattr, newattr;
     int ch;
-    tcgetattr( STDIN_FILENO, &oldattr );
+    tcgetattr(STDIN_FILENO, &oldattr);
     newattr = oldattr;
-    newattr.c_lflag &= ~( ICANON | ECHO);
-    tcsetattr( STDIN_FILENO, TCSANOW, &newattr );
+    newattr.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
     system("stty -echo");
     ch = getchar();
     system("stty echo");
-    tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
     return ch;
 }
 
-void fflush_stdin()
+void fflush_stdin(void)
 {
     /* statements */
     char c;
 
     /* instructions */
-    for(c = 0; c != '\n' && c != EOF; c = getchar());
+    for (c = 0; c != '\n' && c != EOF; c = getchar())
+        ;
 }
 
-unsigned int get_array_size_from_pointer(char* p_array)
+unsigned int get_array_size_from_pointer(const char *p_array)
 {
     /* statements */
     unsigned int size;
@@ -216,14 +223,14 @@ unsigned int get_array_size_from_pointer(char* p_array)
     size = 0;
 
     /* instructions */
-    while((c = *p_array++) != '\0')
+    while ((c = *p_array++) != '\0')
     {
         size++;
     }
     return size;
 }
 
-unsigned long hash(char* p_string)
+unsigned long hash(char *p_string)
 {
     /* statements */
     unsigned long hash = 5381;
@@ -239,22 +246,22 @@ unsigned long hash(char* p_string)
     return hash;
 }
 
-Bool_e read_integer(long* p_value)
+Bool_e read_integer(long *p_value)
 {
     /* statements */
     char a_string[MAX_MEMORY_STRING];
-    char* p_end;
+    char *p_end;
 
     /* initializations */
 
     /* instructions */
-    if(scanf("%s", a_string) != 1)
+    if (scanf("%s", a_string) != 1)
     {
         return FALSE;
     }
 
     *p_value = strtol(a_string, &p_end, 10);
-    if((*p_value == 0L && p_end == a_string) || errno == ERANGE)
+    if ((*p_value == 0L && p_end == a_string) || errno == ERANGE)
     {
         return FALSE;
     }
@@ -262,45 +269,4 @@ Bool_e read_integer(long* p_value)
     {
         return TRUE;
     }
-}
-
-// Source : https://stackoverflow.com/questions/646241/c-run-a-system-command-and-get-output
-char* run_command(char* command)
-{
-    FILE *fp;
-    char *command_out = "";
-    char buffer[1035];
-
-    /* Open the command for reading. */
-    fp = popen(command, "r");
-    if (fp == NULL)
-    {
-        fprintf(stderr, "Error: Failed to read stdout");
-    }
-
-    /* Read the output a line at a time - output it. */
-    while (fgets(buffer, sizeof(buffer), fp) != NULL) {
-        command_out = str_concat(command_out, buffer);
-    }
-
-    if(strlen(command_out) > 0)
-    {
-        command_out[strlen(command_out)-1] = '\0';
-    }
-
-    /* close */
-    pclose(fp);
-    return command_out;
-}
-
-// Source : https://stackoverflow.com/questions/933850/how-do-i-find-the-location-of-the-executable-in-c
-char* get_absolute_path(char* path)
-{
-    static char* base_dir = "";
-    if(strcmp(base_dir,"") == 0)
-    {
-        base_dir = run_command("pwd");
-    }
-
-    return str_concat(base_dir, path);
 }

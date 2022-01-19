@@ -1,3 +1,12 @@
+/*
+Authors:    Constant ROUX,
+            Julian TRANI,
+            Peter PIRIOU--DEZY,
+            Guillaume ROUSSIN        
+            
+Date:       29/11/2021
+*/
+
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
 
@@ -5,18 +14,19 @@
 #include "comparaison_generic.h"
 
 /**
- * A structure to represent a leaf of binary search tree.
+ * @brief A structure to represent a leaf of binary search tree.
+ * 
  */
 typedef struct leaf
 {
-    Result_s result; /**< The result (IMAGE or AUDIO) */
-    struct leaf* p_left; /**< The left leaf pointer (IMAGE or AUDIO) */ 
-    struct leaf* p_right; /**< The right leaf pointer (IMAGE or AUDIO) */
+    Result_s result; /**< The result (IMAGE or AUDIO). */
+    struct leaf* p_left; /**< The left leaf pointer (IMAGE or AUDIO). */ 
+    struct leaf* p_right; /**< The right leaf pointer (IMAGE or AUDIO). */
     /*@}*/
 } Leaf_s;
 
 /**
- * A structure to represent a tree, the first leaf of binary search tree. 
+ * @brief A type to represent a tree, the first leaf of binary search tree. 
  */
 typedef Leaf_s* Binary_search_tree_p; 
 
@@ -49,10 +59,18 @@ Bool_e is_empty_binary_search_tree(Binary_search_tree_p p_binary_search_tree);
  * right else.
  * 
  * @param p_binary_search_tree A pointer of the binary search tree for wich we want to add a result.
- * @param result The result to add (can be IMAGE or AUDIO result).
+ * @param result The result to add.
  */
 void add_node_binary_search_tree_image(Binary_search_tree_p* p_binary_search_tree, Result_s result);
 
+/**
+ * @brief Add a result in a binary search tree. Left if the confidence of the result is lower than the current node,
+ * right else.
+ * 
+ * @param p_binary_search_tree A pointer of the binary search tree for wich we want to add a result.
+ * @param result The result to add.
+ * @param duration The time code of the result.
+ */
 void add_node_binary_search_tree_audio(Binary_search_tree_p* p_binary_search_tree, Result_s result, int duration);
 
 #endif

@@ -2,15 +2,15 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN
+            
             
 Date:       29/11/2021
 */
 
 #include "dynamic_stack.h"
 
-Dynamic_stack_p init_dynamic_stack()
+Dynamic_stack_p init_dynamic_stack(void)
 {
     /* instructions */
     return NULL;
@@ -28,7 +28,8 @@ Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u u
     Node_s* p_node;
 
     /* instructions */
-    p_node = malloc(sizeof(Node_s));
+    int size = sizeof(Node_s);
+    p_node = (Node_s*) malloc(size);
     if(p_node == NULL)
     {
         fprintf(stderr, "Error memory allocation.\n\r");

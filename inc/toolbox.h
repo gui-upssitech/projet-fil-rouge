@@ -2,8 +2,7 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN            
             
 Date:       29/11/2021
 */
@@ -48,7 +47,6 @@ Bool_e is_regular_file(const char *path);
  */
 Bool_e is_extension_file(const char* path, char* extension);
 
-
 /**
  * @brief Read a path with Enter key validation or Escape key abandonment.
  * 
@@ -89,20 +87,20 @@ unsigned long hash(char* p_string);
  * @param p_array The char array for which we want the size.
  * @return unsigned int The size of the array.
  */
-unsigned int get_array_size_from_pointer(char* p_array);
+unsigned int get_array_size_from_pointer(const char* p_array);
 
 /**
  * @brief Flush the stdin buffer.
  * 
  */
-void fflush_stdin();
+void fflush_stdin(void);
 
 /**
  * @brief Get a char in stdin without echo and enter-key validation.
  * 
  * @return char The read char from stdin.
  */
-char getch();
+char getch(void);
 
 /**
  * @brief Know if a file contains a specific string.
@@ -130,8 +128,5 @@ char* str_concat(char* str1, char* str2);
  * @return unsigned int The number of bytes in p_file.
  */
 unsigned int get_bytes_size_file(FILE* p_file);
-
-char* run_command(char* command);
-char* get_absolute_path(char* path);
 
 #endif

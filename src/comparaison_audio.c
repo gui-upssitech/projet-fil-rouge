@@ -2,8 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN
+            
             
 Date:       29/11/2021
 */
@@ -13,7 +13,7 @@ Date:       29/11/2021
 Bool_e compare_audio_descriptors(char* file_name, Audio_descriptor_s p_descriptor1, Audio_descriptor_s p_descriptor2, Binary_search_tree_p* p_tree)
 {
     /* statements */
-    int shift_value, i, j, k;
+    unsigned int shift_value, i, j, k;
     double double_buffer;
     Audio_descriptor_s buffer;
     Result_s result;

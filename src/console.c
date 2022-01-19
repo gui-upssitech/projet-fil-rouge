@@ -2,8 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN
+            
             
 Date:       29/11/2021
 */
@@ -32,7 +32,7 @@ void print_plate_console()
 void print_blank_console(unsigned int blank_size)
 {
     /* statements */
-    int i;
+    unsigned int i;
 
     /* instructions */
     for(i = 0; i < blank_size; i++)
@@ -41,7 +41,7 @@ void print_blank_console(unsigned int blank_size)
     }
 }
 
-void display_centered_text_console(char* p_text)
+void display_centered_text_console(const char* p_text)
 {
     /* statements */
     unsigned int long size, blank_size;
@@ -144,6 +144,7 @@ void display_main_menu()
 Bool_e display_new_pwd_menu(Bool_e first_password)
 {
     /* statements */
+    int code;
     FILE* p_password_file;
     unsigned long password;
 
@@ -170,25 +171,29 @@ Bool_e display_new_pwd_menu(Bool_e first_password)
     
     display_centered_text_console("");
     print_plate_console();
-    password = get_hashed_password();
-    if(fprintf(p_password_file, "%lu", password))
+    password = get_hashed_password(&code);
+    if(code == 1)
     {
-        fprintf(stderr, "Error %d printing password %lu.\n\r", errno, password);
-        return FALSE;
-    }
+        if(fprintf(p_password_file, "%lu", password))
+        {
+            fprintf(stderr, "Error %d printing password %lu.\n\r", errno, password);
+            return FALSE;
+        }
 
-    if(fclose(p_password_file) == EOF)
-    {
-        fprintf(stderr, "Error %d closing the file %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
-        return FALSE;
+        if(fclose(p_password_file) == EOF)
+        {
+            fprintf(stderr, "Error %d closing the file %s.\n\r", errno, PASSWORD_RELATIVE_PATH);
+            return FALSE;
+        }
     }
-
+    
     return TRUE;
 }
 
 void display_login_menu()
 {
     /* statements */
+    int code;
     unsigned long password;
     static unsigned char nb_try = 1;
     char str[2];
@@ -199,28 +204,37 @@ void display_login_menu()
     print_plate_console();
     display_centered_text_console("");
     display_centered_text_console(str_concat(str_concat("Mot de passe (", str), (str[0] == '1') ? " essai restant)" : " essais restants)"));
+    display_centered_text_console("Taper Echap pour quitter");
     display_centered_text_console("");
     print_plate_console();
 
     /* instructions */
-    password = get_hashed_password();
-    if(is_password_valid(password) == TRUE)
+    password = get_hashed_password(&code);
+    if(code == 1)
     {
-        nb_try = 1;
-        display_admin_menu();
-    }
-    else
-    {
-        if(nb_try < MAX_TRY_PASSWORD)
+        if(is_password_valid(password) == TRUE)
         {
-            nb_try++;
-            display_login_menu();
+            nb_try = 1;
+            display_admin_menu();
         }
         else
         {
-            nb_try = 1;
-            return;
+            if(nb_try < MAX_TRY_PASSWORD)
+            {
+                nb_try++;
+                display_login_menu();
+            }
+            else
+            {
+                nb_try = 1;
+                return;
+            }
         }
+    }
+    else
+    {
+        nb_try = 1;
+        return;
     }
 } 
 
@@ -321,7 +335,7 @@ void display_indexation_admin_menu()
     Bool_e ret;
     char c;
     long value;
-    char conversion[2];
+    char conversion[MAX_MEMORY_STRING];
 
     /* instructions */
     while(1)
@@ -349,6 +363,32 @@ void display_indexation_admin_menu()
         switch (c)
         {
         case '1':
+            do
+            {
+                printf("Veuillez choisir le mode (0 pour %s ou 1 pour %s) : ", LIMIT_MODE, THRESHOLD_MODE);
+                ret = read_integer(&value);
+                printf("\33[1A\33[2K\r");
+            } while(ret != 0 && ret != 1);
+
+            if(sprintf(conversion, "%ld", value) == EOF)
+            {
+                fprintf(stderr, "Error %d converting text mode value integer to char array.\n\r", errno);
+                return;
+            }
+
+            if(save_configuration("indexing_text_filter_mode", conversion) == FALSE)
+            {
+                fprintf(stderr, "Error saving new text mode value.\n\r");
+                return;
+            }
+
+            // fopen(LIST_BASE_IMAGE_PATH, "w");
+            // fopen(BASE_IMAGE_DESCRIPTOR_PATH, "w");
+            if(automatic_indexing() == FALSE)
+            {
+                fprintf(stderr, "Error re-indexing text with new mode.\n\r");
+                return;
+            }
             break;
 
         case '2':
@@ -373,8 +413,8 @@ void display_indexation_admin_menu()
                 return;
             }
 
-            fopen(LIST_BASE_IMAGE_PATH, "w");
-            fopen(BASE_IMAGE_DESCRIPTOR_PATH, "w");
+            fclose(fopen(LIST_BASE_IMAGE_PATH, "w"));
+            fclose(fopen(BASE_IMAGE_DESCRIPTOR_PATH, "w"));
             if(automatic_indexing() == FALSE)
             {
                 fprintf(stderr, "Error re-indexing images with new quantification.\n\r");
@@ -402,8 +442,8 @@ void display_indexation_admin_menu()
                 return;
             }
 
-            fopen(LIST_BASE_AUDIO_PATH, "w");
-            fopen(BASE_AUDIO_DESCRIPTOR_PATH, "w");
+            fclose(fopen(LIST_BASE_AUDIO_PATH, "w"));
+            fclose(fopen(BASE_AUDIO_DESCRIPTOR_PATH, "w"));
             if(automatic_indexing() == FALSE)
             {
                 fprintf(stderr, "Error re-indexing audio with new samples.\n\r");
@@ -431,8 +471,8 @@ void display_indexation_admin_menu()
                 return;
             }
 
-            fopen(LIST_BASE_AUDIO_PATH, "w");
-            fopen(BASE_AUDIO_DESCRIPTOR_PATH, "w");
+            fclose(fopen(LIST_BASE_AUDIO_PATH, "w"));
+            fclose(fopen(BASE_AUDIO_DESCRIPTOR_PATH, "w"));
             if(automatic_indexing() == FALSE)
             {
                 fprintf(stderr, "Error re-indexing audio with new levels.\n\r");
@@ -469,7 +509,6 @@ void display_about_menu()
         display_centered_text_console("Guillaume ROUSSIN");
         display_centered_text_console("Peter PIRIOU--DEZY");
         display_centered_text_console("Constant ROUX");
-        display_centered_text_console("Nelson SANCHEZ");
         display_centered_text_console("");
         display_centered_text_console("Version");
         display_centered_text_console("0.1");
@@ -510,24 +549,19 @@ void display_image_research_menu()
         display_centered_text_console("Menu Image");
         display_centered_text_console("");
         display_centered_text_console("Recherche par :");
-        display_centered_text_console("(1) Code couleur");
-        display_centered_text_console("(2) Image couleur");
-        display_centered_text_console("(3) Image niveaux de gris");
+        display_centered_text_console("(1) Image couleur");
+        display_centered_text_console("(2) Image niveaux de gris");
         display_centered_text_console("(q) Quitter");
         display_centered_text_console("");
         print_plate_console();
-        c = get_char_menu('4');
+        c = get_char_menu('3');
         switch (c)
         {
         case '1':
-            display_image_by_hexacode_research_menu();
-            break;
-
-        case '2':
             display_image_by_path_research_menu(TRUE);
             break;
         
-        case '3':
+        case '2':
             display_image_by_path_research_menu(FALSE);
             break;
 
@@ -540,23 +574,6 @@ void display_image_research_menu()
             break;
         }
     }
-}
-
-Bool_e display_image_by_hexacode_research_menu()
-{
-    /* statements */
-    Binary_search_tree_p confidence_tree;
-
-    /* instructions */
-    if(compare_image_hexacode("rouge", &confidence_tree) == FALSE)
-    {
-        fprintf(stderr, "Error comparing image by color.\n\r");
-        return FALSE;
-    }
-
-    display_image_by_hexacode_result_menu(confidence_tree, "rouge");
-
-    return TRUE;
 }
 
 Bool_e display_image_by_path_research_menu(Bool_e colored)
@@ -688,30 +705,6 @@ void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path,
     
     display_centered_text_console("");
     display_centered_text_console(str_concat("Requete : ", file_name));
-    display_centered_text_console("");
-    if(is_empty_binary_search_tree(confidence_tree) == FALSE)
-    {
-        display_centered_text_console("Resultats");
-        display_binary_search_tree(confidence_tree, IMAGE);
-    }
-    else
-    {
-        display_centered_text_console("Aucun resultat");
-    }
-    display_centered_text_console("");
-    display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
-    display_centered_text_console("");
-    print_plate_console();
-    getch();
-}
-
-void display_image_by_hexacode_result_menu(Binary_search_tree_p confidence_tree, char* color)
-{
-    /* instructions */
-    clear_console();
-    print_plate_console();
-    display_centered_text_console("");
-    display_centered_text_console(str_concat("Requete : ", color));
     display_centered_text_console("");
     if(is_empty_binary_search_tree(confidence_tree) == FALSE)
     {

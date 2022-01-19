@@ -2,8 +2,8 @@
 Authors:    Constant ROUX,
             Julian TRANI,
             Peter PIRIOU--DEZY,
-            Guillaume ROUSSIN,
-            Nelson SANCHEZ
+            Guillaume ROUSSIN
+            
             
 Date:       29/11/2021
 */
@@ -11,9 +11,15 @@ Date:       29/11/2021
 #include "dynamic_stack.h"
 #include "indexation_generic.h"
 
-Bool_e automatic_indexing()
+Bool_e automatic_indexing(void)
 {
     /* instructions */
+    /* indexing all texts */
+    if(automatic_indexing_by_data(LIST_BASE_TEXT_PATH, TEXT_BASE_PATH, BASE_TEXT_DESCRIPTOR_PATH, TEXT) == FALSE)
+    {
+        printf("Failed automatic text indexation.\n\r");
+    }
+    
     /* indexing all nb image file */
     if(automatic_indexing_by_data(LIST_BASE_IMAGE_PATH, NB_BASE_PATH, BASE_IMAGE_DESCRIPTOR_PATH, IMAGE) == FALSE)
     {
@@ -63,7 +69,6 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
         fprintf(stderr, "Error %d opening %s.\n\r", errno, p_list_base_path);
         return FALSE;
     }
-
     p_d = opendir(p_data_path);
     if(p_d)
     {
@@ -118,7 +123,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
                     }
 
                     /* step 5 : add the new descriptor in the stack */
-                    p_dynamic_stack = add_unit_dynamic_stack(p_dynamic_stack, unit, descriptor_type);  
+                    p_dynamic_stack = add_unit_dynamic_stack(p_dynamic_stack, unit, descriptor_type); 
                 }
             }
         }
@@ -134,7 +139,6 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
         while(is_empty_dynamic_stack(p_dynamic_stack) == FALSE)
         {
             p_dynamic_stack = remove_unit_dynamic_stack(p_dynamic_stack, &unit, descriptor_type);
-
             Bool_e save_result;
             unsigned long descriptor_id;
 
