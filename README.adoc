@@ -36,19 +36,17 @@ Dans ce diagramme des cas d'utilisation, vous trouverez toutes les fonctionnalit
 
 image::images/user-interactions.png[User,450,align="center"]
 
-WARNING: Toutes les fonctionnalités ne sont pas encore implémentées.
-
 (Les cases cochées sont les fonctionnalités déjà codées et implémentées dans l'application)
 
-- [ ] Indexation Texte
+- [X] Indexation Texte (+ sauvegarde dans la base)
 - [x] Indexation Image (+ sauvegarde dans la base)
 - [x] Indexation Audio (+ sauvegarde dans la base)
 - [x] Comparaison Texte
 - [x] Comparaison Image
 - [x] Comparaison Audio
-- [ ] Moteur de recherche - Texte
-- [x] Moteur de recherche - Image
-- [x] Moteur de recherche - Audio
+- [X] Moteur de recherche - Texte (mot-clef / texte )
+- [x] Moteur de recherche - Image (couleur / niveaux de gris )
+- [x] Moteur de recherche - Audio  (jingle)
 - [x] Connexion pour le passage en mode admin
 - [x] Différents menus
 

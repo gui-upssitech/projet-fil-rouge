@@ -112,6 +112,8 @@ char getch(void);
  */
 Bool_e file_contains_substring(FILE* p_file, char* p_str, char** p_line);
 
+Bool_e file_contains_string(FILE *p_file, char *p_str, char **ret_line);
+
 /**
  * @brief Concat two strings from char pointers.
  * 

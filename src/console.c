@@ -586,6 +586,20 @@ Bool_e display_text_research_by_text_menu(){
         display_centered_text_console("");
         display_centered_text_console("Recherche par texte");
         display_centered_text_console("");
+        if(ret != 0)
+        {
+            if(ret == 1)
+            {
+                display_centered_text_console("Fichier inexistant ou invalide");
+            }
+            else
+            {
+                display_centered_text_console("Fichier au mauvais format");
+            }
+            
+            display_centered_text_console("");
+            ret = 0;
+        }
         display_centered_text_console("Inserer le nom du fichier texte");
         display_centered_text_console("Taper Echap pour quitter");
         display_centered_text_console("");
@@ -598,7 +612,22 @@ Bool_e display_text_research_by_text_menu(){
 
         if(code == 0)
         {            
-            display_research_by_text(path);
+            if(is_regular_file(path) == TRUE)
+            {
+                if(is_extension_file(path, "xml") == TRUE)
+                {
+                    display_research_by_text(path);
+                }
+                else
+                {
+                    ret = 2;
+                }
+            }
+            else
+            {
+                ret = 1;
+            }
+            
         }
         else
         {

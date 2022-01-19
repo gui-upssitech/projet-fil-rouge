@@ -4,25 +4,27 @@ Authors:    Constant ROUX,
             Peter PIRIOU--DEZY,
             Guillaume ROUSSIN
 
-            
+
 Date:       29/11/2021
 */
 
 #include "comparaison_text.h"
 
 void init_keywords(Keywords_s* keywords)
-{    
+{
     keywords->keywords = NULL;
     keywords->size = 0;
+    keywords->score_texts = NULL;
+    keywords->size_scores = 0;
 }
 
-Bool_e display_research_by_keyword(char *word)
+Bool_e display_research_by_keyword(char* word)
 {
     /* statements */
-    FILE *p_indexing_table;
-    char *p_line;
+    FILE* p_indexing_table;
+    char* p_line;
     char buf[MAX_MEMORY_STRING];
-    char *name;
+    char* name;
     unsigned long hash_code;
     unsigned int occurences;
 
@@ -42,7 +44,7 @@ Bool_e display_research_by_keyword(char *word)
     display_centered_text_console(str_concat("Requete : ", word));
     display_centered_text_console("");
 
-    if (file_contains_substring(p_indexing_table, word, &p_line) == TRUE)
+    if (file_contains_string(p_indexing_table, word, &p_line) == TRUE)
     {
         while (fgets(buf, sizeof(buf), p_indexing_table) != 0)
         {
@@ -81,9 +83,9 @@ Bool_e display_research_by_keyword(char *word)
     return TRUE;
 }
 
-Bool_e find_filename_from_id(unsigned long id, char **filename)
+Bool_e find_filename_from_id(unsigned long id, char** filename)
 {
-    FILE *p_list_base;
+    FILE* p_list_base;
     char buf[MAX_MEMORY_STRING];
     unsigned long hash_code;
 
@@ -99,7 +101,7 @@ Bool_e find_filename_from_id(unsigned long id, char **filename)
         fscanf(p_list_base, "%s %lu\n", buf, &hash_code);
         if (hash_code == id)
         {
-            *filename = (char *)malloc(strlen(buf) * sizeof(char));
+            *filename = (char*)malloc(strlen(buf) * sizeof(char));
             strcpy(*filename, buf);
             return TRUE;
         }
@@ -114,22 +116,36 @@ Bool_e find_filename_from_id(unsigned long id, char **filename)
     return FALSE;
 }
 
-Bool_e display_research_by_text(char *path)
+Bool_e display_research_by_text(char* path)
 {
     /* statements */
     Text_descriptor_s desc;
     char word[MAX_MEMORY_STRING];
-    char *line;
+    char* line;
     unsigned int num_occurences;
-    unsigned int i;
 
+    char* p_name;
+    Bool_e found;
+    float max;
+    unsigned long hash_code;
+    unsigned int i, j;
     Keywords_s keywords;
+    FILE* p_indexing_table;
+    char* p_line;
+    char buf[MAX_MEMORY_STRING];
 
     /* initalizations */
     init_keywords(&keywords);
 
+    /* instructions */
+    clear_console();
+    print_plate_console();
+    display_centered_text_console("");
+    display_centered_text_console(str_concat("Requete : ", path));
+    display_centered_text_console("");
+
     /* STEP 1 : Indexing the text in param */
-    if(index_text(path, &desc) == FALSE)
+    if (index_text(path, &desc) == FALSE)
     {
         fprintf(stderr, "Error indexing text research by text %s", path);
         return FALSE;
@@ -139,9 +155,9 @@ Bool_e display_research_by_text(char *path)
     /* Read line one by one and add the word/occurence to the tree */
     while (desc.descriptor_contents)
     {
-        char *new_buffer = strchr(desc.descriptor_contents, '\n');
+        char* new_buffer = strchr(desc.descriptor_contents, '\n');
         size_t line_len = new_buffer ? (size_t)(new_buffer - desc.descriptor_contents) : strlen(desc.descriptor_contents);
-        line = (char *)malloc(line_len + 1);
+        line = (char*)malloc(line_len + 1);
 
         if (line == NULL)
         {
@@ -159,38 +175,149 @@ Bool_e display_research_by_text(char *path)
             // printf("%s %u\n", word, num_occurences);
 
             /* step 1 : memory allocation */
-            keywords.keywords = (Keyword_s *)realloc(keywords.keywords, sizeof(Keyword_s) * (keywords.size + 1));
+            keywords.keywords = (Keyword_s*)realloc(keywords.keywords, sizeof(Keyword_s) * (keywords.size + 1));
             if (keywords.keywords == NULL)
             {
+                fprintf(stderr, "Error re-allocating memory.\n\r");
                 return FALSE;
             }
 
-            keywords.keywords[keywords.size].word = (char* )malloc(sizeof(char* ) * strlen(word));
+            keywords.keywords[keywords.size].word = (char*)malloc(sizeof(char*) * strlen(word));
             if (keywords.keywords[keywords.size].word == NULL)
             {
+                fprintf(stderr, "Error allocating memory.\n\r");
                 return FALSE;
             }
 
             strcpy(keywords.keywords[keywords.size].word, word);
             keywords.keywords[keywords.size].occurences = num_occurences;
 
-            keywords.size++;  
+            keywords.size++;
         }
 
         free(line);
         desc.descriptor_contents = new_buffer ? (new_buffer + 1) : NULL; /* Remove the line (the +1 skips the \n) */
     }
 
-    /* step 2 : compute all weights for each keyword */
-    for(i = 0; i < keywords.size; i++)
+    p_indexing_table = fopen(INDEX_TABLE_TEXT_DESCRIPTOR_PATH, "r");
+    if (p_indexing_table == NULL)
     {
-        keywords.keywords[i].word_weight = (float) keywords.keywords[i].occurences / (float) keywords.keywords[0].occurences;
+        fprintf(stderr, "Error opening %s.\n\r", INDEX_TABLE_TEXT_DESCRIPTOR_PATH);
+        return FALSE;
     }
 
-    /* STEP 2 :  */
+    for (i = 0; i < keywords.size; i++)
+    {
+        /* step 2 : compute all weights for each keyword */
+        keywords.keywords[i].word_weight = (float)keywords.keywords[i].occurences / (float)keywords.keywords[0].occurences;
 
-    /* STEP 3 :  */
+        if (file_contains_string(p_indexing_table, keywords.keywords[i].word, &p_line) == TRUE)
+        {
+            while (fgets(buf, sizeof(buf), p_indexing_table) != 0)
+            {
+                if (buf[0] == '\n')
+                {
+                    break;
+                }
 
-    /* instructions */
+                sscanf(buf, "%lu %u", &hash_code, &num_occurences);
+
+                /* case first text */
+                if (keywords.size_scores == 0)
+                {
+                    keywords.score_texts = realloc(keywords.score_texts, sizeof(Score_text_s) * (keywords.size_scores + 1));
+                    if (keywords.score_texts == NULL)
+                    {
+                        fprintf(stderr, "Error : realloc failed in comparaison_text research by text.\n\r");
+                        return FALSE;
+                    }
+
+                    keywords.score_texts[0].id = hash_code;
+                    keywords.score_texts[0].score = (float)num_occurences * keywords.keywords[i].word_weight;
+                    keywords.size_scores++;
+                }
+                else
+                {
+                    /* check if the text has already a score */
+                    for (j = 0, found = FALSE; j < keywords.size_scores && found == FALSE; j++)
+                    {
+                        if (hash_code == keywords.score_texts[j].id)
+                        {
+                            keywords.score_texts[j].score += (float) num_occurences * keywords.keywords[i].word_weight;
+                            found = TRUE;
+                        }
+                    }
+
+                    if (found == FALSE)
+                    {
+                        keywords.score_texts = realloc(keywords.score_texts, sizeof(Score_text_s) * (keywords.size_scores + 1));
+                        if (keywords.score_texts == NULL)
+                        {
+                            fprintf(stderr, "Error : realloc failed in comparaison_text research by text.\n\r");
+                            return FALSE;
+                        }
+
+                        keywords.score_texts[keywords.size_scores].id = hash_code;
+                        keywords.score_texts[keywords.size_scores].score = (float) num_occurences * keywords.keywords[i].word_weight;
+                        keywords.size_scores++;
+                    }
+                }
+            }
+        }
+        fseek(p_indexing_table, 0, SEEK_SET);
+    }
+
+    if (pclose(p_indexing_table) == EOF)
+    {
+        fprintf(stderr, "Error closing %s.\n\r", INDEX_TABLE_TEXT_DESCRIPTOR_PATH);
+        return FALSE;
+    }   
+
+    /* can be optimized but not enough time */
+    if(keywords.size_scores > 0)
+    {
+        while(1)
+        {
+            max = -1;
+
+            for(i = 0; i < keywords.size_scores; i++)
+            {
+                if(keywords.score_texts[i].score > max)
+                {
+                    max = keywords.score_texts[i].score;
+                    j = i;
+                }
+            }
+
+            if(max == -1)
+            {
+                break;
+            }
+
+            if(find_filename_from_id(keywords.score_texts[j].id, &p_name) == FALSE)
+            {
+                return FALSE;
+            }
+
+            sprintf(word, "%s %.1f", p_name, keywords.score_texts[j].score);
+
+            display_centered_text_console(word);
+
+            free(p_name);
+
+            keywords.score_texts[j].score = -1;
+        }
+    }
+    else
+    {
+        display_centered_text_console("Aucun resultat");
+    }
+
+    display_centered_text_console("");
+    display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
+    display_centered_text_console("");
+    print_plate_console();
+    getch();
+
     return TRUE;
 }

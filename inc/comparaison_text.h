@@ -21,6 +21,12 @@ Date:       29/11/2021
 
 typedef struct
 {
+    unsigned long id;
+    float score;
+} Score_text_s;
+
+typedef struct
+{
     char* word;
     unsigned int occurences;
     float word_weight;
@@ -28,8 +34,10 @@ typedef struct
 
 typedef struct
 {    
+    unsigned int size_scores;
     unsigned int size;
     Keyword_s* keywords;
+    Score_text_s* score_texts;
 } Keywords_s;
 
 /* METHODS */
