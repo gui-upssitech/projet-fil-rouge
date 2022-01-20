@@ -207,3 +207,22 @@ void get_max_tree(Result_s* p_result, Binary_search_tree_p binary_search_tree)
         *p_result = binary_search_tree->result;
     }
 }
+
+void get_max_confidence_audio_tree(Result_s* p_result, Binary_search_tree_p binary_search_tree)
+{
+    /* statements */
+    double max;
+
+    /* initializations */
+    max = 0;
+
+    while(is_empty_binary_search_tree(binary_search_tree) == FALSE)
+    {
+        if(binary_search_tree->result.confidence > max)
+        {
+            max = binary_search_tree->result.confidence;
+            *p_result = binary_search_tree->result;
+        }
+        binary_search_tree = binary_search_tree->p_right;
+    }
+}

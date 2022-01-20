@@ -1071,8 +1071,12 @@ void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned 
     unsigned int i;
     Bool_e one_result_existing;
 
+    Result_s max_confidence, current_confidence;
+    char command[2 * MAX_MEMORY_STRING];
+
     /* initializations */
     one_result_existing = FALSE;
+    max_confidence.confidence = 0.0;
 
     /* instructions */
     clear_console();
@@ -1087,6 +1091,12 @@ void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned 
     {
         if(is_empty_binary_search_tree(time_code_forest[i]) == FALSE)
         {
+            get_max_confidence_audio_tree(&current_confidence, time_code_forest[i]);
+            if(current_confidence.confidence > max_confidence.confidence)
+            {
+                max_confidence = current_confidence;
+            }
+
             if(one_result_existing == FALSE)
             {
                 display_centered_text_console("Resultats");
@@ -1097,6 +1107,7 @@ void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned 
             display_centered_text_console("");
         }
     }
+
     if(one_result_existing == FALSE)
     {
         display_centered_text_console("Aucun resultat");
@@ -1106,6 +1117,13 @@ void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned 
     display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
     display_centered_text_console("");
     print_plate_console();
+
+    if(one_result_existing == TRUE)
+    {
+        sprintf(command, "ffplay %s%s -ss %d > /dev/null 2> /dev/null", SOUND_BASE_PATH, max_confidence.name, max_confidence.time_code);
+        system(command);
+    }
+
     getch();
 }
 

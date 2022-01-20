@@ -14,8 +14,9 @@ Date:       29/11/2021
 #include "comparaison_generic.h"
 
 /**
- * @brief A structure to represent a leaf of binary search tree.
+ * @brief 
  * 
+
  */
 typedef struct leaf
 {
@@ -81,5 +82,6 @@ void add_node_binary_search_tree_audio(Binary_search_tree_p* p_binary_search_tre
  */
 void get_max_tree(Result_s* p_result, Binary_search_tree_p binary_search_tree);
 
+void get_max_confidence_audio_tree(Result_s* p_result, Binary_search_tree_p binary_search_tree);
 
 #endif
