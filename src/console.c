@@ -764,6 +764,7 @@ Bool_e display_text_research_by_keyword_menu()
             break;
         }
     }
+    free(word);
     return TRUE;
 }
 
@@ -832,6 +833,7 @@ Bool_e display_text_research_by_text_menu(){
             break;
         }
     }
+    free(path);
     return TRUE;
 }
 
@@ -1026,6 +1028,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
             break;
         }
     }
+    free(path);
     return TRUE;
 }
 
@@ -1205,5 +1208,6 @@ Bool_e display_audio_by_path_research_menu()
             break;
         }
     }
+    free(path);
     return TRUE;
 }

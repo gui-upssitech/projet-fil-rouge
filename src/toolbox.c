@@ -63,7 +63,7 @@ Bool_e read_string(char **path, int *code)
 
     /* initializations */
     i = 0;
-    *path = (char *)malloc(sizeof(char));
+    *path = (char*) malloc(sizeof(char));
 
     /* instructions */
     if (*path == NULL)
@@ -88,7 +88,7 @@ Bool_e read_string(char **path, int *code)
         }
 
         i++;
-        *path = (char *)realloc(*path, (i + 1) * sizeof(char));
+        *path = (char *) realloc(*path, (i + 1) * sizeof(char));
         if (*path == NULL)
         {
             fprintf(stderr, "Error memory reallocation.\n\r");
@@ -160,10 +160,9 @@ Bool_e file_contains_substring(FILE *p_file, char *p_str, char **ret_line)
     /* statements */
     size_t len;
     ssize_t read;
-    char *p_line;
 
     /* initializations */
-    p_line = NULL;
+    *ret_line = NULL;
     len = 0;
 
     /* instructions */
@@ -171,18 +170,15 @@ Bool_e file_contains_substring(FILE *p_file, char *p_str, char **ret_line)
     {
         while (!feof(p_file))
         {
-            if ((read = getline(&p_line, &len, p_file)) != -1)
+            if ((read = getline(ret_line, &len, p_file)) != -1)
             {
-                if (strstr(p_line, p_str) != NULL)
+                if (strstr(*ret_line, p_str) != NULL)
                 {
-                    if (ret_line != NULL)
-                    {
-                        *ret_line = p_line;
-                    }
                     return TRUE;
                 }
             }
         }
+        fseek(p_file, 0, SEEK_SET);
     }
 
     return FALSE;

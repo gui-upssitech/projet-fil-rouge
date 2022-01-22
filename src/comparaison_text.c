@@ -167,7 +167,7 @@ Bool_e display_research_by_text(char* path)
     {
         char* new_buffer = strchr(desc.descriptor_contents, '\n');
         size_t line_len = new_buffer ? (size_t)(new_buffer - desc.descriptor_contents) : strlen(desc.descriptor_contents);
-        line = (char*)malloc(line_len + 1);
+        line = (char*) malloc(line_len + 1);
 
         if (line == NULL)
         {
@@ -185,14 +185,14 @@ Bool_e display_research_by_text(char* path)
             // printf("%s %u\n", word, num_occurences);
 
             /* step 1 : memory allocation */
-            keywords.keywords = (Keyword_s*)realloc(keywords.keywords, sizeof(Keyword_s) * (keywords.size + 1));
+            keywords.keywords = (Keyword_s*) realloc(keywords.keywords, sizeof(Keyword_s) * (keywords.size + 1));
             if (keywords.keywords == NULL)
             {
                 fprintf(stderr, "Error re-allocating memory.\n\r");
                 return FALSE;
             }
 
-            keywords.keywords[keywords.size].word = (char*)malloc(sizeof(char*) * strlen(word));
+            keywords.keywords[keywords.size].word = (char*) malloc(sizeof(char*) * strlen(word));
             if (keywords.keywords[keywords.size].word == NULL)
             {
                 fprintf(stderr, "Error allocating memory.\n\r");
@@ -208,6 +208,8 @@ Bool_e display_research_by_text(char* path)
         free(line);
         desc.descriptor_contents = new_buffer ? (new_buffer + 1) : NULL; /* Remove the line (the +1 skips the \n) */
     }
+
+    free(desc.descriptor_contents);
 
     p_indexing_table = fopen(INDEX_TABLE_TEXT_DESCRIPTOR_PATH, "r");
     if (p_indexing_table == NULL)
@@ -334,6 +336,13 @@ Bool_e display_research_by_text(char* path)
     display_centered_text_console("");
     print_plate_console();
     getch();
+
+    for(i = 0; i < keywords.size; i++)
+    {
+        free(keywords.keywords[i].word);
+    }
+    free(keywords.keywords);
+    free(keywords.score_texts);
 
     return TRUE;
 }

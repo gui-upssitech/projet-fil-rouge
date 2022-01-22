@@ -89,10 +89,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
                     unsigned long descriptor_id;
 
                     /* step 3 : create the descriptor of the file */
-                    if(ret_line != NULL)
-                    {
-                        free(ret_line);
-                    }
+                    free(ret_line);
 
                     switch(descriptor_type)
                     {
