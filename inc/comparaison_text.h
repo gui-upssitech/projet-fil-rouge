@@ -20,68 +20,68 @@ Date:       29/11/2021
 #include "toolbox.h"
 
 /**
- * @brief 
+ * @brief A struct which associates a score to a text id.
  * 
  */
 typedef struct
 {
-    unsigned long id;
-    float score;
+    unsigned long id; /**< the text id. */
+    float score; /**< The score of the text. */
 } Score_text_s;
 
 /**
- * @brief 
+ * @brief A struct to represent a keyword in an indexing text. 
  * 
  */
 typedef struct
 {
-    char* word;
-    unsigned int occurences;
-    float word_weight;
+    char* word; /**< The word name. */
+    unsigned int occurences; /**< The number of occurencies of the word in the text */
+    float word_weight; /**< The weight of the word in the text. */
 } Keyword_s;
 
 
 /**
- * @brief 
+ * @brief A struct to represents all keywords of a text.
  * 
  */
 typedef struct
 {    
-    unsigned int size_scores;
-    unsigned int size;
-    Keyword_s* keywords;
-    Score_text_s* score_texts;
+    unsigned int size_scores; /**< The number of texts with a score. */
+    unsigned int size; /**< The number of keywords. */
+    Keyword_s* keywords; /**< A Keyword_s pointer which represents an array of keywords. */
+    Score_text_s* score_texts; /**< A Score_text_s pointer which represents an array of text scores. */
 } Keywords_s;
 
 /**
- * @brief 
+ * @brief Init the keywords array.
  * 
- * @param keywords 
+ * @param keywords A pointer which represents the keywords array.
  */
 void init_keywords(Keywords_s* keywords);
 
 /**
- * @brief 
+ * @brief Display the research by keyword result menu.
  * 
- * @param word 
- * @return Bool_e 
+ * @param word The word to search.
+ * @return Bool_e TRUE if succeed, FALSE else.
  */
 Bool_e display_research_by_keyword(char *word);
 
 /**
- * @brief 
+ * @brief Find a filename with his id.
  * 
- * @param id 
- * @param filename 
- * @return Bool_e 
+ * @param id The id of the file.
+ * @param filename The found filename string.
+ * @return Bool_e TRUE if succeed, FALSE else.
  */
 Bool_e find_filename_from_id(unsigned long id, char **filename);
 
 /**
- * @brief 
+ * @brief Display the research by text menu result.
  * 
- * @param path 
- * @return Bool_e 
+ * @param path The path of the file to search.
+ * @return Bool_e TRUE if succeed, FALSE else.
  */
 Bool_e display_research_by_text(char *path);
 

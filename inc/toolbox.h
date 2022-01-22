@@ -140,11 +140,11 @@ char* str_concat(char* str1, char* str2);
 unsigned int get_bytes_size_file(FILE* p_file);
 
 /**
- * @brief 
+ * @brief Open a text or image file. 
  * 
- * @param path 
- * @param filename 
- * @return Bool_e 
+ * @param path The path to the directory.
+ * @param filename The name of the file.
+ * @return Bool_e TRUE if succeed, FALSE else.
  */
 Bool_e open_file(char* path, char* filename);
 
