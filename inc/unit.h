@@ -46,6 +46,6 @@ typedef union
  * @param unit2 The unit input.
  * @param descriptor_type The type of units.
  */
-void affect_unit(Unit_u* unit1, Unit_u unit2, Descriptor_e descriptor_type);
+void affect_unit(Unit_u* unit1, Unit_u* unit2, Descriptor_e descriptor_type);
 
 #endif

@@ -189,6 +189,8 @@ Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor)
             return FALSE;
         }
 
+        free(p_quantified_image);
+
         /* step 4 : generate id */
         p_descriptor->id = hash(image.p_path);
     }

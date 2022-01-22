@@ -1,458 +1,8 @@
-==195140== Memcheck, a memory error detector
-==195140== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==195140== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
-==195140== Command: ./app/main
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a69be0 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a7dac0 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a7d8d0 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a6b4d0 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a8c760 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a7b920 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a66de0 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a6c840 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a79630 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a64950 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a656e0 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a64760 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a64d30 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x109F1C: save_dictionary_to_file (binary_tree_text.c:107)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109DD7: add_word_to_tree (binary_tree_text.c:68)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a64b40 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== Invalid read of size 8
-==195140==    at 0x109FF4: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Address 0x4a658d0 is 16 bytes inside a block of size 24 free'd
-==195140==    at 0x48399AB: free (vg_replace_malloc.c:538)
-==195140==    by 0x109FE3: save_dictionary_to_file (binary_tree_text.c:125)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10A006: save_dictionary_to_file (binary_tree_text.c:128)
-==195140==    by 0x10F509: automatic_indexing_by_data (indexation_generic.c:220)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140==  Block was alloc'd at
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109D98: add_word_to_tree (binary_tree_text.c:64)
-==195140==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
+==202954== Memcheck, a memory error detector
+==202954== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==202954== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
+==202954== Command: ./app/main
+==202954== 
 [H[2J[3J+--------------------------------------------------------------------------------------------------+
 |                                                                                                  |
 |                                       Moteur de Recherche                                        |
@@ -463,97 +13,58 @@
 |                                           (q) Quitter                                            |
 |                                                                                                  |
 +--------------------------------------------------------------------------------------------------+
-==195140== 
-==195140== HEAP SUMMARY:
-==195140==     in use at exit: 86,871,169 bytes in 637 blocks
-==195140==   total heap usage: 3,153 allocs, 2,516 frees, 169,900,146 bytes allocated
-==195140== 
-==195140== 120 bytes in 1 blocks are definitely lost in loss record 1 of 10
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x48C173F: getdelim (iogetdelim.c:62)
-==195140==    by 0x110628: file_contains_substring (toolbox.c:174)
-==195140==    by 0x10F048: automatic_indexing_by_data (indexation_generic.c:86)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== 120 bytes in 1 blocks are definitely lost in loss record 2 of 10
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x48C173F: getdelim (iogetdelim.c:62)
-==195140==    by 0x110628: file_contains_substring (toolbox.c:174)
-==195140==    by 0x10F048: automatic_indexing_by_data (indexation_generic.c:86)
-==195140==    by 0x10EE49: automatic_indexing (indexation_generic.c:25)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== 120 bytes in 1 blocks are definitely lost in loss record 3 of 10
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x48C173F: getdelim (iogetdelim.c:62)
-==195140==    by 0x110628: file_contains_substring (toolbox.c:174)
-==195140==    by 0x10F048: automatic_indexing_by_data (indexation_generic.c:86)
-==195140==    by 0x10EE9E: automatic_indexing (indexation_generic.c:32)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== 120 bytes in 1 blocks are definitely lost in loss record 4 of 10
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x48C173F: getdelim (iogetdelim.c:62)
-==195140==    by 0x110628: file_contains_substring (toolbox.c:174)
-==195140==    by 0x10F048: automatic_indexing_by_data (indexation_generic.c:86)
-==195140==    by 0x10EEF0: automatic_indexing (indexation_generic.c:39)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== 2,327 bytes in 283 blocks are definitely lost in loss record 5 of 10
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x110C25: init_word (word.c:21)
-==195140==    by 0x109C99: add_occurence_to_tree (binary_tree_text.c:31)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== 22,640 bytes in 283 blocks are definitely lost in loss record 6 of 10
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x110C9D: init_word (word.c:33)
-==195140==    by 0x109C99: add_occurence_to_tree (binary_tree_text.c:31)
-==195140==    by 0x11022C: update_dictionary (indexation_text.c:134)
-==195140==    by 0x10F2F3: automatic_indexing_by_data (indexation_generic.c:161)
-==195140==    by 0x10EE0D: automatic_indexing (indexation_generic.c:19)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== 452,400 bytes in 2 blocks are definitely lost in loss record 7 of 10
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x10EBB7: do_histograms_audio (indexation_audio.c:94)
-==195140==    by 0x10ED8A: index_audio (indexation_audio.c:143)
-==195140==    by 0x10F134: automatic_indexing_by_data (indexation_generic.c:110)
-==195140==    by 0x10EEF0: automatic_indexing (indexation_generic.c:39)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== 473,322 bytes in 13 blocks are definitely lost in loss record 8 of 10
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x10FCED: index_image (indexation_image.c:172)
-==195140==    by 0x10F0FB: automatic_indexing_by_data (indexation_generic.c:105)
-==195140==    by 0x10EE49: automatic_indexing (indexation_generic.c:25)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== 4,000,000 bytes in 50 blocks are definitely lost in loss record 9 of 10
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x10FCED: index_image (indexation_image.c:172)
-==195140==    by 0x10F0FB: automatic_indexing_by_data (indexation_generic.c:105)
-==195140==    by 0x10EE9E: automatic_indexing (indexation_generic.c:32)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== 81,920,000 bytes in 2 blocks are possibly lost in loss record 10 of 10
-==195140==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==195140==    by 0x110B45: affect_unit (unit.c:48)
-==195140==    by 0x10E680: add_unit_dynamic_stack (dynamic_stack.c:40)
-==195140==    by 0x10F1ED: automatic_indexing_by_data (indexation_generic.c:136)
-==195140==    by 0x10EEF0: automatic_indexing (indexation_generic.c:39)
-==195140==    by 0x110FED: main (main.c:15)
-==195140== 
-==195140== LEAK SUMMARY:
-==195140==    definitely lost: 4,951,169 bytes in 635 blocks
-==195140==    indirectly lost: 0 bytes in 0 blocks
-==195140==      possibly lost: 81,920,000 bytes in 2 blocks
-==195140==    still reachable: 0 bytes in 0 blocks
-==195140==         suppressed: 0 bytes in 0 blocks
-==195140== 
-==195140== For lists of detected and suppressed errors, rerun with: -s
-==195140== ERROR SUMMARY: 293 errors from 25 contexts (suppressed: 0 from 0)
+==202954== 
+==202954== HEAP SUMMARY:
+==202954==     in use at exit: 39,031 bytes in 1,136 blocks
+==202954==   total heap usage: 3,153 allocs, 2,017 frees, 6,964,946 bytes allocated
+==202954== 
+==202954== 120 bytes in 1 blocks are definitely lost in loss record 279 of 286
+==202954==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==202954==    by 0x48C173F: getdelim (iogetdelim.c:62)
+==202954==    by 0x11061D: file_contains_substring (toolbox.c:174)
+==202954==    by 0x10F031: automatic_indexing_by_data (indexation_generic.c:86)
+==202954==    by 0x10EDF6: automatic_indexing (indexation_generic.c:19)
+==202954==    by 0x11100E: main (main.c:15)
+==202954== 
+==202954== 120 bytes in 1 blocks are definitely lost in loss record 280 of 286
+==202954==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==202954==    by 0x48C173F: getdelim (iogetdelim.c:62)
+==202954==    by 0x11061D: file_contains_substring (toolbox.c:174)
+==202954==    by 0x10F031: automatic_indexing_by_data (indexation_generic.c:86)
+==202954==    by 0x10EE32: automatic_indexing (indexation_generic.c:25)
+==202954==    by 0x11100E: main (main.c:15)
+==202954== 
+==202954== 120 bytes in 1 blocks are definitely lost in loss record 281 of 286
+==202954==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==202954==    by 0x48C173F: getdelim (iogetdelim.c:62)
+==202954==    by 0x11061D: file_contains_substring (toolbox.c:174)
+==202954==    by 0x10F031: automatic_indexing_by_data (indexation_generic.c:86)
+==202954==    by 0x10EE87: automatic_indexing (indexation_generic.c:32)
+==202954==    by 0x11100E: main (main.c:15)
+==202954== 
+==202954== 120 bytes in 1 blocks are definitely lost in loss record 282 of 286
+==202954==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==202954==    by 0x48C173F: getdelim (iogetdelim.c:62)
+==202954==    by 0x11061D: file_contains_substring (toolbox.c:174)
+==202954==    by 0x10F031: automatic_indexing_by_data (indexation_generic.c:86)
+==202954==    by 0x10EED9: automatic_indexing (indexation_generic.c:39)
+==202954==    by 0x11100E: main (main.c:15)
+==202954== 
+==202954== 38,551 (24 direct, 38,527 indirect) bytes in 1 blocks are definitely lost in loss record 286 of 286
+==202954==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==202954==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
+==202954==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
+==202954==    by 0x110221: update_dictionary (indexation_text.c:134)
+==202954==    by 0x10F2DC: automatic_indexing_by_data (indexation_generic.c:161)
+==202954==    by 0x10EDF6: automatic_indexing (indexation_generic.c:19)
+==202954==    by 0x11100E: main (main.c:15)
+==202954== 
+==202954== LEAK SUMMARY:
+==202954==    definitely lost: 504 bytes in 5 blocks
+==202954==    indirectly lost: 38,527 bytes in 1,131 blocks
+==202954==      possibly lost: 0 bytes in 0 blocks
+==202954==    still reachable: 0 bytes in 0 blocks
+==202954==         suppressed: 0 bytes in 0 blocks
+==202954== 
+==202954== For lists of detected and suppressed errors, rerun with: -s
+==202954== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)

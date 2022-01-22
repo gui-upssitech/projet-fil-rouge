@@ -91,7 +91,7 @@ Bool_e do_histograms_audio(Audio_s* p_audio, Audio_descriptor_s* p_descriptor)
     unsigned int i;
 
     /* initializations */
-    p_descriptor->p_histogram = (unsigned int*) malloc((p_descriptor->levels * p_descriptor->i_windows) * sizeof(unsigned int));
+    p_descriptor->p_histogram = (unsigned int*) malloc(p_descriptor->levels * p_descriptor->i_windows * sizeof(unsigned int));
 
     /* instructions */
     if(p_descriptor->p_histogram == NULL)

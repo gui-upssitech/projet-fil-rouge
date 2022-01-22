@@ -37,7 +37,7 @@ Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u* 
     else
     {
         p_node->next_node = p_dynamic_stack;
-        affect_unit(&(p_node->element), *unit, descriptor_type);
+        affect_unit(&(p_node->element), unit, descriptor_type);
         p_dynamic_stack = p_node;
         switch(descriptor_type)
         {
@@ -50,7 +50,7 @@ Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u* 
                 break;
             
             case AUDIO:
-                // free(unit->audio_descriptor.p_histogram); // PROBLEM HERE
+                free(unit->audio_descriptor.p_histogram); // PROBLEM HERE
                 break;
         }
     }
@@ -70,7 +70,7 @@ Dynamic_stack_p remove_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_
     else
     {   
         p_node = p_dynamic_stack;
-        affect_unit(unit, p_node->element, descriptor_type);
+        affect_unit(unit, &(p_node->element), descriptor_type);
         p_dynamic_stack = p_node->next_node;
         switch(descriptor_type)
         {
@@ -83,7 +83,7 @@ Dynamic_stack_p remove_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_
                 break;
             
             case AUDIO:
-                // free(p_node->element.audio_descriptor.p_histogram);
+                free(p_node->element.audio_descriptor.p_histogram);
                 break;
         }
         free(p_node);

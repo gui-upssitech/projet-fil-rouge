@@ -29,7 +29,7 @@ Bool_e generate_command(char *input_path, unsigned long desc_id, char *output)
     return (result != EOF);
 }
 
-Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
+Bool_e index_text(char *p_path, Text_descriptor_s* p_descriptor)
 {
     /* statements */
     FILE *p_cmd;
