@@ -70,11 +70,6 @@ Bool_e add_occurence(Word_s **word, Word_occurence_s occurence)
                     break;
                 }
             }
-
-            /*if we don't find a place */
-            /*if (!place_found){                
-                (*word)->t_occurences[size] = occurence;
-            }*/
         }
         (*word)->tab_cursor++;
     }
@@ -91,11 +86,6 @@ Bool_e add_occurence(Word_s **word, Word_occurence_s occurence)
                 {
                     // Shift
                     memmove((*word)->t_occurences + i + 1, (*word)->t_occurences + i, (cursor - i - 1) * sizeof(Word_occurence_s));
-                    // for (j = max_size - 1; j >= i; j--)
-                    // {
-                    //     *(word->t_occurences + j) = *(word->t_occurences + j - 1);
-                    // }
-                    // Insert
                     (*word)->t_occurences[i] = occurence;
                     break;
                 }

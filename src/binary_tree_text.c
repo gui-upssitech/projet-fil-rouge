@@ -124,6 +124,11 @@ Bool_e save_dictionary_to_file(Word_Tree_s p_word_tree, FILE *p_stream)
         free(word_desc);
 
         save_dictionary_to_file(p_word_tree->p_right, p_stream);
+
+        free(p_word_tree->root->t_occurences);
+        free(p_word_tree->root->word_name);
+        free(p_word_tree->root);
+        free(p_word_tree);
     }
 
     return TRUE;

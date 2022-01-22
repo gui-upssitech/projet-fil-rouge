@@ -1,8 +1,8 @@
-==202954== Memcheck, a memory error detector
-==202954== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==202954== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
-==202954== Command: ./app/main
-==202954== 
+==206302== Memcheck, a memory error detector
+==206302== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==206302== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
+==206302== Command: ./app/main
+==206302== 
 [H[2J[3J+--------------------------------------------------------------------------------------------------+
 |                                                                                                  |
 |                                       Moteur de Recherche                                        |
@@ -13,58 +13,49 @@
 |                                           (q) Quitter                                            |
 |                                                                                                  |
 +--------------------------------------------------------------------------------------------------+
-==202954== 
-==202954== HEAP SUMMARY:
-==202954==     in use at exit: 39,031 bytes in 1,136 blocks
-==202954==   total heap usage: 3,153 allocs, 2,017 frees, 6,964,946 bytes allocated
-==202954== 
-==202954== 120 bytes in 1 blocks are definitely lost in loss record 279 of 286
-==202954==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==202954==    by 0x48C173F: getdelim (iogetdelim.c:62)
-==202954==    by 0x11061D: file_contains_substring (toolbox.c:174)
-==202954==    by 0x10F031: automatic_indexing_by_data (indexation_generic.c:86)
-==202954==    by 0x10EDF6: automatic_indexing (indexation_generic.c:19)
-==202954==    by 0x11100E: main (main.c:15)
-==202954== 
-==202954== 120 bytes in 1 blocks are definitely lost in loss record 280 of 286
-==202954==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==202954==    by 0x48C173F: getdelim (iogetdelim.c:62)
-==202954==    by 0x11061D: file_contains_substring (toolbox.c:174)
-==202954==    by 0x10F031: automatic_indexing_by_data (indexation_generic.c:86)
-==202954==    by 0x10EE32: automatic_indexing (indexation_generic.c:25)
-==202954==    by 0x11100E: main (main.c:15)
-==202954== 
-==202954== 120 bytes in 1 blocks are definitely lost in loss record 281 of 286
-==202954==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==202954==    by 0x48C173F: getdelim (iogetdelim.c:62)
-==202954==    by 0x11061D: file_contains_substring (toolbox.c:174)
-==202954==    by 0x10F031: automatic_indexing_by_data (indexation_generic.c:86)
-==202954==    by 0x10EE87: automatic_indexing (indexation_generic.c:32)
-==202954==    by 0x11100E: main (main.c:15)
-==202954== 
-==202954== 120 bytes in 1 blocks are definitely lost in loss record 282 of 286
-==202954==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==202954==    by 0x48C173F: getdelim (iogetdelim.c:62)
-==202954==    by 0x11061D: file_contains_substring (toolbox.c:174)
-==202954==    by 0x10F031: automatic_indexing_by_data (indexation_generic.c:86)
-==202954==    by 0x10EED9: automatic_indexing (indexation_generic.c:39)
-==202954==    by 0x11100E: main (main.c:15)
-==202954== 
-==202954== 38,551 (24 direct, 38,527 indirect) bytes in 1 blocks are definitely lost in loss record 286 of 286
-==202954==    at 0x483877F: malloc (vg_replace_malloc.c:307)
-==202954==    by 0x109CF8: add_word_to_tree (binary_tree_text.c:46)
-==202954==    by 0x109CAC: add_occurence_to_tree (binary_tree_text.c:32)
-==202954==    by 0x110221: update_dictionary (indexation_text.c:134)
-==202954==    by 0x10F2DC: automatic_indexing_by_data (indexation_generic.c:161)
-==202954==    by 0x10EDF6: automatic_indexing (indexation_generic.c:19)
-==202954==    by 0x11100E: main (main.c:15)
-==202954== 
-==202954== LEAK SUMMARY:
-==202954==    definitely lost: 504 bytes in 5 blocks
-==202954==    indirectly lost: 38,527 bytes in 1,131 blocks
-==202954==      possibly lost: 0 bytes in 0 blocks
-==202954==    still reachable: 0 bytes in 0 blocks
-==202954==         suppressed: 0 bytes in 0 blocks
-==202954== 
-==202954== For lists of detected and suppressed errors, rerun with: -s
-==202954== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)
+==206302== 
+==206302== HEAP SUMMARY:
+==206302==     in use at exit: 480 bytes in 4 blocks
+==206302==   total heap usage: 3,153 allocs, 3,149 frees, 6,964,946 bytes allocated
+==206302== 
+==206302== 120 bytes in 1 blocks are definitely lost in loss record 1 of 4
+==206302==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==206302==    by 0x48C173F: getdelim (iogetdelim.c:62)
+==206302==    by 0x11065D: file_contains_substring (toolbox.c:174)
+==206302==    by 0x10F071: automatic_indexing_by_data (indexation_generic.c:86)
+==206302==    by 0x10EE36: automatic_indexing (indexation_generic.c:19)
+==206302==    by 0x11104E: main (main.c:15)
+==206302== 
+==206302== 120 bytes in 1 blocks are definitely lost in loss record 2 of 4
+==206302==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==206302==    by 0x48C173F: getdelim (iogetdelim.c:62)
+==206302==    by 0x11065D: file_contains_substring (toolbox.c:174)
+==206302==    by 0x10F071: automatic_indexing_by_data (indexation_generic.c:86)
+==206302==    by 0x10EE72: automatic_indexing (indexation_generic.c:25)
+==206302==    by 0x11104E: main (main.c:15)
+==206302== 
+==206302== 120 bytes in 1 blocks are definitely lost in loss record 3 of 4
+==206302==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==206302==    by 0x48C173F: getdelim (iogetdelim.c:62)
+==206302==    by 0x11065D: file_contains_substring (toolbox.c:174)
+==206302==    by 0x10F071: automatic_indexing_by_data (indexation_generic.c:86)
+==206302==    by 0x10EEC7: automatic_indexing (indexation_generic.c:32)
+==206302==    by 0x11104E: main (main.c:15)
+==206302== 
+==206302== 120 bytes in 1 blocks are definitely lost in loss record 4 of 4
+==206302==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==206302==    by 0x48C173F: getdelim (iogetdelim.c:62)
+==206302==    by 0x11065D: file_contains_substring (toolbox.c:174)
+==206302==    by 0x10F071: automatic_indexing_by_data (indexation_generic.c:86)
+==206302==    by 0x10EF19: automatic_indexing (indexation_generic.c:39)
+==206302==    by 0x11104E: main (main.c:15)
+==206302== 
+==206302== LEAK SUMMARY:
+==206302==    definitely lost: 480 bytes in 4 blocks
+==206302==    indirectly lost: 0 bytes in 0 blocks
+==206302==      possibly lost: 0 bytes in 0 blocks
+==206302==    still reachable: 0 bytes in 0 blocks
+==206302==         suppressed: 0 bytes in 0 blocks
+==206302== 
+==206302== For lists of detected and suppressed errors, rerun with: -s
+==206302== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
