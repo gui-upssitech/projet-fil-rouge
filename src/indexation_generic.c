@@ -63,6 +63,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
     Unit_u unit;
 
     /* initializations */
+    ret_line = NULL;
     p_dynamic_stack = init_dynamic_stack();
     p_dictionary = init_word_tree();
     p_list_base = fopen(p_list_base_path, "a+");
@@ -88,6 +89,11 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
                     unsigned long descriptor_id;
 
                     /* step 3 : create the descriptor of the file */
+                    if(ret_line != NULL)
+                    {
+                        free(ret_line);
+                    }
+
                     switch(descriptor_type)
                     {
                         case TEXT:
@@ -127,7 +133,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
                     }
 
                     /* step 5 : add the new descriptor in the stack */
-                    p_dynamic_stack = add_unit_dynamic_stack(p_dynamic_stack, unit, descriptor_type); 
+                    p_dynamic_stack = add_unit_dynamic_stack(p_dynamic_stack, &unit, descriptor_type); 
                 }
             }
         }
@@ -150,23 +156,26 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
             {
                 case TEXT:
                     save_result = save_descriptor_text(p_base, &(unit.text_descriptor));
-                    descriptor_id = unit.image_descriptor.id;
+                    descriptor_id = unit.text_descriptor.id;
 
                     if(update_dictionary(&p_dictionary, unit.text_descriptor) == FALSE)
                     {
                         fprintf(stderr, "Failed to update dictionnary");
                         return FALSE;
                     }
+                    free(unit.text_descriptor.descriptor_contents);
                     break;
 
                 case IMAGE:
                     save_result = save_descriptor_image(p_base, &(unit.image_descriptor));
                     descriptor_id = unit.image_descriptor.id;
+                    free(unit.image_descriptor.p_histogram);
                     break;
 
                 case AUDIO:
                     save_result = save_descriptor_audio(p_base, &(unit.audio_descriptor));
-                    descriptor_id = unit.image_descriptor.id;
+                    descriptor_id = unit.audio_descriptor.id;
+                    free(unit.audio_descriptor.p_histogram);
                     break;
                     
                 default:

@@ -46,6 +46,8 @@ Bool_e index_text(char *p_path, Text_descriptor_s *p_descriptor)
         return FALSE;
     }
 
+    free(p_path);
+
     /* Step 2: run command */
     /* Open the command for reading. */
     p_cmd = popen(command, "r");

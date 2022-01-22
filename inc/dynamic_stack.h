@@ -56,7 +56,7 @@ Bool_e is_empty_dynamic_stack(Dynamic_stack_p p_dynamic_stack);
  * @param descriptor_type The type of unit.
  * @return Dynamic_stack_p The new dynamic stack with the added unit.
  */
-Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u unit, Descriptor_e descriptor_type);
+Dynamic_stack_p add_unit_dynamic_stack(Dynamic_stack_p p_dynamic_stack, Unit_u* unit, Descriptor_e descriptor_type);
 
 /**
  * @brief Remove unit of the dynamic stack.

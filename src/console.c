@@ -197,13 +197,15 @@ void display_login_menu()
     unsigned long password;
     static unsigned char nb_try = 1;
     char str[2];
+    char display_string[MAX_MEMORY_STRING];
 
     /* instructions */
     sprintf(str, "%d", MAX_TRY_PASSWORD - nb_try + 1);
     clear_console();
     print_plate_console();
     display_centered_text_console("");
-    display_centered_text_console(str_concat(str_concat("Mot de passe (", str), (str[0] == '1') ? " essai restant)" : " essais restants)"));
+    sprintf(display_string, "Mot de passe (%s %s)", str, (str[0] == '1') ? "essai restant" : "essais restants");
+    display_centered_text_console(display_string);
     display_centered_text_console("Taper Echap pour quitter");
     display_centered_text_console("");
     print_plate_console();

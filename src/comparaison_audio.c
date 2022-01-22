@@ -191,6 +191,8 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
             fprintf(stderr, "Error reading hash code for file.\n\r");
         }
 
+        free(p_line);
+
         /* step 3.4 : close the list base image file */
         if(fclose(p_file) == EOF)
         {

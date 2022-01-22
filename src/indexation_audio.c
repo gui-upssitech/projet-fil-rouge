@@ -149,5 +149,7 @@ Bool_e index_audio(char* p_path, Audio_descriptor_s* p_descriptor)
         return FALSE;
     }
 
+    free(audio.p_path);
+
     return TRUE;
 }

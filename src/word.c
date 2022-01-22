@@ -18,12 +18,13 @@ void init_word(char *word_name, Word_s **output)
     }
 
     /* Init world name */
-    (*output)->word_name = (char*) malloc(strlen(word_name) * sizeof(char));
+    (*output)->word_name = (char*) malloc((strlen(word_name) + 2) * sizeof(char));
     if((*output)->word_name == NULL)
     {
         fprintf(stderr, "Error %d: Failed to allocate memory to init char array of word.\n\r", errno);
         return;
     }
+
     strcpy((*output)->word_name, word_name);
 
     /* Init size of occurence */
@@ -110,12 +111,6 @@ Bool_e word_to_string(Word_s word, char** output)
     unsigned int i;
     char buf[MAX_MEMORY_STRING];
 
-    *output = (char *) malloc(MAX_MEMORY_STRING * sizeof(char));
-    if(*output == NULL)
-    {
-        fprintf(stderr, "Error allocating memory to convert word to string.\n\r");
-        return FALSE;
-    }
     sprintf(*output, "%s", word.word_name);
 
     for (i = 0; i < word.tab_cursor; i++)

@@ -126,6 +126,8 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
             return FALSE;
         }
 
+        free(p_line);
+
         /* step 3.4 : close the list base image file */
         if(fclose(p_file) == EOF)
         {

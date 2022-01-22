@@ -40,11 +40,16 @@ Bool_e add_occurence_to_tree(Word_Tree_s *p_word_tree, char *word, Word_occurenc
 
 void add_word_to_tree(Word_Tree_s *tree, Word_s *word_object)
 {
-
     /* Step 1 : checking if the tree is empty so we add the element */
     if (is_empty_word_tree(*tree) == TRUE)
     {
-        Word_Leaf_s *leaf = (Word_Leaf_s *)malloc(sizeof(Word_Leaf_s));
+        Word_Leaf_s* leaf = (Word_Leaf_s *)malloc(sizeof(Word_Leaf_s));
+        if(leaf == NULL)
+        {
+            fprintf(stderr, "Error leaf memory allocation in text binary tree.\n\r");
+            return;
+        }
+
         leaf->p_left = NULL;
         leaf->p_right = NULL;
         leaf->root = word_object;
@@ -101,13 +106,22 @@ Bool_e save_dictionary_to_file(Word_Tree_s p_word_tree, FILE *p_stream)
     {
         save_dictionary_to_file(p_word_tree->p_left, p_stream);
 
-        char* word_desc;
+        
+        char* word_desc = (char *) malloc(MAX_MEMORY_STRING * sizeof(char));
+        if(word_desc == NULL)
+        {
+            fprintf(stderr, "Error allocating memory to convert word to string.\n\r");
+            return FALSE;
+        }
         word_to_string(*(p_word_tree->root), &word_desc);
+
         if(fprintf(p_stream, "%s\n\n", word_desc) == EOF)
         {
             fprintf(stderr, "Error writing to file.\n\r");
             return FALSE;
         }
+
+        free(word_desc);
 
         save_dictionary_to_file(p_word_tree->p_right, p_stream);
     }

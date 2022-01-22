@@ -67,7 +67,7 @@ void load_configuration(char *config, char *value)
 Bool_e load_configurations(void)
 {
     /* statements */
-    FILE *p_config_file;
+    FILE* p_config_file;
     char buf[MAX_MEMORY_STRING], name[MAX_MEMORY_STRING], value[MAX_MEMORY_STRING];
 
     /* initializations */
