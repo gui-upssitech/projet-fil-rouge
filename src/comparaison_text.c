@@ -72,15 +72,13 @@ Bool_e display_research_by_keyword(char* word)
             }
             sprintf(buf, "%s %u", name, occurences);
             display_centered_text_console(buf);
-            free(name);
         }
     }
     else
     {
         display_centered_text_console("Aucun resultat");
     }
-    free(word);
-    free(p_line);
+
     display_centered_text_console("");
     display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
     display_centered_text_console("");
@@ -93,6 +91,10 @@ Bool_e display_research_by_keyword(char* word)
         return FALSE;
     }
 
+    free(name);
+    free(word);
+    free(p_line);
+    
     return TRUE;
 }
 
@@ -329,8 +331,6 @@ Bool_e display_research_by_text(char* path)
 
             display_centered_text_console(word);
 
-            free(p_name);
-
             keywords.score_texts[j].score = -1;
         }
     }
@@ -351,6 +351,7 @@ Bool_e display_research_by_text(char* path)
     }
     free(keywords.keywords);
     free(keywords.score_texts);
+    free(p_name);
 
     return TRUE;
 }

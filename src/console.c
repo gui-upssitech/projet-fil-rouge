@@ -763,6 +763,7 @@ Bool_e display_text_research_by_keyword_menu()
         {
             break;
         }
+
     }
     return TRUE;
 }

@@ -162,10 +162,9 @@ Bool_e file_contains_string(FILE *p_file, char *p_str, char **ret_line)
     /* statements */
     size_t len;
     ssize_t read;
-    char *p_line;
 
     /* initializations */
-    p_line = NULL;
+    *ret_line = NULL;
     len = 0;
 
     /* instructions */
@@ -173,15 +172,11 @@ Bool_e file_contains_string(FILE *p_file, char *p_str, char **ret_line)
     {
         while (!feof(p_file))
         {
-            if ((read = getline(&p_line, &len, p_file)) != -1)
+            if ((read = getline(ret_line, &len, p_file)) != -1)
             {
-                p_line[strlen(p_line) - 1] = '\0';
-                if (strcmp(p_line, p_str) == 0)
+                (*ret_line)[strlen(*ret_line) - 1] = '\0';
+                if (strcmp(*ret_line, p_str) == 0)
                 {
-                    if (ret_line != NULL)
-                    {
-                        *ret_line = p_line;
-                    }
                     return TRUE;
                 }
             }
