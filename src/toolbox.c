@@ -128,33 +128,6 @@ unsigned int get_bytes_size_file(FILE *p_file)
     return bytes;
 }
 
-char* str_concat(char *str1, char *str2)
-{
-    /* statements */
-    char *ret;
-    unsigned int size1, size2;
-    unsigned int i;
-
-    /* initializations */
-    size1 = get_array_size_from_pointer(str1);
-    size2 = get_array_size_from_pointer(str2);
-    ret = (char*) malloc((size1 + size2 + 1) * sizeof(char));
-
-    if (ret != NULL)
-    {
-        /* instructions */
-        for (i = 0; i < size1; i++)
-            *(ret + i) = *(str1 + i);
-
-        for (i = 0; i < size2; i++)
-            *(ret + size1 + i) = *(str2 + i);
-
-        *(ret + size1 + i) = '\0';
-    }
-
-    return ret;
-}
-
 Bool_e file_contains_substring(FILE *p_file, char *p_str, char **ret_line)
 {
     /* statements */

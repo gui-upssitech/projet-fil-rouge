@@ -28,6 +28,7 @@ Bool_e display_research_by_keyword(char* word)
     unsigned long hash_code;
     unsigned int occurences;
     Bool_e first;
+    char string[MAX_MEMORY_STRING];
 
     /* initalizations */
     first = TRUE;
@@ -43,7 +44,8 @@ Bool_e display_research_by_keyword(char* word)
     clear_console();
     print_plate_console();
     display_centered_text_console("");
-    display_centered_text_console(str_concat("Requete : ", word));
+    sprintf(string, "Requete : %s", word);
+    display_centered_text_console(string);
     display_centered_text_console("");
 
     if (file_contains_string(p_indexing_table, word, &p_line) == TRUE)
@@ -62,6 +64,7 @@ Bool_e display_research_by_keyword(char* word)
                 fprintf(stderr, "Error file not found in the base.\n\r");
                 return FALSE;
             }
+
             if(first == TRUE)
             {
                 open_file(TEXT_BASE_PATH, name);
@@ -69,12 +72,15 @@ Bool_e display_research_by_keyword(char* word)
             }
             sprintf(buf, "%s %u", name, occurences);
             display_centered_text_console(buf);
+            free(name);
         }
     }
     else
     {
         display_centered_text_console("Aucun resultat");
     }
+    free(word);
+    free(p_line);
     display_centered_text_console("");
     display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
     display_centered_text_console("");
@@ -130,7 +136,6 @@ Bool_e display_research_by_text(char* path)
     char word[MAX_MEMORY_STRING];
     char* line;
     unsigned int num_occurences;
-
     char* p_name;
     Bool_e found;
     float max;
@@ -140,6 +145,7 @@ Bool_e display_research_by_text(char* path)
     FILE* p_indexing_table;
     char* p_line;
     char buf[MAX_MEMORY_STRING];
+    char string[MAX_MEMORY_STRING];
 
     Bool_e first;
 
@@ -151,7 +157,8 @@ Bool_e display_research_by_text(char* path)
     clear_console();
     print_plate_console();
     display_centered_text_console("");
-    display_centered_text_console(str_concat("Requete : ", path));
+    sprintf(string, "Requete : %s", path);
+    display_centered_text_console(string);
     display_centered_text_console("");
 
     /* STEP 1 : Indexing the text in param */
@@ -276,6 +283,7 @@ Bool_e display_research_by_text(char* path)
                 }
             }
         }
+        free(p_line);
         fseek(p_indexing_table, 0, SEEK_SET);
     }
 

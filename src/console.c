@@ -764,7 +764,6 @@ Bool_e display_text_research_by_keyword_menu()
             break;
         }
     }
-    free(word);
     return TRUE;
 }
 
@@ -1036,6 +1035,7 @@ void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path,
 {
     /*statements */
     char* file_name; 
+    char string[MAX_MEMORY_STRING];
 
     /* instructions */
     clear_console();
@@ -1051,7 +1051,8 @@ void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path,
     }
     
     display_centered_text_console("");
-    display_centered_text_console(str_concat("Requete : ", file_name));
+    sprintf(string, "Requete : %s", file_name);
+    display_centered_text_console(string);
     display_centered_text_console("");
     if(is_empty_binary_search_tree(confidence_tree) == FALSE)
     {
@@ -1075,9 +1076,9 @@ void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned 
     char* file_name; 
     unsigned int i;
     Bool_e one_result_existing;
-
     Result_s max_confidence, current_confidence;
     char command[2 * MAX_MEMORY_STRING];
+    char string[MAX_MEMORY_STRING];
 
     /* initializations */
     one_result_existing = FALSE;
@@ -1090,7 +1091,8 @@ void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned 
     strcpy(strrchr(file_name, '.'), ".wav");
     
     display_centered_text_console("");
-    display_centered_text_console(str_concat("Requete : ", file_name));
+    sprintf(string, "Requete : %s", file_name);
+    display_centered_text_console(string);
     display_centered_text_console("");
     for(i = 0; i < size; i++)
     {
@@ -1186,6 +1188,7 @@ Bool_e display_audio_by_path_research_menu()
                     if(compare_audio_files(path, &time_code_forest, &size) == TRUE)
                     {
                         display_audio_result_menu(time_code_forest, size, path);
+                        free(time_code_forest);
                     }
                     else
                     {

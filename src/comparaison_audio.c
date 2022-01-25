@@ -99,6 +99,7 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
     /* command descriptor statements */
     FILE* p_cmd;
     char buf[MAX_MEMORY_STRING];
+    char command[MAX_MEMORY_STRING];
 
     /* image descriptor statements */
     unsigned long hash_file, hash_file_read;
@@ -124,7 +125,8 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
     }
 
     /* step 1 : get the number of audio files and init the forest */
-    p_cmd = popen(str_concat("wc -l ", LIST_BASE_AUDIO_PATH), "r");
+    sprintf(command, "wc -l %s", LIST_BASE_AUDIO_PATH);
+    p_cmd = popen(command, "r");
 
     if(p_cmd == NULL)
     {
@@ -153,7 +155,8 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
     }
 
     /* step 2 : find database image files */
-    p_cmd = popen(str_concat(str_concat("find ", SOUND_BASE_PATH), "*.bin -printf \"%f\n\""), "r");
+    sprintf(command, "find %s*.bin -printf \"%%f\n\"", SOUND_BASE_PATH);
+    p_cmd = popen(command, "r");
 
     if(p_cmd == NULL)
     {
@@ -243,6 +246,8 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
             return FALSE;
         }
         idx++;
+        free(request_descriptor_file.p_histogram);
+        free(descriptor_file.p_histogram);
     }
 
     if(pclose(p_cmd) == EOF)

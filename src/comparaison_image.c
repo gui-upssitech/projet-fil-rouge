@@ -53,7 +53,8 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
 {
     /* command descriptor statements */
     FILE* p_cmd;
-    char buf[MAX_MEMORY_STRING]; // TO DO
+    char buf[MAX_MEMORY_STRING];
+    char command[MAX_MEMORY_STRING];
 
     /* image descriptor statements */
     unsigned long hash_file, hash_file_read;
@@ -82,11 +83,13 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
     /* step 2 : find database image files */
     if(colored == TRUE)
     {
-        p_cmd = popen(str_concat(str_concat("find ", RGB_BASE_PATH), "*.txt -printf \"%f\n\""), "r");
+        sprintf(command, "find %s*.txt -printf \"%%f\n\"", RGB_BASE_PATH);
+        p_cmd = popen(command, "r");
     }
     else
     {
-        p_cmd = popen(str_concat(str_concat("find ", NB_BASE_PATH), "*.txt -printf \"%f\n\""), "r");
+        sprintf(command, "find %s*.txt -printf \"%%f\n\"", NB_BASE_PATH);
+        p_cmd = popen(command, "r");
     }
 
     if(p_cmd == NULL)
@@ -175,8 +178,11 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
             return FALSE;
         }
 
+        free(descriptor_file.p_histogram);
+
         if(confidence >= G_parameters.image_comparison_parameters.threshold)
         {
+            memset(result.name, 0, MAX_MEMORY_STRING);
             for(i = 0; buf[i] != '\0' && i < MAX_MEMORY_STRING; i++)
             {
                 result.name[i] = buf[i];

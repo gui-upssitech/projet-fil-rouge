@@ -21,6 +21,7 @@ unsigned long get_hashed_password(int* p_code)
     
     /* initializations */
     size = 0;
+    memset(password, 0, MAX_LENGTH_PASSWORD + 1);
 
     /* instructions */
     do 

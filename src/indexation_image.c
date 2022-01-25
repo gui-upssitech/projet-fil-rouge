@@ -201,7 +201,5 @@ Bool_e index_image(char* p_path, Image_descriptor_s* p_descriptor)
         return FALSE;
     }
 
-    free(image.p_path);
-
     return TRUE;
 }

@@ -61,6 +61,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
     Dynamic_stack_p p_dynamic_stack;
     Word_Tree_s p_dictionary;
     Unit_u unit;
+    char path[MAX_MEMORY_STRING];
 
     /* initializations */
     ret_line = NULL;
@@ -89,22 +90,21 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
                     unsigned long descriptor_id;
 
                     /* step 3 : create the descriptor of the file */
-                    free(ret_line);
-
+                    sprintf(path, "%s%s", p_data_path, p_dir->d_name);
                     switch(descriptor_type)
                     {
                         case TEXT:
-                            index_result = index_text(str_concat(p_data_path, p_dir->d_name), &(unit.text_descriptor));
+                            index_result = index_text(path, &(unit.text_descriptor));
                             descriptor_id = unit.text_descriptor.id;
                             break;
                         
                         case IMAGE:
-                            index_result = index_image(str_concat(p_data_path, p_dir->d_name), &(unit.image_descriptor));
+                            index_result = index_image(path, &(unit.image_descriptor));
                             descriptor_id = unit.image_descriptor.id;
                             break;
 
                         case AUDIO:
-                            index_result = index_audio(str_concat(p_data_path, p_dir->d_name), &(unit.audio_descriptor));
+                            index_result = index_audio(path, &(unit.audio_descriptor));
                             descriptor_id = unit.audio_descriptor.id;
                             break;
                         
@@ -132,6 +132,7 @@ Bool_e automatic_indexing_by_data(char* p_list_base_path, char* p_data_path, cha
                     /* step 5 : add the new descriptor in the stack */
                     p_dynamic_stack = add_unit_dynamic_stack(p_dynamic_stack, &unit, descriptor_type); 
                 }
+                free(ret_line);
             }
         }
         closedir(p_d);

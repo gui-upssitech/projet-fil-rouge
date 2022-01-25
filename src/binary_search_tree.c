@@ -48,6 +48,8 @@ Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descr
         break;
     }
 
+    free(binary_search_tree);
+
     return TRUE;
 }
 
@@ -69,7 +71,7 @@ void add_node_binary_search_tree_image(Binary_search_tree_p *p_binary_search_tre
     Leaf_s *p_leaf;
 
     /* instructions */
-    p_leaf = (Leaf_s *)malloc(sizeof(Leaf_s));
+    p_leaf = (Leaf_s*) malloc(sizeof(Leaf_s));
     if (p_leaf == NULL)
     {
         printf("Error memory allocation.\n\r");
@@ -198,6 +200,11 @@ void add_node_binary_search_tree_audio(Binary_search_tree_p *p_binary_search_tre
 void get_max_tree(Result_s* p_result, Binary_search_tree_p binary_search_tree)
 {
     /* instructions */
+    if (is_empty_binary_search_tree(binary_search_tree) == TRUE)
+    {
+        return;
+    }
+
     if (is_empty_binary_search_tree(binary_search_tree->p_right) == FALSE)
     {
         get_max_tree(p_result, binary_search_tree->p_right); 

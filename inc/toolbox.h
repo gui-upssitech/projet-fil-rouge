@@ -123,15 +123,6 @@ Bool_e file_contains_substring(FILE* p_file, char* p_str, char** p_line);
 Bool_e file_contains_string(FILE *p_file, char *p_str, char **ret_line);
 
 /**
- * @brief Concat two strings from char pointers.
- * 
- * @param str1 The first string represented by a char pointer (left).
- * @param str2 The second string represented by a char pointer (right).
- * @return char* The new line
- */
-char* str_concat(char* str1, char* str2);
-
-/**
  * @brief Get the size of a file in bytes.
  * 
  * @param p_file The opened file descriptor.
