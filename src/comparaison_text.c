@@ -72,6 +72,7 @@ Bool_e display_research_by_keyword(char* word)
             }
             sprintf(buf, "%s %u", name, occurences);
             display_centered_text_console(buf);
+            free(name);
         }
     }
     else
@@ -91,7 +92,6 @@ Bool_e display_research_by_keyword(char* word)
         return FALSE;
     }
 
-    free(name);
     free(word);
     free(p_line);
     
@@ -116,7 +116,11 @@ Bool_e find_filename_from_id(unsigned long id, char** filename)
         fscanf(p_list_base, "%s %lu\n", buf, &hash_code);
         if (hash_code == id)
         {
-            *filename = (char*)malloc(strlen(buf) * sizeof(char));
+            *filename = (char*) malloc((strlen(buf) + 1) * sizeof(char));
+            if(*filename == NULL)
+            {
+                fprintf(stderr, "Error memory allocating.\n\r");
+            }
             strcpy(*filename, buf);
             return TRUE;
         }
@@ -332,6 +336,8 @@ Bool_e display_research_by_text(char* path)
             display_centered_text_console(word);
 
             keywords.score_texts[j].score = -1;
+
+            free(p_name);
         }
     }
     else
@@ -351,7 +357,6 @@ Bool_e display_research_by_text(char* path)
     }
     free(keywords.keywords);
     free(keywords.score_texts);
-    free(p_name);
 
     return TRUE;
 }
