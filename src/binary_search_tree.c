@@ -4,13 +4,13 @@
 #include "binary_search_tree.h"
 #include "console.h"
 
-Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descriptor_e data_type)
+Bool_e display_binary_search_tree(Binary_search_tree_p* binary_search_tree, Descriptor_e data_type)
 {
     /* statements */
     char buf[MAX_CHAR_PER_LINE - 4 + MAX_MEMORY_STRING];
 
     /* instructions */
-    if (is_empty_binary_search_tree(binary_search_tree) == TRUE)
+    if (is_empty_binary_search_tree(*binary_search_tree) == TRUE)
     {
         fprintf(stderr, "Error binary search tree is empty.\n\r");
         return FALSE;
@@ -19,28 +19,28 @@ Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descr
     switch (data_type)
     {
     case IMAGE:
-        if (binary_search_tree->p_right != NULL)
+        if ((*binary_search_tree)->p_right != NULL)
         {
-            display_binary_search_tree(binary_search_tree->p_right, data_type);
+            display_binary_search_tree((&(*binary_search_tree)->p_right), data_type);
         }
-        sprintf(buf, "%s [%3.2f %%]", binary_search_tree->result.name, binary_search_tree->result.confidence);
+        sprintf(buf, "%s [%3.2f %%]", (*binary_search_tree)->result.name, (*binary_search_tree)->result.confidence);
         display_centered_text_console(buf);
-        if (binary_search_tree->p_left != NULL)
+        if ((*binary_search_tree)->p_left != NULL)
         {
-            display_binary_search_tree(binary_search_tree->p_left, data_type);
+            display_binary_search_tree((&(*binary_search_tree)->p_left), data_type);
         }
         break;
 
     case AUDIO:
-        if (binary_search_tree->p_left != NULL)
+        if ((*binary_search_tree)->p_left != NULL)
         {
-            display_binary_search_tree(binary_search_tree->p_left, data_type);
+            display_binary_search_tree((&(*binary_search_tree)->p_left), data_type);
         }
-        sprintf(buf, "%3.2f %% at %ds", binary_search_tree->result.confidence, binary_search_tree->result.time_code);
+        sprintf(buf, "%3.2f %% at %ds", (*binary_search_tree)->result.confidence, (*binary_search_tree)->result.time_code);
         display_centered_text_console(buf);
-        if (binary_search_tree->p_right != NULL)
+        if ((*binary_search_tree)->p_right != NULL)
         {
-            display_binary_search_tree(binary_search_tree->p_right, data_type);
+            display_binary_search_tree((&(*binary_search_tree)->p_right), data_type);
         }
         break;
 
@@ -48,7 +48,8 @@ Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descr
         break;
     }
 
-    free(binary_search_tree);
+    free(*binary_search_tree);
+    *binary_search_tree = NULL;
 
     return TRUE;
 }

@@ -203,6 +203,8 @@ Bool_e compare_image_files(char* request_file_path, Binary_search_tree_p* result
         }
     }
 
+    free(request_descriptor_file.p_histogram);
+
     if(pclose(p_cmd) == EOF)
     {
         fprintf(stderr, "Error %d closing the find command.\n\r", errno);

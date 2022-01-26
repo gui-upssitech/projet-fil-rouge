@@ -128,7 +128,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored);
  * @param path The path of the search image by user.
  * @param colored Boolean variable to indicate if the menu is for a colored or gray image.
  */
-void display_image_result_menu(Binary_search_tree_p confidence_tree, char *path, Bool_e colored);
+void display_image_result_menu(Binary_search_tree_p* confidence_tree, char *path, Bool_e colored);
 
 /**
  * @brief Display audio by path research menu.

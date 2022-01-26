@@ -37,7 +37,7 @@ typedef Leaf_s* Binary_search_tree_p;
  * @param data_type The data type of each result (IMAGE or AUDIO).
  * @return Bool_e TRUE if the diplay succeed, FALSE else.
  */
-Bool_e display_binary_search_tree(Binary_search_tree_p binary_search_tree, Descriptor_e data_type);
+Bool_e display_binary_search_tree(Binary_search_tree_p* binary_search_tree, Descriptor_e data_type);
 
 /**
  * @brief Init a binary search tree by setting the first node to NULL.

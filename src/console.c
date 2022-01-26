@@ -982,7 +982,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
                         {
                             get_max_tree(&result, confidence_tree);
                             open_file(RGB_BASE_PATH, result.name);
-                            display_image_result_menu(confidence_tree, path, TRUE);
+                            display_image_result_menu(&confidence_tree, path, TRUE);    
                         }
                         else
                         {
@@ -1004,7 +1004,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
                         {
                             get_max_tree(&result, confidence_tree);
                             open_file(NB_BASE_PATH, result.name);
-                            display_image_result_menu(confidence_tree, path, FALSE);
+                            display_image_result_menu(&confidence_tree, path, FALSE);
                         }
                         else
                         {
@@ -1016,7 +1016,6 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
                     {
                         ret = 2;
                     }
-
                 }
             }
             else
@@ -1028,12 +1027,13 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
         {
             break;
         }
+        free(path);
     }
-    free(path);
+    
     return TRUE;
 }
 
-void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path, Bool_e colored)
+void display_image_result_menu(Binary_search_tree_p* confidence_tree, char* path, Bool_e colored)
 {
     /*statements */
     char* file_name; 
@@ -1056,7 +1056,7 @@ void display_image_result_menu(Binary_search_tree_p confidence_tree, char* path,
     sprintf(string, "Requete : %s", file_name);
     display_centered_text_console(string);
     display_centered_text_console("");
-    if(is_empty_binary_search_tree(confidence_tree) == FALSE)
+    if(is_empty_binary_search_tree(*confidence_tree) == FALSE)
     {
         display_centered_text_console("Resultats");
         display_binary_search_tree(confidence_tree, IMAGE);
@@ -1112,7 +1112,7 @@ void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned 
             }
             one_result_existing = TRUE;
             display_centered_text_console(time_code_forest[i]->result.name);
-            display_binary_search_tree(time_code_forest[i], AUDIO);
+            display_binary_search_tree(&(time_code_forest[i]), AUDIO);
             display_centered_text_console("");
         }
     }
