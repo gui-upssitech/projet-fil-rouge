@@ -122,6 +122,11 @@ Bool_e find_filename_from_id(unsigned long id, char** filename)
                 fprintf(stderr, "Error memory allocating.\n\r");
             }
             strcpy(*filename, buf);
+            if (fclose(p_list_base) == EOF)
+            {
+                fprintf(stderr, "Error closing %s.\n\r", LIST_BASE_TEXT_PATH);
+                return FALSE;
+            }
             return TRUE;
         }
     }
