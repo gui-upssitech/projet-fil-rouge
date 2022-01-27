@@ -121,7 +121,7 @@ void add_node_binary_search_tree_image(Binary_search_tree_p *p_binary_search_tre
                     p_buf = (Leaf_s *)malloc(sizeof(Leaf_s));
                     if (p_buf == NULL)
                     {
-                        printf("Error memory allocation.\n\r"); // TO DO
+                        fprintf(stderr, "Error memory allocation.\n\r");
                         return;
                     }
                     p_buf->p_right = NULL;

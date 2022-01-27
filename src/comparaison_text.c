@@ -155,6 +155,8 @@ Bool_e display_research_by_text(char* path)
     Keywords_s keywords;
     FILE* p_indexing_table;
     char* p_line;
+    char* new_buffer;
+    char* temp_desc;
     char buf[MAX_MEMORY_STRING];
     char string[MAX_MEMORY_STRING];
 
@@ -181,9 +183,10 @@ Bool_e display_research_by_text(char* path)
 
     /*Source : https://stackoverflow.com/questions/17983005/c-how-to-read-a-string-line-by-line */
     /* Read line one by one and add the word/occurence to the tree */
+    temp_desc = desc.descriptor_contents; 
     while (desc.descriptor_contents)
     {
-        char* new_buffer = strchr(desc.descriptor_contents, '\n');
+        new_buffer = strchr(desc.descriptor_contents, '\n');
         size_t line_len = new_buffer ? (size_t)(new_buffer - desc.descriptor_contents) : strlen(desc.descriptor_contents);
         line = (char*) malloc(line_len + 1);
 
@@ -200,7 +203,6 @@ Bool_e display_research_by_text(char* path)
         if (strchr(line, ' '))
         {
             sscanf(line, "%s %u\n", word, &num_occurences);
-            // printf("%s %u\n", word, num_occurences);
 
             /* step 1 : memory allocation */
             keywords.keywords = (Keyword_s*) realloc(keywords.keywords, sizeof(Keyword_s) * (keywords.size + 1));
@@ -224,10 +226,11 @@ Bool_e display_research_by_text(char* path)
         }
 
         free(line);
+
         desc.descriptor_contents = new_buffer ? (new_buffer + 1) : NULL; /* Remove the line (the +1 skips the \n) */
     }
 
-    free(desc.descriptor_contents);
+    free(temp_desc);
 
     p_indexing_table = fopen(INDEX_TABLE_TEXT_DESCRIPTOR_PATH, "r");
     if (p_indexing_table == NULL)

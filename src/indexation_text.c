@@ -37,6 +37,7 @@ Bool_e index_text(char *p_path, Text_descriptor_s* p_descriptor)
     unsigned int current_size;
     char buffer[MAX_MEMORY_STRING];
     char command[MAX_COMMAND_LENGTH];
+    char* temp;
 
     /* Step 1: generate command */
     p_descriptor->id = hash(p_path);
@@ -62,14 +63,17 @@ Bool_e index_text(char *p_path, Text_descriptor_s* p_descriptor)
     {
         /* Resize the string to accomodate new line */
         line_size = strlen(buffer);
-        p_descriptor->descriptor_contents = (char *) realloc(p_descriptor->descriptor_contents, current_size + line_size * sizeof(char));
+        temp = (char *)realloc(p_descriptor->descriptor_contents, current_size + line_size * sizeof(char));
 
         /* Verify malloc allocation */
-        if (p_descriptor->descriptor_contents == NULL)
+        if (temp == NULL)
         {
+            free(p_descriptor->descriptor_contents);
             fprintf(stderr, "Error reallocating descriptor content.\n\r");
             return FALSE;
         }
+
+        p_descriptor->descriptor_contents = temp;
 
         strcpy(p_descriptor->descriptor_contents + current_size - 1, buffer);
         current_size += line_size;
