@@ -768,8 +768,9 @@ Bool_e display_text_research_by_keyword_menu()
     return TRUE;
 }
 
-Bool_e display_text_research_by_text_menu(){
-/* statements */
+Bool_e display_text_research_by_text_menu()
+{
+    /* statements */
     char* path;
     int code;
     int ret ; 
@@ -832,6 +833,7 @@ Bool_e display_text_research_by_text_menu(){
         {
             break;
         }
+        
         free(path);
     }
     

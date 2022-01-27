@@ -282,8 +282,13 @@ Bool_e display_research_by_text(char* path)
                     {
                         keywords.score_texts = realloc(keywords.score_texts, sizeof(Score_text_s) * (keywords.size_scores + 1));
                         if (keywords.score_texts == NULL)
-                        {
+                        { 
                             fprintf(stderr, "Error : realloc failed in comparaison_text research by text.\n\r");
+                            if (pclose(p_indexing_table) == EOF)
+                            {
+                                fprintf(stderr, "Error closing %s.\n\r", INDEX_TABLE_TEXT_DESCRIPTOR_PATH);
+                                return FALSE;
+                            } 
                             return FALSE;
                         }
 

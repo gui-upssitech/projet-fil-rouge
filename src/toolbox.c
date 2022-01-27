@@ -60,6 +60,7 @@ Bool_e read_string(char **path, int *code)
     /* statements */
     int i;
     char c;
+    char* new_buffer;
 
     /* initializations */
     i = 0;
@@ -88,12 +89,16 @@ Bool_e read_string(char **path, int *code)
         }
 
         i++;
-        *path = (char *) realloc(*path, (i + 1) * sizeof(char));
-        if (*path == NULL)
+        new_buffer = (char *) realloc(*path, (i + 1) * sizeof(char));
+
+        if (new_buffer == NULL)
         {
             fprintf(stderr, "Error memory reallocation.\n\r");
+            free(*path);
             return FALSE;
         }
+        
+        *path = new_buffer;
 
     } while (c != ESCAPE_KEY && c != ENTER_KEY);
 

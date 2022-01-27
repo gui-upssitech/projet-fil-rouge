@@ -62,7 +62,7 @@ Bool_e index_text(char *p_path, Text_descriptor_s* p_descriptor)
     {
         /* Resize the string to accomodate new line */
         line_size = strlen(buffer);
-        p_descriptor->descriptor_contents = (char *)realloc(p_descriptor->descriptor_contents, current_size + line_size * sizeof(char));
+        p_descriptor->descriptor_contents = (char *) realloc(p_descriptor->descriptor_contents, current_size + line_size * sizeof(char));
 
         /* Verify malloc allocation */
         if (p_descriptor->descriptor_contents == NULL)
