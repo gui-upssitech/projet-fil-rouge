@@ -89,4 +89,6 @@ void get_max_tree(Result_s* p_result, Binary_search_tree_p binary_search_tree);
  */
 void get_max_confidence_audio_tree(Result_s* p_result, Binary_search_tree_p binary_search_tree);
 
+Bool_e free_binary_search_tree(Binary_search_tree_p* binary_search_tree); // TO DO
+
 #endif

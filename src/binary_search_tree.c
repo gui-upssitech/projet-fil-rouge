@@ -48,8 +48,18 @@ Bool_e display_binary_search_tree(Binary_search_tree_p* binary_search_tree, Desc
         break;
     }
 
-    free(*binary_search_tree);
-    *binary_search_tree = NULL;
+    return TRUE;
+}
+
+Bool_e free_binary_search_tree(Binary_search_tree_p* binary_search_tree)
+{
+    if (is_empty_binary_search_tree(*binary_search_tree) == FALSE)
+    {
+        free_binary_search_tree((&(*binary_search_tree)->p_left));
+        free_binary_search_tree((&(*binary_search_tree)->p_right));
+        free(*binary_search_tree);
+        *binary_search_tree = NULL;
+    }
 
     return TRUE;
 }
@@ -72,15 +82,14 @@ void add_node_binary_search_tree_image(Binary_search_tree_p *p_binary_search_tre
     Leaf_s *p_leaf;
 
     /* instructions */
-    p_leaf = (Leaf_s*) malloc(sizeof(Leaf_s));
-    if (p_leaf == NULL)
-    {
-        printf("Error memory allocation.\n\r");
-        return;
-    }
-
     if (is_empty_binary_search_tree(*p_binary_search_tree))
     {
+        p_leaf = (Leaf_s*) malloc(sizeof(Leaf_s));
+        if (p_leaf == NULL)
+        {
+            printf("Error memory allocation.\n\r");
+            return;
+        }
         p_leaf->p_left = NULL;
         p_leaf->p_right = NULL;
         p_leaf->result = result;
@@ -149,15 +158,14 @@ void add_node_binary_search_tree_audio(Binary_search_tree_p *p_binary_search_tre
     Leaf_s *p_leaf;
 
     /* instructions */
-    p_leaf = (Leaf_s *)malloc(sizeof(Leaf_s));
-    if (p_leaf == NULL)
-    {
-        printf("Error memory allocation.\n\r");
-        return;
-    }
-
     if (is_empty_binary_search_tree(*p_binary_search_tree))
     {
+        p_leaf = (Leaf_s *)malloc(sizeof(Leaf_s));
+        if (p_leaf == NULL)
+        {
+            printf("Error memory allocation.\n\r");
+            return;
+        }
         p_leaf->p_left = NULL;
         p_leaf->p_right = NULL;
         p_leaf->result = result;

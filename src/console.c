@@ -984,7 +984,8 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
                         {
                             get_max_tree(&result, confidence_tree);
                             open_file(RGB_BASE_PATH, result.name);
-                            display_image_result_menu(&confidence_tree, path, TRUE);    
+                            display_image_result_menu(&confidence_tree, path, TRUE);   
+                            free_binary_search_tree(&confidence_tree);
                         }
                         else
                         {
@@ -1007,6 +1008,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
                             get_max_tree(&result, confidence_tree);
                             open_file(NB_BASE_PATH, result.name);
                             display_image_result_menu(&confidence_tree, path, FALSE);
+                            free_binary_search_tree(&confidence_tree); 
                         }
                         else
                         {
@@ -1146,6 +1148,7 @@ Bool_e display_audio_by_path_research_menu()
     char* path;
     int code;
     int ret;
+    unsigned int i;
 
     /* initalizations */
     ret = 0;
@@ -1192,7 +1195,10 @@ Bool_e display_audio_by_path_research_menu()
                     if(compare_audio_files(path, &time_code_forest, &size) == TRUE)
                     {
                         display_audio_result_menu(time_code_forest, size, path);
-                        free(time_code_forest);
+                        for(i = 0; i < size; i++)
+                        {
+                            free_binary_search_tree(&(time_code_forest[i]));
+                        }
                     }
                     else
                     {
