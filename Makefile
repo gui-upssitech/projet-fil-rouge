@@ -5,7 +5,7 @@ INCDIR = inc
 OBJDIR = obj
 APPDIR = app
 
-CFLAGS = -I$(INCDIR) -g -W -Wall -fanalyzer
+CFLAGS = -I$(INCDIR) -g -W -Wall
 
 SRC = $(wildcard $(SRCDIR)/*.c)
 OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

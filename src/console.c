@@ -831,6 +831,7 @@ Bool_e display_text_research_by_text_menu()
         }
         else
         {
+            free(path);
             break;
         }
         
@@ -1029,6 +1030,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
         }
         else
         {
+            free(path);
             break;
         }
         free(path);
@@ -1188,7 +1190,7 @@ Bool_e display_audio_by_path_research_menu()
         if(code == 0)
         {
             if(is_regular_file(path) == TRUE)
-            {
+          {
                 if(is_extension_file(path, "wav") == TRUE)
                 {
                     strcpy(strrchr(path, '.'), ".bin");
@@ -1199,6 +1201,8 @@ Bool_e display_audio_by_path_research_menu()
                         {
                             free_binary_search_tree(&(time_code_forest[i]));
                         }
+                        free(time_code_forest);
+                        free(path);
                     }
                     else
                     {
@@ -1218,9 +1222,9 @@ Bool_e display_audio_by_path_research_menu()
         }
         else
         {
+            free(path);
             break;
         }
     }
-    free(path);
     return TRUE;
 }
