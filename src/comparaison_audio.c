@@ -85,6 +85,7 @@ Bool_e read_histogram_audio(FILE* p_file, Audio_descriptor_s* p_descriptor)
     {
         if(fscanf(p_file, "%u", &read_value) != 1)
         {
+                free(p_descriptor->p_histogram);
                 fprintf(stderr, "Error reading descriptor value.\n\r");
                 return FALSE;
         }
@@ -149,7 +150,7 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
         return FALSE;
     }
 
-    for(i = 0; i < *size; i++)
+    for(i = 0; i < (*size); i++)
     {
         *(*p_forest + i) = init_binary_search_tree();
     }
@@ -227,6 +228,7 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
                     if(read_histogram_audio(p_file, &descriptor_file) == FALSE)
                     {
                         fprintf(stderr, "Error reading image histogram.\n\r");
+                        return FALSE;
                     }
                 }
             }
@@ -246,9 +248,9 @@ Bool_e compare_audio_files(char* request_file_path, Binary_search_tree_p** p_for
             return FALSE;
         }
         idx++;
-        free(request_descriptor_file.p_histogram);
         free(descriptor_file.p_histogram);
     }
+    free(request_descriptor_file.p_histogram);
 
     if(pclose(p_cmd) == EOF)
     {
