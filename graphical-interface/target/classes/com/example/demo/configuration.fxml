@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ConfigurationController">
     <children>
         <Label layoutX="237.0" layoutY="36.0" text="Configurations">
             <font>
@@ -38,8 +38,9 @@
         <Spinner layoutX="270.0" layoutY="200.0" prefHeight="25.0" prefWidth="60.0" />
         <Separator layoutX="216.0" layoutY="121.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="6.0" />
         <Separator layoutX="378.0" layoutY="121.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="6.0" />
-        <Button layoutX="274.0" layoutY="330.0" mnemonicParsing="false" text="Valider" />
-      <ProgressBar layoutX="200.0" layoutY="294.0" prefWidth="200.0" progress="0.0" />
-      <Label layoutX="242.0" layoutY="270.0" text="Indexation en cours ..." />
+        <Button fx:id="validButton" layoutX="274.0" layoutY="330.0" mnemonicParsing="false" onAction="#onValidButton" text="Valider" />
+      <ProgressBar fx:id="progressBar" layoutX="200.0" layoutY="294.0" prefWidth="200.0" progress="0.0" />
+      <Label fx:id="labelIndexation" layoutX="242.0" layoutY="270.0" />
+      <Button fx:id="returnButton" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButton" text="Retour" />
     </children>
 </Pane>

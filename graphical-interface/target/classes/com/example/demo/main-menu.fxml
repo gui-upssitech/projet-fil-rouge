@@ -14,7 +14,7 @@
         <TextField fx:id="searchBar" layoutX="83.0" layoutY="213.0" prefHeight="25.0" prefWidth="240.0" promptText="Veuillez inserer votre requête" />
         <Button fx:id="searchButton" layoutX="420.0" layoutY="213.0" mnemonicParsing="false" onAction="#onSearchButton" prefHeight="25.0" prefWidth="87.0" text="Rechercher" />
         <Label fx:id="messError" contentDisplay="CENTER" layoutX="109.0" layoutY="266.0" prefHeight="17.0" prefWidth="383.0" textAlignment="CENTER" />
-      <Button fx:id="paramButton" layoutX="531.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Param" />
+      <Button fx:id="paramButton" layoutX="531.0" layoutY="14.0" mnemonicParsing="false" onAction="#onParamButton" prefHeight="25.0" prefWidth="55.0" text="Param" />
       <MenuButton layoutX="334.0" layoutY="213.0" mnemonicParsing="false" text="Moteurs">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />

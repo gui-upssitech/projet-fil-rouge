@@ -27,5 +27,6 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
+      <Button fx:id="returnButton" layoutX="22.0" layoutY="15.0" mnemonicParsing="false" onAction="#onReturnButton" text="Retour" />
     </children>
 </Pane>
