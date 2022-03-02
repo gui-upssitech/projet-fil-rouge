@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.SearchController">
+    <children>
+        <Separator layoutX="297.0" layoutY="79.0" orientation="VERTICAL" prefHeight="298.0" prefWidth="5.0" />
+        <Pagination layoutX="28.0" layoutY="348.0" maxPageIndicatorCount="5" pageCount="5" prefHeight="41.0" prefWidth="251.0" />
+        <Separator layoutX="48.0" layoutY="128.0" prefWidth="200.0" />
+        <Label layoutX="344.0" layoutY="214.0" prefHeight="29.0" prefWidth="208.0" text="Visualisation documents si possible" />
+        <TextField editable="false" layoutX="22.0" layoutY="54.0" prefHeight="25.0" prefWidth="167.0" text="patate+fromage" />
+        <ComboBox editable="true" layoutX="199.0" layoutY="54.0" prefHeight="25.0" prefWidth="74.0" promptText="Texte" />
+        <TableView layoutX="28.0" layoutY="143.0" prefHeight="198.0" prefWidth="251.0">
+            <columns>
+                <TableColumn prefWidth="123.80001258850098" text="Nom fichier" />
+                <TableColumn prefWidth="126.5999755859375" text="Résultat" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+        <Button fx:id="saveButton" layoutX="85.0" layoutY="91.0" mnemonicParsing="false" text="Sauvegarder recherche" />
+        <Label layoutX="252.0" layoutY="14.0" prefHeight="27.0" prefWidth="91.0" text="Recherche">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+    </children>
+</Pane>

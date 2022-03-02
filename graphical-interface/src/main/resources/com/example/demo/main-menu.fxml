@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MainMenuController">
+    <children>
+        <ImageView fx:id="imageMenu" fitHeight="112.0" fitWidth="324.0" layoutX="139.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../../../images/test-bg.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="searchBar" layoutX="83.0" layoutY="213.0" prefHeight="25.0" prefWidth="240.0" promptText="Veuillez inserer votre requête" />
+        <Button fx:id="searchButton" layoutX="420.0" layoutY="213.0" mnemonicParsing="false" onAction="#onSearchButton" prefHeight="25.0" prefWidth="87.0" text="Rechercher" />
+        <Label fx:id="messError" contentDisplay="CENTER" layoutX="109.0" layoutY="266.0" prefHeight="17.0" prefWidth="383.0" textAlignment="CENTER" />
+      <Button fx:id="paramButton" layoutX="531.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Param" />
+      <MenuButton layoutX="334.0" layoutY="213.0" mnemonicParsing="false" text="Moteurs">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+    </children>
+</Pane>

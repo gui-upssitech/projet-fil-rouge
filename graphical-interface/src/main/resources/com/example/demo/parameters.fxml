@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ParameterController">
+    <children>
+        <Label layoutX="221.0" layoutY="43.0" prefHeight="40.0" prefWidth="155.0" text="Paramètres">
+            <font>
+                <Font name="System Bold" size="28.0" />
+            </font>
+        </Label>
+        <Label layoutX="168.0" layoutY="126.0" prefHeight="27.0" prefWidth="127.0" text="Thème visuel">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <RadioButton layoutX="323.0" layoutY="117.0" mnemonicParsing="false" text="Sombre">
+            <toggleGroup>
+                <ToggleGroup fx:id="group" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton layoutX="323.0" layoutY="144.0" mnemonicParsing="false" text="Clair">
+            <toggleGroup>
+                <fx:reference source="group" />
+            </toggleGroup>
+        </RadioButton>
+        <PasswordField fx:id="passwordField" layoutX="168.0" layoutY="225.0" prefHeight="25.0" prefWidth="197.0" promptText="Veuillez saisir votre mot de passe" visible="false" />
+        <Button fx:id="loginButton" layoutX="375.0" layoutY="225.0" mnemonicParsing="false" onAction="#onLoginButton" prefHeight="25.0" prefWidth="53.0" text="Login" visible="false" />
+        <CheckBox fx:id="adminButton" layoutX="168.0" layoutY="196.0" mnemonicParsing="false" onAction="#onAdminButton" text="Mode administrateur">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </CheckBox>
+        <Button layoutX="168.0" layoutY="281.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="265.0" text="Mes recherches sauvegardés" />
+      <Separator layoutX="168.0" layoutY="181.0" prefHeight="3.0" prefWidth="265.0" />
+      <Separator layoutX="168.0" layoutY="268.0" prefHeight="3.0" prefWidth="265.0" />
+    </children>
+</Pane>
