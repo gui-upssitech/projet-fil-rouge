@@ -39,6 +39,7 @@
         <Separator layoutX="216.0" layoutY="121.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="6.0" />
         <Separator layoutX="378.0" layoutY="121.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="6.0" />
         <Button layoutX="274.0" layoutY="330.0" mnemonicParsing="false" text="Valider" />
-      <ProgressBar layoutX="200.0" layoutY="288.0" prefWidth="200.0" progress="0.0" />
+      <ProgressBar layoutX="200.0" layoutY="294.0" prefWidth="200.0" progress="0.0" />
+      <Label layoutX="242.0" layoutY="270.0" text="Indexation en cours ..." />
     </children>
 </Pane>
