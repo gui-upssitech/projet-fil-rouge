@@ -4,6 +4,6 @@ module com.example.demo {
 
     requires org.kordamp.bootstrapfx.core;
 
-    opens com.example.demo to javafx.fxml;
-    exports com.example.demo;
+    opens com.miniteldo to javafx.fxml;
+    exports com.miniteldo;
 }

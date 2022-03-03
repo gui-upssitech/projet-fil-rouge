@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.miniteldo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
