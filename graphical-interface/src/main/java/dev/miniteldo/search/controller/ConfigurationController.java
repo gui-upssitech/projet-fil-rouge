@@ -2,6 +2,8 @@ package dev.miniteldo.search.controller;
 
 // Project : graphical-interface
 
+import dev.miniteldo.search.App;
+import dev.miniteldo.search.view.Views;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,23 +31,14 @@ public class ConfigurationController {
     // Methods
     @FXML
     protected void onReturnButton() throws IOException {
-        // Close the current page
-        Stage stage = (Stage) returnButton.getScene().getWindow();
-        stage.close();
-
-        // load a new page
-        Stage nextpage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/layout/parameters.fxml")));
-        Scene scene = new Scene(root);
-        nextpage.setTitle("Paramètres");
-        nextpage.setScene(scene);
-        nextpage.show();
+        App.setView(Views.PARAMETERS);
     }
 
     @FXML
     protected void onValidButton() {
         labelIndexation.setText("Indexation en cours ...");
         progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+
 //        try {
 //            Thread.sleep(1000);
 //        } catch (InterruptedException e) {

@@ -1,7 +1,9 @@
 package dev.miniteldo.search.controller;
 
+import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.StringModifier;
+import dev.miniteldo.search.view.Views;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -63,16 +65,7 @@ public class MainMenuController {
 
     @FXML
     protected void onParamButton() throws IOException {
-        // Close the current page
-        Stage stage = (Stage) searchButton.getScene().getWindow();
-        stage.close();
-
-        Stage nextpage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/layout/parameters.fxml")));
-        Scene scene = new Scene(root);
-        nextpage.setTitle("Paramètres");
-        nextpage.setScene(scene);
-        nextpage.show();
+        App.setView(Views.PARAMETERS);
     }
 
     @FXML

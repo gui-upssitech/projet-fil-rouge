@@ -1,5 +1,7 @@
 package dev.miniteldo.search.controller;
 
+import dev.miniteldo.search.App;
+import dev.miniteldo.search.view.Views;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,17 +20,7 @@ public class SearchController {
 
 
     @FXML
-    protected void onReturnButton() throws IOException {
-        // Close the current page
-        Stage stage = (Stage) returnButton.getScene().getWindow();
-        stage.close();
-
-        // load a new page
-        Stage nextpage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/layout/main-menu.fxml")));
-        Scene scene = new Scene(root);
-        nextpage.setTitle("Moteur de recherche");
-        nextpage.setScene(scene);
-        nextpage.show();
+    protected void onReturnButton() {
+        App.setView(Views.MAIN);
     }
 }
