@@ -1,7 +1,7 @@
-package com.miniteldo;
+package dev.miniteldo.search.controller;
 
-import com.miniteldo.tools.Regex;
-import com.miniteldo.tools.StringModifier;
+import dev.miniteldo.search.model.tools.Regex;
+import dev.miniteldo.search.model.tools.StringModifier;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -68,7 +68,7 @@ public class MainMenuController {
         stage.close();
 
         Stage nextpage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("parameters.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/layout/parameters.fxml")));
         Scene scene = new Scene(root);
         nextpage.setTitle("Paramètres");
         nextpage.setScene(scene);

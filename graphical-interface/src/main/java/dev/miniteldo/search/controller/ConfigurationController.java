@@ -1,4 +1,4 @@
-package com.miniteldo;
+package dev.miniteldo.search.controller;
 
 // Project : graphical-interface
 
@@ -35,7 +35,7 @@ public class ConfigurationController {
 
         // load a new page
         Stage nextpage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("parameters.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/layout/parameters.fxml")));
         Scene scene = new Scene(root);
         nextpage.setTitle("Paramètres");
         nextpage.setScene(scene);

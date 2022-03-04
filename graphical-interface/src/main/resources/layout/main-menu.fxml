@@ -4,11 +4,11 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MainMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.MainMenuController">
     <children>
         <ImageView fx:id="imageMenu" fitHeight="112.0" fitWidth="324.0" layoutX="139.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../images/test-bg.png" />
+                <Image url="@../images/logo.png" />
             </image>
         </ImageView>
         <TextField fx:id="searchBar" layoutX="83.0" layoutY="213.0" prefHeight="25.0" prefWidth="240.0" promptText="Veuillez inserer votre requête"/>

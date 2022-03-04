@@ -1,4 +1,4 @@
-package com.miniteldo.tools;
+package dev.miniteldo.search.model.tools;
 
 // Project : graphical-interface
 
