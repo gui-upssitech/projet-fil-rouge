@@ -1,0 +1,33 @@
+.root {
+    -fx-background-color: -fx-bg-color;
+    -fx-text-fill: -fx-text-color;
+}
+
+#titleText {
+    -fx-text-fill: -fx-text-color;
+}
+
+#searchBarContainer > * {
+    -fx-background-color: -fx-input-fill;
+    -fx-font-family: "Courier New";
+    -fx-text-fill: -fx-text-color;
+
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
+    -fx-border-color: -fx-input-stroke;
+
+    -fx-padding: 12px;
+}
+
+#searchBarContainer MenuButton {
+    -fx-border-width: 2px 0 2px 0;
+    -fx-padding: 8px 12px;
+}
+
+#searchBarContainer TextField {
+    -fx-border-radius: 12px 0px 0px 12px;
+}
+
+#searchBarContainer Button {
+    -fx-border-radius: 0px 12px 12px 0px;
+}

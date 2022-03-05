@@ -5,6 +5,7 @@ import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.StringModifier;
 import dev.miniteldo.search.view.Error;
 import dev.miniteldo.search.view.Views;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -22,17 +23,13 @@ import java.util.regex.Pattern;
 public class MainMenuController {
     public TextField searchBar;
     public Button searchButton;
-    public Label messError;
 
     public String requete;
-    public Button fileButton;
-    public Button paramButton;
 
     @FXML
     protected void onSearchButton(ActionEvent event) {
         // TODO ADD EXISTING AND CORRECT FILE CHECK
         if (searchBar.getText() == null || searchBar.getText().trim().isEmpty()) {
-            messError.setText("Erreur, votre requête est vide");
 
             // PopUpError modal window
             Error.popUpError(((Node) event.getSource()).getScene().getWindow(), "La requête est vide !");
@@ -43,7 +40,6 @@ public class MainMenuController {
             System.out.println(StringModifier.removeAllSpace(requete));
 
             // TODO CHECK TYPE OF RESEARCH WITH A SWITCH ON COMBOBOX
-            messError.setText("Votre requête contient : \"" + searchBar.getText() + "\"");
 
             Pattern p = Pattern.compile(Regex.REGEX_TEXTE.getRegexExp());
             Matcher m = p.matcher(requete);

@@ -15,13 +15,25 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Stage stage;
-
-    // -------------------------------
-
     // Main
     public static void main(String[] args) {
         App.launch();
+    }
+
+    // ---------------------------------------
+
+    private static Stage stage;
+    private static boolean darkMode = true;
+
+    @Override
+    public void start(Stage stage) {
+        App.stage = stage;
+
+        stage.setTitle("Moteur de recherche");
+        stage.setResizable(false);
+        setView(Views.MAIN);
+
+        stage.show();
     }
 
     public static void setView(Views view) {
@@ -34,20 +46,17 @@ public class App extends Application {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
 
-        } catch (IOException e) {
+            // Stylesheet select
+            stage.getScene().getStylesheets().add(getTheme());
+
+        } catch (IOException | NullPointerException e) {
             System.out.println("Err: failed to change the view");
             e.printStackTrace();
         }
-
     }
 
-    @Override
-    public void start(Stage stage) {
-        App.stage = stage;
-
-        stage.setTitle("Moteur de recherche");
-        setView(Views.MAIN);
-
-        stage.show();
+    public static String getTheme() throws NullPointerException {
+        String url = "/stylesheets/theme-" + ((darkMode) ? "dark" : "light") + ".css";
+        return App.class.getResource(url).toExternalForm();
     }
 }

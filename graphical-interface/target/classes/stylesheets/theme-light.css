@@ -1,0 +1,8 @@
+.root {
+    -fx-bg-color: #FFF;
+    -fx-text-color: #000;
+
+    /* Main page inputs */
+    -fx-input-fill: #FFF;
+    -fx-input-stroke: #AAA;
+}
