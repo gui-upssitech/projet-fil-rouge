@@ -4,6 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.ParameterController">
     <children>
         <Label layoutX="221.0" layoutY="43.0" prefHeight="40.0" prefWidth="155.0" text="Paramètres">
@@ -36,6 +38,14 @@
         <Button layoutX="168.0" layoutY="281.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="265.0" text="Mes recherches sauvegardés" />
       <Separator layoutX="168.0" layoutY="181.0" prefHeight="3.0" prefWidth="265.0" />
       <Separator layoutX="168.0" layoutY="268.0" prefHeight="3.0" prefWidth="265.0" />
-      <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButton" text="Retour" />
+        <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButton" >
+            <graphic>
+                <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons/arrow-left.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
     </children>
 </Pane>
