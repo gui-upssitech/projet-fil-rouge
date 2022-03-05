@@ -15,27 +15,17 @@ import java.io.IOException;
  */
 public class App extends Application {
 
+    private static Stage stage;
+
+    // -------------------------------
+
     // Main
     public static void main(String[] args) {
         App.launch();
     }
 
-    // -------------------------------
-
-    private static Stage stage;
-
-    @Override
-    public void start(Stage stage) {
-        App.stage = stage;
-
-        stage.setTitle("Moteur de recherche");
-        setView(Views.MAIN);
-
-        stage.show();
-    }
-
     public static void setView(Views view) {
-        if(stage == null) return;
+        if (stage == null) return;
 
         String path = "/layout/" + view.getPath();
         try {
@@ -51,4 +41,13 @@ public class App extends Application {
 
     }
 
+    @Override
+    public void start(Stage stage) {
+        App.stage = stage;
+
+        stage.setTitle("Moteur de recherche");
+        setView(Views.MAIN);
+
+        stage.show();
+    }
 }

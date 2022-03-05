@@ -6,17 +6,16 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.MainMenuController">
     <children>
-        <ImageView fx:id="imageMenu" fitHeight="112.0" fitWidth="324.0" layoutX="139.0" layoutY="74.0"
-                   pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/logo.png"/>
+        <ImageView fx:id="imageMenu" fitHeight="112.0" fitWidth="324.0" layoutX="139.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../images/logo.png" />
         </ImageView>
         <TextField fx:id="searchBar" layoutX="83.0" layoutY="213.0" prefHeight="25.0" prefWidth="240.0" promptText="Veuillez insérer votre requête" />
         <Button fx:id="searchButton" layoutX="420.0" layoutY="213.0" mnemonicParsing="false" onAction="#onSearchButton" prefHeight="25.0" prefWidth="87.0" text="Rechercher" />
-        <Label fx:id="messError" contentDisplay="CENTER" layoutX="109.0" layoutY="266.0" prefHeight="17.0" prefWidth="383.0" textAlignment="CENTER" />
+        <Label fx:id="messError" contentDisplay="CENTER" layoutX="124.0" layoutY="313.0" prefHeight="17.0" prefWidth="383.0" textAlignment="CENTER" />
         <Button fx:id="paramButton" layoutX="546.0" layoutY="14.0" mnemonicParsing="false" onAction="#onParamButton" prefHeight="24.0" prefWidth="24.0">
             <graphic>
                 <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../images/icons/settings.png"/>
+                    <Image url="@../images/icons/settings.png" />
                 </ImageView>
             </graphic>
         </Button>
@@ -26,10 +25,10 @@
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-        <Button fx:id="fileButton" layoutX="275.0" layoutY="262.0" mnemonicParsing="false" onAction="#onFileButton" >
+        <Button fx:id="fileButton" layoutX="296.0" layoutY="268.0" mnemonicParsing="false" onAction="#onFileButton">
             <graphic>
                 <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../images/icons/file.png"/>
+                    <Image url="@../images/icons/file.png" />
                 </ImageView>
             </graphic>
         </Button>

@@ -3,8 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="204.0" prefWidth="368.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="166.0" layoutY="24.0" prefHeight="17.0" prefWidth="36.0" text="Erreur" />
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.ErrorController">
+    <children>
+        <Label layoutX="109.0" layoutY="14.0" text="Erreur" />
+        <Label fx:id="labelError" layoutX="84.0" layoutY="54.0" text="Message erreur" />
+        <Button fx:id="okButton" layoutX="109.0" layoutY="86.0" mnemonicParsing="false" onAction="#onOkButton" text="Ok" />
+    </children>
 </Pane>

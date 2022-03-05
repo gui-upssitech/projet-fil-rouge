@@ -4,8 +4,8 @@ public enum Views {
     MAIN("main-menu.fxml"),
     PARAMETERS("parameters.fxml"),
     SEARCH_RESULT("result-search.fxml"),
-    ADMIN_CONFIG("configuration.fxml");
-
+    ADMIN_CONFIG("configuration.fxml"),
+    ERROR("error.fxml");
 
     // Enum parameters
 
