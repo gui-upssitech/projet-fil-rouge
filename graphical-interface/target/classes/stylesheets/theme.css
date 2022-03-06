@@ -1,0 +1,30 @@
+/* Theme */
+
+.root {
+    -fx-bg-color: #FFF;
+    -fx-text-color: #000;
+
+    /* Main page inputs */
+    -fx-input-fill: #FFF;
+    -fx-input-stroke: #ddd;
+}
+
+/* Other */
+
+.button, .text-field {
+    -fx-background-color: -fx-input-fill;
+    -fx-font-family: "Roboto";
+    -fx-text-fill: -fx-text-color;
+
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: -fx-input-stroke;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+
+    -fx-padding: 12px;
+}
+
+.button:hover {
+    -fx-background-insets: 0;
+}

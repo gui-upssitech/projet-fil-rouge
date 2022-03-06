@@ -23,13 +23,13 @@ public class App extends Application {
     // ---------------------------------------
 
     private static Stage stage;
-    private static boolean darkMode = true;
+    private static boolean darkMode = false;
 
     @Override
     public void start(Stage stage) {
         App.stage = stage;
 
-        stage.setTitle("Moteur de recherche");
+        stage.setTitle("Minteldo");
         stage.setResizable(false);
         setView(Views.MAIN);
 
@@ -47,7 +47,7 @@ public class App extends Application {
             stage.setScene(scene);
 
             // Stylesheet select
-            stage.getScene().getStylesheets().add(getTheme());
+            //stage.getScene().getStylesheets().add(getTheme());
 
         } catch (IOException | NullPointerException e) {
             System.out.println("Err: failed to change the view");
