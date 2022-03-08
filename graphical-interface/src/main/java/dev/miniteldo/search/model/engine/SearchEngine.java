@@ -93,5 +93,11 @@ public interface SearchEngine {
      */
     boolean changePassword(String newPassword);
 
-    // TODO: Complete config functions
+    /**
+     * Modifier un paramètre de configuration de l'application
+     * @param configName Paramètre à modifier
+     * @param value Nouvelle valeur du paramètre
+     * @return Confirmation de changement du paramètre
+     */
+    boolean setConfig(Config configName, int value);
 }
