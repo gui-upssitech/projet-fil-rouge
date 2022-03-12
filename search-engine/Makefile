@@ -66,13 +66,13 @@ test_comparison_audio: $(OBJ) src/test/test_comparison_audio.c
 ##########################################################################################
 #                                      bridge                                            #
 ##########################################################################################
-comparison_text: $(OBJ) src/bridge/comparison_text.c
-	gcc -c src/bridge/comparison_text.c $(CFLAGS)
+searcher_text: $(OBJ) src/bridge/searcher_text.c
+	gcc -c src/bridge/searcher_text.c $(CFLAGS)
 	mv ./*.o ./obj
 	$(CC) -o $(BRIDIR)/$@ $^ $(CFLAGS)	
 
-comparison_image: $(OBJ) src/bridge/comparison_image.c
-	gcc -c src/bridge/comparison_image.c $(CFLAGS)
+searcher_image: $(OBJ) src/bridge/searcher_image.c
+	gcc -c src/bridge/searcher_image.c $(CFLAGS)
 	mv ./*.o ./obj
 	$(CC) -o $(BRIDIR)/$@ $^ $(CFLAGS)	
 
