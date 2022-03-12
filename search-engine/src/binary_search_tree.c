@@ -23,8 +23,14 @@ Bool_e display_binary_search_tree(Binary_search_tree_p* binary_search_tree, Desc
         {
             display_binary_search_tree((&(*binary_search_tree)->p_right), data_type);
         }
+        
+        #if defined(TEXTUAL)
         sprintf(buf, "%s [%3.2f %%]", (*binary_search_tree)->result.name, (*binary_search_tree)->result.confidence);
         display_centered_text_console(buf);
+        #elif defined(GRAPHICAL)
+        sprintf(buf, "%s %3.2f", (*binary_search_tree)->result.name, (*binary_search_tree)->result.confidence);
+        printf("%s\n", buf);
+        #endif
         if ((*binary_search_tree)->p_left != NULL)
         {
             display_binary_search_tree((&(*binary_search_tree)->p_left), data_type);
@@ -36,8 +42,10 @@ Bool_e display_binary_search_tree(Binary_search_tree_p* binary_search_tree, Desc
         {
             display_binary_search_tree((&(*binary_search_tree)->p_left), data_type);
         }
+        
         sprintf(buf, "%3.2f %% at %ds", (*binary_search_tree)->result.confidence, (*binary_search_tree)->result.time_code);
         display_centered_text_console(buf);
+
         if ((*binary_search_tree)->p_right != NULL)
         {
             display_binary_search_tree((&(*binary_search_tree)->p_right), data_type);

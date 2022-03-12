@@ -41,12 +41,15 @@ Bool_e display_research_by_keyword(char* word)
         return FALSE;
     }
 
+    #if defined(TEXTUAL)
     clear_console();
     print_plate_console();
     display_centered_text_console("");
     sprintf(string, "Requete : %s", word);
     display_centered_text_console(string);
     display_centered_text_console("");
+    #endif
+
 
     if (file_contains_string(p_indexing_table, word, &p_line) == TRUE)
     {
@@ -71,20 +74,30 @@ Bool_e display_research_by_keyword(char* word)
                 first = FALSE;
             }
             sprintf(buf, "%s %u", name, occurences);
+
+            #if defined(TEXTUAL)
             display_centered_text_console(buf);
+            #elif defined(GRAPHICAL)
+            printf("%s\n", buf);
+            #endif 
+
             free(name);
         }
     }
     else
     {
+        #if defined(TEXTUAL)
         display_centered_text_console("Aucun resultat");
+        #endif
     }
 
+    #if defined(TEXTUAL)
     display_centered_text_console("");
     display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
     display_centered_text_console("");
     print_plate_console();
     getch();
+    #endif
 
     if (fclose(p_indexing_table) == EOF)
     {
@@ -92,7 +105,9 @@ Bool_e display_research_by_keyword(char* word)
         return FALSE;
     }
 
+    #if defined(TEXTUAL)
     free(word);
+    #endif
     free(p_line);
     
     return TRUE;
