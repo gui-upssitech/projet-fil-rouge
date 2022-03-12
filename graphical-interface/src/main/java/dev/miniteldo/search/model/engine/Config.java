@@ -11,5 +11,5 @@ public enum Config {
     AUDIO_SAMPLES,
     AUDIO_INTERVAL,
     AUDIO_STEP,
-    AUDIO_THRESHOLD;
+    AUDIO_THRESHOLD
 }
