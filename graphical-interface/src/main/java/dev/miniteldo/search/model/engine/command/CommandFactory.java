@@ -1,17 +1,10 @@
-package searchengine.command;
+package dev.miniteldo.search.model.engine.command;
 
-import searchengine.searcher.SearcherType;
+import dev.miniteldo.search.model.engine.searcher.SearcherType;
 
 public class CommandFactory {
-    public static Command getCommand(SearcherType searcherType, String data) {
-        Command command;
 
-        switch(searcherType) {
-            case TEXT_KEYWORD:
-            case TEXT_PATH:
-            case IMAGE_RGB_PATH:
-            case IMAGE_NB_PATH:
-            case AUDIO_PATH:
-        }
+    public static Command getCommand(SearcherType searcherType, String data) {
+        return new Command(searcherType.getSearcherType(), searcherType.getDataType(), data);
     }
 }

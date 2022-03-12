@@ -1,4 +1,4 @@
-package searchengine.searcher;
+package dev.miniteldo.search.model.engine.searcher;
 
 public class SearchResult {
         private String filePath;
