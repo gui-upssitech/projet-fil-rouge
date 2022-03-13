@@ -46,17 +46,9 @@ public class App extends Application {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
 
-            // Stylesheet select
-            //stage.getScene().getStylesheets().add(getTheme());
-
         } catch (IOException | NullPointerException e) {
             System.out.println("Err: failed to change the view");
             e.printStackTrace();
         }
-    }
-
-    public static String getTheme() throws NullPointerException {
-        String url = "/stylesheets/theme-" + ((darkMode) ? "dark" : "light") + ".css";
-        return App.class.getResource(url).toExternalForm();
     }
 }

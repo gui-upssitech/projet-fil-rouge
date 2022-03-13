@@ -1,8 +1,3 @@
-.root {
-    -fx-background-color: -fx-bg-color;
-    -fx-text-fill: -fx-text-color;
-}
-
 #titleText {
     -fx-text-fill: -fx-text-color;
 }
@@ -15,11 +10,4 @@
 #searchBarContainer .button {
     -fx-border-radius: 0px 12px 12px 0px;
     -fx-background-radius: 0px 12px 12px 0px;
-
-    -fx-text-fill: -fx-text-color;
-    -fx-cursor: hand;
-}
-
-#searchBarContainer .button:hover {
-    -fx-background-color: #8ecae6;
 }

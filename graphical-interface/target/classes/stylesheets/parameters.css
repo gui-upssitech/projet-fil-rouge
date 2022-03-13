@@ -1,0 +1,10 @@
+.setting {
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+
+    -fx-cursor: hand;
+}
+
+.setting:hover {
+    -fx-background-color: #EEE;
+}

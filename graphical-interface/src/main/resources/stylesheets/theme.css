@@ -7,9 +7,15 @@
     /* Main page inputs */
     -fx-input-fill: #FFF;
     -fx-input-stroke: #ddd;
+    -fx-button-hover: #8ecae6;
 }
 
 /* Other */
+
+.root {
+    -fx-background-color: -fx-bg-color;
+    -fx-text-fill: -fx-text-color;
+}
 
 .button, .text-field {
     -fx-background-color: -fx-input-fill;
@@ -25,6 +31,12 @@
     -fx-padding: 12px;
 }
 
+.button {
+    -fx-cursor: hand;
+    -fx-text-fill: -fx-text-color;
+}
+
 .button:hover {
     -fx-background-insets: 0;
+    -fx-background-color: -fx-button-hover;
 }
