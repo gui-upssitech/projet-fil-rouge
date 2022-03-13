@@ -12,6 +12,7 @@ Date:       29/11/2021
 
 #include "toolbox.h"
 #include "comparaison_generic.h"
+#include "project.h"
 
 /**
  * @brief A struct which represents a leaf of the binary search tree.

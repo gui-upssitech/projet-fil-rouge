@@ -18,6 +18,7 @@ Date:       29/11/2021
 #include "console.h"
 #include "indexation_text.h"
 #include "toolbox.h"
+#include "project.h"
 
 /**
  * @brief A struct which associates a score to a text id.

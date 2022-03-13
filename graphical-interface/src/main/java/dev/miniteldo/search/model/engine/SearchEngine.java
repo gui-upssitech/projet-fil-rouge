@@ -1,5 +1,7 @@
 package dev.miniteldo.search.model.engine;
 
+import dev.miniteldo.search.model.engine.searcher.SearchResult;
+
 public interface SearchEngine {
 
     // Indexation

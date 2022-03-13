@@ -21,6 +21,7 @@ Date:       29/11/2021
 #include "comparaison_image.h"
 #include "toolbox.h"
 #include "admin.h"
+#include "project.h"
 
 /* useful constants for displaying the console */
 #define WALL "|"
@@ -120,6 +121,15 @@ void display_image_research_menu();
  * @return Bool_e TRUE if the research succeed, FALSE else.
  */
 Bool_e display_image_by_path_research_menu(Bool_e colored);
+
+/**
+ * @brief Display the image by path results for graphical java app.
+ * 
+ * @param colored Boolean variable to indicate if the menu image is for colored images or gray images.
+ * @param path The file path.
+ * @return Bool_e TRUE if the research succeed, FALSE else.
+ */
+Bool_e display_image_by_path_research_menu_graphical(char* path, Bool_e colored);
 
 /**
  * @brief Display image result menu.

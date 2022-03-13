@@ -921,6 +921,47 @@ void display_image_research_menu()
     }
 }
 
+#if defined(GRAPHICAL)
+Bool_e display_image_by_path_research_menu_graphical(char* path, Bool_e colored)
+{
+    /* statements */
+    Binary_search_tree_p confidence_tree;
+    Result_s result;
+
+    /* instructions */
+    if(colored == TRUE)
+    {
+        strcpy(strrchr(path, '.'), ".txt");
+        if(compare_image_files(path, &confidence_tree, TRUE) == TRUE)
+        {
+            display_image_result_menu(&confidence_tree, path, TRUE);   
+            free_binary_search_tree(&confidence_tree);
+        }
+        else
+        {
+            fprintf(stderr, "Error comparing image file \"%s\".\n\r", path);
+            return FALSE;
+        }
+    }
+    else
+    {
+        strcpy(strrchr(path, '.'), ".txt");
+        if(compare_image_files(path, &confidence_tree, FALSE) == TRUE)
+        {
+            display_image_result_menu(&confidence_tree, path, FALSE);
+            free_binary_search_tree(&confidence_tree); 
+        }
+        else
+        {
+            fprintf(stderr, "Error comparing image file \"%s\".\n\r", path);
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+#endif
+
 Bool_e display_image_by_path_research_menu(Bool_e colored)
 {
     /* statements */
@@ -948,6 +989,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
             display_centered_text_console("Recherche par image niveaux de gris");
         }
         display_centered_text_console("");
+
         if(ret != 0)
         {
             if(ret == 1)
@@ -980,6 +1022,7 @@ Bool_e display_image_by_path_research_menu(Bool_e colored)
                 {
                     if(is_extension_file(path, "jpg") == TRUE)
                     {
+    
                         strcpy(strrchr(path, '.'), ".txt");
                         if(compare_image_files(path, &confidence_tree, TRUE) == TRUE)
                         {
@@ -1046,8 +1089,10 @@ void display_image_result_menu(Binary_search_tree_p* confidence_tree, char* path
     char string[MAX_MEMORY_STRING];
 
     /* instructions */
+    #if defined(TEXTUAL)
     clear_console();
     print_plate_console();
+    #endif
     file_name = strrchr(path, '/') + 1;
     if(colored == TRUE)
     {
@@ -1057,16 +1102,21 @@ void display_image_result_menu(Binary_search_tree_p* confidence_tree, char* path
     {
         strcpy(strrchr(file_name, '.'), ".bmp");
     }
-    
+    #if defined(TEXTUAL)
     display_centered_text_console("");
     sprintf(string, "Requete : %s", file_name);
     display_centered_text_console(string);
     display_centered_text_console("");
+    #endif
+    
     if(is_empty_binary_search_tree(*confidence_tree) == FALSE)
     {
+        #if defined(TEXTUAL)
         display_centered_text_console("Resultats");
+        #endif
         display_binary_search_tree(confidence_tree, IMAGE);
     }
+    #if defined(TEXTUAL)
     else
     {
         display_centered_text_console("Aucun resultat");
@@ -1076,6 +1126,7 @@ void display_image_result_menu(Binary_search_tree_p* confidence_tree, char* path
     display_centered_text_console("");
     print_plate_console();
     getch();
+    #endif
 }
 
 void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned int size, char* path)
