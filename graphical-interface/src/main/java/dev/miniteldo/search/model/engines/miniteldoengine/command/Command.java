@@ -1,5 +1,7 @@
 package dev.miniteldo.search.model.engines.miniteldoengine.command;
 
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -8,8 +10,8 @@ import java.io.InputStreamReader;
 public class Command {
     private ProcessBuilder processBuilder;
 
-    public Command(String searchType, String inputType, String data) {
-        processBuilder = new ProcessBuilder("./bridge/" + searchType, inputType, data);
+    public Command(SearcherType searcherType, String data) {
+        processBuilder = new ProcessBuilder("./bridge/" + searcherType.getSearcherType(), searcherType.getDataType(), data);
         processBuilder = processBuilder.directory(new File("../search-engine"));
     }
 

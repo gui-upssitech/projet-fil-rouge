@@ -16,4 +16,12 @@ public class SearchResult {
         public float getConfidence() {
                 return confidence;
         }
+
+        @Override
+        public String toString() {
+                return "SearchResult{" +
+                        "filePath='" + filePath + '\'' +
+                        ", confidence=" + confidence +
+                        '}';
+        }
 }
