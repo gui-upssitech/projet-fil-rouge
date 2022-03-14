@@ -1,6 +1,6 @@
-package dev.miniteldo.search.model.engine.command;
+package dev.miniteldo.search.model.engines.miniteldoengine.command;
 
-import dev.miniteldo.search.model.engine.searcher.SearcherType;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 
 public class CommandFactory {
 

@@ -1,4 +1,4 @@
-package dev.miniteldo.search.model.engine.searcher;
+package dev.miniteldo.search.model.engines.miniteldoengine.searcher;
 
 import java.util.ArrayList;
 

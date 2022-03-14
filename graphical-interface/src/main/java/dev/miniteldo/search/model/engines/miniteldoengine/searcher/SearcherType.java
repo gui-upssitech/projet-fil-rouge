@@ -1,4 +1,4 @@
-package dev.miniteldo.search.model.engine.searcher;
+package dev.miniteldo.search.model.engines.miniteldoengine.searcher;
 
 public enum SearcherType {
     TEXT_KEYWORD("searcher_text", "keyword"),

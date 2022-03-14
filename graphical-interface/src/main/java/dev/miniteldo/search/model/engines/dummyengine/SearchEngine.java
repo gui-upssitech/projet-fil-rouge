@@ -1,6 +1,6 @@
-package dev.miniteldo.search.model.engine;
+package dev.miniteldo.search.model.engines.dummyengine;
 
-import dev.miniteldo.search.model.engine.searcher.SearchResult;
+import dev.miniteldo.search.model.engines.dummyengine.SearchResult;
 
 public interface SearchEngine {
 

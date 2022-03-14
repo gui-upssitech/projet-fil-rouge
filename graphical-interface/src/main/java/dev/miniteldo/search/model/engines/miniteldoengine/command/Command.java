@@ -1,4 +1,4 @@
-package dev.miniteldo.search.model.engine.command;
+package dev.miniteldo.search.model.engines.miniteldoengine.command;
 
 import java.io.BufferedReader;
 import java.io.File;

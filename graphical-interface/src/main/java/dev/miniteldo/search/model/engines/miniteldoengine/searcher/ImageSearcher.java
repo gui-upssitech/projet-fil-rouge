@@ -1,10 +1,10 @@
-package dev.miniteldo.search.model.engine.searcher;
+package dev.miniteldo.search.model.engines.miniteldoengine.searcher;
 
 import java.util.ArrayList;
 
-public class TextSearcher extends Searcher {
+public class ImageSearcher extends Searcher {
 
-    public TextSearcher(SearcherType searcherType) {
+    public ImageSearcher(SearcherType searcherType) {
         super();
         this.searcherType = searcherType;
     }
@@ -13,6 +13,4 @@ public class TextSearcher extends Searcher {
     public ArrayList<SearchResult> search(String request) {
         return null;
     }
-
-
 }

@@ -1,13 +1,10 @@
-package dev.miniteldo.search.model.engine;
+package dev.miniteldo.search.model.engines.miniteldoengine;
 
-import dev.miniteldo.search.model.engine.command.Command;
-import dev.miniteldo.search.model.engine.command.CommandFactory;
-import dev.miniteldo.search.model.engine.searcher.SearcherType;
+import dev.miniteldo.search.model.engines.miniteldoengine.command.CommandFactory;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Test{
 
