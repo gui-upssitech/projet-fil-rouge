@@ -4,6 +4,7 @@
 
 #include "comparaison_image.h"
 #include "console.h"
+#include "configurations.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,27 +24,15 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
+    load_configurations();
+
     if(strcmp(argv[1], "color") == 0)
     {
-        if(display_image_by_path_research_menu_graphical(argv[2], TRUE) == TRUE)
-        {
-            return EXIT_SUCCESS;
-        }
-        else
-        {
-            return EXIT_FAILURE;
-        }
+        display_image_by_path_research_menu_graphical(argv[2], TRUE);
     }
     else if(strcmp(argv[1], "gray") == 0)
     {
-        if(display_image_by_path_research_menu_graphical(argv[2], FALSE) == TRUE)
-        {
-            return EXIT_SUCCESS;
-        }
-        else
-        {
-            return EXIT_FAILURE;
-        }
+        display_image_by_path_research_menu_graphical(argv[2], FALSE);
     }
     else
     {

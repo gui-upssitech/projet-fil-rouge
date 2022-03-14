@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "comparaison_text.h"
+#include "configurations.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,20 +23,15 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
+    load_configurations();
+
     if(strcmp(argv[1], "keyword") == 0)
     {
-        if(display_research_by_keyword(argv[2]) == TRUE)
-        {
-            return EXIT_SUCCESS;
-        }
-        else
-        {
-            return EXIT_FAILURE;
-        }
+        display_research_by_keyword(argv[2]);
     }
     else if(strcmp(argv[1], "text") == 0)
     {
-
+        display_research_by_text(argv[2]);
     }
     else
     {

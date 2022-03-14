@@ -76,6 +76,10 @@ searcher_image: $(OBJ) src/bridge/searcher_image.c
 	mv ./*.o ./obj
 	$(CC) -o $(BRIDIR)/$@ $^ $(CFLAGS)	
 
+searcher_audio : $(OBJ) src/bridge/searcher_audio.c
+	gcc -c src/bridge/searcher_audio.c $(CFLAGS)
+	mv ./*.o ./obj
+	$(CC) -o $(BRIDIR)/$@ $^ $(CFLAGS)	
 
 ##########################################################################################
 #                                        main                                            #

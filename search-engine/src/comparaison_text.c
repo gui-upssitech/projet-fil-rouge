@@ -182,12 +182,14 @@ Bool_e display_research_by_text(char* path)
     init_keywords(&keywords);
 
     /* instructions */
+    #if defined(TEXTUAL)
     clear_console();
     print_plate_console();
     display_centered_text_console("");
     sprintf(string, "Requete : %s", path);
     display_centered_text_console(string);
     display_centered_text_console("");
+    #endif
 
     /* STEP 1 : Indexing the text in param */
     if (index_text(path, &desc) == FALSE)
@@ -360,8 +362,11 @@ Bool_e display_research_by_text(char* path)
             }
 
             sprintf(word, "%s %.1f", p_name, keywords.score_texts[j].score);
-
+            #if defined (TEXTUAL)
             display_centered_text_console(word);
+            #elif defined (GRAPHICAL)
+            printf("%s\n", word);
+            #endif
 
             keywords.score_texts[j].score = -1;
 
@@ -370,14 +375,18 @@ Bool_e display_research_by_text(char* path)
     }
     else
     {
+        #if defined(TEXTUAL)
         display_centered_text_console("Aucun resultat");
+        #endif
     }
 
+    #if defined(TEXTUAL)
     display_centered_text_console("");
     display_centered_text_console("Appuyez sur n'importe quelle touche pour quitter...");
     display_centered_text_console("");
     print_plate_console();
     getch();
+    #endif
 
     for(i = 0; i < keywords.size; i++)
     {
