@@ -2,6 +2,7 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
+import dev.miniteldo.search.view.Dialog;
 import dev.miniteldo.search.view.Error;
 import dev.miniteldo.search.view.Views;
 import javafx.event.ActionEvent;
@@ -40,6 +41,7 @@ public class ParameterController {
     @FXML
     protected void onAdminButton() {
         // TODO: launch login dialog
+        App.showDialog(Dialog.ERROR);
     }
 
     @FXML

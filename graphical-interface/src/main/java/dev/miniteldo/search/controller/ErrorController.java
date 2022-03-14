@@ -2,6 +2,7 @@ package dev.miniteldo.search.controller;
 
 // Project : graphical-interface
 
+import dev.miniteldo.search.App;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -23,8 +24,7 @@ public class ErrorController {
 
     // Methods
     public void onOkButton() {
-        Stage stage = (Stage) okButton.getScene().getWindow();
-        stage.close();
+        App.closeDialog();
     }
 
 }

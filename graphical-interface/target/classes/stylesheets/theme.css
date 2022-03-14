@@ -40,3 +40,12 @@
     -fx-background-insets: 0;
     -fx-background-color: -fx-button-hover;
 }
+
+#dialog {
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+}
+
+#dialog > * {
+    -fx-background-color: #fff;
+    -fx-background-radius: 12px;
+}
