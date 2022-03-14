@@ -1,0 +1,7 @@
+.result-preview-box {
+    -fx-background-color: #DDD;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0;
+}

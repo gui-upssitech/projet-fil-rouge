@@ -3,6 +3,7 @@ package dev.miniteldo.search.controller;
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.StringModifier;
+import dev.miniteldo.search.view.Dialog;
 import dev.miniteldo.search.view.Error;
 import dev.miniteldo.search.view.Views;
 import javafx.application.Platform;
@@ -32,7 +33,7 @@ public class MainMenuController {
         if (searchBar.getText() == null || searchBar.getText().trim().isEmpty()) {
 
             // PopUpError modal window
-            Error.popUpError(((Node) event.getSource()).getScene().getWindow(), "La requête est vide !");
+            App.showDialog(Dialog.ERROR);
 
         } else {
             // Remove space
