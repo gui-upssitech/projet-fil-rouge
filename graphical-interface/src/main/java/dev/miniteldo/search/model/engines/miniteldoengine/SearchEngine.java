@@ -2,6 +2,9 @@ package dev.miniteldo.search.model.engines.miniteldoengine;
 
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearchResult;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public interface SearchEngine {
 
     // Indexation
@@ -40,35 +43,35 @@ public interface SearchEngine {
      * @param negativeKeywords Mots-clés à exclure de la recherche
      * @return Liste des fichiers correspondants, triés par ordre de confiance
      */
-    SearchResult[] keywordSearch(String[] positiveKeywords, String[] negativeKeywords);
+    ArrayList<SearchResult> keywordSearch(String[] positiveKeywords, String[] negativeKeywords);
 
     /**
      * Effectue une recherche textuelle à partir d'un fichier XML
      * @param filePath Chemin vers le fichier texte
      * @return Liste des fichiers similaires, triés par ordre de confiance
      */
-    SearchResult[] textFileSearch(String filePath);
+    ArrayList<SearchResult> textFileSearch(String filePath);
 
     /**
      * Effectue une recherche d'images noir & blanc similaires
      * @param filePath Chemin vers l'image
      * @return Liste des images similaires, triés par ordre de confiance
      */
-    SearchResult[] bwImageSearch(String filePath);
+    ArrayList<SearchResult> bwImageSearch(String filePath) throws IOException;
 
     /**
      * Effectue une recherche d'images couleurs similaires
      * @param filePath Chemin vers l'image
      * @return Liste des images similaires, triés par ordre de confiance
      */
-    SearchResult[] rgbImageSearch(String filePath);
+    ArrayList<SearchResult> rgbImageSearch(String filePath) throws IOException;
 
     /**
      * Effectue une recherche audio à partir d'un fichier WAV
      * @param filePath Chemin vers l'extrait audio
      * @return Liste d'audios contenant le son donné, triés par ordre de confiance
      */
-    SearchResult[] audioSearch(String filePath);
+    ArrayList<SearchResult> audioSearch(String filePath);
 
 
 

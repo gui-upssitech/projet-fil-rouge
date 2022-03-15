@@ -1,8 +1,15 @@
 package dev.miniteldo.search.model.engines.miniteldoengine;
 
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearchResult;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MiniteldoEngine implements SearchEngine {
+
     @Override
     public boolean indexText() {
         return false;
@@ -24,28 +31,30 @@ public class MiniteldoEngine implements SearchEngine {
     }
 
     @Override
-    public SearchResult[] keywordSearch(String[] positiveKeywords, String[] negativeKeywords) {
-        return new SearchResult[0];
+    public ArrayList<SearchResult> keywordSearch(String[] positiveKeywords, String[] negativeKeywords) {
+        return null;
     }
 
     @Override
-    public SearchResult[] textFileSearch(String filePath) {
-        return new SearchResult[0];
+    public ArrayList<SearchResult> textFileSearch(String filePath) {
+        return null;
     }
 
     @Override
-    public SearchResult[] bwImageSearch(String filePath) {
-        return new SearchResult[0];
+    public ArrayList<SearchResult> bwImageSearch(String filePath) throws IOException {
+        Searcher searcher = SearcherFactory.getSearcher(SearcherType.IMAGE_NB_PATH);
+        return searcher.search(filePath);
     }
 
     @Override
-    public SearchResult[] rgbImageSearch(String filePath) {
-        return new SearchResult[0];
+    public ArrayList<SearchResult> rgbImageSearch(String filePath) throws IOException {
+        Searcher searcher = SearcherFactory.getSearcher(SearcherType.IMAGE_RGB_PATH);
+        return searcher.search(filePath);
     }
 
     @Override
-    public SearchResult[] audioSearch(String filePath) {
-        return new SearchResult[0];
+    public ArrayList<SearchResult> audioSearch(String filePath) {
+        return null;
     }
 
     @Override

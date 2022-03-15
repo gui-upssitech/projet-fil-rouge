@@ -13,6 +13,4 @@ public class TextSearcher extends Searcher {
     public ArrayList<SearchResult> search(String request) {
         return null;
     }
-
-
 }
