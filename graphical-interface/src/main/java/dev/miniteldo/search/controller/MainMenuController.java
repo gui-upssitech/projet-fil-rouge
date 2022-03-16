@@ -47,6 +47,7 @@ public class MainMenuController {
             // lancement de la recherche de toutes les occurrences
 //            System.out.println(m.matches());
 
+            System.out.println(checkRegex(requete).name());
 
             SearchEngine engine = AppState.getInstance().getEngine();
             System.out.println("Votre recherche : " + requete);
