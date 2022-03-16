@@ -1,6 +1,8 @@
 package dev.miniteldo.search.model.engines.miniteldoengine;
 
-import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearchResult;
+import dev.miniteldo.search.model.engines.Config;
+import dev.miniteldo.search.model.engines.SearchEngine;
+import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
@@ -41,13 +43,13 @@ public class MiniteldoEngine implements SearchEngine {
     }
 
     @Override
-    public ArrayList<SearchResult> bwImageSearch(String filePath) throws IOException {
+    public ArrayList<SearchResult> bwImageSearch(String filePath) {
         Searcher searcher = SearcherFactory.getSearcher(SearcherType.IMAGE_NB_PATH);
         return searcher.search(filePath);
     }
 
     @Override
-    public ArrayList<SearchResult> rgbImageSearch(String filePath) throws IOException {
+    public ArrayList<SearchResult> rgbImageSearch(String filePath) {
         Searcher searcher = SearcherFactory.getSearcher(SearcherType.IMAGE_RGB_PATH);
         return searcher.search(filePath);
     }

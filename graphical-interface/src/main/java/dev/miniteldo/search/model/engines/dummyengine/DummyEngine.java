@@ -1,5 +1,8 @@
 package dev.miniteldo.search.model.engines.dummyengine;
 
+import dev.miniteldo.search.model.engines.Config;
+import dev.miniteldo.search.model.engines.SearchEngine;
+import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;

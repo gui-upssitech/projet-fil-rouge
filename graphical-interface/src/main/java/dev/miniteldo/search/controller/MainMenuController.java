@@ -1,20 +1,17 @@
 package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
+import dev.miniteldo.search.model.AppState;
+import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.dummyengine.DummyEngine;
-import dev.miniteldo.search.model.engines.dummyengine.SearchEngine;
-import dev.miniteldo.search.model.engines.dummyengine.SearchResult;
+import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.StringModifier;
 import dev.miniteldo.search.view.Dialog;
-import dev.miniteldo.search.view.Error;
 import dev.miniteldo.search.view.Views;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -51,9 +48,9 @@ public class MainMenuController {
 //            System.out.println(m.matches());
 
 
-            DummyEngine dummyEngine = new DummyEngine();
+            SearchEngine engine = AppState.getInstance().getEngine();
             System.out.println("Votre recherche : " + requete);
-            ArrayList<SearchResult> searchResults = dummyEngine.textFileSearch(requete);
+            ArrayList<SearchResult> searchResults = engine.textFileSearch(requete);
 
             for (SearchResult result : searchResults) {
                 System.out.println(result);

@@ -1,5 +1,11 @@
 package dev.miniteldo.search.model;
 
+import dev.miniteldo.search.model.engines.EngineFactory;
+import dev.miniteldo.search.model.engines.Engines;
+import dev.miniteldo.search.model.engines.SearchEngine;
+
+import java.util.HashMap;
+
 /**
  * class: AppState
  * author: Guillaume Roussin
@@ -20,10 +26,16 @@ public class AppState {
     private boolean darkMode;
     private boolean adminMode;
 
+    private Engines curEngine;
+    private HashMap<Engines, SearchEngine> engines;
+
     // Constructor
     private AppState() {
         darkMode = false;
         adminMode = false;
+
+        engines = new HashMap<>();
+        setEngine(Engines.DUMMY_ENGINE); // DUMMY ENGINE will be the default engine for now
     }
 
     // Methods
@@ -51,5 +63,17 @@ public class AppState {
 
     public boolean isAdmin() {
         return adminMode;
+    }
+
+    // Multiengine configuration
+    public void setEngine(Engines engine) {
+        if(!engines.containsKey(engine))
+            engines.put(engine, EngineFactory.createEngine(engine));
+
+        curEngine = engine;
+    }
+
+    public SearchEngine getEngine() {
+        return engines.get(curEngine);
     }
 }

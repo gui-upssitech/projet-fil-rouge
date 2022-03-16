@@ -1,4 +1,4 @@
-package dev.miniteldo.search.model.engines.dummyengine;
+package dev.miniteldo.search.model.engines;
 
 public class SearchResult {
     private String filePath;

@@ -1,4 +1,4 @@
-package dev.miniteldo.search.model.engines.dummyengine;
+package dev.miniteldo.search.model.engines;
 
 public enum Config {
     TEXT_FILTER_MODE,

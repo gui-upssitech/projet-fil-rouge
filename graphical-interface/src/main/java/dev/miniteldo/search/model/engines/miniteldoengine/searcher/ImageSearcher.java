@@ -1,5 +1,6 @@
 package dev.miniteldo.search.model.engines.miniteldoengine.searcher;
 
+import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.command.Command;
 
 import java.io.BufferedReader;
@@ -15,7 +16,7 @@ public class ImageSearcher extends Searcher {
     }
 
     @Override
-    public ArrayList<SearchResult> search(String request) throws IOException {
+    protected ArrayList<SearchResult> searchInner(String request) throws IOException {
         ArrayList<SearchResult> searchResults = new ArrayList<>();
         Command command = new Command(searcherType, request);
         BufferedReader reader = command.getResult();
