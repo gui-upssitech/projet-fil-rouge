@@ -30,6 +30,7 @@
                 <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButton" prefHeight="25.0" text="Rechercher" />
             </children>
          </HBox>
+         <Button fx:id="fileButton" mnemonicParsing="false" onAction="#onFileButton" text="temp file" />
       </children>
    </VBox>
 

@@ -47,8 +47,9 @@ public class MainMenuController {
 
 //            Pattern p = Pattern.compile(Regex.REGEX_TEXTE.getRegexExp());
 //            Matcher m = p.matcher(requete);
-//            // lancement de la recherche de toutes les occurrences
+            // lancement de la recherche de toutes les occurrences
 //            System.out.println(m.matches());
+
 
             DummyEngine dummyEngine = new DummyEngine();
             System.out.println("Votre recherche : " + requete);
@@ -60,6 +61,24 @@ public class MainMenuController {
 
             App.setView(Views.SEARCH_RESULT);
         }
+    }
+
+    public Regex checkRegex(String request) {
+        // Variable
+        Pattern p;
+        Matcher m;
+
+        // Check each regex
+        for (Regex regex : Regex.values()) {
+            p = Pattern.compile(regex.getRegexExp());
+            m = p.matcher(request);
+
+            // If we found a match
+            if (m.matches()) {
+                return regex;
+            }
+        }
+        return Regex.INVALID;
     }
 
     @FXML

@@ -281,8 +281,8 @@ public class DummyEngine implements SearchEngine {
         DummyEngine dummyEngine = new DummyEngine();
         String FAKE_PATH = "a_path";
 //        ArrayList<SearchResult> resultArrayList = dummyEngine.audioSearch(FAKE_PATH);
-//        ArrayList<SearchResult> resultArrayList = dummyEngine.textFileSearch(FAKE_PATH);
-        ArrayList<SearchResult> resultArrayList = dummyEngine.bwImageSearch(FAKE_PATH);
+        ArrayList<SearchResult> resultArrayList = dummyEngine.textFileSearch(FAKE_PATH);
+//        ArrayList<SearchResult> resultArrayList = dummyEngine.bwImageSearch(FAKE_PATH);
         for (SearchResult result : resultArrayList) {
             System.out.println(result);
         }
