@@ -1,6 +1,9 @@
 package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
+import dev.miniteldo.search.model.engines.dummyengine.DummyEngine;
+import dev.miniteldo.search.model.engines.dummyengine.SearchEngine;
+import dev.miniteldo.search.model.engines.dummyengine.SearchResult;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.StringModifier;
 import dev.miniteldo.search.view.Dialog;
@@ -17,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,15 +41,22 @@ public class MainMenuController {
 
         } else {
             // Remove space
-            requete = searchBar.getText().trim();
-            System.out.println(StringModifier.removeAllSpace(requete));
+            requete = StringModifier.removeAllSpace(searchBar.getText().trim());
 
             // TODO CHECK TYPE OF RESEARCH WITH A SWITCH ON COMBOBOX
 
-            Pattern p = Pattern.compile(Regex.REGEX_TEXTE.getRegexExp());
-            Matcher m = p.matcher(requete);
-            // lancement de la recherche de toutes les occurrences
-            System.out.println(m.matches());
+//            Pattern p = Pattern.compile(Regex.REGEX_TEXTE.getRegexExp());
+//            Matcher m = p.matcher(requete);
+//            // lancement de la recherche de toutes les occurrences
+//            System.out.println(m.matches());
+
+            DummyEngine dummyEngine = new DummyEngine();
+            System.out.println("Votre recherche : " + requete);
+            ArrayList<SearchResult> searchResults = dummyEngine.textFileSearch(requete);
+
+            for (SearchResult result : searchResults) {
+                System.out.println(result);
+            }
 
             App.setView(Views.SEARCH_RESULT);
         }
