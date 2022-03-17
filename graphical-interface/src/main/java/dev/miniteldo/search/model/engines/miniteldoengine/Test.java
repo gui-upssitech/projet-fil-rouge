@@ -14,7 +14,10 @@ import java.util.regex.Pattern;
 public class Test {
 
     public static void main(String[] args) throws IOException {
-        Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_PATH);
-        System.out.println(searcher.search("data/text/03-Mimer_un_signal_nerveux_pour_utf8.xml"));
+        //Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_PATH);
+        //System.out.println(searcher.search("data/text/03-Mimer_un_signal_nerveux_pour_utf8.xml"));
+
+        MiniteldoEngine miniteldoEngine = new MiniteldoEngine();
+        System.out.println(miniteldoEngine.login("root"));
     }
 }

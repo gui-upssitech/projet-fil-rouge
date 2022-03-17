@@ -1,6 +1,6 @@
 package dev.miniteldo.search.model.engines.dummyengine;
 
-import dev.miniteldo.search.model.engines.Config;
+import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
@@ -241,7 +241,7 @@ public class DummyEngine implements SearchEngine {
     }
 
     @Override
-    public boolean setConfig(Config configName, int value) {
+    public boolean setConfig(Configurations configName, int value) {
         return false;
     }
 

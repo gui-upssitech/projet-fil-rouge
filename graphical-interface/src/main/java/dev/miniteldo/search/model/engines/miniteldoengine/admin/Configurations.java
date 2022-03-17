@@ -1,6 +1,6 @@
-package dev.miniteldo.search.model.engines;
+package dev.miniteldo.search.model.engines.miniteldoengine.admin;
 
-public enum Config {
+public enum Configurations {
     TEXT_FILTER_MODE,
     TEXT_FILTER_VALUE,
     TEXT_INDEX_TABLE_SIZE,

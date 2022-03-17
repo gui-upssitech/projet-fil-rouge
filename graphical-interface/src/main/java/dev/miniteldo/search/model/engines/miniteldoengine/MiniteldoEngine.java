@@ -1,12 +1,14 @@
 package dev.miniteldo.search.model.engines.miniteldoengine;
 
-import dev.miniteldo.search.model.engines.Config;
+import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
+import dev.miniteldo.search.model.engines.miniteldoengine.admin.Login;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MiniteldoEngine implements SearchEngine {
@@ -86,7 +88,14 @@ public class MiniteldoEngine implements SearchEngine {
 
     @Override
     public boolean login(String password) {
-        return false;
+        boolean result = false;
+
+        try {
+            result = Login.login(password);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
@@ -100,7 +109,7 @@ public class MiniteldoEngine implements SearchEngine {
     }
 
     @Override
-    public boolean setConfig(Config configName, int value) {
+    public boolean setConfig(Configurations configName, int value) {
         return false;
     }
 }

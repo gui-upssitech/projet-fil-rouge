@@ -1,5 +1,7 @@
 package dev.miniteldo.search.model.engines;
 
+import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
+
 import java.util.ArrayList;
 
 public interface SearchEngine {
@@ -113,5 +115,5 @@ public interface SearchEngine {
      * @param value      Nouvelle valeur du paramètre
      * @return Confirmation de changement du paramètre
      */
-    boolean setConfig(Config configName, int value);
+    boolean setConfig(Configurations configName, int value);
 }
