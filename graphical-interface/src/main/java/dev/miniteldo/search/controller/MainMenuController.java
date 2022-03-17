@@ -125,7 +125,7 @@ public class MainMenuController {
     }
 
     public void splitKeyword() {
-        Pattern p = Pattern.compile(Regex.REGEX_TEXTE_KEYWORD.getRegexExp());
+        Pattern p = Pattern.compile("\\+\\w+|\\-\\w+|\\w+");
         Matcher m = p.matcher(request);
 
         String value = "";
