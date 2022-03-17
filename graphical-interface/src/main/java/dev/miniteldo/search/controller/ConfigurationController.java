@@ -5,16 +5,9 @@ package dev.miniteldo.search.controller;
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.view.Views;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Classe ConfigurationController ...
@@ -30,7 +23,7 @@ public class ConfigurationController {
 
     // Methods
     @FXML
-    protected void onReturnButton() throws IOException {
+    protected void onReturnButton() {
         App.setView(Views.PARAMETERS);
     }
 

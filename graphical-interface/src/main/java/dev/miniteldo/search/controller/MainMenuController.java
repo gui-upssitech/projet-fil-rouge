@@ -16,6 +16,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -99,15 +100,17 @@ public class MainMenuController {
     protected void onFileButton() {
         Stage stage = (Stage) searchButton.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.*"), new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"));
 
         // Set title for FileChooser
         fileChooser.setTitle("Select Some Files");
 
         // Set Initial Directory
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        String currentPath = Paths.get("").toAbsolutePath().toString();
+        fileChooser.setInitialDirectory(new File(currentPath));
         File file = fileChooser.showOpenDialog(stage);
-        System.out.println(file);
         if (file != null) {
             searchBar.setText(file.toString());
         }
