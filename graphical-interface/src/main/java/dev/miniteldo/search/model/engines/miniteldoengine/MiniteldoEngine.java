@@ -34,12 +34,37 @@ public class MiniteldoEngine implements SearchEngine {
 
     @Override
     public ArrayList<SearchResult> keywordSearch(String[] positiveKeywords, String[] negativeKeywords) {
-        return null;
+        ArrayList<SearchResult> returnArray = new ArrayList();
+
+        for(String s : positiveKeywords) {
+            ArrayList<SearchResult> buffer;
+            Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_KEYWORD);
+            buffer = searcher.search(s);
+            for(SearchResult result : buffer) {
+                if (!returnArray.contains(result)) {
+                    returnArray.add(result);
+                }
+            }
+        }
+
+        for(String s : negativeKeywords) {
+            ArrayList<SearchResult> buffer;
+            Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_KEYWORD);
+            buffer = searcher.search(s);
+            for(SearchResult result : buffer) {
+                if (returnArray.contains(result)) {
+                    returnArray.remove(result);
+                }
+            }
+        }
+
+        return returnArray;
     }
 
     @Override
     public ArrayList<SearchResult> textFileSearch(String filePath) {
-        return null;
+        Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_PATH);
+        return searcher.search(filePath);
     }
 
     @Override

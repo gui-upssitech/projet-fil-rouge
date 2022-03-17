@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Test{
 
     public static void main(String[] args) throws IOException {
-        Searcher searcher = SearcherFactory.getSearcher(SearcherType.AUDIO_PATH);
-        System.out.println(searcher.search("data/audio/corpus_fi.wav"));
+        Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_PATH);
+        System.out.println(searcher.search("data/text/03-Mimer_un_signal_nerveux_pour_utf8.xml"));
     }
 }
