@@ -28,7 +28,7 @@ public class SearchController {
 
         ArrayList<SearchResult> liste = AppState.getInstance().getCurrentRequest();
         for (SearchResult searchResult : liste) {
-            resultat += "\n" + searchResult.toString();
+            resultat += "\n\r" + searchResult.toString();
         }
         textArea.setText(resultat);
     }

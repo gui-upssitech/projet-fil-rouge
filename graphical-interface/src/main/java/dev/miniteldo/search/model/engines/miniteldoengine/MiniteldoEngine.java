@@ -100,7 +100,7 @@ public class MiniteldoEngine implements SearchEngine {
 
     @Override
     public boolean logout() {
-        return false;
+        return true;
     }
 
     @Override

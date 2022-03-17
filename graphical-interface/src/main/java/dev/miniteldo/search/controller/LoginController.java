@@ -24,7 +24,7 @@ public class LoginController {
 
     public void onOkButton(ActionEvent actionEvent) {
         // FIXME: 17/03/2022
-        boolean isValidPassword = AppState.getInstance().adminLogin(passwordField.getText());
+        boolean isValidPassword = AppState.getInstance().getEngine().login(passwordField.getText());
 
         if (isValidPassword) {
             App.closeDialog();
