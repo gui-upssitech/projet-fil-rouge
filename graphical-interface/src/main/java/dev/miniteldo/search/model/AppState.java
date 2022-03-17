@@ -3,7 +3,9 @@ package dev.miniteldo.search.model;
 import dev.miniteldo.search.model.engines.EngineFactory;
 import dev.miniteldo.search.model.engines.Engines;
 import dev.miniteldo.search.model.engines.SearchEngine;
+import dev.miniteldo.search.model.engines.SearchResult;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -28,6 +30,7 @@ public class AppState {
 
     private Engines curEngine;
     private HashMap<Engines, SearchEngine> engines;
+    private ArrayList<SearchResult> currentRequest;
 
     // Constructor
     private AppState() {
@@ -35,7 +38,8 @@ public class AppState {
         adminMode = false;
 
         engines = new HashMap<>();
-        setEngine(Engines.DUMMY_ENGINE); // DUMMY ENGINE will be the default engine for now
+        currentRequest = new ArrayList<>();
+        setEngine(Engines.MINITELDO_ENGINE); // DUMMY ENGINE will be the default engine for now
     }
 
     // Methods
@@ -75,5 +79,13 @@ public class AppState {
 
     public SearchEngine getEngine() {
         return engines.get(curEngine);
+    }
+
+    public void setCurrentRequest(ArrayList<SearchResult> currentRequest) {
+        this.currentRequest = currentRequest;
+    }
+
+    public ArrayList<SearchResult> getCurrentRequest() {
+        return currentRequest;
     }
 }

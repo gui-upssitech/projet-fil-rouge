@@ -4,6 +4,7 @@ import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.StringModifier;
 import dev.miniteldo.search.view.Dialog;
@@ -40,40 +41,70 @@ public class MainMenuController {
             request = StringModifier.removeAllSpace(searchBar.getText().trim());
 
             // Get Type of the request with regex
-            Regex resultRegex = checkRegex(request);
+            SearcherType searcherTypeRequest = checkRegex(request);
 
             // Verification of the request
-            if (resultRegex.equals(Regex.INVALID)) {
+            if (searcherTypeRequest == null) {
                 // PopUpError modal window
                 App.showDialog(Dialog.ERROR);
             } else {
-                if (!resultRegex.equals(Regex.REGEX_TEXTE_KEYWORD)) {
-                    File tempFile = new File(request);
-                    if (tempFile.exists()) {
-                        // PopUpError modal window
-                        App.showDialog(Dialog.ERROR);
-                    } else {
-                        // FIXME: 17/03/2022 add the method to load the path research
-                    }
-                } else {
-                    // FIXME: 17/03/2022 add the keyword research
-                }
-
-                SearchEngine engine = AppState.getInstance().getEngine();
-                System.out.println("Votre recherche : " + request);
-                ArrayList<SearchResult> searchResults = engine.textFileSearch(request);
-
-                for (SearchResult result : searchResults) {
-                    System.out.println(result);
-                }
+                // Call the C function
+                executeRequest(searcherTypeRequest);
 
                 App.setView(Views.SEARCH_RESULT);
+
             }
 
         }
     }
 
-    public Regex checkRegex(String request) {
+    public boolean executeRequest(SearcherType searcherType) {
+        // Variable
+        SearchEngine engine = AppState.getInstance().getEngine();
+        ArrayList<SearchResult> searchResults = null;
+
+        if (searcherType != SearcherType.TEXT_KEYWORD) {
+            File tempFile = new File(request);
+            if (!tempFile.exists()) {
+                // PopUpError modal window
+                App.showDialog(Dialog.ERROR);
+                return false;
+            }
+        }
+
+        switch (searcherType) {
+            case TEXT_PATH:
+                searchResults = engine.textFileSearch(request);
+                break;
+            case TEXT_KEYWORD:
+                // searchResults = engine.keywordSearch(request);
+                // FIXME: 17/03/2022 fix with keywords split
+                break;
+            case IMAGE_RGB_PATH:
+                searchResults = engine.rgbImageSearch(request);
+                break;
+            case IMAGE_NB_PATH:
+                searchResults = engine.bwImageSearch(request);
+                break;
+            case AUDIO_PATH:
+                searchResults = engine.audioSearch(request);
+                break;
+            default:
+                searchResults = new ArrayList<>();
+                break;
+        }
+
+        AppState.getInstance().setCurrentRequest(searchResults);
+
+        System.out.println("Votre recherche : " + request);
+        for (SearchResult result : searchResults) {
+            System.out.println(result);
+        }
+
+        return true;
+    }
+
+    public SearcherType checkRegex(String request) {
         // Variable
         Pattern p;
         Matcher m;
@@ -85,10 +116,29 @@ public class MainMenuController {
 
             // If we found a match
             if (m.matches()) {
-                return regex;
+                return convertRegexToSearchType(regex);
             }
         }
-        return Regex.INVALID;
+        return null;
+    }
+
+    // FIXME: 17/03/2022 MOVE THIS TRASH FUNCTION
+    public SearcherType convertRegexToSearchType(Regex regex) {
+        switch (regex) {
+            case REGEX_TEXTE_KEYWORD:
+                return SearcherType.TEXT_KEYWORD;
+            case REGEX_TEXTE_PATH:
+                return SearcherType.TEXT_PATH;
+            case REGEX_IMAGE_NB:
+                return SearcherType.IMAGE_NB_PATH;
+            case REGEX_IMAGE_RGB:
+                return SearcherType.IMAGE_RGB_PATH;
+            case REGEX_AUDIO:
+                return SearcherType.AUDIO_PATH;
+            default:
+                return null;
+
+        }
     }
 
     @FXML
@@ -100,9 +150,7 @@ public class MainMenuController {
     protected void onFileButton() {
         Stage stage = (Stage) searchButton.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.*"), new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"));
 
         // Set title for FileChooser
         fileChooser.setTitle("Select Some Files");
