@@ -1175,8 +1175,6 @@ void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned 
             one_result_existing = TRUE;
             #if defined(TEXTUAL)
             display_centered_text_console(time_code_forest[i]->result.name);
-            #elif defined(GRAPHICAL)
-            printf("%s\n", time_code_forest[i]->result.name);
             #endif
             display_binary_search_tree(&(time_code_forest[i]), AUDIO);
             #if defined(TEXTUAL)

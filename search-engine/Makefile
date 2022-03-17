@@ -81,6 +81,11 @@ searcher_audio : $(OBJ) src/bridge/searcher_audio.c
 	mv ./*.o ./obj
 	$(CC) -o $(BRIDIR)/$@ $^ $(CFLAGS)	
 
+login : $(OBJ) src/bridge/login.c
+	gcc -c src/bridge/login.c $(CFLAGS)
+	mv ./*.o ./obj
+	$(CC) -o $(BRIDIR)/$@ $^ $(CFLAGS)	
+
 ##########################################################################################
 #                                        main                                            #
 ##########################################################################################

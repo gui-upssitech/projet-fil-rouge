@@ -70,7 +70,9 @@ Bool_e display_research_by_keyword(char* word)
 
             if(first == TRUE)
             {
+                #if defined(TEXTUAL)
                 open_file(TEXT_BASE_PATH, name);
+                #endif
                 first = FALSE;
             }
             sprintf(buf, "%s %u", name, occurences);
@@ -358,7 +360,9 @@ Bool_e display_research_by_text(char* path)
             if(first == TRUE)
             {
                 first = FALSE;
+                #if defined(TEXTUAL)
                 open_file(TEXT_BASE_PATH, p_name);
+                #endif
             }
 
             sprintf(word, "%s %.1f", p_name, keywords.score_texts[j].score);

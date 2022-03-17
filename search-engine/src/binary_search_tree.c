@@ -47,7 +47,7 @@ Bool_e display_binary_search_tree(Binary_search_tree_p* binary_search_tree, Desc
         sprintf(buf, "%3.2f %% at %ds", (*binary_search_tree)->result.confidence, (*binary_search_tree)->result.time_code);
         display_centered_text_console(buf);
         #elif defined(GRAPHICAL)
-        sprintf(buf, "%3.2f %d", (*binary_search_tree)->result.confidence, (*binary_search_tree)->result.time_code);
+        sprintf(buf, "%s %3.2f %d", (*binary_search_tree)->result.name, (*binary_search_tree)->result.confidence, (*binary_search_tree)->result.time_code);
         printf("%s\n", buf);
         #endif
 
