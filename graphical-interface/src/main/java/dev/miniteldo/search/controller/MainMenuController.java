@@ -3,7 +3,6 @@ package dev.miniteldo.search.controller;
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.SearchEngine;
-import dev.miniteldo.search.model.engines.dummyengine.DummyEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.StringModifier;
@@ -26,38 +25,50 @@ public class MainMenuController {
     public TextField searchBar;
     public Button searchButton;
 
-    public String requete;
+    public String request;
 
     @FXML
     protected void onSearchButton(ActionEvent event) {
         // TODO ADD EXISTING AND CORRECT FILE CHECK
         if (searchBar.getText() == null || searchBar.getText().trim().isEmpty()) {
-
             // PopUpError modal window
             App.showDialog(Dialog.ERROR);
 
         } else {
-            // Remove space
-            requete = StringModifier.removeAllSpace(searchBar.getText().trim());
+            // Get the request Remove space
+            request = StringModifier.removeAllSpace(searchBar.getText().trim());
 
-            // TODO CHECK TYPE OF RESEARCH WITH A SWITCH ON COMBOBOX
+            // Get Type of the request with regex
+            Regex resultRegex = checkRegex(request);
 
-//            Pattern p = Pattern.compile(Regex.REGEX_TEXTE.getRegexExp());
-//            Matcher m = p.matcher(requete);
-            // lancement de la recherche de toutes les occurrences
-//            System.out.println(m.matches());
+            // Verification of the request
+            if (resultRegex.equals(Regex.INVALID)) {
+                // PopUpError modal window
+                App.showDialog(Dialog.ERROR);
+            } else {
+                if (!resultRegex.equals(Regex.REGEX_TEXTE_KEYWORD)) {
+                    File tempFile = new File(request);
+                    if (tempFile.exists()) {
+                        // PopUpError modal window
+                        App.showDialog(Dialog.ERROR);
+                    } else {
+                        // FIXME: 17/03/2022 add the method to load the path research
+                    }
+                } else {
+                    // FIXME: 17/03/2022 add the keyword research
+                }
 
-            System.out.println(checkRegex(requete).name());
+                SearchEngine engine = AppState.getInstance().getEngine();
+                System.out.println("Votre recherche : " + request);
+                ArrayList<SearchResult> searchResults = engine.textFileSearch(request);
 
-            SearchEngine engine = AppState.getInstance().getEngine();
-            System.out.println("Votre recherche : " + requete);
-            ArrayList<SearchResult> searchResults = engine.textFileSearch(requete);
+                for (SearchResult result : searchResults) {
+                    System.out.println(result);
+                }
 
-            for (SearchResult result : searchResults) {
-                System.out.println(result);
+                App.setView(Views.SEARCH_RESULT);
             }
 
-            App.setView(Views.SEARCH_RESULT);
         }
     }
 
@@ -88,10 +99,7 @@ public class MainMenuController {
     protected void onFileButton() {
         Stage stage = (Stage) searchButton.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Files", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.*"), new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"));
 
         // Set title for FileChooser
         fileChooser.setTitle("Select Some Files");
