@@ -56,7 +56,8 @@ public class MiniteldoEngine implements SearchEngine {
 
     @Override
     public ArrayList<SearchResult> audioSearch(String filePath) {
-        return null;
+        Searcher searcher = SearcherFactory.getSearcher(SearcherType.AUDIO_PATH);
+        return searcher.search(filePath);
     }
 
     @Override

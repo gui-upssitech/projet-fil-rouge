@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Test{
 
     public static void main(String[] args) throws IOException {
-        Searcher searcher = SearcherFactory.getSearcher(SearcherType.IMAGE_RGB_PATH);
-        System.out.println(searcher.search("data/image/RGB/01.jpg"));
+        Searcher searcher = SearcherFactory.getSearcher(SearcherType.AUDIO_PATH);
+        System.out.println(searcher.search("data/audio/corpus_fi.wav"));
     }
 }

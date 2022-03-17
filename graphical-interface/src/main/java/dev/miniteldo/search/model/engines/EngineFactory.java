@@ -19,5 +19,4 @@ public class EngineFactory {
             case MINITELDO_ENGINE -> new MiniteldoEngine();
         };
     }
-
 }

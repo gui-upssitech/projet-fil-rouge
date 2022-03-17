@@ -13,7 +13,7 @@ public class SearcherFactory {
                 searcher = new ImageSearcher(searcherType);
                 break;
             default:
-                searcher = new AudioSearcher();
+                searcher = new AudioSearcher(searcherType);
                 break;
         }
 

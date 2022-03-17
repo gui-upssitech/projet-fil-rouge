@@ -1,8 +1,8 @@
 package dev.miniteldo.search.model.engines;
 
 public class SearchResult {
-    private String filePath;
-    private float confidence;
+    protected String filePath;
+    protected float confidence;
 
     public SearchResult(String filePath, float confidence) {
         this.filePath = filePath;
