@@ -28,6 +28,8 @@ public class MainMenuController {
     public Button searchButton;
 
     public String request;
+    private ArrayList<String> positiveKeyword = new ArrayList<>();
+    private ArrayList<String> negativeKeyword = new ArrayList<>();
 
     @FXML
     protected void onSearchButton(ActionEvent event) {
@@ -77,8 +79,8 @@ public class MainMenuController {
                 searchResults = engine.textFileSearch(request);
                 break;
             case TEXT_KEYWORD:
-                // searchResults = engine.keywordSearch(request);
-                // FIXME: 17/03/2022 fix with keywords split
+                splitKeyword();
+                searchResults = engine.keywordSearch(positiveKeyword, negativeKeyword);
                 break;
             case IMAGE_RGB_PATH:
                 searchResults = engine.rgbImageSearch(request);
@@ -120,6 +122,29 @@ public class MainMenuController {
             }
         }
         return null;
+    }
+
+    public void splitKeyword() {
+        Pattern p = Pattern.compile(Regex.REGEX_TEXTE_KEYWORD.getRegexExp());
+        Matcher m = p.matcher(request);
+
+        String value = "";
+
+        while (m.find()) {
+            value = m.group();
+
+            switch (m.group().charAt(0)) {
+                case '-':
+                    value = m.group().substring(1);
+                    negativeKeyword.add(value);
+                    break;
+                case '+':
+                    value = m.group().substring(1);
+                default:
+                    positiveKeyword.add(value);
+                    break;
+            }
+        }
     }
 
     // FIXME: 17/03/2022 MOVE THIS TRASH FUNCTION

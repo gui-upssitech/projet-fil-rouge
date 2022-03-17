@@ -7,7 +7,6 @@ import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MiniteldoEngine implements SearchEngine {
@@ -33,25 +32,25 @@ public class MiniteldoEngine implements SearchEngine {
     }
 
     @Override
-    public ArrayList<SearchResult> keywordSearch(String[] positiveKeywords, String[] negativeKeywords) {
+    public ArrayList<SearchResult> keywordSearch(ArrayList<String> positiveKeywords, ArrayList<String> negativeKeywords) {
         ArrayList<SearchResult> returnArray = new ArrayList();
 
-        for(String s : positiveKeywords) {
+        for (String s : positiveKeywords) {
             ArrayList<SearchResult> buffer;
             Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_KEYWORD);
             buffer = searcher.search(s);
-            for(SearchResult result : buffer) {
+            for (SearchResult result : buffer) {
                 if (!returnArray.contains(result)) {
                     returnArray.add(result);
                 }
             }
         }
 
-        for(String s : negativeKeywords) {
+        for (String s : negativeKeywords) {
             ArrayList<SearchResult> buffer;
             Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_KEYWORD);
             buffer = searcher.search(s);
-            for(SearchResult result : buffer) {
+            for (SearchResult result : buffer) {
                 if (returnArray.contains(result)) {
                     returnArray.remove(result);
                 }

@@ -45,7 +45,7 @@ public interface SearchEngine {
      * @param negativeKeywords Mots-clés à exclure de la recherche
      * @return Liste des fichiers correspondants, triés par ordre de confiance
      */
-    ArrayList<SearchResult> keywordSearch(String[] positiveKeywords, String[] negativeKeywords);
+    ArrayList<SearchResult> keywordSearch(ArrayList<String> positiveKeywords, ArrayList<String> negativeKeywords);
 
     /**
      * Effectue une recherche textuelle à partir d'un fichier XML

@@ -16,15 +16,15 @@ import java.util.Random;
  * date: 14/03/2022
  */
 public class DummyEngine implements SearchEngine {
-    // Attributes
-    private Searcher searcher;
-    private ArrayList<SearchResult> searchResults;
     private final int MIN = 5;
     private final int MAX = 15;
     private final ArrayList<String> pathDataText = new ArrayList<String>();
     private final ArrayList<String> pathDataAudio = new ArrayList<String>();
     private final ArrayList<String> pathDataImageNB = new ArrayList<>();
     private final ArrayList<String> pathDataImageRGB = new ArrayList<>();
+    // Attributes
+    private Searcher searcher;
+    private ArrayList<SearchResult> searchResults;
 
     // Constructor
     public DummyEngine() {
@@ -35,6 +35,17 @@ public class DummyEngine implements SearchEngine {
         initPathAudio();
         initPathImageNB();
         initPathImageRGB();
+    }
+
+    public static void main(String[] args) {
+        DummyEngine dummyEngine = new DummyEngine();
+        String FAKE_PATH = "a_path";
+//        ArrayList<SearchResult> resultArrayList = dummyEngine.audioSearch(FAKE_PATH);
+        ArrayList<SearchResult> resultArrayList = dummyEngine.textFileSearch(FAKE_PATH);
+//        ArrayList<SearchResult> resultArrayList = dummyEngine.bwImageSearch(FAKE_PATH);
+        for (SearchResult result : resultArrayList) {
+            System.out.println(result);
+        }
     }
 
     // DO NOT OPEN => THIS IS TRASH
@@ -100,6 +111,7 @@ public class DummyEngine implements SearchEngine {
         this.pathDataImageNB.add("62.bmp");
         this.pathDataImageNB.add("63.bmp");
     }
+    // Methods
 
     public void initPathImageRGB() {
         this.pathDataImageRGB.add("01.jpg");
@@ -153,7 +165,6 @@ public class DummyEngine implements SearchEngine {
         this.pathDataImageRGB.add("49.jpg");
         this.pathDataImageRGB.add("50.jpg");
     }
-    // Methods
 
     @Override
     public boolean indexText() {
@@ -176,7 +187,7 @@ public class DummyEngine implements SearchEngine {
     }
 
     @Override
-    public ArrayList<SearchResult> keywordSearch(String[] positiveKeywords, String[] negativeKeywords) {
+    public ArrayList<SearchResult> keywordSearch(ArrayList<String> positiveKeywords, ArrayList<String> negativeKeywords) {
         this.searcher = SearcherFactory.getSearcher(SearcherType.TEXT_KEYWORD);
         generateSearchResult(SearcherType.TEXT_KEYWORD);
         /*
@@ -278,16 +289,5 @@ public class DummyEngine implements SearchEngine {
     @Override
     public String toString() {
         return "DummyEngine{" + "searchResults=" + searchResults + '}';
-    }
-
-    public static void main(String[] args) {
-        DummyEngine dummyEngine = new DummyEngine();
-        String FAKE_PATH = "a_path";
-//        ArrayList<SearchResult> resultArrayList = dummyEngine.audioSearch(FAKE_PATH);
-        ArrayList<SearchResult> resultArrayList = dummyEngine.textFileSearch(FAKE_PATH);
-//        ArrayList<SearchResult> resultArrayList = dummyEngine.bwImageSearch(FAKE_PATH);
-        for (SearchResult result : resultArrayList) {
-            System.out.println(result);
-        }
     }
 }
