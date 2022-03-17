@@ -8,7 +8,7 @@ package dev.miniteldo.search.model.tools;
  */
 public enum Regex {
     // enum constants calling the enum constructors
-    REGEX_TEXTE_KEYWORD("[+|-]?\\w+"),
+    REGEX_TEXTE_KEYWORD("([+|-]?\\w)*"),
     REGEX_TEXTE_PATH("([^\\s]+(\\.(?i)(xml))$)"),
     REGEX_IMAGE_RGB("([^\\s]+(\\.(?i)(jpg))$)"),
     REGEX_IMAGE_NB("([^\\s]+(\\.(?i)(bmp))$)"),
