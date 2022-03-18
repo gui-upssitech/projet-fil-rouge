@@ -1,6 +1,7 @@
 package dev.miniteldo.search.model.engines.miniteldoengine.command;
 
-import dev.miniteldo.search.model.engines.miniteldoengine.admin.LogOptions;
+import dev.miniteldo.search.model.engines.miniteldoengine.admin.LoggerOptions;
+import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerOptions;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 
 import java.io.BufferedReader;
@@ -16,8 +17,13 @@ public class Command {
         processBuilder = processBuilder.directory(new File("../search-engine"));
     }
 
-    public Command(LogOptions logOptions, String data) {
+    public Command(LoggerOptions logOptions, String data) {
         processBuilder = new ProcessBuilder("./bridge/" + logOptions.getLogType(), logOptions.getLogAction(), data);
+        processBuilder = processBuilder.directory(new File("../search-engine"));
+    }
+
+    public Command(IndexerOptions indexerOptions) {
+        processBuilder = new ProcessBuilder("./bridge/" + indexerOptions.getIndexingType(), indexerOptions.getDataType());
         processBuilder = processBuilder.directory(new File("../search-engine"));
     }
 

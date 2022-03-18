@@ -1,13 +1,13 @@
 package dev.miniteldo.search.model.engines.miniteldoengine.admin;
 
-public enum LogOptions {
+public enum LoggerOptions {
     NEW_PASSWORD("log", "reset"),
     LOGIN("log", "login");
 
     private String logType;
     private String logAction;
 
-    LogOptions(String logType, String logAction) {
+    LoggerOptions(String logType, String logAction) {
         this.logType = logType;
         this.logAction = logAction;
     }

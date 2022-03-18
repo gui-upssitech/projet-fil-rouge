@@ -3,7 +3,8 @@ package dev.miniteldo.search.model.engines.miniteldoengine;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
-import dev.miniteldo.search.model.engines.miniteldoengine.admin.Log;
+import dev.miniteldo.search.model.engines.miniteldoengine.admin.Logger;
+import dev.miniteldo.search.model.engines.miniteldoengine.indexer.Indexer;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
@@ -15,27 +16,59 @@ public class MiniteldoEngine implements SearchEngine {
 
     @Override
     public boolean indexText() {
-        return false;
+        boolean result = false;
+
+        try {
+            result = Indexer.indexText();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override
     public boolean indexImage() {
-        return false;
+        boolean result = false;
+
+        try {
+            result = Indexer.indexImage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override
     public boolean indexAudio() {
-        return false;
+        boolean result = false;
+
+        try {
+            result = Indexer.indexAudio();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override
     public boolean indexAll() {
-        return false;
+        boolean result = false;
+
+        try {
+            result = Indexer.indexAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override
     public ArrayList<SearchResult> keywordSearch(ArrayList<String> positiveKeywords, ArrayList<String> negativeKeywords) {
-        ArrayList<SearchResult> returnArray = new ArrayList();
+        ArrayList returnArray = new ArrayList();
 
         for (String s : positiveKeywords) {
             ArrayList<SearchResult> buffer;
@@ -91,7 +124,7 @@ public class MiniteldoEngine implements SearchEngine {
         boolean result = false;
 
         try {
-            result = Log.login(password);
+            result = Logger.login(password);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,7 +141,7 @@ public class MiniteldoEngine implements SearchEngine {
         boolean result = false;
 
         try {
-            result = Log.resetPassword(newPassword);
+            result = Logger.resetPassword(newPassword);
         } catch (IOException e) {
             e.printStackTrace();
         }
