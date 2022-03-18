@@ -3,7 +3,7 @@ package dev.miniteldo.search.model.engines.miniteldoengine;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
-import dev.miniteldo.search.model.engines.miniteldoengine.admin.Login;
+import dev.miniteldo.search.model.engines.miniteldoengine.admin.Log;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
@@ -91,7 +91,7 @@ public class MiniteldoEngine implements SearchEngine {
         boolean result = false;
 
         try {
-            result = Login.login(password);
+            result = Log.login(password);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,7 +105,15 @@ public class MiniteldoEngine implements SearchEngine {
 
     @Override
     public boolean changePassword(String newPassword) {
-        return false;
+        boolean result = false;
+
+        try {
+            result = Log.resetPassword(newPassword);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override

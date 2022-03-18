@@ -17,7 +17,7 @@ public class Command {
     }
 
     public Command(LogOptions logOptions, String data) {
-        processBuilder = new ProcessBuilder("./bridge/" + logOptions.getLogType(), data);
+        processBuilder = new ProcessBuilder("./bridge/" + logOptions.getLogType(), logOptions.getLogAction(), data);
         processBuilder = processBuilder.directory(new File("../search-engine"));
     }
 
