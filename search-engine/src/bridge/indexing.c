@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
+    load_configurations();
+
     if(strcmp(argv[1], "text") == 0)
     {
         if(automatic_indexing_by_data(LIST_BASE_TEXT_PATH, TEXT_BASE_PATH, BASE_TEXT_DESCRIPTOR_PATH, INDEX_TABLE_TEXT_DESCRIPTOR_PATH, TEXT) == FALSE)
