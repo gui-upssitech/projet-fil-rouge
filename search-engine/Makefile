@@ -91,6 +91,11 @@ log : $(OBJ) src/bridge/log.c
 	mv ./*.o ./obj
 	$(CC) -o $(BRIDIR)/$@ $^ $(CFLAGS)	
 
+parameters : $(OBJ) src/bridge/parameters.c
+	gcc -c src/bridge/parameters.c $(CFLAGS)
+	mv ./*.o ./obj
+	$(CC) -o $(BRIDIR)/$@ $^ $(CFLAGS)	
+
 ##########################################################################################
 #                                        main                                            #
 ##########################################################################################

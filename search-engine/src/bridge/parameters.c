@@ -4,12 +4,14 @@
 
 #include "admin.h"
 #include "toolbox.h"
+#include "indexation_generic.h"
+#include "indexation_text.h"
+#include "indexation_image.h"
+#include "indexation_audio.h"
 
 int main(int argc, char *argv[])
 {
     /* statements */
-    unsigned long hashed_pwd;
-    FILE* p_password_file;
 
     /* initialisations */
 
