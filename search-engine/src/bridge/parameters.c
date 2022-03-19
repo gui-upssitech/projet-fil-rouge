@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
         return EXIT_SUCCESS;
     }
 
-    if(load_configurations())
+    if(load_configurations() == FALSE)
     {
         printf("0");
         return EXIT_SUCCESS;

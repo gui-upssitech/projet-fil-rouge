@@ -3,6 +3,7 @@ package dev.miniteldo.search.model.engines.miniteldoengine;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
+import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurator;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Logger;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.Indexer;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
@@ -151,6 +152,12 @@ public class MiniteldoEngine implements SearchEngine {
 
     @Override
     public boolean setConfig(Configurations configName, int value) {
-        return false;
+        boolean result = false;
+        try {
+            result =  Configurator.configure(configName, String.valueOf(value));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
