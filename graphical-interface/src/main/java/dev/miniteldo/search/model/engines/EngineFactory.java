@@ -16,7 +16,7 @@ public class EngineFactory {
     public static SearchEngine createEngine(Engines engineType) {
         return switch (engineType) {
             case DUMMY_ENGINE -> new DummyEngine();
-            case MINITELDO_ENGINE -> new MiniteldoEngine();
+            case MINITELDO_ENGINE -> new MiniteldoEngine("search-engine");
         };
     }
 }

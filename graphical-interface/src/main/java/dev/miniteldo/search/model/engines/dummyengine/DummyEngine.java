@@ -22,9 +22,11 @@ public class DummyEngine implements SearchEngine {
     private final ArrayList<String> pathDataAudio = new ArrayList<String>();
     private final ArrayList<String> pathDataImageNB = new ArrayList<>();
     private final ArrayList<String> pathDataImageRGB = new ArrayList<>();
+
     // Attributes
     private Searcher searcher;
     private ArrayList<SearchResult> searchResults;
+    private final static String miniteldoEnginePath = "search-engine"; // TODO warning
 
     // Constructor
     public DummyEngine() {
@@ -188,7 +190,7 @@ public class DummyEngine implements SearchEngine {
 
     @Override
     public ArrayList<SearchResult> keywordSearch(ArrayList<String> positiveKeywords, ArrayList<String> negativeKeywords) {
-        this.searcher = SearcherFactory.getSearcher(SearcherType.TEXT_KEYWORD);
+        this.searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.TEXT_KEYWORD);
         generateSearchResult(SearcherType.TEXT_KEYWORD);
         /*
             Minus set with positiveKeywords and negativeKeywords
@@ -199,28 +201,28 @@ public class DummyEngine implements SearchEngine {
 
     @Override
     public ArrayList<SearchResult> textFileSearch(String filePath) {
-        this.searcher = SearcherFactory.getSearcher(SearcherType.TEXT_PATH);
+        this.searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.TEXT_PATH);
         generateSearchResult(SearcherType.TEXT_PATH);
         return this.searchResults;
     }
 
     @Override
     public ArrayList<SearchResult> bwImageSearch(String filePath) {
-        this.searcher = SearcherFactory.getSearcher(SearcherType.IMAGE_NB_PATH);
+        this.searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.IMAGE_NB_PATH);
         generateSearchResult(SearcherType.IMAGE_NB_PATH);
         return this.searchResults;
     }
 
     @Override
     public ArrayList<SearchResult> rgbImageSearch(String filePath) {
-        this.searcher = SearcherFactory.getSearcher(SearcherType.IMAGE_RGB_PATH);
+        this.searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.IMAGE_RGB_PATH);
         generateSearchResult(SearcherType.IMAGE_RGB_PATH);
         return this.searchResults;
     }
 
     @Override
     public ArrayList<SearchResult> audioSearch(String filePath) {
-        this.searcher = SearcherFactory.getSearcher(SearcherType.AUDIO_PATH);
+        this.searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.AUDIO_PATH);
         generateSearchResult(SearcherType.AUDIO_PATH);
         return this.searchResults;
     }

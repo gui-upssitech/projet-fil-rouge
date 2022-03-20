@@ -6,8 +6,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Logger {
-    static public boolean login(String password) throws IOException {
-        Command command = new Command(LoggerOptions.LOGIN, password);
+    static public boolean login(String miniteldoEnginePath, String password) throws IOException {
+        Command command = new Command(miniteldoEnginePath, LoggerOptions.LOGIN, password);
         BufferedReader reader = command.getResult();
         String line;
         boolean result = false;
@@ -20,8 +20,8 @@ public class Logger {
         return result;
     }
 
-    static public boolean resetPassword(String newPassword) throws IOException {
-        Command command = new Command(LoggerOptions.NEW_PASSWORD, newPassword);
+    static public boolean resetPassword(String miniteldoEnginePath, String newPassword) throws IOException {
+        Command command = new Command(miniteldoEnginePath, LoggerOptions.NEW_PASSWORD, newPassword);
         BufferedReader reader = command.getResult();
         String line;
         boolean result = false;

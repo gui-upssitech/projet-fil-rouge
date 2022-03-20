@@ -13,24 +13,24 @@ import java.io.InputStreamReader;
 public class Command {
     private ProcessBuilder processBuilder;
 
-    public Command(SearcherType searcherType, String data) {
+    public Command(String miniteldoEnginePath, SearcherType searcherType, String data) {
         processBuilder = new ProcessBuilder("./bridge/" + searcherType.getSearcherType(), searcherType.getDataType(), data);
-        processBuilder = processBuilder.directory(new File("../search-engine"));
+        processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
     }
 
-    public Command(LoggerOptions logOptions, String data) {
+    public Command(String miniteldoEnginePath, LoggerOptions logOptions, String data) {
         processBuilder = new ProcessBuilder("./bridge/" + logOptions.getLogType(), logOptions.getLogAction(), data);
-        processBuilder = processBuilder.directory(new File("../search-engine"));
+        processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
     }
 
-    public Command(IndexerOptions indexerOptions) {
+    public Command(String miniteldoEnginePath, IndexerOptions indexerOptions) {
         processBuilder = new ProcessBuilder("./bridge/" + indexerOptions.getIndexingType(), indexerOptions.getDataType());
-        processBuilder = processBuilder.directory(new File("../search-engine"));
+        processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
     }
 
-    public Command(Configurations configurations, String data) {
+    public Command(String miniteldoEnginePath, Configurations configurations, String data) {
         processBuilder = new ProcessBuilder("./bridge/" + configurations.getParametersType(), configurations.getParameters(), data);
-        processBuilder = processBuilder.directory(new File("../search-engine"));
+        processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
     }
 
     public BufferedReader getResult() throws IOException {

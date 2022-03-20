@@ -10,16 +10,17 @@ import java.util.ArrayList;
 
 public class AudioSearcher extends Searcher {
 
-    public AudioSearcher(SearcherType searcherType) {
+    public AudioSearcher(String miniteldoEnginePath, SearcherType searcherType) {
         super();
         this.searcherType = searcherType;
         this.path = "search-engine/data/audio/";
+        this.miniteldoEnginePath = miniteldoEnginePath;
     }
 
     @Override
     protected ArrayList<SearchResult> searchInner(String request) throws IOException {
         ArrayList<SearchResult> searchResults = new ArrayList<>();
-        Command command = new Command(searcherType, request);
+        Command command = new Command(miniteldoEnginePath, searcherType, request);
         BufferedReader reader = command.getResult();
         String absolutePath = System.getProperty("user.dir").toString();
         String line;

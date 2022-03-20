@@ -15,12 +15,18 @@ import java.util.ArrayList;
 
 public class MiniteldoEngine implements SearchEngine {
 
+    protected final String miniteldoEnginePath;
+
+    public MiniteldoEngine(String miniteldoEnginePath) {
+        this.miniteldoEnginePath = miniteldoEnginePath;
+    }
+
     @Override
     public boolean indexText() {
         boolean result = false;
 
         try {
-            result = Indexer.indexText();
+            result = Indexer.indexText(miniteldoEnginePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,7 +39,7 @@ public class MiniteldoEngine implements SearchEngine {
         boolean result = false;
 
         try {
-            result = Indexer.indexImage();
+            result = Indexer.indexImage(miniteldoEnginePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +52,7 @@ public class MiniteldoEngine implements SearchEngine {
         boolean result = false;
 
         try {
-            result = Indexer.indexAudio();
+            result = Indexer.indexAudio(miniteldoEnginePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,7 +65,7 @@ public class MiniteldoEngine implements SearchEngine {
         boolean result = false;
 
         try {
-            result = Indexer.indexAll();
+            result = Indexer.indexAll(miniteldoEnginePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,7 +79,7 @@ public class MiniteldoEngine implements SearchEngine {
 
         for (String s : positiveKeywords) {
             ArrayList<SearchResult> buffer;
-            Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_KEYWORD);
+            Searcher searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.TEXT_KEYWORD);
             buffer = searcher.search(s);
             for (SearchResult result : buffer) {
                 if (!returnArray.contains(result)) {
@@ -84,7 +90,7 @@ public class MiniteldoEngine implements SearchEngine {
 
         for (String s : negativeKeywords) {
             ArrayList<SearchResult> buffer;
-            Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_KEYWORD);
+            Searcher searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.TEXT_KEYWORD);
             buffer = searcher.search(s);
             for (SearchResult result : buffer) {
                 if (returnArray.contains(result)) {
@@ -98,25 +104,25 @@ public class MiniteldoEngine implements SearchEngine {
 
     @Override
     public ArrayList<SearchResult> textFileSearch(String filePath) {
-        Searcher searcher = SearcherFactory.getSearcher(SearcherType.TEXT_PATH);
+        Searcher searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.TEXT_PATH);
         return searcher.search(filePath);
     }
 
     @Override
     public ArrayList<SearchResult> bwImageSearch(String filePath) {
-        Searcher searcher = SearcherFactory.getSearcher(SearcherType.IMAGE_NB_PATH);
+        Searcher searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.IMAGE_NB_PATH);
         return searcher.search(filePath);
     }
 
     @Override
     public ArrayList<SearchResult> rgbImageSearch(String filePath) {
-        Searcher searcher = SearcherFactory.getSearcher(SearcherType.IMAGE_RGB_PATH);
+        Searcher searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.IMAGE_RGB_PATH);
         return searcher.search(filePath);
     }
 
     @Override
     public ArrayList<SearchResult> audioSearch(String filePath) {
-        Searcher searcher = SearcherFactory.getSearcher(SearcherType.AUDIO_PATH);
+        Searcher searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.AUDIO_PATH);
         return searcher.search(filePath);
     }
 
@@ -125,7 +131,7 @@ public class MiniteldoEngine implements SearchEngine {
         boolean result = false;
 
         try {
-            result = Logger.login(password);
+            result = Logger.login(miniteldoEnginePath, password);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -142,7 +148,7 @@ public class MiniteldoEngine implements SearchEngine {
         boolean result = false;
 
         try {
-            result = Logger.resetPassword(newPassword);
+            result = Logger.resetPassword(miniteldoEnginePath, newPassword);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -154,7 +160,7 @@ public class MiniteldoEngine implements SearchEngine {
     public boolean setConfig(Configurations configName, int value) {
         boolean result = false;
         try {
-            result =  Configurator.configure(configName, String.valueOf(value));
+            result =  Configurator.configure(miniteldoEnginePath, configName, String.valueOf(value));
         } catch (IOException e) {
             e.printStackTrace();
         }

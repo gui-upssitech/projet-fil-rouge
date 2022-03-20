@@ -9,16 +9,17 @@ import java.util.ArrayList;
 
 public class ImageSearcher extends Searcher {
 
-    public ImageSearcher(SearcherType searcherType) {
+    public ImageSearcher(String miniteldoEnginePath, SearcherType searcherType) {
         super();
         this.searcherType = searcherType;
         this.path = (searcherType == SearcherType.IMAGE_RGB_PATH) ? "search-engine/data/image/RGB/" : "search-engine/data/image/NB/";
+        this.miniteldoEnginePath = miniteldoEnginePath;
     }
 
     @Override
     protected ArrayList<SearchResult> searchInner(String request) throws IOException {
         ArrayList<SearchResult> searchResults = new ArrayList<>();
-        Command command = new Command(searcherType, request);
+        Command command = new Command(miniteldoEnginePath, searcherType, request);
         BufferedReader reader = command.getResult();
         String absolutePath = System.getProperty("user.dir").toString();
         String line;
