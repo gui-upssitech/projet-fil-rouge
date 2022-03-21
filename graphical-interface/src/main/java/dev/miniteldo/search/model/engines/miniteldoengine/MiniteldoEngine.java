@@ -5,6 +5,7 @@ import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurator;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Logger;
+import dev.miniteldo.search.model.engines.miniteldoengine.command.Command;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.Indexer;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
@@ -22,6 +23,16 @@ public class MiniteldoEngine implements SearchEngine {
 
     public MiniteldoEngine(String miniteldoEnginePath) {
         this.miniteldoEnginePath = miniteldoEnginePath;
+    }
+
+    @Override
+    public void init() {
+        Command command = new Command(miniteldoEnginePath, "init.sh");
+        try {
+            command.getResult();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

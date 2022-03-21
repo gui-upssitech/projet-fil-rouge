@@ -172,6 +172,11 @@ public class DummyEngine implements SearchEngine {
     }
 
     @Override
+    public void init() {
+
+    }
+
+    @Override
     public boolean indexText(IndexerMode mode) {
         return false;
     }

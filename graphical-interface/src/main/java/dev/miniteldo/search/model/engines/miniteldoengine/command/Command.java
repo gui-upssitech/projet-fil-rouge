@@ -14,21 +14,31 @@ import java.io.InputStreamReader;
 public class Command {
     private ProcessBuilder processBuilder;
 
+    /* sh command */
+    public Command(String miniteldoEnginePath, String command) {
+        processBuilder = new ProcessBuilder("./bridge/" + command);
+        processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
+    }
+
+    /* search command */
     public Command(String miniteldoEnginePath, SearcherType searcherType, String data) {
         processBuilder = new ProcessBuilder("./bridge/" + searcherType.getSearcherType(), searcherType.getDataType(), data);
         processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
     }
 
+    /* Logger command */
     public Command(String miniteldoEnginePath, LoggerOptions logOptions, String data) {
         processBuilder = new ProcessBuilder("./bridge/" + logOptions.getLogType(), logOptions.getLogAction(), data);
         processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
     }
 
+    /* Indexer command */
     public Command(String miniteldoEnginePath, IndexerOptions indexerOptions, IndexerMode mode) {
         processBuilder = new ProcessBuilder("./bridge/" + indexerOptions.getIndexingType(), indexerOptions.getDataType(), mode.getMode());
         processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
     }
 
+    /* Configuration command */
     public Command(String miniteldoEnginePath, Configurations configurations, String data) {
         processBuilder = new ProcessBuilder("./bridge/" + configurations.getParametersType(), configurations.getParameters(), data);
         processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));

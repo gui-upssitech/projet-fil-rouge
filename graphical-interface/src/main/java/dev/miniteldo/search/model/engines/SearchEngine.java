@@ -8,12 +8,21 @@ import java.util.HashMap;
 
 public interface SearchEngine {
 
+    // Initialisation
+    // ====================================================
+
+    /**
+     * Initialise le moteur de rechercher à l'instanciation
+     */
+    void init();
+
     // Indexation
     // ====================================================
-    // TODO update doc
+
     /**
      * Effectue une indexation de tous les fichiers textes
      *
+     * @param mode Mode de l'indexation (update ou reset)
      * @return Retourne vraie si l'indexation a réussie
      */
     boolean indexText(IndexerMode mode);
@@ -21,6 +30,7 @@ public interface SearchEngine {
     /**
      * Effectue une indexation de toutes les images
      *
+     * @param mode Mode de l'indexation (update ou reset)
      * @return Retourne vraie si l'indexation a réussie
      */
     boolean indexImage(IndexerMode mode);
@@ -28,6 +38,7 @@ public interface SearchEngine {
     /**
      * Effectue une indexation de tous les fichiers audio
      *
+     * @param mode Mode de l'indexation (update ou reset)
      * @return Retourne vraie si l'indexation a réussie
      */
     boolean indexAudio(IndexerMode mode);
@@ -35,6 +46,7 @@ public interface SearchEngine {
     /**
      * Effectue une indexation de tous les fichiers
      *
+     * @param mode Mode de l'indexation (update ou reset)
      * @return Retourne vraie si l'indexation a réussie
      */
     boolean indexAll(IndexerMode mode);
