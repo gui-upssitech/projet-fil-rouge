@@ -25,6 +25,15 @@ public enum Configurations {
         this.max = max;
     }
 
+    public static Configurations getConfiguration(String parameters) {
+        for(Configurations configuration : values()) {
+            if(configuration.parameters.equals(parameters)) {
+                return configuration;
+            }
+        }
+        return null;
+    }
+
     public String getParametersType() {
         return parametersType;
     }

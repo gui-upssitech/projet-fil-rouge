@@ -8,6 +8,8 @@ import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFacto
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -245,6 +247,11 @@ public class DummyEngine implements SearchEngine {
     @Override
     public boolean setConfig(Configurations configName, int value) {
         return false;
+    }
+
+    @Override
+    public HashMap<Configurations, Integer> loadConfigs() {
+        return null;
     }
 
     /**

@@ -12,6 +12,8 @@ import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MiniteldoEngine implements SearchEngine {
 
@@ -165,5 +167,10 @@ public class MiniteldoEngine implements SearchEngine {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public HashMap<Configurations, Integer> loadConfigs() {
+        return Configurator.loadConfigs(miniteldoEnginePath);
     }
 }

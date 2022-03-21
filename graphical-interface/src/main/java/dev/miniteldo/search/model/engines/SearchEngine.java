@@ -3,6 +3,7 @@ package dev.miniteldo.search.model.engines;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface SearchEngine {
 
@@ -116,4 +117,11 @@ public interface SearchEngine {
      * @return Confirmation de changement du paramètre
      */
     boolean setConfig(Configurations configName, int value);
+
+    /**
+     * Récupérer les paramètres actuels de configuration de l'application
+     *
+     * @return Map des configurations et leurs valeurs associées
+     */
+    HashMap<Configurations, Integer> loadConfigs();
 }
