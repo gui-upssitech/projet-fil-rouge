@@ -7,7 +7,14 @@
     -fx-border-width: 1px 0px 1px 1px;
 }
 
-#searchBarContainer .button {
+#searchBarContainer .middle-button {
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border-width: 1px 0px 1px 1px;
+    -fx-padding: 11px 12px 12px 12px;
+}
+
+#searchBarContainer .last-button {
     -fx-border-radius: 0px 12px 12px 0px;
     -fx-background-radius: 0px 12px 12px 0px;
 }

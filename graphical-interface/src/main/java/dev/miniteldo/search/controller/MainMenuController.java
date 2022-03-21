@@ -28,8 +28,8 @@ public class MainMenuController {
     public Button searchButton;
 
     public String request;
-    private ArrayList<String> positiveKeyword = new ArrayList<>();
-    private ArrayList<String> negativeKeyword = new ArrayList<>();
+    private final ArrayList<String> positiveKeyword = new ArrayList<>();
+    private final ArrayList<String> negativeKeyword = new ArrayList<>();
 
     @FXML
     protected void onSearchButton(ActionEvent event) {
@@ -74,27 +74,15 @@ public class MainMenuController {
             }
         }
 
-        switch (searcherType) {
-            case TEXT_PATH:
-                searchResults = engine.textFileSearch(request);
-                break;
-            case TEXT_KEYWORD:
-                splitKeyword();
-                searchResults = engine.keywordSearch(positiveKeyword, negativeKeyword);
-                break;
-            case IMAGE_RGB_PATH:
-                searchResults = engine.rgbImageSearch(request);
-                break;
-            case IMAGE_NB_PATH:
-                searchResults = engine.bwImageSearch(request);
-                break;
-            case AUDIO_PATH:
-                searchResults = engine.audioSearch(request);
-                break;
-            default:
-                searchResults = new ArrayList<>();
-                break;
-        }
+        if(searcherType == SearcherType.TEXT_KEYWORD) splitKeyword();
+
+        searchResults = switch (searcherType) {
+            case TEXT_PATH -> engine.textFileSearch(request);
+            case TEXT_KEYWORD -> engine.keywordSearch(positiveKeyword, negativeKeyword);
+            case IMAGE_RGB_PATH -> engine.rgbImageSearch(request);
+            case IMAGE_NB_PATH -> engine.bwImageSearch(request);
+            case AUDIO_PATH -> engine.audioSearch(request);
+        };
 
         AppState.getInstance().setCurrentRequest(searchResults);
 
@@ -149,21 +137,14 @@ public class MainMenuController {
 
     // FIXME: 17/03/2022 MOVE THIS TRASH FUNCTION
     public SearcherType convertRegexToSearchType(Regex regex) {
-        switch (regex) {
-            case REGEX_TEXTE_KEYWORD:
-                return SearcherType.TEXT_KEYWORD;
-            case REGEX_TEXTE_PATH:
-                return SearcherType.TEXT_PATH;
-            case REGEX_IMAGE_NB:
-                return SearcherType.IMAGE_NB_PATH;
-            case REGEX_IMAGE_RGB:
-                return SearcherType.IMAGE_RGB_PATH;
-            case REGEX_AUDIO:
-                return SearcherType.AUDIO_PATH;
-            default:
-                return null;
-
-        }
+        return switch (regex) {
+            case REGEX_TEXTE_KEYWORD -> SearcherType.TEXT_KEYWORD;
+            case REGEX_TEXTE_PATH -> SearcherType.TEXT_PATH;
+            case REGEX_IMAGE_NB -> SearcherType.IMAGE_NB_PATH;
+            case REGEX_IMAGE_RGB -> SearcherType.IMAGE_RGB_PATH;
+            case REGEX_AUDIO -> SearcherType.AUDIO_PATH;
+            default -> null;
+        };
     }
 
     @FXML

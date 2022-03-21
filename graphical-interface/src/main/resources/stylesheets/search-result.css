@@ -1,0 +1,9 @@
+.search-result {
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-cursor: hand;
+}
+
+.search-result:hover {
+    -fx-background-color: #EEE;
+}

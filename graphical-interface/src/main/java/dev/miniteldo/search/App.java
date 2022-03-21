@@ -37,9 +37,11 @@ public class App extends Application {
         App.stage = stage;
 
         stage.setTitle("Minteldo");
-        //stage.setResizable(false);
         setView(Views.MAIN);
 
+        stage.setResizable(true);
+        stage.setMaximized(true);
+        
         stage.show();
     }
 
