@@ -1,24 +1,28 @@
 package dev.miniteldo.search.model.engines.miniteldoengine.admin;
 
 public enum Configurations {
-    TEXT_FILTER_MODE("parameters", "indexing_text_filter_mode"),
-    TEXT_FILTER_VALUE("parameters", "indexing_text_filter_value"),
-    TEXT_INDEX_TABLE_SIZE("parameters", "indexing_text_number_table_index"),
+    TEXT_FILTER_MODE("parameters", "indexing_text_filter_mode", 0, 1),
+    TEXT_FILTER_VALUE("parameters", "indexing_text_filter_value", 3, 30),
+    TEXT_INDEX_TABLE_SIZE("parameters", "indexing_text_number_table_index", 3, 30),
 
-    IMAGE_NUM_BITS_QUANTIFICATION("parameters", "indexing_image_quantification"),
-    IMAGE_THRESHOLD("parameters", "comparison_image_threshold"),
+    IMAGE_NUM_BITS_QUANTIFICATION("parameters", "indexing_image_quantification", 1, 5),
+    IMAGE_THRESHOLD("parameters", "comparison_image_threshold", 0, 100),
 
-    AUDIO_SAMPLES("parameters", "indexing_audio_samples"),
-    AUDIO_INTERVAL("parameters", "indexing_audio_interval"),
-    AUDIO_STEP("parameters", "comparison_audio_step"),
-    AUDIO_THRESHOLD("parameters", "comparison_audio_threshold");
+    AUDIO_SAMPLES("parameters", "indexing_audio_samples", 256, 8192),
+    AUDIO_INTERVAL("parameters", "indexing_audio_interval", 3, 1000),
+    AUDIO_STEP("parameters", "comparison_audio_step", 1, 10),
+    AUDIO_THRESHOLD("parameters", "comparison_audio_threshold", 0, 100);
 
     private final String parametersType;
     private final String parameters;
+    private final int min;
+    private final int max;
 
-    Configurations(String parametersType, String parameters) {
+    Configurations(String parametersType, String parameters, int min, int max) {
         this.parametersType = parametersType;
         this.parameters = parameters;
+        this.min = min;
+        this.max = max;
     }
 
     public String getParametersType() {
@@ -27,5 +31,13 @@ public enum Configurations {
 
     public String getParameters() {
         return parameters;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public int getMax() {
+        return max;
     }
 }
