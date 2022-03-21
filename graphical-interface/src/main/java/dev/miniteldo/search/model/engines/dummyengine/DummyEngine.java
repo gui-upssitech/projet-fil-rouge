@@ -3,6 +3,7 @@ package dev.miniteldo.search.model.engines.dummyengine;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
+import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
@@ -171,23 +172,23 @@ public class DummyEngine implements SearchEngine {
     }
 
     @Override
-    public boolean indexText() {
-        return true;
+    public boolean indexText(IndexerMode mode) {
+        return false;
     }
 
     @Override
-    public boolean indexImage() {
-        return true;
+    public boolean indexImage(IndexerMode mode) {
+        return false;
     }
 
     @Override
-    public boolean indexAudio() {
-        return true;
+    public boolean indexAudio(IndexerMode mode) {
+        return false;
     }
 
     @Override
-    public boolean indexAll() {
-        return true;
+    public boolean indexAll(IndexerMode mode) {
+        return false;
     }
 
     @Override

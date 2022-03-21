@@ -6,6 +6,7 @@ import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurator;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Logger;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.Indexer;
+import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
@@ -24,11 +25,11 @@ public class MiniteldoEngine implements SearchEngine {
     }
 
     @Override
-    public boolean indexText() {
+    public boolean indexText(IndexerMode mode) {
         boolean result = false;
 
         try {
-            result = Indexer.indexText(miniteldoEnginePath);
+            result = Indexer.indexText(miniteldoEnginePath, mode);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,11 +38,11 @@ public class MiniteldoEngine implements SearchEngine {
     }
 
     @Override
-    public boolean indexImage() {
+    public boolean indexImage(IndexerMode mode) {
         boolean result = false;
 
         try {
-            result = Indexer.indexImage(miniteldoEnginePath);
+            result = Indexer.indexImage(miniteldoEnginePath, mode);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,11 +51,11 @@ public class MiniteldoEngine implements SearchEngine {
     }
 
     @Override
-    public boolean indexAudio() {
+    public boolean indexAudio(IndexerMode mode) {
         boolean result = false;
 
         try {
-            result = Indexer.indexAudio(miniteldoEnginePath);
+            result = Indexer.indexAudio(miniteldoEnginePath, mode);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,11 +64,11 @@ public class MiniteldoEngine implements SearchEngine {
     }
 
     @Override
-    public boolean indexAll() {
+    public boolean indexAll(IndexerMode mode) {
         boolean result = false;
 
         try {
-            result = Indexer.indexAll(miniteldoEnginePath);
+            result = Indexer.indexAll(miniteldoEnginePath, mode);
         } catch (IOException e) {
             e.printStackTrace();
         }

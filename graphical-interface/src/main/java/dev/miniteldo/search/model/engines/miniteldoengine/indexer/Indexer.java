@@ -6,10 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Indexer {
-    public static boolean indexText(String miniteldoEnginePath) throws IOException {
+    public static boolean indexText(String miniteldoEnginePath, IndexerMode mode) throws IOException {
         boolean result = false;
         String line;
-        Command command = new Command(miniteldoEnginePath, IndexerOptions.TEXT);
+        Command command = new Command(miniteldoEnginePath, IndexerOptions.TEXT, mode);
         BufferedReader reader = command.getResult();
 
         while ((line = reader.readLine()) != null) {
@@ -20,10 +20,10 @@ public class Indexer {
         return result;
     }
 
-    public static boolean indexImage(String miniteldoEnginePath) throws IOException {
+    public static boolean indexImage(String miniteldoEnginePath, IndexerMode mode) throws IOException {
         boolean result = false;
         String line;
-        Command command = new Command(miniteldoEnginePath, IndexerOptions.IMAGE);
+        Command command = new Command(miniteldoEnginePath, IndexerOptions.IMAGE, mode);
         BufferedReader reader = command.getResult();
 
         while ((line = reader.readLine()) != null) {
@@ -34,10 +34,10 @@ public class Indexer {
         return result;
     }
 
-    public static boolean indexAudio(String miniteldoEnginePath) throws IOException {
+    public static boolean indexAudio(String miniteldoEnginePath, IndexerMode mode) throws IOException {
         boolean result = false;
         String line;
-        Command command = new Command(miniteldoEnginePath, IndexerOptions.AUDIO);
+        Command command = new Command(miniteldoEnginePath, IndexerOptions.AUDIO, mode);
         BufferedReader reader = command.getResult();
 
         while ((line = reader.readLine()) != null) {
@@ -48,10 +48,10 @@ public class Indexer {
         return result;
     }
 
-    public static boolean indexAll(String miniteldoEnginePath) throws IOException {
+    public static boolean indexAll(String miniteldoEnginePath, IndexerMode mode) throws IOException {
         boolean result = false;
         String line;
-        Command command = new Command(miniteldoEnginePath, IndexerOptions.ALL);
+        Command command = new Command(miniteldoEnginePath, IndexerOptions.ALL, mode);
         BufferedReader reader = command.getResult();
 
         while ((line = reader.readLine()) != null) {

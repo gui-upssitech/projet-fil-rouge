@@ -1,6 +1,7 @@
 package dev.miniteldo.search.model.engines;
 
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
+import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,34 +10,34 @@ public interface SearchEngine {
 
     // Indexation
     // ====================================================
-
+    // TODO update doc
     /**
      * Effectue une indexation de tous les fichiers textes
      *
      * @return Retourne vraie si l'indexation a réussie
      */
-    boolean indexText();
+    boolean indexText(IndexerMode mode);
 
     /**
      * Effectue une indexation de toutes les images
      *
      * @return Retourne vraie si l'indexation a réussie
      */
-    boolean indexImage();
+    boolean indexImage(IndexerMode mode);
 
     /**
      * Effectue une indexation de tous les fichiers audio
      *
      * @return Retourne vraie si l'indexation a réussie
      */
-    boolean indexAudio();
+    boolean indexAudio(IndexerMode mode);
 
     /**
      * Effectue une indexation de tous les fichiers
      *
      * @return Retourne vraie si l'indexation a réussie
      */
-    boolean indexAll();
+    boolean indexAll(IndexerMode mode);
 
     // Search
     // ====================================================

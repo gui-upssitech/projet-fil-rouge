@@ -4,6 +4,7 @@ public enum Configurations {
     TEXT_FILTER_MODE("parameters", "indexing_text_filter_mode", 0, 1),
     TEXT_FILTER_VALUE("parameters", "indexing_text_filter_value", 3, 30),
     TEXT_INDEX_TABLE_SIZE("parameters", "indexing_text_number_table_index", 3, 30),
+    TEXT_INDEX_DEBUG("parameters", "indexing_text_debug", 0, 1),
 
     IMAGE_NUM_BITS_QUANTIFICATION("parameters", "indexing_image_quantification", 1, 5),
     IMAGE_THRESHOLD("parameters", "comparison_image_threshold", 0, 100),
