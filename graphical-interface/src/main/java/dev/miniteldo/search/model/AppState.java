@@ -4,6 +4,7 @@ import dev.miniteldo.search.model.engines.EngineFactory;
 import dev.miniteldo.search.model.engines.Engines;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,19 +27,17 @@ public class AppState {
 
     // Attributes
     private boolean darkMode;
-    private boolean adminMode;
 
     private Engines curEngine;
     private HashMap<Engines, SearchEngine> engines;
-    private ArrayList<SearchResult> currentRequest;
+    private String currentRequest;
 
     // Constructor
     private AppState() {
         darkMode = false;
-        adminMode = false;
+        currentRequest = null;
 
         engines = new HashMap<>();
-        currentRequest = new ArrayList<>();
         setEngine(Engines.MINITELDO_ENGINE); // DUMMY ENGINE will be the default engine for now
     }
 
@@ -54,20 +53,6 @@ public class AppState {
         return darkMode;
     }
 
-    // Admin authorisation
-
-    public boolean adminLogin(String password) {
-        adminMode = password.equals("root");
-        return adminMode;
-    }
-
-    public void adminLogout() {
-        adminMode = false;
-    }
-
-    public boolean isAdmin() {
-        return adminMode;
-    }
 
     // Multiengine configuration
     public void setEngine(Engines engine) {
@@ -81,11 +66,13 @@ public class AppState {
         return engines.get(curEngine);
     }
 
-    public void setCurrentRequest(ArrayList<SearchResult> currentRequest) {
+    // Search request transmission
+
+    public void setCurrentRequest(String currentRequest) {
         this.currentRequest = currentRequest;
     }
 
-    public ArrayList<SearchResult> getCurrentRequest() {
+    public String getCurrentRequest() {
         return currentRequest;
     }
 }
