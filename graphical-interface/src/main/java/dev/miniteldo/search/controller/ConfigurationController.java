@@ -10,8 +10,8 @@ import dev.miniteldo.search.view.Views;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,16 +23,24 @@ import java.util.Map;
 public class ConfigurationController {
     // Attributs components
     public Button validButton;
-    public ProgressBar progressBar;
     public Label labelIndexation;
     public Button returnButton;
-    public ComboBox<Configurations> comboBoxMode;
+
+    private ArrayList<String> stringsComboMode;
+    public ComboBox<String> comboBoxMode;
+    private ArrayList<String> stringsComboDebug;
+    public ComboBox<String> comboBoxDebug;
 
     public Spinner<Integer> spinnerTextValue;
     public Spinner<Integer> spinnerIndexText;
+
+    public Spinner<Integer> spinnerBitQuanti;
+    public Spinner<Integer> spinnerImageValue;
+
     public Spinner<Integer> spinnerEchantillon;
     public Spinner<Integer> spinnerInterval;
-    public Spinner<Integer> spinnerBitQuanti;
+    public Spinner<Integer> spinnerAudioStep;
+    public Spinner<Integer> spinnerAudioValue;
 
     private HashMap<Configurations, Integer> hashMapOldValue;
     private HashMap<Configurations, Integer> hashMapNewValue = new HashMap<>();
@@ -42,21 +50,27 @@ public class ConfigurationController {
     private boolean isImageModified = false;
     private boolean isAudioModified = false;
 
-    public ToggleButton debugButton;
-
-    public ImageView loadingGif;
 
     @FXML
     public void initialize() {
-        loadingGif.setVisible(false);
-
         // Init configuration value from C code
         this.hashMapOldValue = AppState.getInstance().getEngine().loadConfigs();
         System.out.println(hashMapOldValue);
 
-        comboBoxMode.setItems(FXCollections.observableArrayList(Configurations.values()));
+        // Init comboBox String
+        stringsComboMode = new ArrayList<>();
+        stringsComboMode.add("Limite");
+        stringsComboMode.add("Seuil");
 
-        initHashMapSpinner();
+        stringsComboDebug = new ArrayList<>();
+        stringsComboDebug.add("Non");
+        stringsComboDebug.add("Oui");
+
+        // Add strings to comboBox
+        comboBoxMode.setItems(FXCollections.observableArrayList(stringsComboMode));
+        comboBoxDebug.setItems(FXCollections.observableArrayList(stringsComboDebug));
+
+        initData();
 
         // Set spinner with config value from C
         for (Map.Entry<Configurations, Spinner<Integer>> entry : hashMapSpinner.entrySet()) {
@@ -67,17 +81,23 @@ public class ConfigurationController {
     /**
      * Init the hashmap of spinner
      */
-    public void initHashMapSpinner() {
+    public void initData() {
         // Text
         this.hashMapSpinner.put(Configurations.TEXT_FILTER_VALUE, spinnerTextValue);
         this.hashMapSpinner.put(Configurations.TEXT_INDEX_TABLE_SIZE, spinnerIndexText);
+        // Mode
+        this.comboBoxMode.getSelectionModel().select(stringsComboMode.get(hashMapOldValue.get(Configurations.TEXT_FILTER_MODE)));
+        this.comboBoxDebug.getSelectionModel().select(stringsComboDebug.get(hashMapOldValue.get(Configurations.TEXT_INDEX_DEBUG)));
 
         // Image
         this.hashMapSpinner.put(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spinnerBitQuanti);
+        this.hashMapSpinner.put(Configurations.IMAGE_THRESHOLD, spinnerImageValue);
 
         // Audio
         this.hashMapSpinner.put(Configurations.AUDIO_SAMPLES, spinnerEchantillon);
         this.hashMapSpinner.put(Configurations.AUDIO_INTERVAL, spinnerInterval);
+        this.hashMapSpinner.put(Configurations.AUDIO_STEP, spinnerAudioStep);
+        this.hashMapSpinner.put(Configurations.AUDIO_THRESHOLD, spinnerAudioValue);
     }
 
     /**
@@ -98,13 +118,19 @@ public class ConfigurationController {
         // Text
         this.hashMapNewValue.put(Configurations.TEXT_FILTER_VALUE, spinnerTextValue.getValue());
         this.hashMapNewValue.put(Configurations.TEXT_INDEX_TABLE_SIZE, spinnerIndexText.getValue());
+        // mode
+        this.hashMapNewValue.put(Configurations.TEXT_FILTER_MODE, comboBoxMode.getSelectionModel().getSelectedIndex());
+        this.hashMapNewValue.put(Configurations.TEXT_INDEX_DEBUG, comboBoxDebug.getSelectionModel().getSelectedIndex());
 
         // Image
         this.hashMapNewValue.put(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spinnerBitQuanti.getValue());
+        this.hashMapNewValue.put(Configurations.IMAGE_THRESHOLD, spinnerImageValue.getValue());
 
         // Audio
         this.hashMapNewValue.put(Configurations.AUDIO_SAMPLES, spinnerEchantillon.getValue());
         this.hashMapNewValue.put(Configurations.AUDIO_INTERVAL, spinnerInterval.getValue());
+        this.hashMapNewValue.put(Configurations.AUDIO_STEP, spinnerAudioStep.getValue());
+        this.hashMapNewValue.put(Configurations.AUDIO_THRESHOLD, spinnerAudioValue.getValue());
     }
 
     private void saveConfiguration() {
@@ -192,14 +218,7 @@ public class ConfigurationController {
     @FXML
     protected void onValidButton() {
         labelIndexation.setText("Indexation en cours ...");
-        progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-
-        loadingGif.setVisible(true);
-
         saveConfiguration();
-
-        loadingGif.setVisible(false);
         labelIndexation.setText("Indexation fini !");
     }
-
 }

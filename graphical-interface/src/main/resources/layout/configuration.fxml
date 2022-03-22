@@ -7,41 +7,43 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.ConfigurationController">
     <children>
-        <Label layoutX="237.0" layoutY="36.0" text="Configurations">
+        <Label layoutX="225.0" layoutY="36.0" text="Configurations">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <Label layoutX="52.0" layoutY="134.0" text="Texte indexation">
+        <Label layoutX="50.0" layoutY="93.0" text="Texte indexation">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <Spinner fx:id="spinnerTextValue" layoutX="127.0" layoutY="164.0" prefHeight="25.0" prefWidth="60.0" />
-        <Label layoutX="30.0" layoutY="168.0" text="Seuil" />
-        <Label layoutX="29.0" layoutY="204.0" text="Mode" />
-        <ComboBox fx:id="comboBoxMode" disable="true" layoutX="107.0" layoutY="200.0" prefHeight="25.0" prefWidth="80.0" promptText="FILTRE" />
-        <Label layoutX="279.0" layoutY="134.0" text="Image">
+        <Spinner fx:id="spinnerTextValue" layoutX="106.0" layoutY="176.0" prefHeight="25.0" prefWidth="80.0" />
+        <Label layoutX="29.0" layoutY="180.0" text="Seuil" />
+        <Label layoutX="29.0" layoutY="144.0" text="Mode" />
+        <ComboBox fx:id="comboBoxMode" layoutX="107.0" layoutY="140.0" prefHeight="25.0" prefWidth="80.0" promptText="FILTRE" />
+        <Label layoutX="230.0" layoutY="93.0" text="Image indexation">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <Label layoutX="244.0" layoutY="168.0" prefHeight="17.0" prefWidth="111.0" text="Bit de quantification" />
-        <Label layoutX="457.0" layoutY="134.0" text="Audio">
+        <Label layoutX="245.0" layoutY="137.0" prefHeight="32.0" prefWidth="111.0" text="Bit de quantification" textAlignment="CENTER" wrapText="true" />
+        <Label layoutX="420.0" layoutY="93.0" text="Audio Indexation">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <Label layoutX="414.0" layoutY="168.0" text="Echantillons" />
-        <Label layoutX="414.0" layoutY="204.0" text="Niveau" />
-        <Spinner fx:id="spinnerEchantillon" editable="true" layoutX="503.0" layoutY="164.0" prefHeight="25.0" prefWidth="79.0" />
-        <Spinner fx:id="spinnerInterval" layoutX="503.0" layoutY="200.0" prefHeight="25.0" prefWidth="80.0" />
-        <Spinner fx:id="spinnerBitQuanti" layoutX="270.0" layoutY="200.0" prefHeight="25.0" prefWidth="60.0" />
-        <Separator layoutX="216.0" layoutY="121.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="6.0" />
-        <Separator layoutX="378.0" layoutY="121.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="6.0" />
-        <Button fx:id="validButton" layoutX="271.0" layoutY="362.0" mnemonicParsing="false" onAction="#onValidButton" text="Valider" />
-      <ProgressBar fx:id="progressBar" layoutX="203.0" layoutY="332.0" prefWidth="200.0" progress="0.0" />
-      <Label fx:id="labelIndexation" layoutX="242.0" layoutY="270.0" />
+        <Label layoutX="411.0" layoutY="141.0" text="Echantillons" />
+        <Label layoutX="411.0" layoutY="177.0" text="Niveau" />
+        <Spinner fx:id="spinnerEchantillon" editable="true" layoutX="500.0" layoutY="137.0" prefHeight="25.0" prefWidth="79.0" />
+        <Spinner fx:id="spinnerInterval" layoutX="500.0" layoutY="173.0" prefHeight="25.0" prefWidth="80.0" />
+        <Spinner fx:id="spinnerBitQuanti" layoutX="270.0" layoutY="181.0" prefHeight="25.0" prefWidth="60.0" />
+        <Separator layoutX="207.0" layoutY="121.0" orientation="VERTICAL" prefHeight="198.0" prefWidth="6.0" />
+        <Separator layoutX="390.0" layoutY="121.0" orientation="VERTICAL" prefHeight="198.0" prefWidth="6.0" />
+        <Button fx:id="validButton" layoutX="271.0" layoutY="352.0" mnemonicParsing="false" onAction="#onValidButton" text="Valider" />
+      <Label fx:id="labelIndexation" layoutX="216.0" layoutY="319.0" prefHeight="24.0" prefWidth="170.0" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
         <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButton">
             <graphic>
                 <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
@@ -49,13 +51,25 @@
                 </ImageView>
             </graphic>
         </Button>
-      <ToggleButton fx:id="debugButton" disable="true" layoutX="127.0" layoutY="239.0" mnemonicParsing="false" text="Debug" />
-      <Spinner fx:id="spinnerIndexText" layoutX="125.0" layoutY="274.0" prefHeight="24.0" prefWidth="64.0" />
-      <Label layoutX="29.0" layoutY="243.0" text="Debug" />
-      <Label layoutX="29.0" layoutY="278.0" text="Index" />
-      <ImageView fx:id="loadingGif" fitHeight="150.0" fitWidth="200.0" layoutX="393.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/loading.gif" />
-         </image></ImageView>
+      <Spinner fx:id="spinnerIndexText" layoutX="109.0" layoutY="250.0" prefHeight="24.0" prefWidth="80.0" />
+      <Label layoutX="29.0" layoutY="219.0" text="Debug" />
+      <Label layoutX="29.0" layoutY="254.0" text="Index" />
+      <ComboBox fx:id="comboBoxDebug" layoutX="107.0" layoutY="215.0" prefHeight="24.0" prefWidth="79.0" />
+      <Label layoutX="222.0" layoutY="218.0" text="Image comparaison">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="411.0" layoutY="218.0" text="Audio comparaison">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="227.0" layoutY="254.0" text="Seuil" />
+      <Spinner fx:id="spinnerImageValue" layoutX="285.0" layoutY="250.0" prefHeight="24.0" prefWidth="64.0" />
+      <Label layoutX="416.0" layoutY="254.0" text="Pas" />
+      <Spinner fx:id="spinnerAudioStep" layoutX="500.0" layoutY="250.0" prefHeight="24.0" prefWidth="80.0" />
+      <Label layoutX="411.0" layoutY="292.0" text="Seuil" />
+      <Spinner fx:id="spinnerAudioValue" layoutX="500.0" layoutY="288.0" prefHeight="24.0" prefWidth="80.0" />
     </children>
 </Pane>
