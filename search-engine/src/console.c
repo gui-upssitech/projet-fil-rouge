@@ -1197,11 +1197,13 @@ void display_audio_result_menu(Binary_search_tree_p* time_code_forest, unsigned 
     print_plate_console();
     #endif
 
+    #if defined(TEXTUAL)
     if(one_result_existing == TRUE)
     {
         sprintf(command, "ffplay %s%s -ss %d > /dev/null 2> /dev/null", SOUND_BASE_PATH, max_confidence.name, max_confidence.time_code);
         system(command);
     }
+    #endif
 
     #if defined(TEXTUAL)
     getch();
