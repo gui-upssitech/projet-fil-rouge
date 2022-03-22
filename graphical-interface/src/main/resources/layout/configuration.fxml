@@ -35,7 +35,7 @@
         <Label layoutX="414.0" layoutY="168.0" text="Echantillons" />
         <Label layoutX="414.0" layoutY="204.0" text="Niveau" />
         <Spinner fx:id="spinnerEchantillon" editable="true" layoutX="503.0" layoutY="164.0" prefHeight="25.0" prefWidth="79.0" />
-        <Spinner fx:id="spinnerInterval" layoutX="503.0" layoutY="200.0" prefHeight="25.0" prefWidth="60.0" />
+        <Spinner fx:id="spinnerInterval" layoutX="503.0" layoutY="200.0" prefHeight="25.0" prefWidth="80.0" />
         <Spinner fx:id="spinnerBitQuanti" layoutX="270.0" layoutY="200.0" prefHeight="25.0" prefWidth="60.0" />
         <Separator layoutX="216.0" layoutY="121.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="6.0" />
         <Separator layoutX="378.0" layoutY="121.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="6.0" />

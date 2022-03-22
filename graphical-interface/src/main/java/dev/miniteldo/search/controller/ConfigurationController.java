@@ -5,7 +5,7 @@ package dev.miniteldo.search.controller;
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
-import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
+import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.view.Views;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Classe ConfigurationController ...
@@ -33,7 +34,13 @@ public class ConfigurationController {
     public Spinner<Integer> spinnerInterval;
     public Spinner<Integer> spinnerBitQuanti;
 
-    private HashMap<Configurations, Integer> hashMap;
+    private HashMap<Configurations, Integer> hashMapOldValue;
+    private HashMap<Configurations, Integer> hashMapNewValue = new HashMap<>();
+    private HashMap<Configurations, Spinner<Integer>> hashMapSpinner = new HashMap<>();
+
+    private boolean isTextModified = false;
+    private boolean isImageModified = false;
+    private boolean isAudioModified = false;
 
     public ToggleButton debugButton;
 
@@ -44,29 +51,137 @@ public class ConfigurationController {
         loadingGif.setVisible(false);
 
         // Init configuration value from C code
-        this.hashMap = AppState.getInstance().getEngine().loadConfigs();
-        System.out.println(hashMap);
+        this.hashMapOldValue = AppState.getInstance().getEngine().loadConfigs();
+        System.out.println(hashMapOldValue);
 
         comboBoxMode.setItems(FXCollections.observableArrayList(Configurations.values()));
 
+        initHashMapSpinner();
+
         // Set spinner with config value from C
-        initSpinner(spinnerTextValue, Configurations.TEXT_FILTER_VALUE, hashMap.get(Configurations.TEXT_FILTER_VALUE));
-        initSpinner(spinnerIndexText, Configurations.TEXT_INDEX_TABLE_SIZE, hashMap.get(Configurations.TEXT_INDEX_TABLE_SIZE));
-
-        initSpinner(spinnerBitQuanti, Configurations.IMAGE_NUM_BITS_QUANTIFICATION, hashMap.get(Configurations.IMAGE_NUM_BITS_QUANTIFICATION));
-
-        initSpinner(spinnerEchantillon, Configurations.AUDIO_SAMPLES, hashMap.get(Configurations.AUDIO_SAMPLES));
-        initSpinner(spinnerInterval, Configurations.AUDIO_INTERVAL, hashMap.get(Configurations.AUDIO_INTERVAL));
+        for (Map.Entry<Configurations, Spinner<Integer>> entry : hashMapSpinner.entrySet()) {
+            initSpinner(entry.getValue(), entry.getKey());
+        }
     }
 
-    private void initSpinner(Spinner<Integer> spinner, Configurations configurations, int init) {
-        SpinnerValueFactory<Integer> valueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                        configurations.getMin(),
-                        configurations.getMax(),
-                        init);
+    /**
+     * Init the hashmap of spinner
+     */
+    public void initHashMapSpinner() {
+        // Text
+        this.hashMapSpinner.put(Configurations.TEXT_FILTER_VALUE, spinnerTextValue);
+        this.hashMapSpinner.put(Configurations.TEXT_INDEX_TABLE_SIZE, spinnerIndexText);
+
+        // Image
+        this.hashMapSpinner.put(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spinnerBitQuanti);
+
+        // Audio
+        this.hashMapSpinner.put(Configurations.AUDIO_SAMPLES, spinnerEchantillon);
+        this.hashMapSpinner.put(Configurations.AUDIO_INTERVAL, spinnerInterval);
+    }
+
+    /**
+     * Set the min, max and init of a spinner
+     *
+     * @param spinner
+     * @param configurations
+     */
+    private void initSpinner(Spinner<Integer> spinner, Configurations configurations) {
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(configurations.getMin(), configurations.getMax(), hashMapOldValue.get(configurations));
         spinner.setValueFactory(valueFactory);
     }
+
+    /**
+     * Get all value from spinner and put it in the correct map
+     */
+    private void getAllSpinnerValueToMap() {
+        // Text
+        this.hashMapNewValue.put(Configurations.TEXT_FILTER_VALUE, spinnerTextValue.getValue());
+        this.hashMapNewValue.put(Configurations.TEXT_INDEX_TABLE_SIZE, spinnerIndexText.getValue());
+
+        // Image
+        this.hashMapNewValue.put(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spinnerBitQuanti.getValue());
+
+        // Audio
+        this.hashMapNewValue.put(Configurations.AUDIO_SAMPLES, spinnerEchantillon.getValue());
+        this.hashMapNewValue.put(Configurations.AUDIO_INTERVAL, spinnerInterval.getValue());
+    }
+
+    private void saveConfiguration() {
+        // Get all value from spinner
+        getAllSpinnerValueToMap();
+
+        // Comparison of old and new value of all spinner
+        for (Map.Entry<Configurations, Integer> entry : hashMapOldValue.entrySet()) {
+            Configurations config = entry.getKey();
+            Integer oldValue = entry.getValue();
+            Integer newValue = hashMapNewValue.get(config);
+
+            if (!oldValue.equals(newValue) && newValue != null) {
+                // Audio sample need vérification
+                if (config.equals(Configurations.AUDIO_SAMPLES)) {
+                    if (verificationAudioParam(newValue)) {
+                        AppState.getInstance().getEngine().setConfig(Configurations.AUDIO_SAMPLES, spinnerEchantillon.getValue());
+                        checkModifiedType(config); // check the type modified
+                    }
+                } else {
+                    AppState.getInstance().getEngine().setConfig(config, newValue);
+                }
+
+                System.out.println(config);
+            }
+        }
+
+        // call indexing function
+        if (isTextModified) {
+            AppState.getInstance().getEngine().indexText(IndexerMode.RESET);
+        }
+        if (isImageModified) {
+            AppState.getInstance().getEngine().indexText(IndexerMode.RESET);
+        }
+        if (isAudioModified) {
+            AppState.getInstance().getEngine().indexText(IndexerMode.RESET);
+        }
+
+        // Reset value
+        this.hashMapOldValue = AppState.getInstance().getEngine().loadConfigs();
+        isTextModified = false;
+        isImageModified = false;
+        isAudioModified = false;
+
+        System.out.println("====");
+        System.out.println("Fini ! ");
+        System.out.println("====");
+    }
+
+    /**
+     * For the param config fix to true the correct modified value
+     *
+     * @param configurations
+     */
+    public void checkModifiedType(Configurations configurations) {
+        String type = configurations.getParametersType().split("_")[0];
+
+        switch (type) {
+            case "TEXT":
+                isTextModified = true;
+                break;
+            case "IMAGE":
+                isImageModified = true;
+                break;
+            default:
+                isAudioModified = true;
+                break;
+        }
+    }
+
+    /**
+     * Doit être une puissance de 2 => audio samples
+     */
+    private boolean verificationAudioParam(int n) {
+        return (int) (Math.ceil((Math.log(n) / Math.log(2)))) == (int) (Math.floor(((Math.log(n) / Math.log(2)))));
+    }
+
 
     // Methods
     @FXML
@@ -79,49 +194,12 @@ public class ConfigurationController {
         labelIndexation.setText("Indexation en cours ...");
         progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
 
-//        loadingGif.setVisible(true);
+        loadingGif.setVisible(true);
 
         saveConfiguration();
 
-//        loadingGif.setVisible(false);
+        loadingGif.setVisible(false);
         labelIndexation.setText("Indexation fini !");
     }
 
-    private void saveConfiguration() {
-        // look
-        // vérif les valeurs changées + domaine text/image/audio
-        // reset text => suprimme et recréer
-
-        // FIXME: 21/03/2022 FIX AND OPTIMIS THIS SHIT
-        if (!hashMap.get(Configurations.TEXT_FILTER_VALUE).equals(spinnerTextValue.getValue())) {
-            AppState.getInstance().getEngine().setConfig(Configurations.TEXT_FILTER_VALUE, spinnerTextValue.getValue());
-            System.out.println("Text value modifié");
-        }
-        if (!hashMap.get(Configurations.TEXT_INDEX_TABLE_SIZE).equals(spinnerIndexText.getValue())) {
-            AppState.getInstance().getEngine().setConfig(Configurations.TEXT_INDEX_TABLE_SIZE, spinnerIndexText.getValue());
-            System.out.println("Index modifié");
-        }
-        if (!hashMap.get(Configurations.IMAGE_NUM_BITS_QUANTIFICATION).equals(spinnerBitQuanti.getValue())) {
-            AppState.getInstance().getEngine().setConfig(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spinnerBitQuanti.getValue());
-            System.out.println("Bit de quantification changé");
-        }
-        if (!hashMap.get(Configurations.AUDIO_INTERVAL).equals(spinnerInterval.getValue())) {
-            AppState.getInstance().getEngine().setConfig(Configurations.AUDIO_INTERVAL, spinnerInterval.getValue());
-            System.out.println("Interval modifié");
-        }
-        if (!hashMap.get(Configurations.AUDIO_SAMPLES).equals(spinnerEchantillon.getValue())) {
-            if (verificationAudioParam(spinnerEchantillon.getValue())) {
-                AppState.getInstance().getEngine().setConfig(Configurations.AUDIO_SAMPLES, spinnerEchantillon.getValue());
-            }
-            System.out.println("Echantillon modifié");
-        }
-    }
-
-    /**
-     * Doit etre une puissance de 2 => audio samples
-     */
-    private boolean verificationAudioParam(int n) {
-        return (int) (Math.ceil((Math.log(n) / Math.log(2))))
-                == (int) (Math.floor(((Math.log(n) / Math.log(2)))));
-    }
 }
