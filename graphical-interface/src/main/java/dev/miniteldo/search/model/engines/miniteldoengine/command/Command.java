@@ -16,7 +16,7 @@ public class Command {
 
     /* sh command */
     public Command(String miniteldoEnginePath, String command) {
-        processBuilder = new ProcessBuilder("./bridge/" + command);
+        processBuilder = new ProcessBuilder("sh", "./bridge/" + command);
         processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
     }
 
