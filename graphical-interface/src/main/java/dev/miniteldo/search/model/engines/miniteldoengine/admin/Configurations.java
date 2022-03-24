@@ -1,6 +1,8 @@
 package dev.miniteldo.search.model.engines.miniteldoengine.admin;
 
 public enum Configurations {
+    INDEXING_MODE("parameters", "indexing_mode", 0, 1),
+
     TEXT_FILTER_MODE("parameters", "indexing_text_filter_mode", 0, 1),
     TEXT_FILTER_VALUE("parameters", "indexing_text_filter_value", 3, 30),
     TEXT_INDEX_TABLE_SIZE("parameters", "indexing_text_number_table_index", 3, 30),

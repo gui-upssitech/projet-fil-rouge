@@ -176,6 +176,7 @@ public class ConfigurationController {
                     }
                 } else {
                     AppState.getInstance().getEngine().setConfig(config, newValue);
+                    checkModifiedType(config); // check the type modified
                 }
 
                 System.out.println(config);
@@ -187,10 +188,10 @@ public class ConfigurationController {
             AppState.getInstance().getEngine().indexText(IndexerMode.RESET);
         }
         if (isImageModified) {
-            AppState.getInstance().getEngine().indexText(IndexerMode.RESET);
+            AppState.getInstance().getEngine().indexImage(IndexerMode.RESET);
         }
         if (isAudioModified) {
-            AppState.getInstance().getEngine().indexText(IndexerMode.RESET);
+            AppState.getInstance().getEngine().indexAudio(IndexerMode.RESET);
         }
 
         // Reset value
@@ -210,12 +211,20 @@ public class ConfigurationController {
      * @param configurations
      */
     public void checkModifiedType(Configurations configurations) {
-        String type = configurations.getParametersType().split("_")[0];
+        String type = configurations.toString().split("_")[0];
 
         switch (type) {
-            case "TEXT" -> isTextModified = true;
-            case "IMAGE" -> isImageModified = true;
-            default -> isAudioModified = true;
+            case "TEXT":
+                isTextModified = true;
+                break;
+
+            case "IMAGE":
+                isImageModified = true;
+                break;
+
+            case "AUDIO":
+                isAudioModified = true;
+                break;
         }
     }
 

@@ -8,6 +8,7 @@ import dev.miniteldo.search.model.engines.miniteldoengine.admin.Logger;
 import dev.miniteldo.search.model.engines.miniteldoengine.command.Command;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.Indexer;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
+import dev.miniteldo.search.model.engines.miniteldoengine.openedclosedmode.OpenedClosedMode;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
@@ -30,6 +31,7 @@ public class MiniteldoEngine implements SearchEngine {
         Command command = new Command(miniteldoEnginePath, "init.sh");
         try {
             command.getResult();
+            OpenedClosedMode.init(miniteldoEnginePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
