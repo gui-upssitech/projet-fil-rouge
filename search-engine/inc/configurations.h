@@ -23,6 +23,15 @@ Date:       29/11/2021
 #define MAX_FILTER_SIZE 30
 
 /**
+ * @brief A struct which represents general indexing parameters.
+ * 
+ */
+typedef struct
+{
+    unsigned int mode; /**< the indexing mode (0 <=> closed, 1 <=> opened). */
+} Indexing_parameters_s;
+
+/**
  * @brief A struct which represents text indexing parameters.
  * 
  */
@@ -84,6 +93,7 @@ typedef struct
  */
 typedef struct
 {
+    Indexing_parameters_s indexing_parameters;
     Text_indexing_parameters_s text_indexing_parameters;
     Image_indexing_parameters_s image_indexing_parameters;
     Audio_indexing_parameters_s audio_indexing_parameters;

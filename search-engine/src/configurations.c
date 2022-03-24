@@ -13,11 +13,15 @@ Date:       29/11/2021
 
 #include "configurations.h"
 
-Parameters_s G_parameters = {{0, 10, 0, 5}, {2}, {1024, 100}, {60.0}, {1, 80.0}};
+Parameters_s G_parameters = {{0}, {0, 10, 0, 5}, {2}, {1024, 100}, {60.0}, {1, 80.0}};
 
 void load_configuration(char *config, char *value)
 {
     value[0] = '0';
+    if (strcmp(config, "indexing_mode") == 0)
+    {
+        G_parameters.indexing_parameters.mode = atoi(value);
+    }
     if (strcmp(config, "indexing_text_filter_mode") == 0)
     {
         G_parameters.text_indexing_parameters.indexing_text_filter_mode = atoi(value);
@@ -95,6 +99,7 @@ Bool_e load_configurations(void)
         fprintf(stderr, "Error %d closing the file %s.\n\r", errno, CONFIG_FILE_PATH);
         return FALSE;
     }
+
     return TRUE;
 }
 
