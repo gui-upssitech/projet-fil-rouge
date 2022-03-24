@@ -7,7 +7,9 @@ import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.view.Views;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -24,23 +26,24 @@ public class ConfigurationController {
     // Attributs components
     public Button validButton;
     public Label labelIndexation;
-    public Button returnButton;
 
+    // Text componenent
     private ArrayList<String> stringsComboMode;
-    public ComboBox<String> comboBoxMode;
+    public ComboBox<String> cbTextMode;
+    public Spinner<Integer> spTextThreshold;
+    public Spinner<Integer> spTextIndex;
     private ArrayList<String> stringsComboDebug;
-    public ComboBox<String> comboBoxDebug;
+    public ComboBox<String> cbTextDebug;
 
-    public Spinner<Integer> spinnerTextValue;
-    public Spinner<Integer> spinnerIndexText;
+    // Image componenent
+    public Spinner<Integer> spImageBit;
+    public Spinner<Integer> spImageThreshold;
 
-    public Spinner<Integer> spinnerBitQuanti;
-    public Spinner<Integer> spinnerImageValue;
-
-    public Spinner<Integer> spinnerEchantillon;
-    public Spinner<Integer> spinnerInterval;
-    public Spinner<Integer> spinnerAudioStep;
-    public Spinner<Integer> spinnerAudioValue;
+    // Audio componenent
+    public Spinner<Integer> spAudioSample;
+    public Spinner<Integer> spAudioInterval;
+    public Spinner<Integer> spAudioStep;
+    public Spinner<Integer> spAudioThreshold;
 
     private HashMap<Configurations, Integer> hashMapOldValue;
     private HashMap<Configurations, Integer> hashMapNewValue = new HashMap<>();
@@ -67,8 +70,9 @@ public class ConfigurationController {
         stringsComboDebug.add("Oui");
 
         // Add strings to comboBox
-        comboBoxMode.setItems(FXCollections.observableArrayList(stringsComboMode));
-        comboBoxDebug.setItems(FXCollections.observableArrayList(stringsComboDebug));
+        cbTextMode.setItems(FXCollections.observableArrayList(stringsComboMode));
+        cbTextDebug.setItems(FXCollections.observableArrayList(stringsComboDebug));
+
 
         initData();
 
@@ -76,6 +80,9 @@ public class ConfigurationController {
         for (Map.Entry<Configurations, Spinner<Integer>> entry : hashMapSpinner.entrySet()) {
             initSpinner(entry.getValue(), entry.getKey());
         }
+
+        updateVisibilitySpinner();
+
     }
 
     /**
@@ -83,21 +90,21 @@ public class ConfigurationController {
      */
     public void initData() {
         // Text
-        this.hashMapSpinner.put(Configurations.TEXT_FILTER_VALUE, spinnerTextValue);
-        this.hashMapSpinner.put(Configurations.TEXT_INDEX_TABLE_SIZE, spinnerIndexText);
+        this.hashMapSpinner.put(Configurations.TEXT_FILTER_VALUE, spTextThreshold);
+        this.hashMapSpinner.put(Configurations.TEXT_INDEX_TABLE_SIZE, spTextIndex);
         // Mode
-        this.comboBoxMode.getSelectionModel().select(stringsComboMode.get(hashMapOldValue.get(Configurations.TEXT_FILTER_MODE)));
-        this.comboBoxDebug.getSelectionModel().select(stringsComboDebug.get(hashMapOldValue.get(Configurations.TEXT_INDEX_DEBUG)));
+        this.cbTextMode.getSelectionModel().select(stringsComboMode.get(hashMapOldValue.get(Configurations.TEXT_FILTER_MODE)));
+        this.cbTextDebug.getSelectionModel().select(stringsComboDebug.get(hashMapOldValue.get(Configurations.TEXT_INDEX_DEBUG)));
 
         // Image
-        this.hashMapSpinner.put(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spinnerBitQuanti);
-        this.hashMapSpinner.put(Configurations.IMAGE_THRESHOLD, spinnerImageValue);
+        this.hashMapSpinner.put(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spImageBit);
+        this.hashMapSpinner.put(Configurations.IMAGE_THRESHOLD, spImageThreshold);
 
         // Audio
-        this.hashMapSpinner.put(Configurations.AUDIO_SAMPLES, spinnerEchantillon);
-        this.hashMapSpinner.put(Configurations.AUDIO_INTERVAL, spinnerInterval);
-        this.hashMapSpinner.put(Configurations.AUDIO_STEP, spinnerAudioStep);
-        this.hashMapSpinner.put(Configurations.AUDIO_THRESHOLD, spinnerAudioValue);
+        this.hashMapSpinner.put(Configurations.AUDIO_SAMPLES, spAudioSample);
+        this.hashMapSpinner.put(Configurations.AUDIO_INTERVAL, spAudioInterval);
+        this.hashMapSpinner.put(Configurations.AUDIO_STEP, spAudioStep);
+        this.hashMapSpinner.put(Configurations.AUDIO_THRESHOLD, spAudioThreshold);
     }
 
     /**
@@ -116,21 +123,38 @@ public class ConfigurationController {
      */
     private void getAllSpinnerValueToMap() {
         // Text
-        this.hashMapNewValue.put(Configurations.TEXT_FILTER_VALUE, spinnerTextValue.getValue());
-        this.hashMapNewValue.put(Configurations.TEXT_INDEX_TABLE_SIZE, spinnerIndexText.getValue());
+        this.hashMapNewValue.put(Configurations.TEXT_FILTER_VALUE, spTextThreshold.getValue());
+        this.hashMapNewValue.put(Configurations.TEXT_INDEX_TABLE_SIZE, spTextIndex.getValue());
         // mode
-        this.hashMapNewValue.put(Configurations.TEXT_FILTER_MODE, comboBoxMode.getSelectionModel().getSelectedIndex());
-        this.hashMapNewValue.put(Configurations.TEXT_INDEX_DEBUG, comboBoxDebug.getSelectionModel().getSelectedIndex());
+        this.hashMapNewValue.put(Configurations.TEXT_FILTER_MODE, cbTextMode.getSelectionModel().getSelectedIndex());
+        this.hashMapNewValue.put(Configurations.TEXT_INDEX_DEBUG, cbTextDebug.getSelectionModel().getSelectedIndex());
 
         // Image
-        this.hashMapNewValue.put(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spinnerBitQuanti.getValue());
-        this.hashMapNewValue.put(Configurations.IMAGE_THRESHOLD, spinnerImageValue.getValue());
+        this.hashMapNewValue.put(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spImageBit.getValue());
+        this.hashMapNewValue.put(Configurations.IMAGE_THRESHOLD, spImageThreshold.getValue());
 
         // Audio
-        this.hashMapNewValue.put(Configurations.AUDIO_SAMPLES, spinnerEchantillon.getValue());
-        this.hashMapNewValue.put(Configurations.AUDIO_INTERVAL, spinnerInterval.getValue());
-        this.hashMapNewValue.put(Configurations.AUDIO_STEP, spinnerAudioStep.getValue());
-        this.hashMapNewValue.put(Configurations.AUDIO_THRESHOLD, spinnerAudioValue.getValue());
+        this.hashMapNewValue.put(Configurations.AUDIO_SAMPLES, spAudioSample.getValue());
+        this.hashMapNewValue.put(Configurations.AUDIO_INTERVAL, spAudioInterval.getValue());
+        this.hashMapNewValue.put(Configurations.AUDIO_STEP, spAudioStep.getValue());
+        this.hashMapNewValue.put(Configurations.AUDIO_THRESHOLD, spAudioThreshold.getValue());
+    }
+
+    @FXML
+    protected void onComboBoxModeAction() {
+        updateVisibilitySpinner();
+    }
+
+    private void updateVisibilitySpinner() {
+        boolean showThreshold = cbTextMode.getSelectionModel().getSelectedIndex() == 0;
+        spTextIndex.setDisable(!showThreshold);
+        spTextThreshold.setDisable(showThreshold);
+
+        if (showThreshold) {
+            spTextThreshold.getValueFactory().setValue(hashMapOldValue.get(Configurations.TEXT_FILTER_VALUE));
+        } else {
+            spTextIndex.getValueFactory().setValue(hashMapOldValue.get(Configurations.TEXT_INDEX_TABLE_SIZE));
+        }
     }
 
     private void saveConfiguration() {
@@ -147,7 +171,7 @@ public class ConfigurationController {
                 // Audio sample need vérification
                 if (config.equals(Configurations.AUDIO_SAMPLES)) {
                     if (verificationAudioParam(newValue)) {
-                        AppState.getInstance().getEngine().setConfig(Configurations.AUDIO_SAMPLES, spinnerEchantillon.getValue());
+                        AppState.getInstance().getEngine().setConfig(Configurations.AUDIO_SAMPLES, spAudioSample.getValue());
                         checkModifiedType(config); // check the type modified
                     }
                 } else {
@@ -189,15 +213,9 @@ public class ConfigurationController {
         String type = configurations.getParametersType().split("_")[0];
 
         switch (type) {
-            case "TEXT":
-                isTextModified = true;
-                break;
-            case "IMAGE":
-                isImageModified = true;
-                break;
-            default:
-                isAudioModified = true;
-                break;
+            case "TEXT" -> isTextModified = true;
+            case "IMAGE" -> isImageModified = true;
+            default -> isAudioModified = true;
         }
     }
 
@@ -205,7 +223,8 @@ public class ConfigurationController {
      * Doit être une puissance de 2 => audio samples
      */
     private boolean verificationAudioParam(int n) {
-        return (int) (Math.ceil((Math.log(n) / Math.log(2)))) == (int) (Math.floor(((Math.log(n) / Math.log(2)))));
+        double v = Math.log(n) / Math.log(2);
+        return (int) (Math.ceil(v)) == (int) (Math.floor(v));
     }
 
 

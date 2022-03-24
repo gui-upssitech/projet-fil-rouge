@@ -1,75 +1,222 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.ConfigurationController">
-    <children>
-        <Label layoutX="225.0" layoutY="36.0" text="Configurations">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
-        <Label layoutX="50.0" layoutY="93.0" text="Texte indexation">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <Spinner fx:id="spinnerTextValue" layoutX="106.0" layoutY="176.0" prefHeight="25.0" prefWidth="80.0" />
-        <Label layoutX="29.0" layoutY="180.0" text="Seuil" />
-        <Label layoutX="29.0" layoutY="144.0" text="Mode" />
-        <ComboBox fx:id="comboBoxMode" layoutX="107.0" layoutY="140.0" prefHeight="25.0" prefWidth="80.0" promptText="FILTRE" />
-        <Label layoutX="230.0" layoutY="93.0" text="Image indexation">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <Label layoutX="245.0" layoutY="137.0" prefHeight="32.0" prefWidth="111.0" text="Bit de quantification" textAlignment="CENTER" wrapText="true" />
-        <Label layoutX="420.0" layoutY="93.0" text="Audio Indexation">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <Label layoutX="411.0" layoutY="141.0" text="Echantillons" />
-        <Label layoutX="411.0" layoutY="177.0" text="Niveau" />
-        <Spinner fx:id="spinnerEchantillon" editable="true" layoutX="500.0" layoutY="137.0" prefHeight="25.0" prefWidth="79.0" />
-        <Spinner fx:id="spinnerInterval" layoutX="500.0" layoutY="173.0" prefHeight="25.0" prefWidth="80.0" />
-        <Spinner fx:id="spinnerBitQuanti" layoutX="270.0" layoutY="181.0" prefHeight="25.0" prefWidth="60.0" />
-        <Separator layoutX="207.0" layoutY="121.0" orientation="VERTICAL" prefHeight="198.0" prefWidth="6.0" />
-        <Separator layoutX="390.0" layoutY="121.0" orientation="VERTICAL" prefHeight="198.0" prefWidth="6.0" />
-        <Button fx:id="validButton" layoutX="271.0" layoutY="352.0" mnemonicParsing="false" onAction="#onValidButton" text="Valider" />
-      <Label fx:id="labelIndexation" layoutX="216.0" layoutY="319.0" prefHeight="24.0" prefWidth="170.0" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font></Label>
-        <Button fx:id="returnButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButton">
-            <graphic>
-                <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../images/icons/arrow-left.png" />
-                </ImageView>
-            </graphic>
-        </Button>
-      <Spinner fx:id="spinnerIndexText" layoutX="109.0" layoutY="250.0" prefHeight="24.0" prefWidth="80.0" />
-      <Label layoutX="29.0" layoutY="219.0" text="Debug" />
-      <Label layoutX="29.0" layoutY="254.0" text="Index" />
-      <ComboBox fx:id="comboBoxDebug" layoutX="107.0" layoutY="215.0" prefHeight="24.0" prefWidth="79.0" />
-      <Label layoutX="222.0" layoutY="218.0" text="Image comparaison">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="411.0" layoutY="218.0" text="Audio comparaison">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="227.0" layoutY="254.0" text="Seuil" />
-      <Spinner fx:id="spinnerImageValue" layoutX="285.0" layoutY="250.0" prefHeight="24.0" prefWidth="64.0" />
-      <Label layoutX="416.0" layoutY="254.0" text="Pas" />
-      <Spinner fx:id="spinnerAudioStep" layoutX="500.0" layoutY="250.0" prefHeight="24.0" prefWidth="80.0" />
-      <Label layoutX="411.0" layoutY="292.0" text="Seuil" />
-      <Spinner fx:id="spinnerAudioValue" layoutX="500.0" layoutY="288.0" prefHeight="24.0" prefWidth="80.0" />
-    </children>
-</Pane>
+<AnchorPane prefHeight="480.0" prefWidth="720.0" stylesheets="@../stylesheets/theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.ConfigurationController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="480.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" text="Configurations" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="24.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="283.0" prefWidth="720.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="263.0" prefWidth="218.0">
+                     <children>
+                        <Label text="Texte Indexation">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Mode">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <ComboBox fx:id="cbTextMode" onAction="#onComboBoxModeAction" prefWidth="150.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin></HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Seuil">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <Spinner fx:id="spTextThreshold" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Index">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <Spinner fx:id="spTextIndex" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Debug">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <ComboBox fx:id="cbTextDebug" prefWidth="150.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin></VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="260.0" prefWidth="170.0">
+                     <children>
+                        <Label text="Image Indexation">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Bit quantification">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <Spinner fx:id="spImageBit" />
+                           </children>
+                        </HBox>
+                        <Label text="Image Comparaison">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Seuil">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <Spinner fx:id="spImageThreshold" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin></VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="263.0" prefWidth="211.0">
+                     <children>
+                        <Label text="Audio Indexation">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Echantillons">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <Spinner fx:id="spAudioSample" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Niveau">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <Spinner fx:id="spAudioInterval" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Label text="Audio comparaison">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Pas">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <Spinner fx:id="spAudioStep" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Seuil">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <Spinner fx:id="spAudioThreshold" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin></VBox>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="57.0" prefWidth="720.0">
+               <children>
+                  <Label fx:id="labelIndexation" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font></Label>
+                  <Button fx:id="validButton" mnemonicParsing="false" onAction="#onValidButton" text="Valider" />
+               </children>
+            </VBox>
+         </children>
+         <stylesheets>
+            <URL value="@../stylesheets/configuration.css" />
+            <URL value="@../stylesheets/configuration.css" />
+         </stylesheets>
+      </VBox>
+      <ImageView fx:id="returnButton" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onReturnButton" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0">
+         <image>
+            <Image url="@../images/icons/arrow-left.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+   </children>
+</AnchorPane>
