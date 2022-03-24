@@ -29,7 +29,6 @@ public class ParameterController {
     private AppState state;
 
     // FX Methods
-
     @FXML
     public void initialize() {
         state = AppState.getInstance();
@@ -69,6 +68,11 @@ public class ParameterController {
     @FXML
     protected void onReturnButton() {
         App.setView(Views.MAIN);
+    }
+
+    @FXML
+    protected void onSaveButton() {
+        App.setView(Views.SAVE);
     }
 
     // Other methods

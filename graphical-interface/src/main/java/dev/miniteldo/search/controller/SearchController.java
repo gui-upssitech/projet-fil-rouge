@@ -7,6 +7,8 @@ import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.StringModifier;
+import dev.miniteldo.search.model.tools.Tools;
+import dev.miniteldo.search.view.Component;
 import dev.miniteldo.search.view.Dialog;
 import dev.miniteldo.search.view.SearchResultComponentFactory;
 import dev.miniteldo.search.view.Views;
@@ -26,10 +28,13 @@ public class SearchController {
 
     /* Attibutes */
 
-    @FXML public Button saveButton;
-    @FXML public Button returnButton;
+    @FXML
+    public Button saveButton;
+    @FXML
+    public Button returnButton;
 
-    @FXML private VBox resultContainer;
+    @FXML
+    private VBox resultContainer;
 
     private AppState state;
     private SearcherType requestType;
@@ -41,7 +46,7 @@ public class SearchController {
 
         // Search logic
         String request = state.getCurrentRequest();
-        requestType = getRequestType(request);
+        requestType = Tools.getRequestType(request);
         ArrayList<SearchResult> resultList = performSearch(request);
 
         displayResults(resultList);
@@ -64,12 +69,12 @@ public class SearchController {
     /* Other methods */
 
     private ArrayList<SearchResult> performSearch(String request) {
-        if(requestType == null) return null;
+        if (requestType == null) return null;
 
         ArrayList<SearchResult> searchResults;
         SearchEngine engine = state.getEngine();
 
-        if(requestType == SearcherType.TEXT_KEYWORD) {
+        if (requestType == SearcherType.TEXT_KEYWORD) {
             // Special case : keyword search
             ArrayList<String> positiveKeywords = getKeywords(request, true);
             ArrayList<String> negativeKeywords = getKeywords(request, false);
@@ -93,39 +98,26 @@ public class SearchController {
         return searchResults;
     }
 
-    public SearcherType getRequestType(String request) {
-        for (Regex regex : Regex.values()) {
-            Matcher m = Pattern.compile(regex.getRegexExp()).matcher(request);
-            if (m.matches()) return switch (regex) {
-                case REGEX_TEXTE_KEYWORD -> SearcherType.TEXT_KEYWORD;
-                case REGEX_TEXTE_PATH -> SearcherType.TEXT_PATH;
-                case REGEX_IMAGE_NB -> SearcherType.IMAGE_NB_PATH;
-                case REGEX_IMAGE_RGB -> SearcherType.IMAGE_RGB_PATH;
-                case REGEX_AUDIO -> SearcherType.AUDIO_PATH;
-                default -> null;
-            };
-        }
-        return null;
-    }
-
     public ArrayList<String> getKeywords(String request, boolean positive) {
         Matcher m = Pattern.compile("([+|-]?)(\\w+)").matcher(request);
 
         ArrayList<String> list = new ArrayList<>();
-        while(m.find()) {
+        while (m.find()) {
             boolean toAdd = m.group(1).equals("-") ^ positive; // [^ positive] inverts result if positive is true
-            if(toAdd) list.add(m.group(2));
+            if (toAdd) list.add(m.group(2));
         }
 
         return list;
     }
 
     private void displayResults(ArrayList<SearchResult> liste) {
-        if(liste == null || liste.isEmpty())
+        if (liste == null || liste.isEmpty())
             resultContainer.getChildren().add(new Label("No results found"));
         else {
             for (SearchResult searchResult : liste) {
                 HBox result = SearchResultComponentFactory.createComponent(
+                        Component.SEARCH_RESULT,
+                        null,
                         requestType,
                         searchResult,
                         event -> onResultClicked(searchResult)

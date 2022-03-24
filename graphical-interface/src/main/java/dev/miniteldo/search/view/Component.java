@@ -6,7 +6,8 @@ package dev.miniteldo.search.view;
  * date: 20/03/2022
  */
 public enum Component {
-    SEARCH_RESULT("components/search-result.fxml");
+    SEARCH_RESULT("components/search-result.fxml"),
+    SEARCH("components/search.fxml");
 
     // Enum parameters
 

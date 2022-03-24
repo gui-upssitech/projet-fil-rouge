@@ -60,7 +60,7 @@
                   <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefWidth="360.0" spacing="12.0" styleClass="setting">
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#onSaveButton" prefWidth="360.0" spacing="12.0" styleClass="setting">
                <children>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
