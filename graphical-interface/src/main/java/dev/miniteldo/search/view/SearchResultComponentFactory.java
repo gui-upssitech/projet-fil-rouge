@@ -37,7 +37,11 @@ public class SearchResultComponentFactory {
                     Label confidence = (Label) root.lookup("#confidence");
 
                     fileName.setText(getFileName(result.getFilePath()));
-                    confidence.setText(result.getConfidence() + "%");
+                    if (type.toString().split("_")[0].equals("TEXT")) {
+                        confidence.setText(String.valueOf(result.getConfidence()));
+                    } else {
+                        confidence.setText(result.getConfidence() + "%");
+                    }
                     icon.setImage(getIcon(type));
                     root.setOnMouseClicked(onClick);
 

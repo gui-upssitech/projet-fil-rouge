@@ -270,6 +270,13 @@ public class ConfigurationController {
     }
 
     public void onResetButton(ActionEvent event) {
-        FileTools.clearFile();
+        // Delete the file content
+        boolean isClear = FileTools.clearFile();
+
+        if (isClear) {
+            App.showDialog(Dialog.SUCCESS);
+        } else {
+            App.showDialog(Dialog.ERROR);
+        }
     }
 }

@@ -7,6 +7,7 @@ import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.StringModifier;
+import dev.miniteldo.search.model.tools.Tools;
 import dev.miniteldo.search.view.Dialog;
 import dev.miniteldo.search.view.Views;
 import javafx.event.ActionEvent;
@@ -22,19 +23,29 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * Classe MainMenuController ...
+ * Date : 02/03/2022
+ * Auteur : all
+ */
 public class MainMenuController {
     public TextField searchBar;
     public Button searchButton;
+    private String request;
 
     @FXML
     protected void onSearchButton(ActionEvent event) {
-        // TODO ADD EXISTING AND CORRECT FILE CHECK
+        request = searchBar.getText().trim();
+
         if (searchBar.getText() == null || searchBar.getText().trim().isEmpty()) {
             App.showDialog(Dialog.ERROR);
         } else {
-            AppState.getInstance().setCurrentRequest(searchBar.getText().trim());
-            App.setView(Views.SEARCH_RESULT);
+            if (!Tools.isRequestValid(request)) {
+                App.showDialog(Dialog.ERROR);
+            } else {
+                AppState.getInstance().setCurrentRequest(searchBar.getText().trim());
+                App.setView(Views.SEARCH_RESULT);
+            }
         }
     }
 

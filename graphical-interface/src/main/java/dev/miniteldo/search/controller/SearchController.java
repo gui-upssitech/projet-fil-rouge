@@ -13,6 +13,7 @@ import dev.miniteldo.search.view.Component;
 import dev.miniteldo.search.view.Dialog;
 import dev.miniteldo.search.view.SearchResultComponentFactory;
 import dev.miniteldo.search.view.Views;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,6 +35,8 @@ public class SearchController {
     public Button saveButton;
     @FXML
     public Button returnButton;
+    @FXML
+    public Button searchButton;
     public TextField requestLabel;
 
     @FXML
@@ -79,7 +82,6 @@ public class SearchController {
 
     private ArrayList<SearchResult> performSearch(String request) {
         if (requestType == null) return null;
-
 
         SearchEngine engine = state.getEngine();
 
@@ -133,6 +135,27 @@ public class SearchController {
                 );
                 resultContainer.getChildren().add(result);
             }
+        }
+    }
+
+    public void onSearchButton(ActionEvent event) {
+        // get the new request
+        if (!Tools.isRequestValid(request)) {
+            App.showDialog(Dialog.ERROR);
+        } else {
+            // clear container
+            resultContainer.getChildren().clear();
+
+            request = requestLabel.getText().trim();
+            state.setCurrentRequest(request);
+
+            // get research type
+            requestType = Tools.getRequestType(request);
+
+            // execute search
+            ArrayList<SearchResult> resultList = performSearch(request);
+
+            displayResults(resultList);
         }
     }
 }

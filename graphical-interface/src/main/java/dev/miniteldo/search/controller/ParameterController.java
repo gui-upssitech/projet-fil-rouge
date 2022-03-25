@@ -14,15 +14,8 @@ import javafx.scene.layout.VBox;
 public class ParameterController {
 
     // View attributes
-
-    @FXML
-    public Button loginButton;
     @FXML
     public VBox settingsBox;
-    @FXML
-    private CheckBox adminButton;
-    @FXML
-    private PasswordField passwordField;
     @FXML
     private ImageView sunIcon, moonIcon;
     // Other attributes
@@ -37,27 +30,8 @@ public class ParameterController {
 
     @FXML
     protected void onAdminButton() {
-        // TODO: launch login dialog
         App.showDialog(Dialog.LOGIN);
-        System.out.println("Je ne suis pas bloqué dans le pop up...");
     }
-
-//    @FXML
-//    protected void onLoginButton(ActionEvent event) {
-//        if (passwordField.getText() == null || passwordField.getText().trim().isEmpty()) {
-//            System.out.println("Error blank text");
-//            return;
-//        }
-//
-//        String password = passwordField.getText().trim();
-//        if (state.adminLogin(password)) {
-//            System.out.println("Password valid");
-//            App.setView(Views.ADMIN_CONFIG);
-//        } else {
-//            System.out.println("Error wrong password");
-//            // TODO: error message
-//        }
-//    }
 
     @FXML
     protected void onThemeBarClicked() {

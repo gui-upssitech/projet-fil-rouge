@@ -2,6 +2,7 @@ package dev.miniteldo.search.model.tools;
 
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,5 +20,18 @@ public class Tools {
             };
         }
         return null;
+    }
+
+    public static boolean isRequestValid(String request) {
+        SearcherType searcherType = getRequestType(request);
+
+        if (searcherType == null) {
+            return false;
+        }
+        if (searcherType.toString().contains("PATH")) {
+            File f = new File(request);
+            return f.exists();
+        }
+        return true;
     }
 }

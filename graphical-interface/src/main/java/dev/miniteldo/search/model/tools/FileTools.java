@@ -30,7 +30,7 @@ public class FileTools {
         // FIXME: 25/03/2022 FIX OVERWRITING
     }
 
-    public static void clearFile() {
+    public static boolean clearFile() {
         String PATH = "../data/save.txt";
         FileOutputStream outputStream;
         String line = "";
@@ -44,6 +44,7 @@ public class FileTools {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     public static HashMap<String, ArrayList<SearchResult>> readFile() {
