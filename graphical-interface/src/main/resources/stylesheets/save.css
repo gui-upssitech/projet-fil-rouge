@@ -1,0 +1,7 @@
+.split-pane *.split-pane-divider {
+    -fx-padding: 0;
+}
+
+.result-list-container {
+    -fx-background-color: transparent;
+}
