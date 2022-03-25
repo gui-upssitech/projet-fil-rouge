@@ -12,7 +12,7 @@ public enum Regex {
     REGEX_TEXTE_PATH("([^\\s]+(\\.(?i)(xml))$)"),
     REGEX_IMAGE_RGB("([^\\s]+(\\.(?i)(jpg))$)"),
     REGEX_IMAGE_NB("([^\\s]+(\\.(?i)(bmp))$)"),
-    REGEX_AUDIO("([^\\s]+(\\.(?i)(bin|wav))$)"),
+    REGEX_AUDIO("([^\\s]+(\\.(?i)(wav))$)"),
     INVALID("Invalid");
 
     private final String regexExp;
