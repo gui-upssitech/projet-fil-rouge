@@ -35,6 +35,10 @@ public class ConfigurationController {
     private ArrayList<String> stringsComboDebug;
     public ComboBox<String> cbTextDebug;
 
+
+    private ArrayList<String> stringsComboModeOpen;
+    public ComboBox<String> cbModeOpen;
+
     // Image componenent
     public Spinner<Integer> spImageBit;
     public Spinner<Integer> spImageThreshold;
@@ -69,10 +73,14 @@ public class ConfigurationController {
         stringsComboDebug.add("Non");
         stringsComboDebug.add("Oui");
 
+        stringsComboModeOpen = new ArrayList<>();
+        stringsComboModeOpen.add("Ouvert");
+        stringsComboModeOpen.add("Fermé");
+
         // Add strings to comboBox
         cbTextMode.setItems(FXCollections.observableArrayList(stringsComboMode));
         cbTextDebug.setItems(FXCollections.observableArrayList(stringsComboDebug));
-
+        cbModeOpen.setItems(FXCollections.observableArrayList(stringsComboModeOpen));
 
         initData();
 
@@ -95,6 +103,7 @@ public class ConfigurationController {
         // Mode
         this.cbTextMode.getSelectionModel().select(stringsComboMode.get(hashMapOldValue.get(Configurations.TEXT_FILTER_MODE)));
         this.cbTextDebug.getSelectionModel().select(stringsComboDebug.get(hashMapOldValue.get(Configurations.TEXT_INDEX_DEBUG)));
+        this.cbModeOpen.getSelectionModel().select(stringsComboModeOpen.get(hashMapOldValue.get(Configurations.INDEXING_MODE)));
 
         // Image
         this.hashMapSpinner.put(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spImageBit);
@@ -128,6 +137,7 @@ public class ConfigurationController {
         // mode
         this.hashMapNewValue.put(Configurations.TEXT_FILTER_MODE, cbTextMode.getSelectionModel().getSelectedIndex());
         this.hashMapNewValue.put(Configurations.TEXT_INDEX_DEBUG, cbTextDebug.getSelectionModel().getSelectedIndex());
+        this.hashMapNewValue.put(Configurations.INDEXING_MODE, cbModeOpen.getSelectionModel().getSelectedIndex());
 
         // Image
         this.hashMapNewValue.put(Configurations.IMAGE_NUM_BITS_QUANTIFICATION, spImageBit.getValue());
@@ -175,8 +185,12 @@ public class ConfigurationController {
                         checkModifiedType(config); // check the type modified
                     }
                 } else {
+                    if (config.equals(Configurations.INDEXING_MODE)) {
+                        // FIXME: 25/03/2022 add the thread method
+                    }
                     AppState.getInstance().getEngine().setConfig(config, newValue);
                     checkModifiedType(config); // check the type modified
+
                 }
 
                 System.out.println(config);
