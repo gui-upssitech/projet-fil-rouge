@@ -13,7 +13,10 @@ import dev.miniteldo.search.view.Views;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -31,7 +34,11 @@ import java.util.regex.Pattern;
 public class MainMenuController {
     public TextField searchBar;
     public Button searchButton;
+    public Label infoLabel;
+    public ImageView infoImage;
     private String request;
+
+    private boolean isInfoUp = false;
 
     @FXML
     protected void onSearchButton(ActionEvent event) {
@@ -70,5 +77,14 @@ public class MainMenuController {
         if (file != null) {
             searchBar.setText(file.toString());
         }
+    }
+
+    public void onInfoAction(MouseEvent mouseEvent) {
+        if (isInfoUp) {
+            infoLabel.setVisible(true);
+        } else {
+            infoLabel.setVisible(false);
+        }
+        isInfoUp = !isInfoUp;
     }
 }

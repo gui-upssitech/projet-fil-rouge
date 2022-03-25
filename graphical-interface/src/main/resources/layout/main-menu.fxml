@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.MainMenuController">
    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
          <HBox alignment="CENTER" spacing="24.0">
@@ -42,6 +37,20 @@
                </Button>
             
                 <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButton" prefHeight="25.0" styleClass="last-button" text="Rechercher" />
+            </children>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="106.0" prefWidth="720.0">
+            <children>
+               <VBox alignment="TOP_CENTER" prefHeight="111.0" prefWidth="313.0">
+                  <children>
+                     <ImageView fx:id="infoImage" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onInfoAction" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons/info.png" />
+                        </image>
+                     </ImageView>
+                     <Label fx:id="infoLabel" text="Donec vitae tortor ac metus tristique ornare. In id viverra lectus. Morbi sit amet vulputate urna. Quisque auctor non purus ac placerat. Integer gravida semper massa, et convallis ligula congue eget. Fusce non velit nisi. Nullam non orci id felis faucibus pharetra et quis dolor. Curabitur et tellus ut tellus ornare placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque at consectetur elit, in eleifend est. Sed in auctor odio, ac ultrices felis. Mauris eget ultrices lectus, et faucibus nisi. " textAlignment="CENTER" visible="false" wrapText="true" />
+                  </children>
+               </VBox>
             </children>
          </HBox>
       </children>
