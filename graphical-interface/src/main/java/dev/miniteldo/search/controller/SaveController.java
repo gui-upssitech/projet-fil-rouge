@@ -46,7 +46,7 @@ public class SaveController {
             HBox result = SearchResultComponentFactory.createComponent(
                     Component.SEARCH,
                     request,
-                    null,
+                    requestType,
                     null,
                     event -> onRequestClicked(request)
             );
