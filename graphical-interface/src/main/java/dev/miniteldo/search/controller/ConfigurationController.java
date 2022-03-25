@@ -6,6 +6,7 @@ import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
+import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.view.Dialog;
 import dev.miniteldo.search.view.Views;
 import javafx.beans.value.ChangeListener;
@@ -35,7 +36,6 @@ public class ConfigurationController {
     public Spinner<Integer> spTextIndex;
     private ArrayList<String> stringsComboDebug;
     public ComboBox<String> cbTextDebug;
-
 
     private ArrayList<String> stringsComboModeOpen;
     public ComboBox<String> cbModeOpen;
@@ -264,5 +264,9 @@ public class ConfigurationController {
         saveConfiguration();
         labelIndexation.setText("Indexation fini !");
         App.showDialog(Dialog.SUCCESS);
+    }
+
+    public void onResetButton(ActionEvent event) {
+        FileTools.clearFile();
     }
 }

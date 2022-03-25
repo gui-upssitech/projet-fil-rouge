@@ -3,6 +3,7 @@ package dev.miniteldo.search.controller;
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
+import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.model.tools.Tools;
 import dev.miniteldo.search.view.Component;
 import dev.miniteldo.search.view.SearchResultComponentFactory;
@@ -86,31 +87,33 @@ public class SaveController {
      *
      */
     private void initData() {
-        ArrayList<SearchResult> searchResults = new ArrayList<>();
-        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/22-Les_clubs_de_football_anglais_utf8.xml", 12));
-        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/13-Ligue_des_champions____Si_utf8.xml", 5));
-
-        hashMap.put("football", searchResults);
-
-        searchResults = new ArrayList<>();
-        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/22-Les_clubs_de_football_anglais_utf8.xml", 5));
-        hashMap.put("football+club", searchResults);
-
-
-        searchResults = new ArrayList<>();
-        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/22-Les_clubs_de_football_anglais_utf8.xml", 12));
-        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/13-Ligue_des_champions____Si_utf8.xml", 5));
-        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/27-Le_Stade_de_France_s_ouvre_utf8.xml", 5));
-        hashMap.put("football+club", searchResults);
-
-        searchResults = new ArrayList<>();
-        searchResults.add(new SearchResult("58", 12));
-        searchResults.add(new SearchResult("59", 12));
-        searchResults.add(new SearchResult("60", 12));
-        searchResults.add(new SearchResult("61", 12));
-        searchResults.add(new SearchResult("62", 12));
-        searchResults.add(new SearchResult("63", 12));
-        hashMap.put("/home/juju/Bureau/projet-fil-rouge/data/image/NB/51.bmp", searchResults);
+//        ArrayList<SearchResult> searchResults = new ArrayList<>();
+//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/22-Les_clubs_de_football_anglais_utf8.xml", 12));
+//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/13-Ligue_des_champions____Si_utf8.xml", 5));
+//
+//        hashMap.put("football", searchResults);
+//
+//        searchResults = new ArrayList<>();
+//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/22-Les_clubs_de_football_anglais_utf8.xml", 5));
+//        hashMap.put("football+club", searchResults);
+//
+//
+//        searchResults = new ArrayList<>();
+//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/22-Les_clubs_de_football_anglais_utf8.xml", 12));
+//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/13-Ligue_des_champions____Si_utf8.xml", 5));
+//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/27-Le_Stade_de_France_s_ouvre_utf8.xml", 5));
+//        hashMap.put("football+club", searchResults);
+//
+//        searchResults = new ArrayList<>();
+//        searchResults.add(new SearchResult("58", 12));
+//        searchResults.add(new SearchResult("59", 12));
+//        searchResults.add(new SearchResult("60", 12));
+//        searchResults.add(new SearchResult("61", 12));
+//        searchResults.add(new SearchResult("62", 12));
+//        searchResults.add(new SearchResult("63", 12));
+//        hashMap.put("/home/juju/Bureau/projet-fil-rouge/data/image/NB/51.bmp", searchResults);
+        hashMap = FileTools.readFile();
+        System.out.println("");
     }
 
     private void onResultClicked(SearchResult searchResult) {

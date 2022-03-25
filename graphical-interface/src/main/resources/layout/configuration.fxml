@@ -39,7 +39,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <ComboBox fx:id="cbTextMode" onAction="#onComboBoxModeAction" prefWidth="150.0" />
+                                        <ComboBox fx:id="cbTextMode" onAction="#onComboBoxModeAction" prefWidth="100.0" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -52,7 +52,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Spinner fx:id="spTextThreshold" />
+                                        <Spinner fx:id="spTextThreshold" prefWidth="100.0" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -65,7 +65,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Spinner fx:id="spTextIndex" />
+                                        <Spinner fx:id="spTextIndex" prefWidth="100.0" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -78,7 +78,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <ComboBox fx:id="cbTextDebug" prefWidth="150.0" />
+                                        <ComboBox fx:id="cbTextDebug" prefWidth="100.0" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -106,7 +106,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Spinner fx:id="spImageBit" />
+                                        <Spinner fx:id="spImageBit" prefWidth="100.0" />
                                     </children>
                                 </HBox>
                                 <Label text="Image Comparaison">
@@ -124,7 +124,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Spinner fx:id="spImageThreshold" />
+                                        <Spinner fx:id="spImageThreshold" prefWidth="100.0" />
                                     </children>
                                 </HBox>
                             </children>
@@ -149,7 +149,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Spinner fx:id="spAudioSample" />
+                                        <Spinner fx:id="spAudioSample" prefWidth="100.0" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -162,7 +162,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Spinner fx:id="spAudioInterval" />
+                                        <Spinner fx:id="spAudioInterval" prefWidth="100.0" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -183,7 +183,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Spinner fx:id="spAudioStep" />
+                                        <Spinner fx:id="spAudioStep" prefWidth="100.0" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -196,7 +196,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Spinner fx:id="spAudioThreshold" />
+                                        <Spinner fx:id="spAudioThreshold" prefWidth="100.0" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -217,6 +217,12 @@
                      </HBox.margin>
                   </Label>
                   <ComboBox fx:id="cbModeOpen" prefWidth="150.0" />
+                  <Label text="Reset sauvegarde">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="resetButton" mnemonicParsing="false" onAction="#onResetButton" text="Reset" />
                </children>
             </HBox>
                 <VBox alignment="CENTER" prefHeight="57.0" prefWidth="720.0">
