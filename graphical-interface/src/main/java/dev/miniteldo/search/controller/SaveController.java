@@ -42,27 +42,32 @@ public class SaveController {
     public void initialize() {
         initData();
 
-        for (String request : hashMap.keySet()) {
-            requestType = Tools.getRequestType(request);
-            HBox result = SearchResultComponentFactory.createComponent(
-                    Component.SEARCH,
-                    request,
-                    requestType,
-                    null,
-                    event -> onRequestClicked(request)
-            );
-            requestContainer.getChildren().add(result);
-        }
+        if (hashMap.isEmpty()) {
+            Label label = new Label("Aucune sauvegarde dans le fichier");
+            requestContainer.getChildren().add(label);
+        } else {
+            for (String request : hashMap.keySet()) {
+                requestType = Tools.getRequestType(request);
+                HBox result = SearchResultComponentFactory.createComponent(
+                        Component.SEARCH,
+                        request,
+                        requestType,
+                        null,
+                        event -> onRequestClicked(request)
+                );
+                requestContainer.getChildren().add(result);
+            }
 
-        for (SearchResult searchResult : hashMap.entrySet().iterator().next().getValue()) {
-            HBox result = SearchResultComponentFactory.createComponent(
-                    Component.SEARCH_RESULT,
-                    null,
-                    requestType,
-                    searchResult,
-                    event -> onResultClicked(searchResult)
-            );
-            resultContainer.getChildren().add(result);
+            for (SearchResult searchResult : hashMap.entrySet().iterator().next().getValue()) {
+                HBox result = SearchResultComponentFactory.createComponent(
+                        Component.SEARCH_RESULT,
+                        null,
+                        requestType,
+                        searchResult,
+                        event -> onResultClicked(searchResult)
+                );
+                resultContainer.getChildren().add(result);
+            }
         }
     }
 
@@ -87,31 +92,6 @@ public class SaveController {
      *
      */
     private void initData() {
-//        ArrayList<SearchResult> searchResults = new ArrayList<>();
-//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/22-Les_clubs_de_football_anglais_utf8.xml", 12));
-//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/13-Ligue_des_champions____Si_utf8.xml", 5));
-//
-//        hashMap.put("football", searchResults);
-//
-//        searchResults = new ArrayList<>();
-//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/22-Les_clubs_de_football_anglais_utf8.xml", 5));
-//        hashMap.put("football+club", searchResults);
-//
-//
-//        searchResults = new ArrayList<>();
-//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/22-Les_clubs_de_football_anglais_utf8.xml", 12));
-//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/13-Ligue_des_champions____Si_utf8.xml", 5));
-//        searchResults.add(new SearchResult("/home/juju/Bureau/projet-fil-rouge/data/text/27-Le_Stade_de_France_s_ouvre_utf8.xml", 5));
-//        hashMap.put("football+club", searchResults);
-//
-//        searchResults = new ArrayList<>();
-//        searchResults.add(new SearchResult("58", 12));
-//        searchResults.add(new SearchResult("59", 12));
-//        searchResults.add(new SearchResult("60", 12));
-//        searchResults.add(new SearchResult("61", 12));
-//        searchResults.add(new SearchResult("62", 12));
-//        searchResults.add(new SearchResult("63", 12));
-//        hashMap.put("/home/juju/Bureau/projet-fil-rouge/data/image/NB/51.bmp", searchResults);
         hashMap = FileTools.readFile();
         System.out.println("");
     }
