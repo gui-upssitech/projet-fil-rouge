@@ -35,6 +35,11 @@ public class MiniteldoEngine implements SearchEngine {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        HashMap<Configurations, Integer> configs = loadConfigs();
+        if(configs.get(Configurations.INDEXING_MODE) == 1) {
+            OpenedClosedMode.start();
+        }
     }
 
     @Override

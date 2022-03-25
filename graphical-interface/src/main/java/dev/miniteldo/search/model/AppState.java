@@ -38,7 +38,8 @@ public class AppState {
         currentRequest = null;
 
         engines = new HashMap<>();
-        setEngine(Engines.MINITELDO_ENGINE); // DUMMY ENGINE will be the default engine for now
+        setEngine(Engines.MINITELDO_ENGINE); // DUMMY ENGINE will be the default engine for now NOT NOW Guillaume, NOT NOW
+        getEngine().init();
     }
 
     // Methods

@@ -6,6 +6,7 @@ import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
+import dev.miniteldo.search.model.engines.miniteldoengine.openedclosedmode.OpenedClosedMode;
 import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.view.Dialog;
 import dev.miniteldo.search.view.Views;
@@ -75,8 +76,8 @@ public class ConfigurationController {
         stringsComboDebug.add("Oui");
 
         stringsComboModeOpen = new ArrayList<>();
-        stringsComboModeOpen.add("Ouvert");
         stringsComboModeOpen.add("Fermé");
+        stringsComboModeOpen.add("Ouvert");
 
         // Add strings to comboBox
         cbTextMode.setItems(FXCollections.observableArrayList(stringsComboMode));
@@ -187,13 +188,15 @@ public class ConfigurationController {
                     }
                 } else {
                     if (config.equals(Configurations.INDEXING_MODE)) {
-                        // FIXME: 25/03/2022 add the thread method
+                        if(newValue == 0) {
+                            OpenedClosedMode.stop();
+                        } else {
+                            OpenedClosedMode.start();
+                        }
                     }
                     AppState.getInstance().getEngine().setConfig(config, newValue);
                     checkModifiedType(config); // check the type modified
-
                 }
-
                 System.out.println(config);
             }
         }
