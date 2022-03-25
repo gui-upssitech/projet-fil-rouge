@@ -5,6 +5,7 @@ import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
+import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.StringModifier;
 import dev.miniteldo.search.model.tools.Tools;
@@ -16,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -32,20 +34,24 @@ public class SearchController {
     public Button saveButton;
     @FXML
     public Button returnButton;
+    public TextField requestLabel;
 
     @FXML
     private VBox resultContainer;
 
     private AppState state;
     private SearcherType requestType;
+    private String request;
+    private ArrayList<SearchResult> searchResults;
 
     /* FXML Methods */
-
     public void initialize() {
         state = AppState.getInstance();
 
         // Search logic
-        String request = state.getCurrentRequest();
+        request = state.getCurrentRequest();
+        requestLabel.setText(request);
+
         requestType = Tools.getRequestType(request);
         ArrayList<SearchResult> resultList = performSearch(request);
 
@@ -63,7 +69,10 @@ public class SearchController {
 
     @FXML
     protected void onSaveButton() {
-
+        if (FileTools.saveRequest(request, searchResults)) {
+            App.showDialog(Dialog.SUCCESS);
+            System.out.println("Save de la requête réussi !");
+        }
     }
 
     /* Other methods */
@@ -71,7 +80,7 @@ public class SearchController {
     private ArrayList<SearchResult> performSearch(String request) {
         if (requestType == null) return null;
 
-        ArrayList<SearchResult> searchResults;
+
         SearchEngine engine = state.getEngine();
 
         if (requestType == SearcherType.TEXT_KEYWORD) {

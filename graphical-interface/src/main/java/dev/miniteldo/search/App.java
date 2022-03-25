@@ -41,7 +41,7 @@ public class App extends Application {
 
         stage.setResizable(true);
         stage.setMaximized(true);
-        
+
         stage.show();
     }
 
@@ -65,7 +65,7 @@ public class App extends Application {
         if (stage == null) return;
 
         Node dialog = stage.getScene().lookup("#dialog");
-        if(dialog != null) {
+        if (dialog != null) {
             Pane parent = (Pane) dialog.getParent();
             parent.getChildren().remove(dialog);
         }

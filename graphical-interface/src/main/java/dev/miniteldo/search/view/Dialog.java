@@ -2,7 +2,8 @@ package dev.miniteldo.search.view;
 
 public enum Dialog {
     ERROR("error.fxml"),
-    LOGIN("login.fxml");
+    LOGIN("login.fxml"),
+    SUCCESS("success.fxml");
 
     // Enum parameters
 

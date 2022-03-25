@@ -6,6 +6,7 @@ import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
+import dev.miniteldo.search.view.Dialog;
 import dev.miniteldo.search.view.Views;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
@@ -262,5 +263,6 @@ public class ConfigurationController {
         labelIndexation.setText("Indexation en cours ...");
         saveConfiguration();
         labelIndexation.setText("Indexation fini !");
+        App.showDialog(Dialog.SUCCESS);
     }
 }
