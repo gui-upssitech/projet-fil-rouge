@@ -13,7 +13,7 @@ public class FileTools {
         String line = "";
 
         try {
-            outputStream = new FileOutputStream(PATH);
+            outputStream = new FileOutputStream(PATH, true);
             outputStream.write((request + "\n").getBytes());
             for (SearchResult searchResult : searchResults) {
                 line = searchResult.getFilePath() + "#" + searchResult.getConfidence() + "\n";
@@ -53,10 +53,13 @@ public class FileTools {
 
         BufferedReader reader;
         try {
+            // Assure that the file exists
+            File saveFile = new File(PATH);
+            saveFile.createNewFile();
             reader = new BufferedReader(new FileReader(PATH));
             String line = reader.readLine();
             while (line != null) {
-                if (line.contains("-")) {
+                if (line.contains("#")) {
                     String[] splits = line.split("#");
                     hashMap.get(currentRequest).add(new SearchResult(splits[0], Float.parseFloat(splits[1])));
                 } else {
