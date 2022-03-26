@@ -12,6 +12,7 @@ import dev.miniteldo.search.view.SearchResultComponentFactory;
 import dev.miniteldo.search.view.enums.Component;
 import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -21,6 +22,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,7 +41,8 @@ public class SearchController {
     public Button searchButton;
     public TextField requestLabel;
 
-    @FXML private VBox resultContainer, previewBox;
+    @FXML
+    private VBox resultContainer, previewBox;
 
     private AppState state;
     private SearcherType requestType;
@@ -171,6 +174,15 @@ public class SearchController {
     public void onEscapeAction(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
             onReturnButton();
+        }
+    }
+
+    public void onFileButton(ActionEvent event) {
+        Stage stage = (Stage) requestLabel.getScene().getWindow();
+        File file = FileChooserTools.createFileChooser(stage);
+
+        if (file != null) {
+            requestLabel.setText(file.toString());
         }
     }
 }

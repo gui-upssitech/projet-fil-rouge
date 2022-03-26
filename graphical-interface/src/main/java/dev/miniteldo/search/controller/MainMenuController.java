@@ -58,16 +58,8 @@ public class MainMenuController {
     @FXML
     protected void onFileButton() {
         Stage stage = (Stage) searchButton.getScene().getWindow();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.*"), new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"));
+        File file = FileChooserTools.createFileChooser(stage);
 
-        // Set title for FileChooser
-        fileChooser.setTitle("Select Some Files");
-
-        // Set Initial Directory
-        String currentPath = Paths.get("").toAbsolutePath().toString();
-        fileChooser.setInitialDirectory(new File(currentPath));
-        File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             searchBar.setText(file.toString());
         }
