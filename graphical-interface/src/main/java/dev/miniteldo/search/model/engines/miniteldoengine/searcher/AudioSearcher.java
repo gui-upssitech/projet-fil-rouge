@@ -13,7 +13,7 @@ public class AudioSearcher extends Searcher {
     public AudioSearcher(String miniteldoEnginePath, SearcherType searcherType) {
         super();
         this.searcherType = searcherType;
-        this.path = "search-engine/data/audio/";
+        this.path = "data/audio/";
         this.miniteldoEnginePath = miniteldoEnginePath;
     }
 

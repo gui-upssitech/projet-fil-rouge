@@ -12,7 +12,7 @@ public class ImageSearcher extends Searcher {
     public ImageSearcher(String miniteldoEnginePath, SearcherType searcherType) {
         super();
         this.searcherType = searcherType;
-        this.path = (searcherType == SearcherType.IMAGE_RGB_PATH) ? "search-engine/data/image/RGB/" : "search-engine/data/image/NB/";
+        this.path = (searcherType == SearcherType.IMAGE_RGB_PATH) ? "data/image/RGB/" : "data/image/NB/";
         this.miniteldoEnginePath = miniteldoEnginePath;
     }
 

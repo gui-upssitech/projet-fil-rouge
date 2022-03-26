@@ -96,6 +96,11 @@ parameters : $(OBJ) src/bridge/parameters.c
 	mv ./*.o ./obj
 	$(CC) -o $(BRIDIR)/$@ $^ $(CFLAGS)	
 
+descriptor_view : $(OBJ) src/bridge/descriptor_view.c
+	gcc -c src/bridge/descriptor_view.c $(CFLAGS)
+	mv ./*.o ./obj
+	$(CC) -o $(BRIDIR)/$@ $^ $(CFLAGS)	
+
 ##########################################################################################
 #                                        main                                            #
 ##########################################################################################
