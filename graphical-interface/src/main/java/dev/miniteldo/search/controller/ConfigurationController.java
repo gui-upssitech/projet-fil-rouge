@@ -15,6 +15,8 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -188,7 +190,7 @@ public class ConfigurationController {
                     }
                 } else {
                     if (config.equals(Configurations.INDEXING_MODE)) {
-                        if(newValue == 0) {
+                        if (newValue == 0) {
                             OpenedClosedMode.stop();
                         } else {
                             OpenedClosedMode.start();
@@ -263,10 +265,8 @@ public class ConfigurationController {
 
     @FXML
     protected void onValidButton() {
-        labelIndexation.setText("Indexation en cours ...");
         saveConfiguration();
-        labelIndexation.setText("Indexation fini !");
-        App.showDialog(Dialog.SUCCESS);
+        App.showDialog(Dialog.SUCCESS, "Indexation terminée !");
     }
 
     public void onResetButton(ActionEvent event) {
@@ -274,9 +274,15 @@ public class ConfigurationController {
         boolean isClear = FileTools.clearFile();
 
         if (isClear) {
-            App.showDialog(Dialog.SUCCESS);
+            App.showDialog(Dialog.SUCCESS, "Fichier de sauvegarde vidé !");
         } else {
-            App.showDialog(Dialog.ERROR);
+            App.showDialog(Dialog.ERROR, "Problème à la suppression des données de sauvegarde");
+        }
+    }
+
+    public void onEscapeAction(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
+            onReturnButton();
         }
     }
 }

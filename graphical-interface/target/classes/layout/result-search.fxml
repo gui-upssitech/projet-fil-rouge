@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.SearchController">
+<AnchorPane onKeyPressed="#onEscapeAction" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.SearchController">
     <children>
         <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -22,7 +22,7 @@
                                         <Insets />
                                     </HBox.margin>
                                 </ImageView>
-                                <TextField fx:id="requestLabel" promptText="Requête" HBox.hgrow="ALWAYS" />
+                                <TextField fx:id="requestLabel" onKeyPressed="#onEnterAction" promptText="Requête" HBox.hgrow="ALWAYS" />
                                 <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButton">
                                     <graphic>
                                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">

@@ -19,6 +19,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -73,7 +75,7 @@ public class SearchController {
     @FXML
     protected void onSaveButton() {
         if (FileTools.saveRequest(request, searchResults)) {
-            App.showDialog(Dialog.SUCCESS);
+            App.showDialog(Dialog.SUCCESS, "La requête a été sauvegardé");
             System.out.println("Save de la requête réussi !");
         }
     }
@@ -138,10 +140,10 @@ public class SearchController {
         }
     }
 
-    public void onSearchButton(ActionEvent event) {
+    public void onSearchButton() {
         // get the new request
         if (!Tools.isRequestValid(request)) {
-            App.showDialog(Dialog.ERROR);
+            App.showDialog(Dialog.ERROR, "Problème, la requête n'est pas valide !");
         } else {
             // clear container
             resultContainer.getChildren().clear();
@@ -156,6 +158,18 @@ public class SearchController {
             ArrayList<SearchResult> resultList = performSearch(request);
 
             displayResults(resultList);
+        }
+    }
+
+    public void onEnterAction(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            onSearchButton();
+        }
+    }
+
+    public void onEscapeAction(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
+            onReturnButton();
         }
     }
 }

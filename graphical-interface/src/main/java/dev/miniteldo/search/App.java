@@ -1,5 +1,6 @@
 package dev.miniteldo.search;
 
+import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.view.Dialog;
 import dev.miniteldo.search.view.Views;
 import javafx.application.Application;
@@ -71,7 +72,9 @@ public class App extends Application {
         }
     }
 
-    public static void showDialog(Dialog dialog) {
+    public static void showDialog(Dialog dialog, String message) {
+        AppState.getInstance().setDialogMessage(dialog, message);
+
         if (stage == null) return;
 
         String path = "/layout/" + dialog.getPath();

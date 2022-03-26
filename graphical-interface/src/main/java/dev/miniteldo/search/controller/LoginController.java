@@ -9,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  * Classe LoginController ...
@@ -22,8 +24,8 @@ public class LoginController {
     public PasswordField passwordField;
     public Label labelLogin;
 
-    public void onOkButton(ActionEvent actionEvent) {
-        // FIXME: 17/03/2022
+    // Methods
+    public void onOkButton() {
         boolean isValidPassword = AppState.getInstance().getEngine().login(passwordField.getText());
 
         if (isValidPassword) {
@@ -35,5 +37,9 @@ public class LoginController {
         }
     }
 
-    // Methods
+    public void onEnterAction(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            onOkButton();
+        }
+    }
 }

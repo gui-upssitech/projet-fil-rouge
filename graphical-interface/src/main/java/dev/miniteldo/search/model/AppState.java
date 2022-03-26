@@ -5,6 +5,7 @@ import dev.miniteldo.search.model.engines.Engines;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
+import dev.miniteldo.search.view.Dialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import java.util.HashMap;
  * date: 13/03/2022
  */
 public class AppState {
+
 
     // Singleton
     private static class AppStateHolder {
@@ -31,6 +33,9 @@ public class AppState {
     private Engines curEngine;
     private HashMap<Engines, SearchEngine> engines;
     private String currentRequest;
+
+    private String errorMessage = "";
+    private String successMessage = "";
 
     // Constructor
     private AppState() {
@@ -57,8 +62,7 @@ public class AppState {
 
     // Multiengine configuration
     public void setEngine(Engines engine) {
-        if(!engines.containsKey(engine))
-            engines.put(engine, EngineFactory.createEngine(engine));
+        if (!engines.containsKey(engine)) engines.put(engine, EngineFactory.createEngine(engine));
 
         curEngine = engine;
     }
@@ -75,5 +79,20 @@ public class AppState {
 
     public String getCurrentRequest() {
         return currentRequest;
+    }
+
+    public void setDialogMessage(Dialog dialog, String message) {
+        switch (dialog) {
+            case ERROR -> errorMessage = message;
+            case SUCCESS -> successMessage = message;
+        }
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public String getSuccessMessage() {
+        return successMessage;
     }
 }

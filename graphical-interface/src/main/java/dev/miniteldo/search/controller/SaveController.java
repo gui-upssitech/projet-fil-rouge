@@ -11,6 +11,8 @@ import dev.miniteldo.search.view.Views;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -105,4 +107,9 @@ public class SaveController {
         App.setView(Views.PARAMETERS);
     }
 
+    public void onEscapeAction(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ESCAPE) || keyEvent.getCode().equals(KeyCode.ENTER)) {
+            onReturnButton();
+        }
+    }
 }

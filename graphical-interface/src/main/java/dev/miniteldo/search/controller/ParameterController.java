@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 public class ParameterController {
@@ -30,7 +32,7 @@ public class ParameterController {
 
     @FXML
     protected void onAdminButton() {
-        App.showDialog(Dialog.LOGIN);
+        App.showDialog(Dialog.LOGIN, "");
     }
 
     @FXML
@@ -53,5 +55,11 @@ public class ParameterController {
     private void setThemeIcon() {
         sunIcon.setVisible(!state.isDarkMode());
         moonIcon.setVisible(state.isDarkMode());
+    }
+
+    public void onKeyAction(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
+            onReturnButton();
+        }
     }
 }

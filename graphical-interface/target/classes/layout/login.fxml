@@ -14,7 +14,7 @@
             <font>
                 <Font name="System Bold" size="18.0" />
             </font></Label>
-      <PasswordField fx:id="passwordField" promptText="Veuillez saisir votre mot de passe" />
+      <PasswordField fx:id="passwordField" onKeyPressed="#onEnterAction" promptText="Veuillez saisir votre mot de passe" />
         <Button fx:id="okButton" mnemonicParsing="false" onAction="#onOkButton" prefWidth="100.0" text="Valider" />
     </children>
     <padding>

@@ -16,6 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -45,10 +47,10 @@ public class MainMenuController {
         request = searchBar.getText().trim();
 
         if (searchBar.getText() == null || searchBar.getText().trim().isEmpty()) {
-            App.showDialog(Dialog.ERROR);
+            App.showDialog(Dialog.ERROR, "Problème, la requête vide !");
         } else {
             if (!Tools.isRequestValid(request)) {
-                App.showDialog(Dialog.ERROR);
+                App.showDialog(Dialog.ERROR, "Problème, la requête n'est pas valide !");
             } else {
                 AppState.getInstance().setCurrentRequest(searchBar.getText().trim());
                 App.setView(Views.SEARCH_RESULT);
@@ -86,5 +88,11 @@ public class MainMenuController {
             infoLabel.setVisible(false);
         }
         isInfoUp = !isInfoUp;
+    }
+
+    public void onEnterAction(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            onSearchButton(null);
+        }
     }
 }
