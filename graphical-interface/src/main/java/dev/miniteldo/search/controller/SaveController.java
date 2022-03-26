@@ -26,10 +26,6 @@ import java.util.HashMap;
  */
 public class SaveController {
     // Attributs
-    private SearcherType requestType;
-
-    @FXML
-    public Label searchName;
 
     @FXML
     public VBox requestContainer;
@@ -38,64 +34,59 @@ public class SaveController {
     public ImageView returnButton;
 
     private HashMap<String, ArrayList<SearchResult>> hashMap = new HashMap<>();
+    private SearcherType selectedRequestType;
 
     // Methods
     @FXML
     public void initialize() {
-        initData();
+        hashMap = FileTools.readFile();
 
         if (hashMap.isEmpty()) {
-            Label label = new Label("Aucune sauvegarde dans le fichier");
+            Label label = new Label("Aucune sauvegarde dans le fichier !");
             requestContainer.getChildren().add(label);
         } else {
             for (String request : hashMap.keySet()) {
-                requestType = Tools.getRequestType(request);
+                selectedRequestType = Tools.getRequestType(request);
                 HBox result = SearchResultComponentFactory.createComponent(
                         Component.SEARCH,
                         request,
-                        requestType,
+                        selectedRequestType,
                         null,
                         event -> onRequestClicked(request)
                 );
                 requestContainer.getChildren().add(result);
             }
 
-            for (SearchResult searchResult : hashMap.entrySet().iterator().next().getValue()) {
-                HBox result = SearchResultComponentFactory.createComponent(
-                        Component.SEARCH_RESULT,
-                        null,
-                        requestType,
-                        searchResult,
-                        event -> onResultClicked(searchResult)
-                );
-                resultContainer.getChildren().add(result);
-            }
+            displayResults(hashMap.entrySet().iterator().next().getValue());
         }
     }
 
     private void onRequestClicked(String request) {
-        System.out.println("Requete" + request);
-
+        // Clear the result container
         resultContainer.getChildren().clear();
-        for (SearchResult searchResult : hashMap.get(request)) {
+        displayResults(hashMap.get(request));
+    }
+
+    /**
+     * Print the results of the request passed in param
+     *
+     * @param searchResults
+     */
+    private void displayResults(ArrayList<SearchResult> searchResults) {
+        if (searchResults.isEmpty()) {
+            Label label = new Label("Aucun résultat !");
+            resultContainer.getChildren().add(label);
+        }
+        for (SearchResult searchResult : searchResults) {
             HBox result = SearchResultComponentFactory.createComponent(
                     Component.SEARCH_RESULT,
                     null,
-                    requestType,
+                    selectedRequestType,
                     searchResult,
                     event -> onResultClicked(searchResult)
             );
             resultContainer.getChildren().add(result);
         }
-    }
-
-
-    /**
-     *
-     */
-    private void initData() {
-        hashMap = FileTools.readFile();
-        System.out.println("");
     }
 
     private void onResultClicked(SearchResult searchResult) {
@@ -108,7 +99,7 @@ public class SaveController {
     }
 
     public void onEscapeAction(KeyEvent keyEvent) {
-        if (keyEvent.getCode().equals(KeyCode.ESCAPE) || keyEvent.getCode().equals(KeyCode.ENTER)) {
+        if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
             onReturnButton();
         }
     }
