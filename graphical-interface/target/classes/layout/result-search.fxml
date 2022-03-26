@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<<<<<<< Updated upstream
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -75,3 +76,66 @@
         <URL value="@../stylesheets/result-search.css" />
     </stylesheets>
 </AnchorPane>
+=======
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<SplitPane dividerPositions="0.5" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.SearchController">
+  <items>
+      <VBox spacing="12.0" SplitPane.resizableWithParent="false">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onReturnButton" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/arrow-left.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <TextField promptText="Keywords" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveButton">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/save.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="result-list-container" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox fx:id="resultContainer" spacing="12.0" styleClass="result-list-container" />
+               </content>
+            </ScrollPane>
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="previewBox" alignment="CENTER" styleClass="result-preview-box" SplitPane.resizableWithParent="false">
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </VBox>
+  </items>
+   <stylesheets>
+      <URL value="@../stylesheets/theme.css" />
+      <URL value="@../stylesheets/result-search.css" />
+   </stylesheets>
+</SplitPane>
+>>>>>>> Stashed changes

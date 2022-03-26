@@ -3,11 +3,8 @@ package dev.miniteldo.search.model;
 import dev.miniteldo.search.model.engines.EngineFactory;
 import dev.miniteldo.search.model.engines.Engines;
 import dev.miniteldo.search.model.engines.SearchEngine;
-import dev.miniteldo.search.model.engines.SearchResult;
-import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
-import dev.miniteldo.search.view.Dialog;
+import dev.miniteldo.search.view.enums.Dialog;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

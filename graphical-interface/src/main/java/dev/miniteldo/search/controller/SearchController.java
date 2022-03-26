@@ -6,18 +6,16 @@ import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 import dev.miniteldo.search.model.tools.FileTools;
-import dev.miniteldo.search.model.tools.Regex;
-import dev.miniteldo.search.model.tools.StringModifier;
 import dev.miniteldo.search.model.tools.Tools;
-import dev.miniteldo.search.view.Component;
-import dev.miniteldo.search.view.Dialog;
+import dev.miniteldo.search.view.ResultDisplayFactory;
 import dev.miniteldo.search.view.SearchResultComponentFactory;
-import dev.miniteldo.search.view.Views;
-import javafx.event.ActionEvent;
+import dev.miniteldo.search.view.enums.Component;
+import dev.miniteldo.search.view.enums.Dialog;
+import dev.miniteldo.search.view.enums.Views;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -41,8 +39,7 @@ public class SearchController {
     public Button searchButton;
     public TextField requestLabel;
 
-    @FXML
-    private VBox resultContainer;
+    @FXML private VBox resultContainer, previewBox;
 
     private AppState state;
     private SearcherType requestType;
@@ -63,8 +60,12 @@ public class SearchController {
         displayResults(resultList);
     }
 
-    private void onResultClicked(SearchResult result) {
+    private void previewResult(SearchResult result) {
         System.out.println("Clicked result : " + result.getFilePath());
+        Node preview = ResultDisplayFactory.createPreview(result.getFilePath());
+
+        previewBox.getChildren().removeAll();
+        previewBox.getChildren().add(preview);
     }
 
     @FXML
@@ -133,7 +134,7 @@ public class SearchController {
                         null,
                         requestType,
                         searchResult,
-                        event -> onResultClicked(searchResult)
+                        event -> previewResult(searchResult)
                 );
                 resultContainer.getChildren().add(result);
             }

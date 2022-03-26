@@ -15,6 +15,12 @@
 .root {
     -fx-background-color: -fx-bg-color;
     -fx-text-fill: -fx-text-color;
+
+    -fx-min-width: 720px;
+    -fx-min-height: 480px;
+
+    -fx-pref-width: 720px;
+    -fx-pref-height: 480px;
 }
 
 .button, .text-field {

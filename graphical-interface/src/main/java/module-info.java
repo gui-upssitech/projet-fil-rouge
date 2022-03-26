@@ -9,4 +9,5 @@ module dev.miniteldo.search {
 
     exports dev.miniteldo.search;
     exports dev.miniteldo.search.view;
+    exports dev.miniteldo.search.view.enums;
 }

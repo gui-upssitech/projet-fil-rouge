@@ -2,14 +2,9 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
-import dev.miniteldo.search.model.engines.SearchEngine;
-import dev.miniteldo.search.model.engines.SearchResult;
-import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
-import dev.miniteldo.search.model.tools.Regex;
-import dev.miniteldo.search.model.tools.StringModifier;
 import dev.miniteldo.search.model.tools.Tools;
-import dev.miniteldo.search.view.Dialog;
-import dev.miniteldo.search.view.Views;
+import dev.miniteldo.search.view.enums.Dialog;
+import dev.miniteldo.search.view.enums.Views;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,9 +19,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Classe MainMenuController ...

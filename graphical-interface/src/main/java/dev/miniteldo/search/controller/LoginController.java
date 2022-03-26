@@ -4,7 +4,7 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
-import dev.miniteldo.search.view.Views;
+import dev.miniteldo.search.view.enums.Views;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

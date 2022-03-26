@@ -1,4 +1,4 @@
-package dev.miniteldo.search.view;
+package dev.miniteldo.search.view.enums;
 
 public enum Dialog {
     ERROR("error.fxml"),

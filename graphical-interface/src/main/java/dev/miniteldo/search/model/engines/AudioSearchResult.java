@@ -9,6 +9,10 @@ public class AudioSearchResult extends SearchResult {
         this.timeCode = timeCode;
     }
 
+    public int getTimeCode() {
+        return timeCode;
+    }
+
     @Override
     public String toString() {
         return "{" +

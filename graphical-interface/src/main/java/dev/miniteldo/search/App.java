@@ -1,10 +1,9 @@
 package dev.miniteldo.search;
 
 import dev.miniteldo.search.model.AppState;
-import dev.miniteldo.search.view.Dialog;
-import dev.miniteldo.search.view.Views;
+import dev.miniteldo.search.view.enums.Dialog;
+import dev.miniteldo.search.view.enums.Views;
 import javafx.application.Application;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -42,7 +41,6 @@ public class App extends Application {
 
         stage.setResizable(true);
         stage.setMaximized(true);
-
         stage.show();
     }
 

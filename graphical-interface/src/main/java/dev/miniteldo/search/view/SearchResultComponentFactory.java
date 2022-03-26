@@ -1,7 +1,9 @@
 package dev.miniteldo.search.view;
 
+import dev.miniteldo.search.model.engines.AudioSearchResult;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
+import dev.miniteldo.search.view.enums.Component;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -36,12 +38,8 @@ public class SearchResultComponentFactory {
                     Label fileName = (Label) root.lookup("#file_name");
                     Label confidence = (Label) root.lookup("#confidence");
 
-                    fileName.setText(getFileName(result.getFilePath()));
-                    if (type.toString().split("_")[0].equals("TEXT")) {
-                        confidence.setText(String.valueOf(result.getConfidence()));
-                    } else {
-                        confidence.setText(result.getConfidence() + "%");
-                    }
+                    fileName.setText(getFileName(result, type));
+                    confidence.setText(getConfidenceText(result.getConfidence(), type));
                     icon.setImage(getIcon(type));
                     root.setOnMouseClicked(onClick);
 
@@ -71,24 +69,37 @@ public class SearchResultComponentFactory {
         return root;
     }
 
-    private static String getFileName(String path) {
+    private static String getFileName(SearchResult result, SearcherType type) {
+        String path = result.getFilePath();
         String file = path.substring(path.lastIndexOf('/') + 1);
+
         if (file.lastIndexOf('.') == -1)
             return path;
-        return file
+
+        String name = file
                 .substring(0, file.lastIndexOf('.'))
                 .replace("_utf8", "")
                 .replaceAll("_+", " ");
+
+        if(type == SearcherType.AUDIO_PATH) {
+            AudioSearchResult audioResult = (AudioSearchResult) result;
+            name += " (" + audioResult.getTimeCode() + "s)";
+        }
         // FIXME: 24/03/2022 CHECK IF WE ARE IN THE CURRENT REP
+
+        return name;
     }
 
-    // Todo: complete
+    private static String getConfidenceText(float confidence, SearcherType type) {
+        return (type.toString().startsWith("TEXT")) ? confidence + " occurences" : confidence + "%";
+    }
+
     private static Image getIcon(SearcherType type) {
         String path = "/images/icons/";
 
-        if (type == SearcherType.TEXT_PATH || type == SearcherType.TEXT_KEYWORD)
+        if(type.toString().startsWith("TEXT"))
             path += "file-text.png";
-        else if (type == SearcherType.IMAGE_RGB_PATH || type == SearcherType.IMAGE_NB_PATH)
+        else if(type.toString().startsWith("IMAGE"))
             path += "image.png";
         else
             path += "music.png";
