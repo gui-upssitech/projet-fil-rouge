@@ -37,10 +37,16 @@ public class App extends Application {
         App.stage = stage;
 
         stage.setTitle("Minteldo");
-        setView(Views.MAIN);
 
-        stage.setResizable(true);
-        stage.setMaximized(true);
+        // TODO - Remove for testing only
+        AppState.getInstance().setCurrentRequest("/var/code/uni/PFR/data/text/03-Mimer_un_signal_nerveux_pour_utf8.xml");
+        stage.setMaximized(false);
+        App.setView(Views.SEARCH_RESULT);
+
+        //setView(Views.MAIN);
+
+        //stage.setResizable(true);
+        //stage.setMaximized(true);
         stage.show();
     }
 

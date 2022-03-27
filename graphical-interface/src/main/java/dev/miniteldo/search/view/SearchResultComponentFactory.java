@@ -91,7 +91,7 @@ public class SearchResultComponentFactory {
     }
 
     private static String getConfidenceText(float confidence, SearcherType type) {
-        return (type.toString().startsWith("TEXT")) ? confidence + " occurences" : confidence + "%";
+        return (type.toString().startsWith("TEXT")) ? ""+confidence : confidence + "%";
     }
 
     private static Image getIcon(SearcherType type) {

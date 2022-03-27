@@ -60,7 +60,6 @@ public class SearchController {
     }
 
     private void previewResult(SearchResult result) {
-        System.out.println("Clicked result : " + result.getFilePath());
         Node preview = ResultDisplayFactory.createPreview(result.getFilePath());
 
         previewBox.getChildren().clear();
@@ -127,6 +126,7 @@ public class SearchController {
         if (liste == null || liste.isEmpty())
             resultContainer.getChildren().add(new Label("No results found"));
         else {
+            previewResult(liste.get(0));
             for (SearchResult searchResult : liste) {
                 HBox result = SearchResultComponentFactory.createComponent(
                         Component.SEARCH_RESULT,

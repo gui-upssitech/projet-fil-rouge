@@ -3,6 +3,7 @@ module dev.miniteldo.search {
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
+    requires java.xml;
 
     opens dev.miniteldo.search to javafx.fxml;
     opens dev.miniteldo.search.controller to javafx.fxml;
