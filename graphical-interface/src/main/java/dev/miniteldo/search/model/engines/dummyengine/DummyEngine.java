@@ -3,6 +3,7 @@ package dev.miniteldo.search.model.engines.dummyengine;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
+import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.Descriptor;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
@@ -257,6 +258,11 @@ public class DummyEngine implements SearchEngine {
 
     @Override
     public HashMap<Configurations, Integer> loadConfigs() {
+        return null;
+    }
+
+    @Override
+    public Descriptor viewDescriptor(String filePath) {
         return null;
     }
 

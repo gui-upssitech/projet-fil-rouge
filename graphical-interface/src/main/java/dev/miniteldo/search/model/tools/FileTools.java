@@ -27,9 +27,7 @@ public class FileTools {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return true;
-        // FIXME: 25/03/2022 FIX OVERWRITING
     }
 
     public static boolean clearFile() {

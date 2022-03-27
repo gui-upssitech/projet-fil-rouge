@@ -2,7 +2,7 @@ package dev.miniteldo.search.model.engines;
 
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
-
+import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.Descriptor;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -137,4 +137,12 @@ public interface SearchEngine {
      * @return Map des configurations et leurs valeurs associées
      */
     HashMap<Configurations, Integer> loadConfigs();
+
+    /**
+     * Récupérer le descripteur à partir du chemin d'un fichier
+     *
+     * @param filePath Chemin du fichier
+     * @return Descripteur du fichier correspondant
+     */
+    Descriptor viewDescriptor(String filePath);
 }

@@ -6,17 +6,23 @@ import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurator;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Logger;
 import dev.miniteldo.search.model.engines.miniteldoengine.command.Command;
+import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.Descriptor;
+import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.DescriptorFactory;
+import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.DescriptorType;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.Indexer;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.model.engines.miniteldoengine.openedclosedmode.OpenedClosedMode;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
+import dev.miniteldo.search.model.tools.Tools;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static dev.miniteldo.search.model.tools.Tools.getDescriptorType;
 
 public class MiniteldoEngine implements SearchEngine {
 
@@ -191,5 +197,26 @@ public class MiniteldoEngine implements SearchEngine {
     @Override
     public HashMap<Configurations, Integer> loadConfigs() {
         return Configurator.loadConfigs(miniteldoEnginePath);
+    }
+
+    @Override
+    public Descriptor viewDescriptor(String filePath) {
+        Descriptor descriptor = null;
+        DescriptorType descriptorType = Tools.getDescriptorType(filePath);
+        if(descriptorType != null) {
+            String splits[] = filePath.split("/");
+            switch (descriptorType) {
+                case TEXT:
+                    descriptor = DescriptorFactory.getDescriptor(miniteldoEnginePath, DescriptorType.TEXT, splits[splits.length - 1]);
+                    break;
+
+                case IMAGE:
+                    break;
+
+                case AUDIO:
+                    break;
+            }
+        }
+        return descriptor;
     }
 }

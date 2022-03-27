@@ -1,5 +1,6 @@
 package dev.miniteldo.search.model.tools;
 
+import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.DescriptorType;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 
 import java.io.File;
@@ -16,6 +17,20 @@ public class Tools {
                 case REGEX_IMAGE_NB -> SearcherType.IMAGE_NB_PATH;
                 case REGEX_IMAGE_RGB -> SearcherType.IMAGE_RGB_PATH;
                 case REGEX_AUDIO -> SearcherType.AUDIO_PATH;
+                default -> null;
+            };
+        }
+        return null;
+    }
+
+    public static DescriptorType getDescriptorType(String request) {
+        for (Regex regex : Regex.values()) {
+            Matcher m = Pattern.compile(regex.getRegexExp()).matcher(request);
+            if (m.matches()) return switch (regex) {
+                case REGEX_TEXTE_PATH -> DescriptorType.TEXT;
+                case REGEX_IMAGE_NB -> DescriptorType.IMAGE;
+                case REGEX_IMAGE_RGB -> DescriptorType.IMAGE;
+                case REGEX_AUDIO -> DescriptorType.AUDIO;
                 default -> null;
             };
         }
