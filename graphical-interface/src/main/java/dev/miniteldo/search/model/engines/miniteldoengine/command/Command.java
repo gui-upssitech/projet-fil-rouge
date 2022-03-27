@@ -2,6 +2,7 @@ package dev.miniteldo.search.model.engines.miniteldoengine.command;
 
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurations;
 import dev.miniteldo.search.model.engines.miniteldoengine.admin.LoggerOptions;
+import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.DescriptorType;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerOptions;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
@@ -41,6 +42,12 @@ public class Command {
     /* Configuration command */
     public Command(String miniteldoEnginePath, Configurations configurations, String data) {
         processBuilder = new ProcessBuilder("./bridge/" + configurations.getParametersType(), configurations.getParameters(), data);
+        processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
+    }
+
+    /* Descriptor viewer command */
+    public Command(String miniteldoEnginePath, DescriptorType descriptorType, String data) {
+        processBuilder = new ProcessBuilder("./bridge/" + descriptorType.getCommandName(), descriptorType.getDescriptorType(), data);
         processBuilder = processBuilder.directory(new File("../" + miniteldoEnginePath));
     }
 
