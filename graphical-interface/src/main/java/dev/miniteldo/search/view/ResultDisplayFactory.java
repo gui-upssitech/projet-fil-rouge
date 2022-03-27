@@ -1,5 +1,7 @@
 package dev.miniteldo.search.view;
 
+import dev.miniteldo.search.view.enums.Component;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,6 +15,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.*;
@@ -60,30 +64,44 @@ public class ResultDisplayFactory {
 
             Document doc = builder.parse(new File(filePath));
             doc.getDocumentElement().normalize();
-            VBox root = new VBox();
 
-            root.getChildren().addAll(List.of(
-                    createXMLDescriptor(doc, "titre"),
-                    createXMLDescriptor(doc, "auteur"),
-                    createXMLDescriptor(doc, "date"),
-                    createXMLDescriptor(doc, "resume")
-            ));
+            String componentPath = "/layout/" + Component.TEXT_PREVIEW.getPath();
+            FXMLLoader fxmlLoader = new FXMLLoader(ResultDisplayFactory.class.getResource(componentPath));
+            VBox root = fxmlLoader.load();
+
+            Label title = (Label) root.lookup("#title"),
+                details = (Label) root.lookup("#details"),
+                summary = (Label) root.lookup("#summary");
+
+            VBox contentBox = (VBox) root.lookup("#contentBox");
+
+            title.setText(getTagContent(doc, "titre"));
+            summary.setText(getTagContent(doc, "resume"));
+
+            String auteur = getTagContent(doc, "auteur");
+            String detailText = getTagContent(doc, "date") + " - " + (auteur.equals("") ? "Auteur inconnu" : auteur);
+            details.setText(detailText);
 
             NodeList phrases = doc.getElementsByTagName("phrase");
             for (int i = 0; i < phrases.getLength(); i++) {
-                String phrase = toUTF8(phrases.item(i).getTextContent());
-                root.getChildren().add(new Label(phrase));
+                String phraseContent = toUTF8(phrases.item(i).getTextContent());
+                Label phrase = new Label(phraseContent);
+                phrase.setMaxWidth(Double.MAX_VALUE);
+                phrase.setWrapText(true);
+
+                contentBox.getChildren().add(phrase);
             }
 
             return root;
-        } catch(Exception ignored) {
+        } catch(Exception e) {
+            e.printStackTrace();
             return new Label("Couldn't load \""+filePath+"\"");
         }
     }
 
-    private static Label createXMLDescriptor(Document doc, String tagName) {
+    private static String getTagContent(Document doc, String tagName) {
         String value = doc.getElementsByTagName(tagName).item(0).getTextContent();
-        return new Label(toUTF8(value));
+        return toUTF8(value);
     }
 
     private static String toUTF8(String input) {

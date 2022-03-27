@@ -8,7 +8,8 @@ package dev.miniteldo.search.view.enums;
 public enum Component {
     SEARCH_RESULT("components/search-result.fxml"),
     SEARCH("components/search.fxml"),
-    DESCRIPTOR("components/descriptor.fxml");
+    DESCRIPTOR("components/descriptor.fxml"),
+    TEXT_PREVIEW("components/text-preview.fxml");
 
     // Enum parameters
 

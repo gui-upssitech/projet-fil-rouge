@@ -1,0 +1,12 @@
+.text-preview {
+    -fx-max-width: 600px;
+    -fx-padding: 24px;
+    -fx-background-color: #fff;
+}
+
+.metadata-box {
+    -fx-padding: 0 0 12px 0;
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-style: solid;
+    -fx-border-color: #ddd;
+}

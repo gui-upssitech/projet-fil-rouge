@@ -71,12 +71,16 @@
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
                     </padding>
                 </VBox>
-                <VBox fx:id="previewBox" alignment="CENTER" styleClass="result-preview-box"
-                      SplitPane.resizableWithParent="false">
-                    <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
-                    </padding>
-                </VBox>
+
+            <ScrollPane fitToHeight="true" fitToWidth="true" SplitPane.resizableWithParent="false">
+               <content>
+                  <VBox fx:id="previewBox" alignment="CENTER" styleClass="result-preview-box">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
             </items>
         </SplitPane>
     </children>
