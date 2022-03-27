@@ -33,9 +33,14 @@ public class SearchController {
 
     /* Attibutes */
 
-    @FXML public Button saveButton;
-    @FXML public Button searchButton;
-    @FXML public TextField requestLabel;
+    @FXML
+    public Button saveButton;
+    @FXML
+    public Button searchButton;
+    @FXML
+    public TextField requestLabel;
+    @FXML
+    public Button fileButton;
 
     @FXML
     private VBox resultContainer, previewBox;
