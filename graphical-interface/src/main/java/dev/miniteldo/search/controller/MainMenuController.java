@@ -2,6 +2,7 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
+import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.model.tools.Tools;
 import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
@@ -14,11 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.nio.file.Paths;
 
 /**
  * Classe MainMenuController ...
@@ -58,7 +57,7 @@ public class MainMenuController {
     @FXML
     protected void onFileButton() {
         Stage stage = (Stage) searchButton.getScene().getWindow();
-        File file = FileChooserTools.createFileChooser(stage);
+        File file = FileTools.getInputFile(stage);
 
         if (file != null) {
             searchBar.setText(file.toString());

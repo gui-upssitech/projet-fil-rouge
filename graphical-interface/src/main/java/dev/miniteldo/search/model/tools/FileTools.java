@@ -1,10 +1,14 @@
 package dev.miniteldo.search.model.tools;
 
 import dev.miniteldo.search.model.engines.SearchResult;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class FileTools {
     public static boolean saveRequest(String request, ArrayList<SearchResult> searchResults) {
@@ -20,8 +24,6 @@ public class FileTools {
                 outputStream.write(line.getBytes());
             }
             outputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,8 +41,6 @@ public class FileTools {
             outputStream = new FileOutputStream(PATH);
             outputStream.write(line.getBytes());
             outputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,6 +76,20 @@ public class FileTools {
         }
 
         return hashMap;
+    }
 
+    public static File getInputFile(Stage stage) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Descriptors", List.of("*.xml", "*.jpg", "*.bmp", "*.wav"))
+        );
+
+        // Set title for FileChooser
+        fileChooser.setTitle("Select Some Files");
+
+        // Set Initial Directory
+        String currentPath = Paths.get("../data/").toAbsolutePath().toString();
+        fileChooser.setInitialDirectory(new File(currentPath));
+        return fileChooser.showOpenDialog(stage);
     }
 }
