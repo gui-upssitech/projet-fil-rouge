@@ -16,10 +16,10 @@
                         <Font name="System Bold" size="28.0" />
                     </font>
                     <VBox.margin>
-                        <Insets bottom="50.0" />
+                        <Insets bottom="25.0" />
                     </VBox.margin>
                 </Label>
-                <HBox alignment="CENTER" prefHeight="226.0" prefWidth="600.0">
+                <HBox alignment="CENTER" prefHeight="250.0" prefWidth="720.0">
                     <children>
                         <VBox alignment="CENTER" prefHeight="206.0" prefWidth="67.0">
                             <HBox.margin>
@@ -38,7 +38,7 @@
                             </children>
                         </VBox>
                         <TextField fx:id="fileField" prefHeight="42.0" prefWidth="257.0" promptText="Veuillez insérer un fichier" />
-                        <ScrollPane prefHeight="206.0" prefWidth="301.0">
+                        <ScrollPane prefHeight="230.0" prefWidth="337.0">
                             <content>
                                 <VBox fx:id="descriptorContainer" />
                             </content>
@@ -48,11 +48,11 @@
                         </ScrollPane>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="54.0" prefWidth="720.0">
+                <HBox alignment="CENTER" prefHeight="83.0" prefWidth="720.0">
                     <children>
                         <Button fx:id="visualiserButton" mnemonicParsing="false" onAction="#onVisualiserAction" text="Visualiser">
                             <HBox.margin>
-                                <Insets top="10.0" />
+                                <Insets />
                             </HBox.margin>
                         </Button>
                     </children>

@@ -4,8 +4,8 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
-import dev.miniteldo.search.model.engines.miniteldoengine.command.Command;
 import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.Descriptor;
+import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.ImageDescriptor;
 import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.TextDescriptor;
 import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.view.SearchResultComponentFactory;
@@ -14,11 +14,12 @@ import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -41,7 +42,8 @@ public class DescriptorController {
     public TextField fileField;
     public VBox descriptorContainer;
 
-    private HashMap<String, String> descriptor;
+    private HashMap<String, String> descriptorText;
+    private int[] descriptorImage;
 
     public void onReturnButton(MouseEvent mouseEvent) {
         App.setView(Views.ADMIN_CONFIG);
@@ -71,17 +73,22 @@ public class DescriptorController {
             Descriptor d = AppState.getInstance().getEngine().viewDescriptor(fileField.getText());
 
             if (d instanceof TextDescriptor textDescriptor) {
-                descriptor = textDescriptor.getDataDescriptor();
+                descriptorText = textDescriptor.getDataDescriptor();
 
-                for (Map.Entry<String, String> entry : descriptor.entrySet()) {
+                for (Map.Entry<String, String> entry : descriptorText.entrySet()) {
                     System.out.println(entry.getKey() + "/" + entry.getValue());
 
                     HBox result = createComponent(entry.getKey(), entry.getValue());
 
                     descriptorContainer.getChildren().add(result);
                 }
-            }
+            } else if (d instanceof ImageDescriptor imageDescriptor) {
+                descriptorImage = imageDescriptor.getHistogram();
+                System.out.println(imageDescriptor.getMax());
 
+                BarChart<String, Number> result = createChart(descriptorImage);
+                descriptorContainer.getChildren().add(result);
+            }
         }
     }
 
@@ -106,4 +113,41 @@ public class DescriptorController {
         return root;
     }
 
+    private BarChart<String, Number> createChart(int[] data) {
+
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Axe x");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Axe Y");
+
+        // Create a BarChart
+        BarChart<String, Number> barChart = new BarChart<String, Number>(xAxis, yAxis);
+
+        // Series 1 - Data of 2014
+        XYChart.Series<String, Number> dataSeries1 = new XYChart.Series<String, Number>();
+        dataSeries1.setName("2014");
+
+        for (int i = 0; i < data.length; i++) {
+            dataSeries1.getData().add(new XYChart.Data<String, Number>(String.valueOf(i), data[i]));
+        }
+//        dataSeries1.getData().add(new XYChart.Data<String, Number>("C#", 4.429));
+//        dataSeries1.getData().add(new XYChart.Data<String, Number>("PHP", 2.792));
+//
+//        // Series 2 - Data of 2015
+//        XYChart.Series<String, Number> dataSeries2 = new XYChart.Series<String, Number>();
+//        dataSeries2.setName("2015");
+//
+//        dataSeries2.getData().add(new XYChart.Data<String, Number>("Java", 26.983));
+//        dataSeries2.getData().add(new XYChart.Data<String, Number>("C#", 6.569));
+//        dataSeries2.getData().add(new XYChart.Data<String, Number>("PHP", 6.619));
+
+        // Add Series to BarChart.
+        barChart.getData().add(dataSeries1);
+//        barChart.getData().add(dataSeries2);
+
+        barChart.setTitle("Histrogramme");
+
+        return barChart;
+    }
 }
