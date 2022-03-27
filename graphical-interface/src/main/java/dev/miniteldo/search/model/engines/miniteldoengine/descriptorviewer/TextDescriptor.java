@@ -16,13 +16,13 @@ public class TextDescriptor extends Descriptor {
         this.fileName = fileName;
         dataDescriptor = new HashMap<>();
         try {
-            getTextDescriptor(miniteldoEnginePath, fileName);
+            getTextDescriptor(miniteldoEnginePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void getTextDescriptor(String miniteldoEnginePath, String fileName) throws IOException {
+    public void getTextDescriptor(String miniteldoEnginePath) throws IOException {
         String[] numbers = new String[3];
         int idx = 0;
         String regexData = "\\w+\\s\\d";

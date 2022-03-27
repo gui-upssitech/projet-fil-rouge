@@ -211,6 +211,7 @@ public class MiniteldoEngine implements SearchEngine {
                     break;
 
                 case IMAGE:
+                    descriptor = DescriptorFactory.getDescriptor(miniteldoEnginePath, DescriptorType.IMAGE, splits[splits.length - 1]);
                     break;
 
                 case AUDIO:

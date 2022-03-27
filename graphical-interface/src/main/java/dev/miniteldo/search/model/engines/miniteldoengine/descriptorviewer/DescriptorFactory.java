@@ -12,7 +12,7 @@ public class DescriptorFactory {
                 break;
 
             case IMAGE:
-                descriptor = new ImageDescriptor();
+                descriptor = new ImageDescriptor(miniteldoEnginePath, fileName);
                 break;
 
             case AUDIO:

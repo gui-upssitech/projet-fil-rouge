@@ -1,9 +1,14 @@
 package dev.miniteldo.search.model.engines.miniteldoengine;
 
+import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.Descriptor;
+
+import java.io.IOException;
+
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         MiniteldoEngine miniteldoEngine = new MiniteldoEngine("search-engine");
-        System.out.println(miniteldoEngine.viewDescriptor("/home/rxc3445a/Documents/projet-fil-rouge/data/text/06-US_Open___Mauresmo_et_utf8.xml"));
+        Descriptor descriptor = miniteldoEngine.viewDescriptor("01.jpg");
+        System.out.println(descriptor);
     }
 }
