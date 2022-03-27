@@ -33,13 +33,9 @@ public class SearchController {
 
     /* Attibutes */
 
-    @FXML
-    public Button saveButton;
-    @FXML
-    public Button returnButton;
-    @FXML
-    public Button searchButton;
-    public TextField requestLabel;
+    @FXML public Button saveButton;
+    @FXML public Button searchButton;
+    @FXML public TextField requestLabel;
 
     @FXML
     private VBox resultContainer, previewBox;
@@ -67,7 +63,7 @@ public class SearchController {
         System.out.println("Clicked result : " + result.getFilePath());
         Node preview = ResultDisplayFactory.createPreview(result.getFilePath());
 
-        previewBox.getChildren().removeAll();
+        previewBox.getChildren().clear();
         previewBox.getChildren().add(preview);
     }
 
@@ -179,7 +175,7 @@ public class SearchController {
 
     public void onFileButton(ActionEvent event) {
         Stage stage = (Stage) requestLabel.getScene().getWindow();
-        File file = FileChooserTools.createFileChooser(stage);
+        File file = FileTools.getInputFile(stage);
 
         if (file != null) {
             requestLabel.setText(file.toString());
