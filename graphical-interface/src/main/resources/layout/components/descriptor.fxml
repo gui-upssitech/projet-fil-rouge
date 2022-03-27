@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="search-result" stylesheets="@../../stylesheets/search-result.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fx:id="icon" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/icons/file-text.png" />
+            </image>
+        </ImageView>
+      <Label fx:id="wordLabel" text="Label" />
+        <Label fx:id="valueLabel" maxWidth="1.7976931348623157E308" text="Value" HBox.hgrow="ALWAYS" />
+    </children>
+    <padding>
+        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+    </padding>
+</HBox>
