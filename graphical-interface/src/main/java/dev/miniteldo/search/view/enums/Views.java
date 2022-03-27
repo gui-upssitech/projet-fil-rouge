@@ -5,8 +5,8 @@ public enum Views {
     PARAMETERS("parameters.fxml"),
     SEARCH_RESULT("result-search.fxml"),
     ADMIN_CONFIG("configuration.fxml"),
-    SAVE("save.fxml"),
-    ERROR("error.fxml");
+    DESCRIPTOR("view-descriptor.fxml"),
+    SAVE("save.fxml");
 
     // Enum parameters
 

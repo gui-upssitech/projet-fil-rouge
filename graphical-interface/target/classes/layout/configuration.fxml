@@ -20,7 +20,7 @@
                         <Insets bottom="24.0" />
                     </VBox.margin>
                 </Label>
-                <HBox alignment="CENTER" prefHeight="283.0" prefWidth="720.0">
+                <HBox alignment="CENTER" prefHeight="209.0" prefWidth="720.0">
                     <children>
                         <VBox alignment="TOP_CENTER" prefHeight="263.0" prefWidth="218.0">
                             <children>
@@ -223,6 +223,12 @@
                      </HBox.margin>
                   </Label>
                   <Button fx:id="resetButton" mnemonicParsing="false" onAction="#onResetButton" text="Reset" />
+                  <Label text="Descripteur">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="descriptorButton" mnemonicParsing="false" onAction="#onDescriptorButton" text="Visualiser" />
                </children>
             </HBox>
                 <VBox alignment="CENTER" prefHeight="57.0" prefWidth="720.0">

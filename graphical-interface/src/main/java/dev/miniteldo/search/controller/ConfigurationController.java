@@ -30,6 +30,7 @@ public class ConfigurationController {
     // Attributs components
     public Button validButton;
     public Label labelIndexation;
+    public Button descriptorButton;
 
     // Text componenent
     private ArrayList<String> stringsComboMode;
@@ -283,5 +284,9 @@ public class ConfigurationController {
         if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
             onReturnButton();
         }
+    }
+
+    public void onDescriptorButton(ActionEvent event) {
+        App.setView(Views.DESCRIPTOR);
     }
 }
