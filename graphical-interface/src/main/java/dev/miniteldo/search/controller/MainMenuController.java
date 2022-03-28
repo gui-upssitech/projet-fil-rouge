@@ -65,11 +65,7 @@ public class MainMenuController {
     }
 
     public void onInfoAction(MouseEvent mouseEvent) {
-        if (isInfoUp) {
-            infoLabel.setVisible(true);
-        } else {
-            infoLabel.setVisible(false);
-        }
+        infoLabel.setVisible(!isInfoUp);
         isInfoUp = !isInfoUp;
     }
 

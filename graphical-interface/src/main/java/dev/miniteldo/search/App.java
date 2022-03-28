@@ -43,7 +43,7 @@ public class App extends Application {
         stage.setMaximized(false);
         App.setView(Views.SEARCH_RESULT);
 
-        //setView(Views.MAIN);
+//        setView(Views.MAIN);
 
         //stage.setResizable(true);
         //stage.setMaximized(true);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -39,16 +40,19 @@
                 <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButton" prefHeight="25.0" styleClass="last-button" text="Rechercher" />
             </children>
          </HBox>
-         <HBox alignment="CENTER" prefHeight="106.0" prefWidth="720.0">
+         <HBox alignment="CENTER" prefHeight="84.0" prefWidth="720.0">
             <children>
-               <VBox alignment="TOP_CENTER" prefHeight="106.0" prefWidth="456.0">
+               <VBox alignment="TOP_CENTER" prefHeight="84.0" prefWidth="562.0">
                   <children>
                      <ImageView fx:id="infoImage" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onInfoAction" pickOnBounds="true" preserveRatio="true" styleClass="button">
                         <image>
                            <Image url="@../images/icons/info.png" />
                         </image>
                      </ImageView>
-                     <Label fx:id="infoLabel" text="Donec vitae tortor ac metus tristique ornare. In id viverra lectus. Morbi sit amet vulputate urna. Quisque auctor non purus ac placerat. Integer gravida semper massa, et convallis ligula congue eget. Fusce non velit nisi. Nullam non orci id felis faucibus pharetra et quis dolor. Curabitur et tellus ut tellus ornare placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque at consectetur elit, in eleifend est. Sed in auctor odio, ac ultrices felis. Mauris eget ultrices lectus, et faucibus nisi. " textAlignment="CENTER" visible="false" wrapText="true" />
+                     <Label fx:id="infoLabel" text="Le moteur de recherche détecte automatiquement le type de recherche à effectuer." textAlignment="CENTER" visible="false" wrapText="true">
+                        <VBox.margin>
+                           <Insets top="10.0" />
+                        </VBox.margin></Label>
                   </children>
                </VBox>
             </children>
