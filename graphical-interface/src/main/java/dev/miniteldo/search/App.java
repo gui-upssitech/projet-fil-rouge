@@ -99,7 +99,7 @@ public class App extends Application {
             AnchorPane.setLeftAnchor(dialogRoot, 0.0);
             AnchorPane.setRightAnchor(dialogRoot, 0.0);
 
-            dialogRoot.setOnMouseClicked(event -> closeDialog());
+//            dialogRoot.setOnMouseClicked(event -> closeDialog());
 
             dialogRoot.getChildren().add(dialogContent);
             rootPane.getChildren().add(dialogRoot);

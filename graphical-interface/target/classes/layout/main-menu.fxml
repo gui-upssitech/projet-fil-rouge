@@ -44,7 +44,7 @@
             <children>
                <VBox alignment="TOP_CENTER" prefHeight="84.0" prefWidth="562.0">
                   <children>
-                     <ImageView fx:id="infoImage" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onInfoAction" pickOnBounds="true" preserveRatio="true" styleClass="button">
+                     <ImageView fx:id="infoImage" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
                         <image>
                            <Image url="@../images/icons/info.png" />
                         </image>

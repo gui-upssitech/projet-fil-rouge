@@ -7,6 +7,7 @@ import dev.miniteldo.search.model.tools.Tools;
 import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,6 +33,12 @@ public class MainMenuController {
     private String request;
 
     private boolean isInfoUp = false;
+
+    @FXML
+    public void initialize() {
+        infoImage.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> infoLabel.setVisible(true));
+        infoImage.addEventHandler(MouseEvent.MOUSE_EXITED, e -> infoLabel.setVisible(false));
+    }
 
     @FXML
     protected void onSearchButton(ActionEvent event) {
