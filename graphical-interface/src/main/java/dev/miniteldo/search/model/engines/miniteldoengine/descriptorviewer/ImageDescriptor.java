@@ -14,6 +14,7 @@ public class ImageDescriptor extends Descriptor {
     private int size;
     private int max = 0;
     private int[] histogram;
+
     public ImageDescriptor(String miniteldoEnginePath, String fileName) {
         this.fileName = fileName;
         try {

@@ -46,6 +46,8 @@ public class MiniteldoEngine implements SearchEngine {
         if(configs.get(Configurations.INDEXING_MODE) == 1) {
             OpenedClosedMode.start();
         }
+
+        indexAll(IndexerMode.UPDATE);
     }
 
     @Override
@@ -215,6 +217,7 @@ public class MiniteldoEngine implements SearchEngine {
                     break;
 
                 case AUDIO:
+                    descriptor = DescriptorFactory.getDescriptor(miniteldoEnginePath, DescriptorType.AUDIO, splits[splits.length - 1]);
                     break;
             }
         }

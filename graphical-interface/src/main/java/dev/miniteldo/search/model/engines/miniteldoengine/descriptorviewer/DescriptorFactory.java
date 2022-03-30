@@ -16,7 +16,7 @@ public class DescriptorFactory {
                 break;
 
             case AUDIO:
-                descriptor = new AudioDescriptor();
+                descriptor = new AudioDescriptor(miniteldoEnginePath, fileName);
                 break;
         }
 
