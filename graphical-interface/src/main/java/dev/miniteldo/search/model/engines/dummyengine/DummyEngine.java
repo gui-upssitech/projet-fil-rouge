@@ -20,8 +20,8 @@ import java.util.Random;
  * date: 14/03/2022
  */
 public class DummyEngine implements SearchEngine {
-    private final int MIN = 5;
-    private final int MAX = 15;
+    private final int MIN = 1;
+    private final int MAX = 5;
     private final ArrayList<String> pathDataText = new ArrayList<String>();
     private final ArrayList<String> pathDataAudio = new ArrayList<String>();
     private final ArrayList<String> pathDataImageNB = new ArrayList<>();
@@ -201,10 +201,6 @@ public class DummyEngine implements SearchEngine {
     public ArrayList<SearchResult> keywordSearch(ArrayList<String> positiveKeywords, ArrayList<String> negativeKeywords) {
         this.searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.TEXT_KEYWORD);
         generateSearchResult(SearcherType.TEXT_KEYWORD);
-        /*
-            Minus set with positiveKeywords and negativeKeywords
-        //        return searcher.search() // REAL CODE
-         */
         return this.searchResults;
     }
 
@@ -283,7 +279,7 @@ public class DummyEngine implements SearchEngine {
 
         // Generate value
         for (int i = 0; i < nombreAleatoire; i++) {
-            confidence = rand.nextFloat() * (100) + 0;
+            confidence = (float) (rand.nextDouble() * (100) + 0);
 
             switch (type) {
                 case TEXT_PATH:

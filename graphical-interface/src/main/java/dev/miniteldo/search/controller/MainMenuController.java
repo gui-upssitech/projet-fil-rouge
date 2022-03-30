@@ -2,18 +2,18 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
+import dev.miniteldo.search.model.engines.Engines;
+import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.model.tools.Tools;
 import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
 import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe MainMenuController ...
@@ -34,6 +36,7 @@ public class MainMenuController {
     public Label infoLabel;
     public ImageView infoImage;
     public ImageView paramButton;
+    public ComboBox<String> comboBox;
     private String request;
 
     @FXML
@@ -49,6 +52,21 @@ public class MainMenuController {
 
         paramButton.setOnMouseEntered(e -> rotation.play());
         paramButton.setOnMouseExited(e -> rotation.pause());
+
+        List<String> strings = new ArrayList<>();
+
+        for (Engines engines : Engines.values()) {
+            strings.add(engines.toString());
+        }
+        comboBox.setItems(FXCollections.observableArrayList(strings));
+
+        Engines curEngine = AppState.getInstance().getCurEngine();
+
+        comboBox.getSelectionModel().select(curEngine.toString());
+
+        comboBox.valueProperty().addListener((options, oldValue, newValue) -> {
+            AppState.getInstance().setEngine(Engines.valueOf(newValue));
+        });
     }
 
     @FXML

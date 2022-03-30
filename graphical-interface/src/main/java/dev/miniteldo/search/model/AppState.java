@@ -39,6 +39,7 @@ public class AppState {
     private AppState() {
         darkMode = false;
         currentRequest = null;
+        curEngine = Engines.MINITELDO_ENGINE;
 
         engines = new HashMap<>();
         setEngine(Engines.MINITELDO_ENGINE); // DUMMY ENGINE will be the default engine for now NOT NOW Guillaume, NOT NOW
@@ -63,6 +64,10 @@ public class AppState {
         if (!engines.containsKey(engine)) engines.put(engine, EngineFactory.createEngine(engine));
 
         curEngine = engine;
+    }
+
+    public Engines getCurEngine() {
+        return curEngine;
     }
 
     public SearchEngine getEngine() {
@@ -105,4 +110,6 @@ public class AppState {
     public boolean isPopUp() {
         return popUp;
     }
+
+
 }
