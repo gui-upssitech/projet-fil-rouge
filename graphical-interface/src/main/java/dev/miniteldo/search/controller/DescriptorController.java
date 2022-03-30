@@ -4,6 +4,7 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
+import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.AudioDescriptor;
 import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.Descriptor;
 import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.ImageDescriptor;
 import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.TextDescriptor;
@@ -13,12 +14,15 @@ import dev.miniteldo.search.view.enums.Component;
 import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -41,9 +45,26 @@ public class DescriptorController {
     // Attributs
     public TextField fileField;
     public VBox descriptorContainer;
+    public Spinner<Double> spinner;
+    public Label labelTime;
 
     private HashMap<String, String> descriptorText;
     private int[] descriptorImage;
+
+    @FXML
+    public void initialize() {
+        fileField.textProperty().addListener((observable, oldValue, newValue) -> {
+            Descriptor d = AppState.getInstance().getEngine().viewDescriptor(fileField.getText());
+            if (d instanceof AudioDescriptor audioDescriptor) {
+                SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0, audioDescriptor.getDuration(), 0.1);
+                valueFactory.setAmountToStepBy(0.1);
+                spinner.setValueFactory(valueFactory);
+            }
+
+            spinner.setVisible(d instanceof AudioDescriptor);
+            labelTime.setVisible(d instanceof AudioDescriptor);
+        });
+    }
 
     public void onReturnButton(MouseEvent mouseEvent) {
         App.setView(Views.ADMIN_CONFIG);
@@ -87,6 +108,13 @@ public class DescriptorController {
                 System.out.println(imageDescriptor.getMax());
 
                 BarChart<String, Number> result = createChart(descriptorImage);
+                descriptorContainer.getChildren().add(result);
+
+            } else if (d instanceof AudioDescriptor audioDescriptor) {
+                int index = audioDescriptor.findIdxByTimeCode(spinner.getValue().floatValue());
+                int[] tab = audioDescriptor.getHistograms()[index];
+
+                BarChart<String, Number> result = createChart(tab);
                 descriptorContainer.getChildren().add(result);
             }
         }
