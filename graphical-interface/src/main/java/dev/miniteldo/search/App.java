@@ -1,6 +1,7 @@
 package dev.miniteldo.search;
 
 import dev.miniteldo.search.model.AppState;
+import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
 import javafx.application.Application;
@@ -38,16 +39,13 @@ public class App extends Application {
 
         stage.setTitle("Minteldo");
 
-        // TODO - Remove for testing only
-        AppState.getInstance().setCurrentRequest("/var/code/uni/PFR/data/text/03-Mimer_un_signal_nerveux_pour_utf8.xml");
         stage.setMaximized(false);
-        App.setView(Views.SEARCH_RESULT);
-
-//        setView(Views.MAIN);
+        setView(Views.MAIN);
 
         //stage.setResizable(true);
         //stage.setMaximized(true);
         stage.show();
+
     }
 
     public static void setView(Views view) {
@@ -73,11 +71,14 @@ public class App extends Application {
         if (dialog != null) {
             Pane parent = (Pane) dialog.getParent();
             parent.getChildren().remove(dialog);
+            AppState.getInstance().clearPopUp();
         }
     }
 
     public static void showDialog(Dialog dialog, String message) {
+        AppState.getInstance().setPopUp();
         AppState.getInstance().setDialogMessage(dialog, message);
+
 
         if (stage == null) return;
 

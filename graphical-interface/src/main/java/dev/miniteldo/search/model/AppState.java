@@ -33,6 +33,7 @@ public class AppState {
 
     private String errorMessage = "";
     private String successMessage = "";
+    private boolean popUp = false;
 
     // Constructor
     private AppState() {
@@ -91,5 +92,17 @@ public class AppState {
 
     public String getSuccessMessage() {
         return successMessage;
+    }
+
+    public void setPopUp() {
+        popUp = true;
+    }
+
+    public void clearPopUp() {
+        popUp = false;
+    }
+
+    public boolean isPopUp() {
+        return popUp;
     }
 }

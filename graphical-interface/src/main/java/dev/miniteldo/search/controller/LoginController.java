@@ -4,6 +4,7 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
+import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -23,6 +24,8 @@ public class LoginController {
     public Button okButton;
     public PasswordField passwordField;
     public Label labelLogin;
+    public Button cancelButton;
+    public Label labelError;
 
     // Methods
     public void onOkButton() {
@@ -33,13 +36,19 @@ public class LoginController {
             App.setView(Views.ADMIN_CONFIG);
         } else {
             passwordField.clear();
-            passwordField.promptTextProperty().set("Erreur mot de passe incorrect ...");
+            labelError.setText("Erreur mot de passe incorrect ...");
         }
     }
 
     public void onEnterAction(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             onOkButton();
+        } else if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
+            onCancelAction();
         }
+    }
+
+    public void onCancelAction() {
+        App.closeDialog();
     }
 }

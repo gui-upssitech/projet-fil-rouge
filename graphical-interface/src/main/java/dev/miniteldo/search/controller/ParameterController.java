@@ -58,8 +58,8 @@ public class ParameterController {
     }
 
     public void onKeyAction(KeyEvent keyEvent) {
-        if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
-            onReturnButton();
-        }
+//        if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
+//            onReturnButton();
+//        }
     }
 }

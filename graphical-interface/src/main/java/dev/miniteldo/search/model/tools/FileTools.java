@@ -1,6 +1,8 @@
 package dev.miniteldo.search.model.tools;
 
 import dev.miniteldo.search.model.engines.SearchResult;
+import javafx.application.Platform;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 

@@ -265,8 +265,10 @@ public class ConfigurationController {
 
     @FXML
     protected void onValidButton() {
-        saveConfiguration();
-        App.showDialog(Dialog.SUCCESS, "Indexation terminée !");
+        if (!AppState.getInstance().isPopUp()) {
+            saveConfiguration();
+            App.showDialog(Dialog.SUCCESS, "Indexation terminée !");
+        }
     }
 
     public void onResetButton(ActionEvent event) {

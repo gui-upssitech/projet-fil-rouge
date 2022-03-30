@@ -6,6 +6,8 @@ import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.model.tools.Tools;
 import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
+import javafx.animation.Animation;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 
@@ -30,14 +33,22 @@ public class MainMenuController {
     public Button searchButton;
     public Label infoLabel;
     public ImageView infoImage;
+    public ImageView paramButton;
     private String request;
-
-    private boolean isInfoUp = false;
 
     @FXML
     public void initialize() {
+        // Add hover to info icon
         infoImage.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> infoLabel.setVisible(true));
         infoImage.addEventHandler(MouseEvent.MOUSE_EXITED, e -> infoLabel.setVisible(false));
+
+        // Add animation to param image
+        RotateTransition rotation = new RotateTransition(Duration.seconds(0.5), paramButton);
+        rotation.setCycleCount(Animation.INDEFINITE);
+        rotation.setByAngle(360);
+
+        paramButton.setOnMouseEntered(e -> rotation.play());
+        paramButton.setOnMouseExited(e -> rotation.pause());
     }
 
     @FXML
@@ -45,10 +56,14 @@ public class MainMenuController {
         request = searchBar.getText().trim();
 
         if (searchBar.getText() == null || searchBar.getText().trim().isEmpty()) {
-            App.showDialog(Dialog.ERROR, "Problème, la requête vide !");
-        } else {
+            if (!AppState.getInstance().isPopUp()) {
+                App.showDialog(Dialog.ERROR, "Problème, la requête est vide !");
+            }
+        } else if (!AppState.getInstance().isPopUp()) {
             if (!Tools.isRequestValid(request)) {
-                App.showDialog(Dialog.ERROR, "Problème, la requête n'est pas valide !");
+                if (!AppState.getInstance().isPopUp())
+                    App.showDialog(Dialog.ERROR, "Problème, la requête n'est pas valide !");
+
             } else {
                 AppState.getInstance().setCurrentRequest(searchBar.getText().trim());
                 App.setView(Views.SEARCH_RESULT);
@@ -69,11 +84,6 @@ public class MainMenuController {
         if (file != null) {
             searchBar.setText(file.toString());
         }
-    }
-
-    public void onInfoAction(MouseEvent mouseEvent) {
-        infoLabel.setVisible(!isInfoUp);
-        isInfoUp = !isInfoUp;
     }
 
     public void onEnterAction(KeyEvent keyEvent) {
