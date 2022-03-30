@@ -6,15 +6,21 @@ import dev.miniteldo.search.model.engines.miniteldoengine.command.Command;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dev.miniteldo.search.model.engines.miniteldoengine.admin.Configurator.loadConfigs;
 
 public class AudioDescriptor extends Descriptor {
-    private String fileName;
-    private int window_size;
-    private int num_windows;
+
+    private final static int Fe = 16000;
+
+    private final String fileName;
+    private int histogramIntervals;
+    private int windowSize;
+    private float duration;
+    private int numWindows;
     private int[][] histograms;
 
     public AudioDescriptor(String miniteldoEnginePath, String fileName) {
@@ -39,21 +45,24 @@ public class AudioDescriptor extends Descriptor {
         line = reader.readLine();
         line = reader.readLine();
         if (line != null) {
-            num_windows = Integer.parseInt(line);
+            numWindows = Integer.parseInt(line);
         }
 
-        window_size = loadConfigs(miniteldoEnginePath).get(Configurations.AUDIO_INTERVAL);
+        HashMap<Configurations, Integer> configs = loadConfigs(miniteldoEnginePath);
+        histogramIntervals = configs.get(Configurations.AUDIO_INTERVAL);
+        windowSize = configs.get(Configurations.AUDIO_SAMPLES);
+        duration = windowSize * numWindows / (float) Fe;
 
-        histograms = new int[num_windows][window_size];
+        histograms = new int[numWindows][histogramIntervals];
 
         Pattern p = Pattern.compile("(\\d+)");
 
-        for (int i = 0; i < num_windows; i++) {
+        for (int i = 0; i < numWindows; i++) {
             line = reader.readLine();
             if (line != null) {
                 Matcher m = p.matcher(line);
 
-                for (int j = 0; j < window_size; j++) {
+                for (int j = 0; j < histogramIntervals; j++) {
                     m.find();
                     histograms[i][j] = Integer.parseInt(m.group());
                 }
@@ -61,20 +70,45 @@ public class AudioDescriptor extends Descriptor {
         }
     }
 
+    public int findIdxByTimeCode(float timeCode) throws IllegalArgumentException, ArrayIndexOutOfBoundsException{
+        if(timeCode < 0 || timeCode > duration) {
+            throw new IllegalArgumentException("time code is not between 0 and " + String.valueOf(duration) + ".");
+        }
+
+        if(windowSize == 0) {
+            throw new IllegalArgumentException("Descriptor is not initialized.");
+        }
+
+        int idx = (int) (timeCode * Fe / (float) windowSize);
+        if(idx < 0 || idx > numWindows) {
+            throw new ArrayIndexOutOfBoundsException(String.valueOf(idx) + "is out of bounds [0;" + numWindows + "].");
+        }
+
+        return idx;
+    }
+
     public String getFileName() {
         return fileName;
     }
 
-    public int getWindow_size() {
-        return window_size;
+    public int getHistogramIntervals() {
+        return histogramIntervals;
     }
 
-    public int getNum_windows() {
-        return num_windows;
+    public int getNumWindows() {
+        return numWindows;
     }
 
     public int[][] getHistograms() {
         return histograms;
+    }
+
+    public int getWindowSize() {
+        return windowSize;
+    }
+
+    public float getDuration() {
+        return duration;
     }
 
     @Override
@@ -82,8 +116,10 @@ public class AudioDescriptor extends Descriptor {
         String descriptor_text = "AudioDescriptor{" +
                 "fileName='" + fileName + '\'' +
                 ", id='" + id + '\'' +
-                ", window_size=" + window_size +
-                ", num_windows=" + num_windows +
+                ", histogramIntervals=" + histogramIntervals +
+                ", windowSize=" + windowSize +
+                ", duration=" + duration +
+                ", numWindows=" + numWindows +
                 ", histograms=";
         for (int[] row : histograms) {
             descriptor_text += Arrays.toString(row) + "\n\r";
