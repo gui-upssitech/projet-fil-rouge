@@ -1,14 +1,18 @@
 package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
+import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.model.tools.Tools;
 import dev.miniteldo.search.view.SearchResultComponentFactory;
 import dev.miniteldo.search.view.enums.Component;
+import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -32,6 +36,7 @@ public class SaveController {
     @FXML
     public VBox resultContainer;
     public ImageView returnButton;
+    public Button resetButton;
 
     private HashMap<String, ArrayList<SearchResult>> hashMap = new HashMap<>();
     private SearcherType selectedRequestType;
@@ -39,6 +44,10 @@ public class SaveController {
     // Methods
     @FXML
     public void initialize() {
+        displayRequest();
+    }
+
+    public void displayRequest() {
         hashMap = FileTools.readFile();
 
         if (hashMap.isEmpty()) {
@@ -47,13 +56,7 @@ public class SaveController {
         } else {
             for (String request : hashMap.keySet()) {
                 selectedRequestType = Tools.getRequestType(request);
-                HBox result = SearchResultComponentFactory.createComponent(
-                        Component.SEARCH,
-                        request,
-                        selectedRequestType,
-                        null,
-                        event -> onRequestClicked(request)
-                );
+                HBox result = SearchResultComponentFactory.createComponent(Component.SEARCH, request, selectedRequestType, null, event -> onRequestClicked(request));
                 requestContainer.getChildren().add(result);
             }
 
@@ -78,13 +81,7 @@ public class SaveController {
             resultContainer.getChildren().add(label);
         }
         for (SearchResult searchResult : searchResults) {
-            HBox result = SearchResultComponentFactory.createComponent(
-                    Component.SEARCH_RESULT,
-                    null,
-                    selectedRequestType,
-                    searchResult,
-                    event -> onResultClicked(searchResult)
-            );
+            HBox result = SearchResultComponentFactory.createComponent(Component.SEARCH_RESULT, null, selectedRequestType, searchResult, event -> onResultClicked(searchResult));
             resultContainer.getChildren().add(result);
         }
     }
@@ -103,4 +100,23 @@ public class SaveController {
             onReturnButton();
         }
     }
+
+    public void onResetButton() {
+        // Delete the file content
+        if (!AppState.getInstance().isPopUp()) {
+            boolean isClear = FileTools.clearFile();
+
+            if (isClear) {
+                resultContainer.getChildren().clear();
+                requestContainer.getChildren().clear();
+                displayRequest();
+
+                App.showDialog(Dialog.SUCCESS, "Fichier de sauvegarde vidé !");
+            } else {
+                App.showDialog(Dialog.ERROR, "Problème à la suppression des données de sauvegarde");
+            }
+        }
+    }
+
+
 }

@@ -272,14 +272,7 @@ public class ConfigurationController {
     }
 
     public void onResetButton(ActionEvent event) {
-        // Delete the file content
-        boolean isClear = FileTools.clearFile();
 
-        if (isClear) {
-            App.showDialog(Dialog.SUCCESS, "Fichier de sauvegarde vidé !");
-        } else {
-            App.showDialog(Dialog.ERROR, "Problème à la suppression des données de sauvegarde");
-        }
     }
 
     public void onEscapeAction(KeyEvent keyEvent) {

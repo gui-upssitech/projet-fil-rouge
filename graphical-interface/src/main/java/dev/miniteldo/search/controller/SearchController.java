@@ -79,7 +79,7 @@ public class SearchController {
     @FXML
     protected void onSaveButton() {
         if (FileTools.saveRequest(request, searchResults)) {
-            App.showDialog(Dialog.SUCCESS, "La requête a été sauvegardé");
+            App.showDialog(Dialog.SUCCESS, "La requête a été sauvegardée");
             System.out.println("Save de la requête réussi !");
         }
     }

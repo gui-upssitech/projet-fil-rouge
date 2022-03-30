@@ -91,15 +91,15 @@ public class SearchResultComponentFactory {
     }
 
     private static String getConfidenceText(float confidence, SearcherType type) {
-        return (type.toString().startsWith("TEXT")) ? ""+confidence : confidence + "%";
+        return (type.toString().startsWith("TEXT")) ? "" + confidence : confidence + "%";
     }
 
     private static Image getIcon(SearcherType type) {
         String path = "/images/icons/";
 
-        if(type.toString().startsWith("TEXT"))
+        if (type.toString().startsWith("TEXT"))
             path += "file-text.png";
-        else if(type.toString().startsWith("IMAGE"))
+        else if (type.toString().startsWith("IMAGE"))
             path += "image.png";
         else
             path += "music.png";

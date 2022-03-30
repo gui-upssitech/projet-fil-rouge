@@ -24,19 +24,23 @@
                     <children>
                         <ScrollPane prefHeight="240.0" prefWidth="300.0" styleClass="result-list-container">
                             <content>
-                                <VBox fx:id="requestContainer" />
+                                <VBox fx:id="requestContainer" alignment="CENTER" />
                             </content>
                         </ScrollPane>
                         <ScrollPane prefHeight="240.0" prefWidth="300.0" styleClass="result-list-container">
                             <content>
-                                <VBox fx:id="resultContainer" />
+                                <VBox fx:id="resultContainer" alignment="CENTER" />
                             </content>
                         </ScrollPane>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                <HBox alignment="CENTER" prefHeight="77.0" prefWidth="720.0">
                     <children>
-                        <Button fx:id="viewButton" mnemonicParsing="false" text="Visualiser" />
+                  <Button fx:id="resetButton" mnemonicParsing="false" onAction="#onResetButton" prefWidth="90.0" text="Reset">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
                     </children>
                 </HBox>
             </children>
