@@ -2,6 +2,8 @@ module dev.miniteldo.search {
     requires javafx.controls;
     requires javafx.fxml;
 
+    requires java.desktop;
+
     requires org.kordamp.bootstrapfx.core;
     requires java.xml;
 

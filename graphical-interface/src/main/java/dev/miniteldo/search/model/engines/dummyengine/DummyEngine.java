@@ -226,6 +226,11 @@ public class DummyEngine implements SearchEngine {
     }
 
     @Override
+    public ArrayList<SearchResult> hexacodeImageSearch(String hexaCode) {
+        return null;
+    }
+
+    @Override
     public ArrayList<SearchResult> audioSearch(String filePath) {
         this.searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.AUDIO_PATH);
         generateSearchResult(SearcherType.AUDIO_PATH);

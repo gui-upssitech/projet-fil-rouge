@@ -12,6 +12,7 @@ import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.Descr
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.Indexer;
 import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.model.engines.miniteldoengine.openedclosedmode.OpenedClosedMode;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.ImageSearcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.Searcher;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
@@ -147,6 +148,12 @@ public class MiniteldoEngine implements SearchEngine {
     public ArrayList<SearchResult> rgbImageSearch(String filePath) {
         Searcher searcher = SearcherFactory.getSearcher(miniteldoEnginePath, SearcherType.IMAGE_RGB_PATH);
         return searcher.search(filePath);
+    }
+
+    @Override
+    public ArrayList<SearchResult> hexacodeImageSearch(String hexaCode) {
+        ImageSearcher imageSearcher = new ImageSearcher(miniteldoEnginePath, SearcherType.IMAGE_RGB_PATH, hexaCode);
+        return imageSearcher.findByHexacode();
     }
 
     @Override

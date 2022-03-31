@@ -88,6 +88,14 @@ public interface SearchEngine {
     ArrayList<SearchResult> rgbImageSearch(String filePath);
 
     /**
+     * Effectue une recherche d'images par rapport à une couleur
+     *
+     * @param hexaCode Code hexadécimal de la couleur cherchée
+     * @return Liste des images similaires, triés par ordre de confiance
+     */
+    ArrayList<SearchResult> hexacodeImageSearch(String hexaCode);
+
+    /**
      * Effectue une recherche audio à partir d'un fichier WAV
      *
      * @param filePath Chemin vers l'extrait audio

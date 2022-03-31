@@ -8,7 +8,6 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
         MiniteldoEngine miniteldoEngine = new MiniteldoEngine("search-engine");
-        Descriptor descriptor = miniteldoEngine.viewDescriptor("jingle_fi.wav");
-        System.out.println(descriptor);
+        System.out.println(miniteldoEngine.hexacodeImageSearch("FF0000"));
     }
 }

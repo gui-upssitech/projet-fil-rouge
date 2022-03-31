@@ -9,9 +9,11 @@ public class SearcherFactory {
             case TEXT_KEYWORD: case TEXT_PATH:
                 searcher = new TextSearcher(miniteldoEnginePath, searcherType);
                 break;
+
             case IMAGE_RGB_PATH: case IMAGE_NB_PATH:
                 searcher = new ImageSearcher(miniteldoEnginePath, searcherType);
                 break;
+
             default:
                 searcher = new AudioSearcher(miniteldoEnginePath, searcherType);
                 break;

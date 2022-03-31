@@ -70,7 +70,7 @@ public class AudioDescriptor extends Descriptor {
         }
     }
 
-    public int findIdxByTimeCode(float timeCode) throws IllegalArgumentException, ArrayIndexOutOfBoundsException{
+    public int findIdxByTimeCode(float timeCode) throws IllegalArgumentException {
         if(timeCode < 0 || timeCode > duration) {
             throw new IllegalArgumentException("time code is not between 0 and " + String.valueOf(duration) + ".");
         }
@@ -80,8 +80,10 @@ public class AudioDescriptor extends Descriptor {
         }
 
         int idx = (int) (timeCode * Fe / (float) windowSize);
-        if(idx < 0 || idx > numWindows) {
-            throw new ArrayIndexOutOfBoundsException(String.valueOf(idx) + "is out of bounds [0;" + numWindows + "].");
+        if(idx < 0) {
+            idx = 0;
+        } else if(idx >= numWindows) {
+            idx = numWindows - 1;
         }
 
         return idx;
