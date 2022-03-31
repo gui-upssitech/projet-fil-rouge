@@ -1,5 +1,7 @@
 #titleText {
     -fx-text-fill: -fx-text-color;
+    -fx-font-size: 48;
+    -fx-font-weight: bold;
 }
 
 #searchBarContainer .text-field {

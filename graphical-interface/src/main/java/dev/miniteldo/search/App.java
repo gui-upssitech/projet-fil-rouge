@@ -31,7 +31,6 @@ public class App extends Application {
     // ---------------------------------------
 
     private static Stage stage;
-    private static boolean darkMode = false;
 
     @Override
     public void start(Stage stage) {
@@ -39,11 +38,10 @@ public class App extends Application {
 
         stage.setTitle("Minteldo");
 
-        stage.setMaximized(false);
         setView(Views.MAIN);
 
-        //stage.setResizable(true);
-        //stage.setMaximized(true);
+        stage.setResizable(true);
+        stage.setMaximized(true);
         stage.show();
 
     }

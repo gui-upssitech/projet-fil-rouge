@@ -1,3 +1,15 @@
 .text-field {
     -fx-bg-color: #ddd;
 }
+
+.subtitle {
+    -fx-padding: 0 0 24px 0;
+    -fx-font-weight: bold;
+
+    -fx-font-size: 14pt;
+    -fx-font-family: "Quicksand", sans-serif;
+}
+
+.combo-box, .spinner {
+    -fx-pref-width: 150px;
+}
