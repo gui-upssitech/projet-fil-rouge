@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class FileTools {
+    private static final String PATERN = "|";
+
     public static boolean saveRequest(String request, ArrayList<SearchResult> searchResults) {
         String PATH = "../data/save.txt";
         FileOutputStream outputStream;
@@ -22,7 +24,7 @@ public class FileTools {
             outputStream = new FileOutputStream(PATH, true);
             outputStream.write((request + "\n").getBytes());
             for (SearchResult searchResult : searchResults) {
-                line = searchResult.getFilePath() + "#" + searchResult.getConfidence() + "\n";
+                line = searchResult.getFilePath() + PATERN + searchResult.getConfidence() + "\n";
                 outputStream.write(line.getBytes());
             }
             outputStream.close();
@@ -60,8 +62,8 @@ public class FileTools {
             reader = new BufferedReader(new FileReader(PATH));
             String line = reader.readLine();
             while (line != null) {
-                if (line.contains("#")) {
-                    String[] splits = line.split("#");
+                if (line.contains(PATERN)) {
+                    String[] splits = line.split("\\|");
                     hashMap.get(currentRequest).add(new SearchResult(splits[0], Float.parseFloat(splits[1])));
                 } else {
                     currentRequest = line;

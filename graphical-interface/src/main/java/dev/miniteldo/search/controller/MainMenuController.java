@@ -12,12 +12,14 @@ import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -37,6 +39,9 @@ public class MainMenuController {
     public ImageView infoImage;
     public ImageView paramButton;
     public ComboBox<String> comboBox;
+    public ColorPicker colorPicker;
+    public ImageView colorButton;
+
     private String request;
 
     @FXML
@@ -109,4 +114,10 @@ public class MainMenuController {
             onSearchButton(null);
         }
     }
+
+    public void onColor2Action(ActionEvent event) {
+        String temp = "#"+colorPicker.getValue().toString().toUpperCase().substring(2,8);
+        searchBar.setText(temp);
+    }
+
 }

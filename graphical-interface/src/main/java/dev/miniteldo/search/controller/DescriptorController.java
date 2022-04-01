@@ -47,14 +47,16 @@ public class DescriptorController {
     public VBox descriptorContainer;
     public Spinner<Double> spinner;
     public Label labelTime;
+    public TextField idTextField;
 
+    private Descriptor d;
     private HashMap<String, String> descriptorText;
     private int[] descriptorImage;
 
     @FXML
     public void initialize() {
         fileField.textProperty().addListener((observable, oldValue, newValue) -> {
-            Descriptor d = AppState.getInstance().getEngine().viewDescriptor(fileField.getText());
+            d = AppState.getInstance().getEngine().viewDescriptor(fileField.getText());
             if (d instanceof AudioDescriptor audioDescriptor) {
                 SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0, audioDescriptor.getDuration(), 0.1);
                 valueFactory.setAmountToStepBy(0.1);
@@ -63,6 +65,12 @@ public class DescriptorController {
 
             spinner.setVisible(d instanceof AudioDescriptor);
             labelTime.setVisible(d instanceof AudioDescriptor);
+        });
+
+        spinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue <= ((AudioDescriptor) d).getDuration()) {
+                onVisualiserAction();
+            }
         });
     }
 
@@ -85,13 +93,14 @@ public class DescriptorController {
         }
     }
 
-    public void onVisualiserAction(ActionEvent event) {
+    public void onVisualiserAction() {
         if (fileField.getText().isBlank()) {
             App.showDialog(Dialog.ERROR, "Problème, la requête est vide");
         } else {
             descriptorContainer.getChildren().clear();
 
-            Descriptor d = AppState.getInstance().getEngine().viewDescriptor(fileField.getText());
+            d = AppState.getInstance().getEngine().viewDescriptor(fileField.getText());
+            idTextField.setText(d.getId());
 
             if (d instanceof TextDescriptor textDescriptor) {
                 descriptorText = textDescriptor.getDataDescriptor();
@@ -142,39 +151,29 @@ public class DescriptorController {
     }
 
     private BarChart<String, Number> createChart(int[] data) {
-
         CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Axe x");
+        if (d instanceof ImageDescriptor) {
+            xAxis.setLabel("Pixel quantifié"); // Image
+        } else if (d instanceof AudioDescriptor) {
+            xAxis.setLabel("Niveau échantillonné"); // Audio
+        }
 
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Axe Y");
+        yAxis.setLabel("Occurrence");// Image & Audio
 
         // Create a BarChart
-        BarChart<String, Number> barChart = new BarChart<String, Number>(xAxis, yAxis);
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
 
         // Series 1 - Data of 2014
-        XYChart.Series<String, Number> dataSeries1 = new XYChart.Series<String, Number>();
-        dataSeries1.setName("2014");
+        XYChart.Series<String, Number> dataSerie = new XYChart.Series<>();
 
         for (int i = 0; i < data.length; i++) {
-            dataSeries1.getData().add(new XYChart.Data<String, Number>(String.valueOf(i), data[i]));
+            dataSerie.getData().add(new XYChart.Data<>(String.valueOf(i), data[i]));
         }
-//        dataSeries1.getData().add(new XYChart.Data<String, Number>("C#", 4.429));
-//        dataSeries1.getData().add(new XYChart.Data<String, Number>("PHP", 2.792));
-//
-//        // Series 2 - Data of 2015
-//        XYChart.Series<String, Number> dataSeries2 = new XYChart.Series<String, Number>();
-//        dataSeries2.setName("2015");
-//
-//        dataSeries2.getData().add(new XYChart.Data<String, Number>("Java", 26.983));
-//        dataSeries2.getData().add(new XYChart.Data<String, Number>("C#", 6.569));
-//        dataSeries2.getData().add(new XYChart.Data<String, Number>("PHP", 6.619));
 
         // Add Series to BarChart.
-        barChart.getData().add(dataSeries1);
-//        barChart.getData().add(dataSeries2);
-
-        barChart.setTitle("Histrogramme");
+        barChart.getData().add(dataSerie);
+        barChart.setTitle("Histogramme");
 
         return barChart;
     }

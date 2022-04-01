@@ -1,6 +1,7 @@
 package dev.miniteldo.search.model.engines.miniteldoengine.searcher;
 
 public enum SearcherType {
+    IMAGE_COLOR("searcher_image", "color"),
     TEXT_KEYWORD("searcher_text", "keyword"),
     TEXT_PATH("searcher_text", "text"),
     IMAGE_RGB_PATH("searcher_image", "color"),

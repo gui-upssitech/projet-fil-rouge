@@ -54,12 +54,15 @@ public class SearchController {
     public void initialize() {
         state = AppState.getInstance();
 
-        // Search logic
-        request = state.getCurrentRequest();
+        // Init get data from state
+        request = state.getCurrentRequest().trim();
         requestLabel.setText(request);
 
+        // Search logic
         requestType = Tools.getRequestType(request);
-        ArrayList<SearchResult> resultList = performSearch(request);
+        System.out.println(requestType);
+
+        ArrayList<SearchResult> resultList = performSearch(fixRequestFormat(request));
 
         displayResults(resultList);
     }
@@ -91,11 +94,14 @@ public class SearchController {
 
         SearchEngine engine = state.getEngine();
 
+        // Expression cases
         if (requestType == SearcherType.TEXT_KEYWORD) {
             // Special case : keyword search
             ArrayList<String> positiveKeywords = getKeywords(request, true);
             ArrayList<String> negativeKeywords = getKeywords(request, false);
             searchResults = engine.keywordSearch(positiveKeywords, negativeKeywords);
+        } else if (requestType == SearcherType.IMAGE_COLOR) {
+            searchResults = engine.hexacodeImageSearch(request);
         } else {
             // Begin by checking if requested file exists
             File tempFile = new File(request);
@@ -128,18 +134,11 @@ public class SearchController {
     }
 
     private void displayResults(ArrayList<SearchResult> liste) {
-        if (liste == null || liste.isEmpty())
-            resultContainer.getChildren().add(new Label("No results found"));
+        if (liste == null || liste.isEmpty()) resultContainer.getChildren().add(new Label("No results found"));
         else {
             previewResult(liste.get(0));
             for (SearchResult searchResult : liste) {
-                HBox result = SearchResultComponentFactory.createComponent(
-                        Component.SEARCH_RESULT,
-                        null,
-                        requestType,
-                        searchResult,
-                        event -> previewResult(searchResult)
-                );
+                HBox result = SearchResultComponentFactory.createComponent(Component.SEARCH_RESULT, null, requestType, searchResult, event -> previewResult(searchResult));
                 resultContainer.getChildren().add(result);
             }
         }
@@ -153,7 +152,7 @@ public class SearchController {
             // clear container
             resultContainer.getChildren().clear();
 
-            request = requestLabel.getText().trim();
+            fixRequestFormat(requestLabel.getText());
             state.setCurrentRequest(request);
 
             // get research type
@@ -184,6 +183,15 @@ public class SearchController {
 
         if (file != null) {
             requestLabel.setText(file.toString());
+        }
+    }
+
+    private String fixRequestFormat(String req) {
+        // Delete # caractere
+        if (requestType == SearcherType.IMAGE_COLOR) {
+            return req.substring(1);
+        } else {
+            return req;
         }
     }
 }

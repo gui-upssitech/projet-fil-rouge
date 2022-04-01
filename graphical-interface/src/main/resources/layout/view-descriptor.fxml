@@ -11,7 +11,7 @@
     <children>
         <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Label text="Visualiser descripteurs">
+                <Label text="Visualiser descripteurs" VBox.vgrow="ALWAYS">
                     <font>
                         <Font name="System Bold" size="28.0" />
                     </font>
@@ -19,9 +19,9 @@
                         <Insets bottom="25.0" />
                     </VBox.margin>
                 </Label>
-                <HBox alignment="CENTER" prefHeight="250.0" prefWidth="720.0">
+                <HBox alignment="CENTER" prefHeight="370.0" prefWidth="720.0">
                     <children>
-                        <VBox alignment="CENTER" prefHeight="250.0" prefWidth="227.0">
+                        <VBox alignment="CENTER" prefHeight="329.0" prefWidth="155.0">
                             <children>
                                 <HBox alignment="CENTER" prefHeight="51.0" prefWidth="100.0">
                                     <children>
@@ -34,12 +34,17 @@
                                                 </ImageView>
                                             </graphic>
                                             <HBox.margin>
-                                                <Insets right="5.0" />
+                                                <Insets right="10.0" />
                                             </HBox.margin>
                                         </Button>
-                                        <TextField fx:id="fileField" prefHeight="42.0" prefWidth="182.0" promptText="Veuillez insérer un fichier" />
+                                        <TextField fx:id="fileField" prefHeight="42.0" prefWidth="101.0" promptText="Fichier" />
                                     </children>
                                 </HBox>
+                        <TextField fx:id="idTextField" alignment="TOP_LEFT" prefHeight="18.0" prefWidth="155.0" promptText="ID">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </TextField>
                         <Label fx:id="labelTime" text="Time code" visible="false">
                            <VBox.margin>
                               <Insets top="15.0" />
@@ -53,9 +58,14 @@
                                         <Insets top="10.0" />
                                     </VBox.margin>
                                 </Spinner>
+                              <Button fx:id="visualiserButton" mnemonicParsing="false" onAction="#onVisualiserAction" prefHeight="41.0" prefWidth="116.0" text="Visualiser">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                              </Button>
                             </children>
                         </VBox>
-                        <ScrollPane prefHeight="230.0" prefWidth="399.0">
+                        <ScrollPane prefHeight="350.0" prefWidth="526.0">
                             <content>
                                 <VBox fx:id="descriptorContainer" />
                             </content>
@@ -64,18 +74,6 @@
                             </HBox.margin>
                         </ScrollPane>
                     </children>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="51.0" prefWidth="720.0">
-                    <children>
-                        <Button fx:id="visualiserButton" mnemonicParsing="false" onAction="#onVisualiserAction" prefWidth="90.0" text="Visualiser">
-                            <HBox.margin>
-                                <Insets />
-                            </HBox.margin>
-                        </Button>
-                    </children>
-                    <VBox.margin>
-                        <Insets />
-                    </VBox.margin>
                 </HBox>
             </children>
         </VBox>

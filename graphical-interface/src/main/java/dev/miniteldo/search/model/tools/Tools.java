@@ -12,6 +12,7 @@ public class Tools {
         for (Regex regex : Regex.values()) {
             Matcher m = Pattern.compile(regex.getRegexExp()).matcher(request);
             if (m.matches()) return switch (regex) {
+                case REGEX_IMAGE_COLOR -> SearcherType.IMAGE_COLOR;
                 case REGEX_TEXTE_KEYWORD -> SearcherType.TEXT_KEYWORD;
                 case REGEX_TEXTE_PATH -> SearcherType.TEXT_PATH;
                 case REGEX_IMAGE_NB -> SearcherType.IMAGE_NB_PATH;
@@ -27,9 +28,8 @@ public class Tools {
         for (Regex regex : Regex.values()) {
             Matcher m = Pattern.compile(regex.getRegexExp()).matcher(request);
             if (m.matches()) return switch (regex) {
-                case REGEX_TEXTE_PATH -> DescriptorType.TEXT;
-                case REGEX_IMAGE_NB -> DescriptorType.IMAGE;
-                case REGEX_IMAGE_RGB -> DescriptorType.IMAGE;
+                case REGEX_TEXTE_PATH, REGEX_TEXTE_KEYWORD -> DescriptorType.TEXT;
+                case REGEX_IMAGE_NB, REGEX_IMAGE_RGB, REGEX_IMAGE_COLOR -> DescriptorType.IMAGE;
                 case REGEX_AUDIO -> DescriptorType.AUDIO;
                 default -> null;
             };

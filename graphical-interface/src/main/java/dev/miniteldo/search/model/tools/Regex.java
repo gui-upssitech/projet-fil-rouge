@@ -8,6 +8,7 @@ package dev.miniteldo.search.model.tools;
  */
 public enum Regex {
     // enum constants calling the enum constructors
+    REGEX_IMAGE_COLOR("^#([A-F|a-f]|\\d){6}$"),
     REGEX_TEXTE_KEYWORD("([+|-]?\\w+\\s?)+"),
     REGEX_TEXTE_PATH("([^\\s]+(\\.(?i)(xml))$)"),
     REGEX_IMAGE_RGB("([^\\s]+(\\.(?i)(jpg))$)"),
