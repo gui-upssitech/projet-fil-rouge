@@ -1,13 +1,14 @@
 package dev.miniteldo.search.model.engines.miniteldoengine;
 
-import dev.miniteldo.search.model.engines.miniteldoengine.descriptorviewer.Descriptor;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.TextSearcher;
 
 import java.io.IOException;
 
 public class Test {
 
     public static void main(String[] args) throws IOException {
-        MiniteldoEngine miniteldoEngine = new MiniteldoEngine("search-engine");
-        System.out.println(miniteldoEngine.hexacodeImageSearch("FF0000"));
+        TextSearcher textSearcher = new TextSearcher("search-engine", SearcherType.TEXT_COMPLETION);
+        System.out.println(textSearcher.getWordsList());
     }
 }

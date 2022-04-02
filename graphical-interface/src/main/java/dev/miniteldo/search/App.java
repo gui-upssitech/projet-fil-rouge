@@ -1,7 +1,6 @@
 package dev.miniteldo.search;
 
 import dev.miniteldo.search.model.AppState;
-import dev.miniteldo.search.model.engines.miniteldoengine.indexer.IndexerMode;
 import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
 import javafx.application.Application;
@@ -43,7 +42,6 @@ public class App extends Application {
         stage.setResizable(true);
         stage.setMaximized(true);
         stage.show();
-
     }
 
     public static void setView(Views view) {
