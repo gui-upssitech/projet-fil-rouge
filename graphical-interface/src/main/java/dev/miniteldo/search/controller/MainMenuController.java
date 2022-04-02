@@ -40,7 +40,6 @@ public class MainMenuController {
     public ImageView paramButton;
     public ComboBox<String> comboBox;
     public ColorPicker colorPicker;
-    public ImageView colorButton;
 
     private String request;
 
@@ -85,7 +84,7 @@ public class MainMenuController {
         } else if (!AppState.getInstance().isPopUp()) {
             if (!Tools.isRequestValid(request)) {
                 if (!AppState.getInstance().isPopUp())
-                    App.showDialog(Dialog.ERROR, "Problème, la requête n'est pas valide !");
+                    App.showDialog(Dialog.ERROR, "Problème, requête invalide !");
 
             } else {
                 AppState.getInstance().setCurrentRequest(searchBar.getText().trim());

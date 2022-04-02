@@ -1,8 +1,7 @@
 package dev.miniteldo.search.model.tools;
 
+import dev.miniteldo.search.model.engines.AudioSearchResult;
 import dev.miniteldo.search.model.engines.SearchResult;
-import javafx.application.Platform;
-import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -24,7 +23,11 @@ public class FileTools {
             outputStream = new FileOutputStream(PATH, true);
             outputStream.write((request + "\n").getBytes());
             for (SearchResult searchResult : searchResults) {
-                line = searchResult.getFilePath() + PATERN + searchResult.getConfidence() + "\n";
+                if (searchResult instanceof AudioSearchResult audioSearchResult) {
+                    line = audioSearchResult.getFilePath() + PATERN + audioSearchResult.getConfidence() + PATERN + audioSearchResult.getTimeCode() + "\n";
+                } else {
+                    line = searchResult.getFilePath() + PATERN + searchResult.getConfidence() + "\n";
+                }
                 outputStream.write(line.getBytes());
             }
             outputStream.close();
@@ -64,7 +67,13 @@ public class FileTools {
             while (line != null) {
                 if (line.contains(PATERN)) {
                     String[] splits = line.split("\\|");
-                    hashMap.get(currentRequest).add(new SearchResult(splits[0], Float.parseFloat(splits[1])));
+
+                    // With time code
+                    if (splits.length == 3) {
+                        hashMap.get(currentRequest).add(new AudioSearchResult(splits[0], Float.parseFloat(splits[1]), Integer.parseInt(splits[2])));
+                    } else {
+                        hashMap.get(currentRequest).add(new SearchResult(splits[0], Float.parseFloat(splits[1])));
+                    }
                 } else {
                     currentRequest = line;
                     hashMap.put(currentRequest, new ArrayList<>());

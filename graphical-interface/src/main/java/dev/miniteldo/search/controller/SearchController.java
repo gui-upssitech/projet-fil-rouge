@@ -58,7 +58,6 @@ public class SearchController {
     public void initialize() {
         state = AppState.getInstance();
 
-
         requestLabel.textProperty().addListener((observableValue, s, t1) -> {
             if (requestLabel.getText().matches(Regex.REGEX_IMAGE_COLOR.getRegexExp())) {
                 colorPane.setStyle("-fx-background-color: " + requestLabel.getText());
@@ -96,7 +95,6 @@ public class SearchController {
     protected void onSaveButton() {
         if (FileTools.saveRequest(request, searchResults)) {
             App.showDialog(Dialog.SUCCESS, "La requête a été sauvegardée");
-            System.out.println("Save de la requête réussi !");
         }
     }
 
@@ -147,7 +145,7 @@ public class SearchController {
     }
 
     private void displayResults(ArrayList<SearchResult> liste) {
-        if (liste == null || liste.isEmpty()) resultContainer.getChildren().add(new Label("No results found"));
+        if (liste == null || liste.isEmpty()) resultContainer.getChildren().add(new Label("Aucun résultat ..."));
         else {
             previewResult(liste.get(0));
             for (SearchResult searchResult : liste) {
@@ -160,7 +158,7 @@ public class SearchController {
     public void onSearchButton() {
         // get the new request
         if (!Tools.isRequestValid(request)) {
-            App.showDialog(Dialog.ERROR, "Problème, la requête n'est pas valide !");
+            App.showDialog(Dialog.ERROR, "Problème, requête invalide !");
         } else {
             // clear container
             resultContainer.getChildren().clear();
@@ -199,7 +197,7 @@ public class SearchController {
     }
 
     private String fixRequestFormat(String req) {
-        // Delete # caractere
+        // Delete # character
         if (requestType == SearcherType.IMAGE_COLOR) {
             return req.substring(1);
         } else {

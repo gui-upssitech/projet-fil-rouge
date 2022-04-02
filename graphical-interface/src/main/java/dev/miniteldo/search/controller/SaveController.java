@@ -60,14 +60,17 @@ public class SaveController {
                 requestContainer.getChildren().add(result);
             }
 
-            displayResults(hashMap.entrySet().iterator().next().getValue());
+            selectedRequestType = Tools.getRequestType(hashMap.entrySet().iterator().next().getKey());
+            displayResults(hashMap.entrySet().iterator().next().getValue(), selectedRequestType);
         }
     }
 
     private void onRequestClicked(String request) {
         // Clear the result container
         resultContainer.getChildren().clear();
-        displayResults(hashMap.get(request));
+
+        selectedRequestType = Tools.getRequestType(request);
+        displayResults(hashMap.get(request), selectedRequestType);
     }
 
     /**
@@ -75,13 +78,13 @@ public class SaveController {
      *
      * @param searchResults
      */
-    private void displayResults(ArrayList<SearchResult> searchResults) {
+    private void displayResults(ArrayList<SearchResult> searchResults, SearcherType type) {
         if (searchResults.isEmpty()) {
             Label label = new Label("Aucun résultat !");
             resultContainer.getChildren().add(label);
         }
         for (SearchResult searchResult : searchResults) {
-            HBox result = SearchResultComponentFactory.createComponent(Component.SEARCH_RESULT, null, selectedRequestType, searchResult, event -> onResultClicked(searchResult));
+            HBox result = SearchResultComponentFactory.createComponent(Component.SEARCH_RESULT, null, type, searchResult, event -> onResultClicked(searchResult));
             resultContainer.getChildren().add(result);
         }
     }
