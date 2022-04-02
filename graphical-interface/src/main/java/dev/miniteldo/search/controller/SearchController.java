@@ -152,14 +152,13 @@ public class SearchController {
             // clear container
             resultContainer.getChildren().clear();
 
-            fixRequestFormat(requestLabel.getText());
+            requestType = Tools.getRequestType(request);
             state.setCurrentRequest(request);
 
             // get research type
-            requestType = Tools.getRequestType(request);
 
             // execute search
-            ArrayList<SearchResult> resultList = performSearch(request);
+            ArrayList<SearchResult> resultList = performSearch(fixRequestFormat(requestLabel.getText()));
 
             displayResults(resultList);
         }
