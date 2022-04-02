@@ -9,3 +9,11 @@
 .result-list-container {
     -fx-background-color: transparent;
 }
+
+#colorView {
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: -fx-input-stroke;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}

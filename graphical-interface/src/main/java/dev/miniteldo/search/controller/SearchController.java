@@ -6,6 +6,7 @@ import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 import dev.miniteldo.search.model.tools.FileTools;
+import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.Tools;
 import dev.miniteldo.search.view.ResultDisplayFactory;
 import dev.miniteldo.search.view.SearchResultComponentFactory;
@@ -21,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -41,6 +43,8 @@ public class SearchController {
     public TextField requestLabel;
     @FXML
     public Button fileButton;
+    @FXML
+    public Pane colorPane;
 
     @FXML
     private VBox resultContainer, previewBox;
@@ -53,6 +57,15 @@ public class SearchController {
     /* FXML Methods */
     public void initialize() {
         state = AppState.getInstance();
+
+
+        requestLabel.textProperty().addListener((observableValue, s, t1) -> {
+            if (requestLabel.getText().matches(Regex.REGEX_IMAGE_COLOR.getRegexExp())) {
+                colorPane.setStyle("-fx-background-color: " + requestLabel.getText());
+            } else {
+                colorPane.setStyle("-fx-background-color: transparent");
+            }
+        });
 
         // Init get data from state
         request = state.getCurrentRequest().trim();
