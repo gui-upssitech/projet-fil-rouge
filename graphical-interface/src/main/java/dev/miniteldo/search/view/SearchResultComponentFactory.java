@@ -99,6 +99,8 @@ public class SearchResultComponentFactory {
 
         if (type.toString().startsWith("TEXT"))
             path += "file-text.png";
+        else if(type == SearcherType.IMAGE_COLOR)
+            path += "droplet.png";
         else if (type.toString().startsWith("IMAGE"))
             path += "image.png";
         else
