@@ -36,7 +36,7 @@
 
 /* Input styling */
 
-.button, .text-field, .combo-box, .spinner {
+.button, .text-field, .combo-box, .spinner, .color-picker {
     -fx-background-color: -fx-input-fill;
     -fx-text-fill: -fx-text-color;
 
