@@ -173,6 +173,7 @@ public class DescriptorController {
 
         // Add Series to BarChart.
         barChart.getData().add(dataSerie);
+        barChart.setLegendVisible(false);
         barChart.setTitle("Histogramme");
 
         return barChart;

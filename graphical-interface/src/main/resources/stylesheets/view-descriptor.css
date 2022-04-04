@@ -4,3 +4,19 @@
 .chart-content {
     -fx-padding: 30px;
 }
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0;
+}
+
+.result-pane {
+    -fx-background-color: #ddd;
+}
+
+.hbar {
+    -fx-pref-height: 0px;
+
+    -fx-border-color: #ddd;
+    -fx-border-style: solid;
+    -fx-border-width: 1px 0px 1px 0px;
+}
