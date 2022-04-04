@@ -13,3 +13,10 @@
 .combo-box, .spinner {
     -fx-pref-width: 150px;
 }
+
+.vbar {
+    -fx-pref-width: 0;
+    -fx-border-width: 0 1px 0 1px;
+    -fx-border-style: solid;
+    -fx-border-color: #ddd;
+}
