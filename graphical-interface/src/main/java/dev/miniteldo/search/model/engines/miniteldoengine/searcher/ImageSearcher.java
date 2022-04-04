@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.module.Configuration;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,7 +27,7 @@ public class ImageSearcher extends Searcher {
     public ImageSearcher(String miniteldoEnginePath, SearcherType searcherType, String hexacode) {
         super();
         this.searcherType = searcherType;
-        this.path = (searcherType == SearcherType.IMAGE_RGB_PATH) ? "data/image/RGB/" : "data/image/NB/";
+        this.path = "data/image/RGB/";
         this.miniteldoEnginePath = miniteldoEnginePath;
         this.hexaCode = hexacode;
     }
