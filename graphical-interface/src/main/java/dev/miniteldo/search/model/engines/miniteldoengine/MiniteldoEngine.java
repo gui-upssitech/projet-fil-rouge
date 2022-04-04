@@ -152,7 +152,7 @@ public class MiniteldoEngine implements SearchEngine {
 
     @Override
     public ArrayList<SearchResult> hexacodeImageSearch(String hexaCode) {
-        ImageSearcher imageSearcher = new ImageSearcher(miniteldoEnginePath, SearcherType.IMAGE_HEXACODE, hexaCode);
+        ImageSearcher imageSearcher = new ImageSearcher(miniteldoEnginePath, SearcherType.IMAGE_COLOR, hexaCode);
         return imageSearcher.findByHexacode();
     }
 

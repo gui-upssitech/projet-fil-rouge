@@ -5,7 +5,6 @@ public enum SearcherType {
     TEXT_KEYWORD("searcher_text", "keyword"),
     TEXT_PATH("searcher_text", "text"),
     TEXT_COMPLETION("completion.sh", "keyword"),
-    IMAGE_HEXACODE("searcher_image", "color"),
     IMAGE_RGB_PATH("searcher_image", "color"),
     IMAGE_NB_PATH("searcher_image", "gray"),
     AUDIO_PATH("searcher_audio", "audio");
