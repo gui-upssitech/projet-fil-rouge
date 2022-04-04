@@ -59,7 +59,7 @@ public class ImageSearcher extends Searcher {
         Integer imageComparisonValue = configs.get(Configurations.IMAGE_THRESHOLD);
 
         try {
-            Configurator.configure(miniteldoEnginePath, Configurations.IMAGE_THRESHOLD, "0");
+            Configurator.configure(miniteldoEnginePath, Configurations.IMAGE_THRESHOLD, "0.1");
         } catch (IOException e) {
             e.printStackTrace();
         }
