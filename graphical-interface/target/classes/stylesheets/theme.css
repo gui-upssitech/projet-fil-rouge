@@ -106,3 +106,7 @@
 .qs {
     -fx-font-family: "Quicksand", sans-serif;
 }
+
+.vbox {
+    -fx-background-color: -fx-bg-color;
+}

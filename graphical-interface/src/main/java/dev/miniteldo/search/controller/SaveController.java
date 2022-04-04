@@ -10,7 +10,6 @@ import dev.miniteldo.search.view.SearchResultComponentFactory;
 import dev.miniteldo.search.view.enums.Component;
 import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -85,6 +84,7 @@ public class SaveController {
         }
         for (SearchResult searchResult : searchResults) {
             HBox result = SearchResultComponentFactory.createComponent(Component.SEARCH_RESULT, null, type, searchResult, event -> onResultClicked(searchResult));
+            result.setMaxWidth(Double.MAX_VALUE);
             resultContainer.getChildren().add(result);
         }
     }

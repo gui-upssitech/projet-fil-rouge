@@ -1,16 +1,21 @@
 package dev.miniteldo.search.view;
 
+import dev.miniteldo.search.model.engines.AudioSearchResult;
+import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.view.enums.Component;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.util.Duration;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -30,18 +35,18 @@ import javafx.scene.media.Media;
 public class ResultDisplayFactory {
 
     // Methods
-    public static Node createPreview(String filePath) {
+    public static Node createPreview(SearchResult result) {
+        String filePath = result.getFilePath();
         String extension = filePath.substring(filePath.lastIndexOf(".") + 1);
 
         try {
             return switch (extension) {
                 case "xml" -> createTextPreview(filePath);
                 case "bmp", "jpg" -> createImagePreview(filePath);
-                case "wav" -> createAudioPreview(filePath);
+                case "wav" -> createAudioPreview(filePath, ((AudioSearchResult) result).getTimeCode());
                 default -> new Pane();
             };
         } catch(Exception ignored) {
-            ignored.printStackTrace();
             return new Label("Couldn't load \""+filePath+"\"");
         }
     }
@@ -52,20 +57,33 @@ public class ResultDisplayFactory {
         return new ImageView(image);
     }
 
-    private static Node createAudioPreview(String filePath) throws Exception {
-        /*Media media = new Media(new File(filePath).toURI().toString());
+    private static Node createAudioPreview(String filePath, int timeCode) throws Exception {
+        Media media = new Media(new File(filePath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
 
-        Button button = new Button("Play audio");
+        mediaPlayer.setStartTime(new Duration(timeCode));
+
+        HBox box = new HBox();
+        box.setSpacing(12);
+        box.setAlignment(Pos.CENTER);
+
+        Button button = new Button("Play");
         button.setOnMouseClicked(event -> {
-            mediaPlayer.play();
+            if(mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+                mediaPlayer.pause();
+                button.setText("Play");
+            } else {
+                mediaPlayer.play();
+                button.setText("Pause");
+            }
         });
 
-        button.
+        box.getChildren().addAll(
+                new Label("Time code: "+timeCode+"s"),
+                button
+        );
 
-        return new MediaView(mediaPlayer);*/
-
-        return new Pane();
+        return box;
     }
 
     private static Node createTextPreview(String filePath) throws Exception {

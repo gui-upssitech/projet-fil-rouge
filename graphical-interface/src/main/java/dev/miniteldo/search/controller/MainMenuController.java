@@ -22,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -71,6 +72,9 @@ public class MainMenuController {
         comboBox.valueProperty().addListener((options, oldValue, newValue) -> {
             AppState.getInstance().setEngine(Engines.valueOf(newValue));
         });
+
+        /*String[] words = { "football", "visualiser", "gloire au fuhrer", "sussy baka" };
+        TextFields.bindAutoCompletion(searchBar, words);*/
     }
 
     @FXML

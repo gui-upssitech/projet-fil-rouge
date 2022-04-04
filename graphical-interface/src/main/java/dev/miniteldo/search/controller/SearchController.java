@@ -80,7 +80,7 @@ public class SearchController {
     }
 
     private void previewResult(SearchResult result) {
-        Node preview = ResultDisplayFactory.createPreview(result.getFilePath());
+        Node preview = ResultDisplayFactory.createPreview(result);
 
         previewBox.getChildren().clear();
         previewBox.getChildren().add(preview);
