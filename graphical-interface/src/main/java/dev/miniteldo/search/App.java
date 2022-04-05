@@ -14,6 +14,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -22,7 +24,7 @@ import java.io.InputStream;
  * author: Guillaume Roussin
  * date: 04/03/2022
  */
-public class App extends Application {
+public class App extends Application implements PropertyChangeListener {
 
     // Main
     public static void main(String[] args) {
@@ -44,6 +46,7 @@ public class App extends Application {
 
         stage.setTitle("Minteldo");
 
+        AppState.getInstance().addThemeListener(this);
         setView(Views.MAIN);
 
         stage.setResizable(true);
@@ -59,11 +62,24 @@ public class App extends Application {
 
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(path));
             Scene scene = new Scene(fxmlLoader.load());
+
+            String theme = (AppState.getInstance().isDarkMode()) ? "dark" : "light";
+            scene.getRoot().getStyleClass().add(theme);
+
             stage.setScene(scene);
 
         } catch (IOException | NullPointerException e) {
             System.out.println("Err: failed to change the view");
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getPropertyName().equals("theme")) {
+            Node root = stage.getScene().getRoot();
+            root.getStyleClass().remove((String) evt.getOldValue());
+            root.getStyleClass().add((String) evt.getNewValue());
         }
     }
 

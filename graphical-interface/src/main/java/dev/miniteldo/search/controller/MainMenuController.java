@@ -3,7 +3,6 @@ package dev.miniteldo.search.controller;
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.Engines;
-import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.model.tools.Tools;
 import dev.miniteldo.search.view.enums.Dialog;
@@ -12,17 +11,14 @@ import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.controlsfx.control.textfield.TextFields;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,6 +30,7 @@ import java.util.List;
  * Auteur : all
  */
 public class MainMenuController {
+    @FXML
     public TextField searchBar;
     public Button searchButton;
     public Label infoLabel;

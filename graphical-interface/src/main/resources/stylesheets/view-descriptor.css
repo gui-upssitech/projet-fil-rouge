@@ -10,13 +10,13 @@
 }
 
 .result-pane {
-    -fx-background-color: #ddd;
+    -fx-background-color: -fx-bg-sec;
 }
 
 .hbar {
     -fx-pref-height: 0px;
 
-    -fx-border-color: #ddd;
+    -fx-border-color: -fx-bg-sec;
     -fx-border-style: solid;
     -fx-border-width: 1px 0px 1px 0px;
 }

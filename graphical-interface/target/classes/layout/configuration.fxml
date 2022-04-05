@@ -17,9 +17,9 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.ConfigurationController">
    <content>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onEscapeAction" style="-fx-background-color: #fff;">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onEscapeAction">
           <children>
-              <VBox alignment="CENTER" prefHeight="480.0" prefWidth="720.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <VBox alignment="CENTER" prefHeight="480.0" prefWidth="720.0" spacing="12.0" styleClass="vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <children>
                       <Label alignment="CENTER" style="-fx-font-size: 28px;" styleClass="qs" text="Configurations" textAlignment="CENTER">
                           <font>

@@ -3,5 +3,5 @@
 }
 
 .result-list {
-    -fx-background-color: #ddd;
+    -fx-background-color: -fx-color-sec;
 }

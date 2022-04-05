@@ -10,7 +10,7 @@
     src: url("../fonts/quicksand.ttf");
 }
 
-.root {
+.root.light {
     -fx-bg-color: #FFF;
     -fx-text-color: #000;
 
@@ -18,6 +18,22 @@
     -fx-input-fill: #FFF;
     -fx-input-stroke: #ddd;
     -fx-button-hover: #8ecae6;
+
+    -fx-bg-sec: #ddd;
+    -fx-bg-hover: #eee;
+}
+
+.root.dark {
+    -fx-bg-color: #222;
+    -fx-text-color: #FFF;
+
+    /* Main page inputs */
+    -fx-input-fill: -fx-bg-color;
+    -fx-input-stroke: #333;
+    -fx-button-hover: #0a6c9f;
+
+    -fx-bg-sec: -fx-input-stroke;
+    -fx-bg-hover: #555
 }
 
 /* Other */
@@ -32,6 +48,10 @@
 
     -fx-pref-width: 720px;
     -fx-pref-height: 480px;
+}
+
+* {
+    -fx-text-fill: -fx-text-color;
 }
 
 /* Input styling */
@@ -99,7 +119,7 @@
 }
 
 #dialog > * {
-    -fx-background-color: #fff;
+    -fx-background-color: -fx-bg-color;
     -fx-background-radius: 12px;
 }
 

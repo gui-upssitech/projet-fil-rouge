@@ -6,5 +6,5 @@
 }
 
 .setting:hover {
-    -fx-background-color: #EEE;
+    -fx-background-color: -fx-bg-hover;
 }

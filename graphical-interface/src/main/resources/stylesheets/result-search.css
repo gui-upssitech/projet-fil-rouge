@@ -1,5 +1,5 @@
 .result-preview-box {
-    -fx-background-color: #DDD;
+    -fx-background-color: -fx-bg-sec;
 }
 
 .split-pane *.split-pane-divider {

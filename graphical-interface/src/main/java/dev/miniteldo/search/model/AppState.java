@@ -5,6 +5,8 @@ import dev.miniteldo.search.model.engines.Engines;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.view.enums.Dialog;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 
 /**
@@ -35,15 +37,19 @@ public class AppState {
     private String successMessage = "";
     private boolean popUp = false;
 
+    private final PropertyChangeSupport support;
+
     // Constructor
     private AppState() {
-        darkMode = false;
+        darkMode = true;
         currentRequest = null;
         curEngine = Engines.MINITELDO_ENGINE;
 
         engines = new HashMap<>();
         setEngine(Engines.MINITELDO_ENGINE); // DUMMY ENGINE will be the default engine for now NOT NOW Guillaume, NOT NOW
         getEngine().init();
+
+        support = new PropertyChangeSupport(this);
     }
 
     // Methods
@@ -51,11 +57,23 @@ public class AppState {
     // Theme selection
 
     public void toggleDarkMode() {
+        String oldValue = (darkMode) ? "dark" : "light";
+        String newValue = (!darkMode) ? "dark" : "light";
+
         darkMode = !darkMode;
+        support.firePropertyChange("theme", oldValue, newValue);
     }
 
     public boolean isDarkMode() {
         return darkMode;
+    }
+
+    public String getImageFolder() {
+        return (darkMode) ? "/images/icons-dark" : "/images/icons";
+    }
+
+    public void addThemeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
     }
 
 

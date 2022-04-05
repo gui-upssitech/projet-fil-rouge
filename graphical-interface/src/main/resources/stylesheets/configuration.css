@@ -1,5 +1,9 @@
 .text-field {
-    -fx-bg-color: #ddd;
+    -fx-bg-color: -fx-bg-color;
+}
+
+.root, .anchor-pane {
+    -fx-background-color: -fx-bg-color;
 }
 
 .subtitle {
@@ -18,5 +22,5 @@
     -fx-pref-width: 0;
     -fx-border-width: 0 1px 0 1px;
     -fx-border-style: solid;
-    -fx-border-color: #ddd;
+    -fx-border-color: -fx-bg-sec;
 }

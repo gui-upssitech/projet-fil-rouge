@@ -35,5 +35,5 @@
 .bottom-bar {
     -fx-border-width: 0px 0px 1px 0px;
     -fx-border-style: solid;
-    -fx-border-color: #ddd;
+    -fx-border-color: -fx-bg-sec;
 }

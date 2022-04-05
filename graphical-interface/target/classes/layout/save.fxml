@@ -61,7 +61,7 @@
                   </HBox>
                </children>
             </VBox>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="result-list-container">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="result-list">
                       <content>
                           <VBox fx:id="resultContainer" alignment="TOP_CENTER" styleClass="result-list">
                      <padding>
