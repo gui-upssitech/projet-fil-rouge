@@ -163,6 +163,7 @@ public class SearchController {
             // clear container
             resultContainer.getChildren().clear();
 
+            request = requestLabel.getText();
             requestType = Tools.getRequestType(request);
             state.setCurrentRequest(request);
 
