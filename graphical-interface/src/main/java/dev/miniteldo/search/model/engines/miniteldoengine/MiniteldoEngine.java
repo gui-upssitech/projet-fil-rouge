@@ -44,7 +44,7 @@ public class MiniteldoEngine implements SearchEngine {
         }
 
         HashMap<Configurations, Integer> configs = loadConfigs();
-        if(configs.get(Configurations.INDEXING_MODE) == 1) {
+        if (configs.get(Configurations.INDEXING_MODE) == 1) {
             OpenedClosedMode.start();
         }
 
@@ -196,7 +196,7 @@ public class MiniteldoEngine implements SearchEngine {
     public boolean setConfig(Configurations configName, int value) {
         boolean result = false;
         try {
-            result =  Configurator.configure(miniteldoEnginePath, configName, String.valueOf(value));
+            result = Configurator.configure(miniteldoEnginePath, configName, String.valueOf(value));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -212,7 +212,7 @@ public class MiniteldoEngine implements SearchEngine {
     public Descriptor viewDescriptor(String filePath) {
         Descriptor descriptor = null;
         DescriptorType descriptorType = Tools.getDescriptorType(filePath);
-        if(descriptorType != null) {
+        if (descriptorType != null) {
             String splits[] = filePath.split("/");
             switch (descriptorType) {
                 case TEXT:

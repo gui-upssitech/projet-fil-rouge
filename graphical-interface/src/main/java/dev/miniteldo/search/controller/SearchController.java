@@ -4,7 +4,9 @@ import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.SearchResult;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
+import dev.miniteldo.search.model.engines.miniteldoengine.searcher.TextSearcher;
 import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.Tools;
@@ -25,8 +27,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,6 +81,16 @@ public class SearchController {
         ArrayList<SearchResult> resultList = performSearch(fixRequestFormat(request));
 
         displayResults(resultList);
+
+        TextSearcher textSearcher = (TextSearcher) SearcherFactory.getSearcher("search-engine", SearcherType.TEXT_COMPLETION);
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        try {
+            stringArrayList = textSearcher.getWordsList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        TextFields.bindAutoCompletion(requestLabel, stringArrayList.toArray());
     }
 
     private void previewResult(SearchResult result) {

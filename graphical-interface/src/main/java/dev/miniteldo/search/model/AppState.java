@@ -1,12 +1,13 @@
 package dev.miniteldo.search.model;
 
-import dev.miniteldo.search.model.engines.EngineFactory;
 import dev.miniteldo.search.model.engines.Engines;
+import dev.miniteldo.search.model.engines.EngineFactory;
 import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.view.enums.Dialog;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -29,8 +30,9 @@ public class AppState {
     // Attributes
     private boolean darkMode;
 
-    private Engines curEngine;
-    private HashMap<Engines, SearchEngine> engines;
+    private Engines curEngines;
+    public HashMap<Engines, SearchEngine> engines;
+    private ArrayList<SearchEngine> enginesSelected;
     private String currentRequest;
 
     private String errorMessage = "";
@@ -43,10 +45,13 @@ public class AppState {
     private AppState() {
         darkMode = true;
         currentRequest = null;
-        curEngine = Engines.MINITELDO_ENGINE;
+        curEngines = Engines.MINITELDO_ENGINE;
 
         engines = new HashMap<>();
+        enginesSelected = new ArrayList<>();
         setEngine(Engines.MINITELDO_ENGINE); // DUMMY ENGINE will be the default engine for now NOT NOW Guillaume, NOT NOW
+        setEngine(Engines.MINITELDO_ENGINE_2); // DUMMY ENGINE will be the default engine for now NOT NOW Guillaume, NOT NOW
+        setEngine(Engines.DUMMY_ENGINE); // DUMMY ENGINE will be the default engine for now NOT NOW Guillaume, NOT NOW
         getEngine().init();
 
         support = new PropertyChangeSupport(this);
@@ -74,18 +79,18 @@ public class AppState {
 
 
     // Multiengine configuration
-    public void setEngine(Engines engine) {
-        if (!engines.containsKey(engine)) engines.put(engine, EngineFactory.createEngine(engine));
+    public void setEngine(Engines engines) {
+        if (!this.engines.containsKey(engines)) this.engines.put(engines, EngineFactory.createEngine(engines));
 
-        curEngine = engine;
+        curEngines = engines;
     }
 
     public Engines getCurEngine() {
-        return curEngine;
+        return curEngines;
     }
 
     public SearchEngine getEngine() {
-        return engines.get(curEngine);
+        return engines.get(curEngines);
     }
 
     // Search request transmission
@@ -125,5 +130,31 @@ public class AppState {
         return popUp;
     }
 
+    public ArrayList<SearchEngine> getAllSearchEngine() {
+        return new ArrayList<>(engines.values());
+    }
 
+    public ArrayList<Engines> getAllEngines() {
+        return new ArrayList<>(engines.keySet());
+    }
+
+    public void addSelectedEngine(SearchEngine engine) {
+        enginesSelected.add(engine);
+    }
+
+    public void removeSelectedEngine(int index) {
+        enginesSelected.remove(index);
+    }
+
+    public void clearSelectedEngine() {
+        enginesSelected.clear();
+    }
+
+    public SearchEngine getEngine(Engines engines) {
+        return this.engines.get(engines);
+    }
+
+    public ArrayList<SearchEngine> getEnginesSelected() {
+        return enginesSelected;
+    }
 }
