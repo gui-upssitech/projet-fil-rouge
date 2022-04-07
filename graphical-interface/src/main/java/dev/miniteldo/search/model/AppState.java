@@ -68,10 +68,6 @@ public class AppState {
         return darkMode;
     }
 
-    public String getImageFolder() {
-        return (darkMode) ? "/images/icons-dark" : "/images/icons";
-    }
-
     public void addThemeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
