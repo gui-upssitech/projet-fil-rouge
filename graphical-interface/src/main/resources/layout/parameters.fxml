@@ -5,12 +5,12 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import dev.miniteldo.search.view.Icon?>
 <AnchorPane onKeyPressed="#onKeyAction" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.ParameterController">
    <children>
       <VBox fx:id="settingsBox" alignment="CENTER" fillWidth="false" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -27,24 +27,11 @@
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/icons/layout.png" />
-                           </image>
-                        </ImageView>
+                        <Icon name="layout" />
                         <Label text="Thème visuel" />
                      </children>
                   </HBox>
-                  <ImageView fx:id="moonIcon" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <image>
-                        <Image url="@../images/icons/moon.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="sunIcon" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <image>
-                        <Image url="@../images/icons/sun.png" />
-                     </image>
-                  </ImageView>
+                  <Icon fx:id="themeIcon" name="sun" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
                <padding>
                   <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
@@ -52,11 +39,7 @@
             </AnchorPane>
             <HBox alignment="CENTER_LEFT" onMouseClicked="#onAdminButton" prefWidth="360.0" spacing="12.0" styleClass="setting">
                <children>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/lock.png" />
-                     </image>
-                  </ImageView>
+                  <Icon name="lock" />
                   <Label text="Mode Administrateur" />
                </children>
                <padding>
@@ -65,11 +48,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" onMouseClicked="#onSaveButton" prefWidth="360.0" spacing="12.0" styleClass="setting">
                <children>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/save.png" />
-                     </image>
-                  </ImageView>
+                  <Icon name="save" />
                   <Label text="Mes recherches sauvegardées" />
                </children>
                <padding>
@@ -78,14 +57,7 @@
             </HBox>
          </children>
       </VBox>
-      <ImageView fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onReturnButton" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0">
-         <image>
-            <Image url="@../images/icons/arrow-left.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
+      <Icon name="arrow-left" onMouseClicked="#onReturnButton" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0" />
    </children>
    <stylesheets>
       <URL value="@../stylesheets/theme.css" />

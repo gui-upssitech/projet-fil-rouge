@@ -98,7 +98,6 @@ public class App extends Application implements PropertyChangeListener {
         AppState.getInstance().setPopUp();
         AppState.getInstance().setDialogMessage(dialog, message);
 
-
         if (stage == null) return;
 
         String path = "/layout/" + dialog.getPath();
@@ -118,8 +117,6 @@ public class App extends Application implements PropertyChangeListener {
             AnchorPane.setBottomAnchor(dialogRoot, 0.0);
             AnchorPane.setLeftAnchor(dialogRoot, 0.0);
             AnchorPane.setRightAnchor(dialogRoot, 0.0);
-
-//            dialogRoot.setOnMouseClicked(event -> closeDialog());
 
             dialogRoot.getChildren().add(dialogContent);
             rootPane.getChildren().add(dialogRoot);

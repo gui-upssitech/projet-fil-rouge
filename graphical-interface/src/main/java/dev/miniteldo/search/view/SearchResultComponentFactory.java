@@ -34,13 +34,13 @@ public class SearchResultComponentFactory {
                 try {
                     root = (HBox) fxmlLoader.load();
 
-                    ImageView icon = (ImageView) root.lookup("#icon");
+                    Icon icon = (Icon) root.lookup("#icon");
                     Label fileName = (Label) root.lookup("#file_name");
                     Label confidence = (Label) root.lookup("#confidence");
 
                     fileName.setText(getFileName(result, type));
                     confidence.setText(getConfidenceText(result.getConfidence(), type));
-                    icon.setImage(getIcon(type));
+                    icon.setName(getIcon(type));
                     root.setOnMouseClicked(onClick);
 
                 } catch (IOException e) {
@@ -50,11 +50,11 @@ public class SearchResultComponentFactory {
             case SEARCH -> {
                 try {
                     root = (HBox) fxmlLoader.load();
-                    ImageView icon = (ImageView) root.lookup("#icon");
+                    Icon icon = (Icon) root.lookup("#icon");
                     Label fileName = (Label) root.lookup("#searchName");
 
                     fileName.setText(request);
-                    icon.setImage(getIcon(type));
+                    icon.setName(getIcon(type));
                     root.setOnMouseClicked(onClick);
 
                 } catch (IOException e) {
@@ -94,20 +94,11 @@ public class SearchResultComponentFactory {
         return (type.toString().startsWith("TEXT")) ? "" + confidence : confidence + "%";
     }
 
-    private static Image getIcon(SearcherType type) {
-        String path = "/images/icons/";
-
-        if (type.toString().startsWith("TEXT"))
-            path += "file-text.png";
-        else if(type == SearcherType.IMAGE_COLOR)
-            path += "droplet.png";
-        else if (type.toString().startsWith("IMAGE"))
-            path += "image.png";
-        else
-            path += "music.png";
-
-        URL url = SearchResultComponentFactory.class.getResource(path);
-        return (url == null) ? null : new Image(url.toExternalForm());
+    private static String getIcon(SearcherType type) {
+        if (type.toString().startsWith("TEXT")) return "file-text";
+        else if(type == SearcherType.IMAGE_COLOR) return "droplet";
+        else if (type.toString().startsWith("IMAGE")) return "image";
+        else return "music";
     }
 
 }

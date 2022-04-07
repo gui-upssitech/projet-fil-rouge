@@ -2,16 +2,12 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
+<?import dev.miniteldo.search.view.Icon?>
 <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="search-result" stylesheets="@../../stylesheets/search-result.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ImageView fx:id="icon" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../images/icons/file-text.png" />
-            </image>
-        </ImageView>
+        <Icon fx:id="icon" name="file-text" />
       <Label fx:id="wordLabel" text="Label" />
         <Label fx:id="valueLabel" maxWidth="1.7976931348623157E308" text="Value" HBox.hgrow="ALWAYS" />
     </children>

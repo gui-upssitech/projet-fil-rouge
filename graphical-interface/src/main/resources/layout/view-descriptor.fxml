@@ -9,13 +9,12 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import dev.miniteldo.search.view.Icon?>
 <AnchorPane onKeyPressed="#onKeyAction" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.DescriptorController">
     <children>
       <SplitPane dividerPositions="0.4" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -27,14 +26,7 @@
                         <Insets bottom="25.0" />
                      </VBox.margin>
                      <children>
-                          <ImageView fx:id="returnButton" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onReturnButton" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                  <Image url="@../images/icons/arrow-left.png" />
-                              </image>
-                              <cursor>
-                                  <Cursor fx:constant="HAND" />
-                              </cursor>
-                          </ImageView>
+                         <Icon fx:id="returnButton" name="arrow-left" onMouseClicked="#onReturnButton" style="-fx-cursor: hand;" />
                             <Label styleClass="qs" text="Visualiser descripteurs" wrapText="true">
                                 <font>
                                     <Font name="System Bold" size="28.0" />
@@ -51,11 +43,7 @@
                            <children>
                                         <Button fx:id="fileButton" mnemonicParsing="false" onAction="#onFileButton">
                                             <graphic>
-                                                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../images/icons/file.png" />
-                                                    </image>
-                                                </ImageView>
+                                                <Icon name="file" size="16" />
                                             </graphic>
                                             <HBox.margin>
                                                 <Insets />
@@ -64,11 +52,7 @@
                                         <TextField fx:id="fileField" prefHeight="42.0" prefWidth="101.0" promptText="Fichier" HBox.hgrow="ALWAYS" />
                                     <Button fx:id="visualiserButton" alignment="CENTER" mnemonicParsing="false" onAction="#onVisualiserAction" prefHeight="41.0" prefWidth="116.0">
                                  <graphic>
-                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/icons/eye.png" />
-                                       </image>
-                                    </ImageView>
+                                    <Icon name="eye" size="16" />
                                  </graphic>
                               </Button>
                            </children>

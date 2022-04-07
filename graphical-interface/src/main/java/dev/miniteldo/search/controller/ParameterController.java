@@ -2,6 +2,7 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
+import dev.miniteldo.search.view.Icon;
 import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ public class ParameterController {
     @FXML
     public VBox settingsBox;
     @FXML
-    private ImageView sunIcon, moonIcon;
+    private Icon themeIcon;
     // Other attributes
     private AppState state;
 
@@ -53,8 +54,7 @@ public class ParameterController {
 
     // Other methods
     private void setThemeIcon() {
-        sunIcon.setVisible(!state.isDarkMode());
-        moonIcon.setVisible(state.isDarkMode());
+        themeIcon.setName(state.isDarkMode() ? "moon" : "sun");
     }
 
     public void onKeyAction(KeyEvent keyEvent) {

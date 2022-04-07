@@ -2,20 +2,20 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import dev.miniteldo.search.view.Icon?>
+<?import javafx.scene.layout.Pane?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.ConfigurationController">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.ConfigurationController">
+<ScrollPane AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
    <content>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onEscapeAction">
           <children>
@@ -201,19 +201,13 @@
                   <Insets bottom="24.0" top="24.0" />
                </padding>
               </VBox>
-              <ImageView fx:id="returnButton" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onReturnButton" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0">
-                  <image>
-                      <Image url="@../images/icons/arrow-left.png" />
-                  </image>
-                  <cursor>
-                      <Cursor fx:constant="HAND" />
-                  </cursor>
-              </ImageView>
+              <Icon name="arrow-left" onMouseClicked="#onReturnButton" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0" style="-fx-cursor: hand;" />
           </children>
       </AnchorPane>
    </content>
-   <stylesheets>
-      <URL value="@../stylesheets/theme.css" />
-      <URL value="@../stylesheets/configuration.css" />
-   </stylesheets>
 </ScrollPane>
+    <stylesheets>
+        <URL value="@../stylesheets/theme.css" />
+        <URL value="@../stylesheets/configuration.css" />
+    </stylesheets>
+</AnchorPane>

@@ -34,13 +34,7 @@
                           <TextField fx:id="searchBar" onKeyPressed="#onEnterAction" prefHeight="25.0" prefWidth="300.0" promptText="Veuillez insérer votre requête" />
                           <Button fx:id="fileButton" mnemonicParsing="false" onAction="#onFileButton" styleClass="middle-button">
                               <graphic>
-                                  <Icon name="upload" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true"
-                                        preserveRatio="true"/>
-                                  <!--ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                      <image>
-                                          <Image url="@../images/icons/upload.png" />
-                                      </image>
-                                  </ImageView-->
+                                  <Icon name="upload" size="16" />
                               </graphic>
                           </Button>
                      <ColorPicker id="color-picker" fx:id="colorPicker" onAction="#onColor2Action" styleClass="button" />
@@ -64,15 +58,8 @@
    <HBox alignment="CENTER" layoutX="680.0" layoutY="16.0" spacing="12.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
       <children>
                 <Label fx:id="infoLabel" text="Le moteur de recherche détecte automatiquement le type de recherche à effectuer." textAlignment="CENTER" visible="false" wrapText="true" />
-                <ImageView fx:id="infoImage" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
-                    <image>
-                        <Image url="@../images/icons/info.png" />
-                    </image>
-                </ImageView>
-      
-          <ImageView fx:id="paramButton" fitHeight="24" fitWidth="24" onMouseClicked="#onParamButton" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-              <Image url="@../images/icons/settings.png" />
-          </ImageView>
+                <Icon fx:id="infoImage" name="info" styleClass="button" />
+                <Icon fx:id="paramButton" name="settings" onMouseClicked="#onParamButton" style="-fx-cursor: hand;" />
       </children>
    </HBox>
 

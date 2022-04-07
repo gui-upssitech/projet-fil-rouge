@@ -89,6 +89,26 @@
     -fx-padding: 8px;
 }
 
+/*.combo-box:focused {
+    -fx-border-radius: 12px 12px 0 0;
+    -fx-background-radius: 12px 12px 0 0;
+}*/
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: -fx-input-fill;
+    -fx-padding: 8px;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover {
+    -fx-background-color: -fx-button-hover;
+}
+
+.combo-box .list-view {
+    -fx-background-color: -fx-input-fill;
+    -fx-border-color: -fx-input-stroke;
+    -fx-border-: 1px;
+}
+
 .spinner {
     -fx-padding: 0;
 }

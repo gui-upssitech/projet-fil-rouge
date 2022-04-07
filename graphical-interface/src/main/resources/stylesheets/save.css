@@ -2,6 +2,8 @@
     -fx-padding: 0;
 }
 
+
+
 .result-list {
-    -fx-background-color: -fx-color-sec;
+    -fx-background-color: -fx-bg-sec;
 }
