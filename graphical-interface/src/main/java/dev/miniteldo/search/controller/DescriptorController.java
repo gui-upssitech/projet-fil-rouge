@@ -100,32 +100,39 @@ public class DescriptorController {
             descriptorContainer.getChildren().clear();
 
             d = AppState.getInstance().getEngine().viewDescriptor(fileField.getText());
-            idTextField.setText(d.getId());
 
-            if (d instanceof TextDescriptor textDescriptor) {
-                descriptorText = textDescriptor.getDataDescriptor();
+            // Error !
+            if (d == null){
+                App.showDialog(Dialog.ERROR, "Fichier inconnu !");
+            }else {
+                idTextField.setText(d.getId());
 
-                for (Map.Entry<String, String> entry : descriptorText.entrySet()) {
-                    System.out.println(entry.getKey() + "/" + entry.getValue());
+                if (d instanceof TextDescriptor textDescriptor) {
+                    descriptorText = textDescriptor.getDataDescriptor();
 
-                    HBox result = createComponent(entry.getKey(), entry.getValue());
+                    for (Map.Entry<String, String> entry : descriptorText.entrySet()) {
+                        System.out.println(entry.getKey() + "/" + entry.getValue());
 
+                        HBox result = createComponent(entry.getKey(), entry.getValue());
+
+                        descriptorContainer.getChildren().add(result);
+                    }
+                } else if (d instanceof ImageDescriptor imageDescriptor) {
+                    descriptorImage = imageDescriptor.getHistogram();
+                    System.out.println(imageDescriptor.getMax());
+
+                    BarChart<String, Number> result = createChart(descriptorImage);
+                    descriptorContainer.getChildren().add(result);
+
+                } else if (d instanceof AudioDescriptor audioDescriptor) {
+                    int index = audioDescriptor.findIdxByTimeCode(spinner.getValue().floatValue());
+                    int[] tab = audioDescriptor.getHistograms()[index];
+
+                    BarChart<String, Number> result = createChart(tab);
                     descriptorContainer.getChildren().add(result);
                 }
-            } else if (d instanceof ImageDescriptor imageDescriptor) {
-                descriptorImage = imageDescriptor.getHistogram();
-                System.out.println(imageDescriptor.getMax());
-
-                BarChart<String, Number> result = createChart(descriptorImage);
-                descriptorContainer.getChildren().add(result);
-
-            } else if (d instanceof AudioDescriptor audioDescriptor) {
-                int index = audioDescriptor.findIdxByTimeCode(spinner.getValue().floatValue());
-                int[] tab = audioDescriptor.getHistograms()[index];
-
-                BarChart<String, Number> result = createChart(tab);
-                descriptorContainer.getChildren().add(result);
             }
+
         }
     }
 

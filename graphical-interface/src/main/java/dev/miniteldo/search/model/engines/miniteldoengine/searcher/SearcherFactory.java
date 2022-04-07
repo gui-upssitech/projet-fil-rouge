@@ -6,7 +6,7 @@ public class SearcherFactory {
         Searcher searcher;
 
         switch(searcherType) {
-            case TEXT_KEYWORD: case TEXT_PATH:
+            case TEXT_KEYWORD: case TEXT_PATH: case TEXT_COMPLETION:
                 searcher = new TextSearcher(miniteldoEnginePath, searcherType);
                 break;
 
