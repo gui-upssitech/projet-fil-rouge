@@ -1,0 +1,85 @@
+= [Projet Fil Rouge] Partie 1 - Moteur de recherche
+
+Auteurs :
+Constant ROUX,
+Peter PIRIOU--DEZY,
+Guillaume ROUSSIN,
+Julian TRANI
+
+Dernière mise à jour : 16/01/2022
+
+== Installation 
+
+WARNING: Prérequis : posséder un environnement linux
+
+Avant d'utiliser l'application vous devez :
+
+- Clonez le projet avec le lien suivant : https://github.com/Guillaume-prog/projet-fil-rouge
+
+- Ajoutez le répertoire _data_ téléchargeable ici https://drive.google.com/file/d/1z-Gzd4vYDx38v6kFcMUgXJSrsMW1V9O8/view?usp=sharing[data] , dans le projet
+
+Une fois l'application correctement installée, pour lancer l'application veuillez exécuter la commande suivante dans le répertoire courant du projet : _make main_
+
+== Présentation 
+
+À partir d'une base de documents et après les avoir indexés, l'application permet de faire des recherches selon 3 types de formats : Texte - Image - Audio. 
+Pour chacun de ces formats, nous avons différentes possibilités de recherche.
+
+_Exemple : Pour les images, on peut rechercher par RGB ou niveau de gris_ 
+
+Voici un petit aperçu visuel de l'application :
+
+image::images/menu.png[Menu,450,align="center"]
+
+== Fonctionnalités 
+
+Dans ce diagramme des cas d'utilisation, vous trouverez toutes les fonctionnalités de l'application.
+
+image::images/user-interactions.png[User,450,align="center"]
+
+(Les cases cochées sont les fonctionnalités déjà codées et implémentées dans l'application)
+
+- [x] Indexation Texte (+ sauvegarde dans la base)
+- [x] Indexation Image (+ sauvegarde dans la base)
+- [x] Indexation Audio (+ sauvegarde dans la base)
+- [x] Comparaison Texte
+- [x] Comparaison Image
+- [x] Comparaison Audio
+- [x] Moteur de recherche - Texte (mot-clef / texte )
+- [x] Moteur de recherche - Image (couleur / niveaux de gris )
+- [x] Moteur de recherche - Audio  (jingle)
+- [x] Connexion pour le passage en mode admin
+- [x] Différents menus
+
+
+== Architecture de l'application
+
+L'application possède de nombreux dossiers dans lesquels des fichiers du même type sont regroupés.
+
+Voici un tableau récapitulatif des différents fichiers utilisé dans l'application :
+
+[cols="1,2a"]
+|===
+| *Répertoire* | Description
+
+| admin
+| Contient tous les fichiers de configuration accessible du côté admin  
+
+| data
+| Corresponds à la base de données du moteur de recherche qui est triée par type de formats disponibles
+
+| descriptors
+| Suite à l'indexation, les descripteurs sont stockés selon leur type de format disponible
+
+| inc
+| Contient tous les fichiers .h de l'application
+
+| results
+| Contient le résultat des tests effectués
+
+| src
+| Contient tous les fichiers .c (dont les fichiers test) de l'application
+
+|===
+
+WARNING: Les fichiers d'éxécution .o et .out sont ignorés grâce au _.gitignore_, tout comme le répertoire data, donc ils ne seront jamais ajoutés sur le projet
