@@ -4,7 +4,10 @@ import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.command.Command;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class TextSearcher extends Searcher {
@@ -20,7 +23,9 @@ public class TextSearcher extends Searcher {
     protected ArrayList<SearchResult> searchInner(String request) throws IOException {
         ArrayList<SearchResult> searchResults = new ArrayList<>();
         if (searcherType.equals(SearcherType.TEXT_PATH)) {
-            request = "../data" + request.split("data")[1];
+            Path workingPath = Paths.get(System.getProperty("user.dir"));
+            Path absolutePath = Paths.get(request);
+            request = workingPath.relativize(absolutePath).toString();
         }
 
         Command command = new Command(miniteldoEnginePath, searcherType, request);
