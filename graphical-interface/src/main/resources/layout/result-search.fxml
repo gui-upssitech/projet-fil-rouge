@@ -13,9 +13,12 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import dev.miniteldo.search.view.Icon?>
-<AnchorPane onKeyPressed="#onEscapeAction" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.SearchController">
+<?import javafx.scene.control.ColorPicker?>
+<AnchorPane onKeyPressed="#onEscapeAction" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.miniteldo.search.controller.SearchController">
     <children>
-        <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <VBox spacing="12.0" styleClass="vbox" SplitPane.resizableWithParent="false">
                     <children>
@@ -23,54 +26,57 @@
                             <children>
                                 <Icon name="arrow-left" onMouseClicked="#onReturnButton">
                                     <HBox.margin>
-                                        <Insets />
+                                        <Insets/>
                                     </HBox.margin>
                                 </Icon>
-                                <TextField fx:id="requestLabel" onKeyPressed="#onEnterAction" promptText="Requête" HBox.hgrow="ALWAYS" />
-                        <Pane id="colorView" fx:id="colorPane" prefWidth="70.0" />
+                                <TextField fx:id="requestLabel" onKeyPressed="#onEnterAction" promptText="Requête"
+                                           HBox.hgrow="ALWAYS"/>
+                                <ColorPicker id="color-picker" fx:id="colorPicker" onAction="#onColorAction"
+                                             styleClass="button"/>
                                 <Button fx:id="fileButton" mnemonicParsing="false" onAction="#onFileButton">
                                     <graphic>
-                                        <Icon name="upload" size="16" />
+                                        <Icon name="upload" size="16"/>
                                     </graphic>
                                 </Button>
                                 <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveButton">
                                     <graphic>
-                                        <Icon name="save" size="16" />
+                                        <Icon name="save" size="16"/>
                                     </graphic>
                                 </Button>
                                 <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButton">
                                     <graphic>
-                                        <Icon name="search" size="16" />
+                                        <Icon name="search" size="16"/>
                                     </graphic>
                                 </Button>
                             </children>
                         </HBox>
-                        <Separator prefWidth="200.0" />
-                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="result-list-container" VBox.vgrow="ALWAYS">
+                        <Separator prefWidth="200.0"/>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER"
+                                    styleClass="result-list-container" VBox.vgrow="ALWAYS">
                             <content>
-                                <VBox fx:id="resultContainer" spacing="12.0" styleClass="vbox" />
+                                <VBox fx:id="resultContainer" spacing="12.0" styleClass="vbox"/>
                             </content>
                         </ScrollPane>
                     </children>
                     <padding>
-                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
                     </padding>
                 </VBox>
 
-            <ScrollPane fitToHeight="true" fitToWidth="true" SplitPane.resizableWithParent="false">
-               <content>
-                  <VBox fx:id="previewBox" alignment="CENTER" styleClass="result-preview-box">
-                     <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                     </padding>
-                  </VBox>
-               </content>
-            </ScrollPane>
+                <ScrollPane fitToHeight="true" fitToWidth="true" SplitPane.resizableWithParent="false">
+                    <content>
+                        <VBox fx:id="previewBox" alignment="CENTER" styleClass="result-preview-box">
+                            <padding>
+                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
+                            </padding>
+                        </VBox>
+                    </content>
+                </ScrollPane>
             </items>
         </SplitPane>
     </children>
     <stylesheets>
-        <URL value="@../stylesheets/theme.css" />
-        <URL value="@../stylesheets/result-search.css" />
+        <URL value="@../stylesheets/theme.css"/>
+        <URL value="@../stylesheets/result-search.css"/>
     </stylesheets>
 </AnchorPane>

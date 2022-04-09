@@ -31,5 +31,4 @@ public class OpenedClosedMode {
         nbImageWatchFolder.end();
         audioWatchFolder.end();
     }
-
 }

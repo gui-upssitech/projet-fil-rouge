@@ -43,15 +43,14 @@ public class AppState {
 
     // Constructor
     private AppState() {
-        darkMode = true;
+        darkMode = false;
         currentRequest = null;
         curEngines = Engines.MINITELDO_ENGINE;
 
         engines = new HashMap<>();
         enginesSelected = new ArrayList<>();
-        setEngine(Engines.MINITELDO_ENGINE); // DUMMY ENGINE will be the default engine for now NOT NOW Guillaume, NOT NOW
         setEngine(Engines.MINITELDO_ENGINE_2); // DUMMY ENGINE will be the default engine for now NOT NOW Guillaume, NOT NOW
-        setEngine(Engines.DUMMY_ENGINE); // DUMMY ENGINE will be the default engine for now NOT NOW Guillaume, NOT NOW
+        setEngine(Engines.MINITELDO_ENGINE); // DUMMY ENGINE will be the default engine for now NOT NOW Guillaume, NOT NOW
         getEngine().init();
 
         support = new PropertyChangeSupport(this);
@@ -80,9 +79,11 @@ public class AppState {
 
     // Multiengine configuration
     public void setEngine(Engines engines) {
-        if (!this.engines.containsKey(engines)) this.engines.put(engines, EngineFactory.createEngine(engines));
+        if (!this.engines.containsKey(engines))
+            this.engines.put(engines, EngineFactory.createEngine(engines));
 
         curEngines = engines;
+        getEngine().init();
     }
 
     public Engines getCurEngine() {

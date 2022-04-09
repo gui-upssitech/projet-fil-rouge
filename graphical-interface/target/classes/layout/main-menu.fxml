@@ -43,7 +43,7 @@
                                     <Icon name="upload" size="16"/>
                                 </graphic>
                             </Button>
-                            <ColorPicker id="color-picker" fx:id="colorPicker" onAction="#onColor2Action"
+                            <ColorPicker id="color-picker" fx:id="colorPicker" onAction="#onColorAction"
                                          styleClass="button"/>
 
                             <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButton"
@@ -53,13 +53,14 @@
                             <Insets bottom="24.0"/>
                         </padding>
                     </HBox>
+
                 </children>
             </HBox>
             <HBox alignment="CENTER" spacing="12.0">
                 <children>
                     <Label text="Sélection du moteur"/>
                     <ComboBox fx:id="comboBox" minWidth="150.0"/>
-                    <CheckComboBox fx:id="checkCombo" prefHeight="25.0" prefWidth="192.0"/>
+<!--                    <CheckComboBox fx:id="checkCombo" prefHeight="25.0" prefWidth="192.0"/>-->
                 </children>
             </HBox>
         </children>

@@ -271,10 +271,6 @@ public class ConfigurationController {
         }
     }
 
-    public void onResetButton(ActionEvent event) {
-
-    }
-
     public void onEscapeAction(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
             onReturnButton();

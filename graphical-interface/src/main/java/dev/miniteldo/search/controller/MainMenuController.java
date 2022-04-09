@@ -2,9 +2,7 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
-import dev.miniteldo.search.model.engines.EngineFactory;
 import dev.miniteldo.search.model.engines.Engines;
-import dev.miniteldo.search.model.engines.SearchEngine;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherFactory;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.TextSearcher;
@@ -14,9 +12,7 @@ import dev.miniteldo.search.view.enums.Dialog;
 import dev.miniteldo.search.view.enums.Views;
 import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -89,22 +85,22 @@ public class MainMenuController {
         }
         TextFields.bindAutoCompletion(searchBar, stringArrayList.toArray());
 
-        // Add check box
-        System.out.println(AppState.getInstance().engines);
-        for (Engines engines : AppState.getInstance().getAllEngines()) {
-            checkCombo.getItems().add(engines);
-        }
-
-        checkCombo.getCheckModel().getCheckedItems().addListener(new ListChangeListener<Engines>() {
-            public void onChanged(ListChangeListener.Change<? extends Engines> c) {
-                AppState.getInstance().clearSelectedEngine();
-                for (Engines engines : c.getList()) {
-                    AppState.getInstance().addSelectedEngine(EngineFactory.createEngine(engines));
-                }
-                System.out.println(c);
-                System.out.println(AppState.getInstance().getEnginesSelected());
-            }
-        });
+//        // Add check box
+//        System.out.println(AppState.getInstance().engines);
+//        for (Engines engines : AppState.getInstance().getAllEngines()) {
+//            checkCombo.getItems().add(engines);
+//        }
+//
+//        checkCombo.getCheckModel().getCheckedItems().addListener(new ListChangeListener<Engines>() {
+//            public void onChanged(ListChangeListener.Change<? extends Engines> c) {
+//                AppState.getInstance().clearSelectedEngine();
+//                for (Engines engines : c.getList()) {
+//                    AppState.getInstance().addSelectedEngine(EngineFactory.createEngine(engines));
+//                }
+//                System.out.println(c);
+//                System.out.println(AppState.getInstance().getEnginesSelected());
+//            }
+//        });
     }
 
 
@@ -149,7 +145,7 @@ public class MainMenuController {
         }
     }
 
-    public void onColor2Action(ActionEvent event) {
+    public void onColorAction(ActionEvent event) {
         String temp = "#" + colorPicker.getValue().toString().toUpperCase().substring(2, 8);
         searchBar.setText(temp);
     }

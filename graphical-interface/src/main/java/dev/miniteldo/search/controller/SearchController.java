@@ -19,13 +19,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -48,8 +49,7 @@ public class SearchController {
     @FXML
     public Button fileButton;
     @FXML
-    public Pane colorPane;
-
+    public ColorPicker colorPicker;
     @FXML
     private VBox resultContainer, previewBox;
 
@@ -62,17 +62,13 @@ public class SearchController {
     public void initialize() {
         state = AppState.getInstance();
 
-        requestLabel.textProperty().addListener((observableValue, s, t1) -> {
-            if (requestLabel.getText().matches(Regex.REGEX_IMAGE_COLOR.getRegexExp())) {
-                colorPane.setStyle("-fx-background-color: " + requestLabel.getText());
-            } else {
-                colorPane.setStyle("-fx-background-color: transparent");
-            }
-        });
-
         // Init get data from state
         request = state.getCurrentRequest().trim();
         requestLabel.setText(request);
+
+        if (request.matches(Regex.REGEX_IMAGE_COLOR.getRegexExp())) {
+            colorPicker.setValue(Color.web(request));
+        }
 
         // Search logic
         requestType = Tools.getRequestType(request);
@@ -218,5 +214,10 @@ public class SearchController {
         } else {
             return req;
         }
+    }
+
+    public void onColorAction(ActionEvent event) {
+        String temp = "#" + colorPicker.getValue().toString().toUpperCase().substring(2, 8);
+        requestLabel.setText(temp);
     }
 }

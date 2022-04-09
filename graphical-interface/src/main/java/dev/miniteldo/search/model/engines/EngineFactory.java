@@ -1,13 +1,12 @@
 package dev.miniteldo.search.model.engines;
 
-import dev.miniteldo.search.model.engines.dummyengine.DummyEngine;
 import dev.miniteldo.search.model.engines.miniteldoengine.MiniteldoEngine;
 
 /**
  * class: EngineFactory
  * author: Guillaume Roussin
  * date: 16/03/2022
- *
+ * <p>
  * This class helps reduce memory usage of the app
  */
 public class EngineFactory {
@@ -17,7 +16,6 @@ public class EngineFactory {
         return switch (engineType) {
             case MINITELDO_ENGINE -> new MiniteldoEngine("search-engine");
             case MINITELDO_ENGINE_2 -> new MiniteldoEngine("search-engine-2");
-            case DUMMY_ENGINE -> new DummyEngine();
         };
     }
 }

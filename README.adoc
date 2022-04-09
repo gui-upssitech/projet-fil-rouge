@@ -14,6 +14,10 @@ WARNING: Prérequis : posséder un environnement linux
 
 WARNING: Une version 1.17 de Java est requis, pour cela vous pouvez télécharger https://www.jetbrains.com/fr-fr/idea/download/#section=linux[IntelliJ] ;) 
 
+WARNING: Ajouter cette ligne de commande dans les VM option de IntelliJ (Edit configuration/Modify Options/Add VM options) : *_--add-exports javafx.base/com.sun.javafx.event=org.controlsfx.controls_*
+
+image::images/intellij.png[IntelliJ,350,align="center"]
+
 Avant d'utiliser l'application vous devez :
 
 - Clonez le projet avec le lien suivant : https://github.com/Guillaume-prog/projet-fil-rouge
