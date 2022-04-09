@@ -40,7 +40,7 @@ public class App extends Application implements PropertyChangeListener {
         App.stage = stage;
 
         InputStream iconInputStream = App.class.getResourceAsStream("/images/logo-simple.png");
-        if(iconInputStream != null) {
+        if (iconInputStream != null) {
             stage.getIcons().add(new Image(iconInputStream));
         }
 
@@ -76,7 +76,7 @@ public class App extends Application implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if(evt.getPropertyName().equals("theme")) {
+        if (evt.getPropertyName().equals("theme")) {
             Node root = stage.getScene().getRoot();
             root.getStyleClass().remove((String) evt.getOldValue());
             root.getStyleClass().add((String) evt.getNewValue());

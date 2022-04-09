@@ -72,12 +72,14 @@ public class SearchController {
 
         // Search logic
         requestType = Tools.getRequestType(request);
-        System.out.println(requestType);
 
+        // Do the search from request passed
         ArrayList<SearchResult> resultList = performSearch(fixRequestFormat(request));
+
 
         displayResults(resultList);
 
+        // Add auto completion to the search bar
         TextSearcher textSearcher = (TextSearcher) SearcherFactory.getSearcher("search-engine", SearcherType.TEXT_COMPLETION);
         ArrayList<String> stringArrayList = new ArrayList<>();
         try {
@@ -85,7 +87,6 @@ public class SearchController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         TextFields.bindAutoCompletion(requestLabel, stringArrayList.toArray());
     }
 
@@ -98,13 +99,18 @@ public class SearchController {
 
     @FXML
     protected void onReturnButton() {
-        App.setView(Views.MAIN);
+        if (!AppState.getInstance().isPopUp()) {
+            App.setView(Views.MAIN);
+        }
     }
 
     @FXML
     protected void onSaveButton() {
-        if (FileTools.saveRequest(request, searchResults)) {
-            App.showDialog(Dialog.SUCCESS, "La requête a été sauvegardée");
+        // Avoid multi pop up
+        if (!AppState.getInstance().isPopUp()) {
+            if (FileTools.saveRequest(request, searchResults)) {
+                App.showDialog(Dialog.SUCCESS, "La requête a été sauvegardée");
+            }
         }
     }
 

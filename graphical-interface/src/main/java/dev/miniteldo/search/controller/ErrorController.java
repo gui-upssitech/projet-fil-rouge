@@ -27,11 +27,6 @@ public class ErrorController {
     public Button okButton;
     public Label labelError;
 
-    // Constructor
-    public ErrorController() {
-        // TODO
-    }
-
     @FXML
     public void initialize() {
         labelError.setText(AppState.getInstance().getErrorMessage());

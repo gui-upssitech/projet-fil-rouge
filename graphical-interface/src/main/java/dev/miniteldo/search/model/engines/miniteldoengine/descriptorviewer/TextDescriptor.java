@@ -32,11 +32,10 @@ public class TextDescriptor extends Descriptor {
         BufferedReader reader = command.getResult();
 
         while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-            if(line.matches(regexData)) {
+            if (line.matches(regexData)) {
                 String[] splits = line.split(" ");
                 dataDescriptor.put(splits[0], splits[1]);
-            } else if(line.matches(regexNumber)) {
+            } else if (line.matches(regexNumber)) {
                 numbers[idx] = line;
                 idx++;
             }

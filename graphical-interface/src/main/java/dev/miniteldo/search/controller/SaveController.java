@@ -2,6 +2,7 @@ package dev.miniteldo.search.controller;
 
 import dev.miniteldo.search.App;
 import dev.miniteldo.search.model.AppState;
+import dev.miniteldo.search.model.History;
 import dev.miniteldo.search.model.engines.SearchResult;
 import dev.miniteldo.search.model.engines.miniteldoengine.searcher.SearcherType;
 import dev.miniteldo.search.model.tools.FileTools;
@@ -20,7 +21,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
+import java.util.TreeMap;
 
 /**
  * Classe SaveController ...
@@ -29,7 +31,6 @@ import java.util.HashMap;
  */
 public class SaveController {
     // Attributs
-
     @FXML
     public VBox requestContainer;
     @FXML
@@ -37,7 +38,7 @@ public class SaveController {
     public ImageView returnButton;
     public Button resetButton;
 
-    private HashMap<String, ArrayList<SearchResult>> hashMap = new HashMap<>();
+    private TreeMap<History, ArrayList<SearchResult>> treeMap = new TreeMap<>(History::compareTo);
     private SearcherType selectedRequestType;
 
     // Methods
@@ -47,29 +48,29 @@ public class SaveController {
     }
 
     public void displayRequest() {
-        hashMap = FileTools.readFile();
+        treeMap = FileTools.readFile();
 
-        if (hashMap.isEmpty()) {
+        if (treeMap.isEmpty()) {
             Label label = new Label("Aucune sauvegarde dans le fichier !");
             requestContainer.getChildren().add(label);
         } else {
-            for (String request : hashMap.keySet()) {
-                selectedRequestType = Tools.getRequestType(request);
-                HBox result = SearchResultComponentFactory.createComponent(Component.SEARCH, request, selectedRequestType, null, event -> onRequestClicked(request));
+            for (History history : treeMap.keySet()) {
+                selectedRequestType = Tools.getRequestType(history.getRequest());
+                HBox result = SearchResultComponentFactory.createComponent(Component.SEARCH, history.toString(), selectedRequestType, null, event -> onRequestClicked(history));
                 requestContainer.getChildren().add(result);
             }
 
-            selectedRequestType = Tools.getRequestType(hashMap.entrySet().iterator().next().getKey());
-            displayResults(hashMap.entrySet().iterator().next().getValue(), selectedRequestType);
+            selectedRequestType = Tools.getRequestType(treeMap.entrySet().iterator().next().getKey().getRequest());
+            displayResults(treeMap.entrySet().iterator().next().getValue(), selectedRequestType);
         }
     }
 
-    private void onRequestClicked(String request) {
+    private void onRequestClicked(History history) {
         // Clear the result container
         resultContainer.getChildren().clear();
 
-        selectedRequestType = Tools.getRequestType(request);
-        displayResults(hashMap.get(request), selectedRequestType);
+        selectedRequestType = Tools.getRequestType(history.getRequest());
+        displayResults(treeMap.get(history), selectedRequestType);
     }
 
     /**

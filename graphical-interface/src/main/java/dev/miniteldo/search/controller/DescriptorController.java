@@ -74,7 +74,7 @@ public class DescriptorController {
         });
     }
 
-    public void onReturnButton(MouseEvent mouseEvent) {
+    public void onReturnButton() {
         App.setView(Views.ADMIN_CONFIG);
     }
 
@@ -102,24 +102,21 @@ public class DescriptorController {
             d = AppState.getInstance().getEngine().viewDescriptor(fileField.getText());
 
             // Error !
-            if (d == null){
+            if (d == null) {
                 App.showDialog(Dialog.ERROR, "Fichier inconnu !");
-            }else {
+            } else {
                 idTextField.setText(d.getId());
 
                 if (d instanceof TextDescriptor textDescriptor) {
                     descriptorText = textDescriptor.getDataDescriptor();
 
                     for (Map.Entry<String, String> entry : descriptorText.entrySet()) {
-                        System.out.println(entry.getKey() + "/" + entry.getValue());
-
                         HBox result = createComponent(entry.getKey(), entry.getValue());
 
                         descriptorContainer.getChildren().add(result);
                     }
                 } else if (d instanceof ImageDescriptor imageDescriptor) {
                     descriptorImage = imageDescriptor.getHistogram();
-                    System.out.println(imageDescriptor.getMax());
 
                     BarChart<String, Number> result = createChart(descriptorImage);
                     descriptorContainer.getChildren().add(result);

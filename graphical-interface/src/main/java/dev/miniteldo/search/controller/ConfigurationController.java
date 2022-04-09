@@ -66,7 +66,6 @@ public class ConfigurationController {
     public void initialize() {
         // Init configuration value from C code
         this.hashMapOldValue = AppState.getInstance().getEngine().loadConfigs();
-        System.out.println(hashMapOldValue);
 
         // Init comboBox String
         stringsComboMode = new ArrayList<>();
@@ -199,7 +198,6 @@ public class ConfigurationController {
                     AppState.getInstance().getEngine().setConfig(config, newValue);
                     checkModifiedType(config); // check the type modified
                 }
-                System.out.println(config);
             }
         }
 
@@ -219,10 +217,6 @@ public class ConfigurationController {
         isTextModified = false;
         isImageModified = false;
         isAudioModified = false;
-
-        System.out.println("====");
-        System.out.println("Fini ! ");
-        System.out.println("====");
     }
 
     /**
