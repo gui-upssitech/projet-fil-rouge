@@ -10,6 +10,7 @@ import dev.miniteldo.search.model.engines.miniteldoengine.searcher.TextSearcher;
 import dev.miniteldo.search.model.tools.FileTools;
 import dev.miniteldo.search.model.tools.Regex;
 import dev.miniteldo.search.model.tools.Tools;
+import dev.miniteldo.search.view.AudioPlayer;
 import dev.miniteldo.search.view.ResultDisplayFactory;
 import dev.miniteldo.search.view.SearchResultComponentFactory;
 import dev.miniteldo.search.view.enums.Component;
@@ -93,6 +94,11 @@ public class SearchController {
     private void previewResult(SearchResult result) {
         Node preview = ResultDisplayFactory.createPreview(result);
 
+        if(requestType == SearcherType.AUDIO_PATH) {
+            AudioPlayer player = (AudioPlayer) previewBox.lookup("#audio-player");
+            if(player != null) player.stop();
+        }
+
         previewBox.getChildren().clear();
         previewBox.getChildren().add(preview);
     }
@@ -100,6 +106,11 @@ public class SearchController {
     @FXML
     protected void onReturnButton() {
         if (!AppState.getInstance().isPopUp()) {
+            if(requestType == SearcherType.AUDIO_PATH) {
+                AudioPlayer player = (AudioPlayer) previewBox.lookup("#audio-player");
+                if(player != null) player.stop();
+            }
+
             App.setView(Views.MAIN);
         }
     }

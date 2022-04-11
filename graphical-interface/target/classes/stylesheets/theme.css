@@ -94,16 +94,18 @@
     -fx-background-radius: 12px 12px 0 0;
 }*/
 
-.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell,
+.auto-complete-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
     -fx-background-color: -fx-input-fill;
     -fx-padding: 8px;
 }
 
-.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover {
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover,
+.auto-complete-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover {
     -fx-background-color: -fx-button-hover;
 }
 
-.combo-box .list-view {
+.combo-box .list-view, .auto-complete-popup .list-view {
     -fx-background-color: -fx-input-fill;
     -fx-border-color: -fx-input-stroke;
     -fx-border-: 1px;

@@ -58,32 +58,7 @@ public class ResultDisplayFactory {
     }
 
     private static Node createAudioPreview(String filePath, int timeCode) throws Exception {
-        Media media = new Media(new File(filePath).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-
-        mediaPlayer.setStartTime(new Duration(timeCode));
-
-        HBox box = new HBox();
-        box.setSpacing(12);
-        box.setAlignment(Pos.CENTER);
-
-        Button button = new Button("Play");
-        button.setOnMouseClicked(event -> {
-            if(mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-                mediaPlayer.pause();
-                button.setText("Play");
-            } else {
-                mediaPlayer.play();
-                button.setText("Pause");
-            }
-        });
-
-        box.getChildren().addAll(
-                new Label("Time code: "+timeCode+"s"),
-                button
-        );
-
-        return box;
+        return new AudioPlayer(filePath, timeCode);
     }
 
     private static Node createTextPreview(String filePath) throws Exception {
