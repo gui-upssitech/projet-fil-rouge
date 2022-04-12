@@ -1,0 +1,22 @@
+.root, .anchor-pane {
+    -fx-background-color: -fx-bg-color;
+}
+
+.subtitle {
+    -fx-padding: 0 0 24px 0;
+    -fx-font-weight: bold;
+
+    -fx-font-size: 14pt;
+    -fx-font-family: "Quicksand", sans-serif;
+}
+
+.combo-box, .spinner {
+    -fx-pref-width: 150px;
+}
+
+.vbar {
+    -fx-pref-width: 0;
+    -fx-border-width: 0 1px 0 1px;
+    -fx-border-style: solid;
+    -fx-border-color: -fx-bg-sec;
+}

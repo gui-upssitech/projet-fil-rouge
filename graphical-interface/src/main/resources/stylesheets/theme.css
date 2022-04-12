@@ -1,0 +1,154 @@
+/* Theme */
+
+@font-face {
+    -fx-font-family: "Anonymous Pro";
+    src: url("../fonts/anonymous-pro.ttf");
+}
+
+@font-face {
+    -fx-font-family: "Quicksand";
+    src: url("../fonts/quicksand.ttf");
+}
+
+.root.light {
+    -fx-bg-color: #FFF;
+    -fx-text-color: #000;
+
+    /* Main page inputs */
+    -fx-input-fill: #FFF;
+    -fx-input-stroke: #ddd;
+    -fx-button-hover: #8ecae6;
+
+    -fx-bg-sec: #ddd;
+    -fx-bg-hover: #eee;
+}
+
+.root.dark {
+    -fx-bg-color: #222;
+    -fx-text-color: #FFF;
+
+    /* Main page inputs */
+    -fx-input-fill: -fx-bg-color;
+    -fx-input-stroke: #333;
+    -fx-button-hover: #0a6c9f;
+
+    -fx-bg-sec: -fx-input-stroke;
+    -fx-bg-hover: #555
+}
+
+/* Other */
+
+.root {
+    -fx-background-color: -fx-bg-color;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-family: "Anonymous Pro", monospace;
+
+    -fx-min-width: 720px;
+    -fx-min-height: 480px;
+
+    -fx-pref-width: 720px;
+    -fx-pref-height: 480px;
+}
+
+* {
+    -fx-text-fill: -fx-text-color;
+}
+
+/* Input styling */
+
+.button, .text-field, .combo-box, .spinner, .color-picker {
+    -fx-background-color: -fx-input-fill;
+    -fx-text-fill: -fx-text-color;
+
+    -fx-font-family: "Anonymous Pro", monospace;
+
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: -fx-input-stroke;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+
+    -fx-padding: 12px;
+}
+
+.button,
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-cursor: hand;
+    -fx-text-fill: -fx-text-color;
+}
+
+.button:hover,
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-insets: 0;
+    -fx-background-color: -fx-button-hover;
+}
+
+.combo-box {
+    -fx-padding: 8px;
+}
+
+/*.combo-box:focused {
+    -fx-border-radius: 12px 12px 0 0;
+    -fx-background-radius: 12px 12px 0 0;
+}*/
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell,
+.auto-complete-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: -fx-input-fill;
+    -fx-padding: 8px;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover,
+.auto-complete-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover {
+    -fx-background-color: -fx-button-hover;
+}
+
+.combo-box .list-view, .auto-complete-popup .list-view {
+    -fx-background-color: -fx-input-fill;
+    -fx-border-color: -fx-input-stroke;
+    -fx-border-: 1px;
+}
+
+.spinner {
+    -fx-padding: 0;
+}
+
+.spinner .text-field {
+    -fx-border-width: 0 1px 0 0;
+    -fx-border-radius: 0;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: -fx-bg-color;
+    -fx-padding: 0 12px;
+}
+
+.spinner .increment-arrow-button {
+    -fx-background-radius: 0 12px 0 0;
+}
+
+.spinner .decrement-arrow-button {
+    -fx-background-radius:  0 0 12px 0;
+}
+
+/* Dialogs & titles */
+
+#dialog {
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+}
+
+#dialog > * {
+    -fx-background-color: -fx-bg-color;
+    -fx-background-radius: 12px;
+}
+
+.qs {
+    -fx-font-family: "Quicksand", sans-serif;
+}
+
+.vbox {
+    -fx-background-color: -fx-bg-color;
+}

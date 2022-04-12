@@ -1,0 +1,9 @@
+.split-pane *.split-pane-divider {
+    -fx-padding: 0;
+}
+
+
+
+.result-list {
+    -fx-background-color: -fx-bg-sec;
+}

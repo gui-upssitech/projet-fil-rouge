@@ -1,7 +1,2 @@
-# Objects and outputs made by Makefile
-app/
-obj/
-
-descriptors/
-results/
 data/
+target/

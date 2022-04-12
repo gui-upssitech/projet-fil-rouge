@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox spacing="12.0" styleClass="text-preview" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox spacing="12.0" styleClass="metadata-box">
+         <children>
+            <Label fx:id="title" maxWidth="1.7976931348623157E308" text="Label" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="details" maxWidth="1.7976931348623157E308" text="Label" wrapText="true" />
+            <Label fx:id="summary" maxWidth="1.7976931348623157E308" text="Label" wrapText="true" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="12.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox fx:id="contentBox" prefHeight="200.0" prefWidth="100.0" spacing="12.0" VBox.vgrow="ALWAYS" />
+   </children>
+   <stylesheets>
+      <URL value="@../../stylesheets/theme.css" />
+      <URL value="@../../stylesheets/text-preview.css" />
+   </stylesheets>
+</VBox>
